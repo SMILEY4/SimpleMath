@@ -7,8 +7,6 @@ public class Vector2f implements IVector2 {
 	
 	
 	
-	
-	
 	public static Vector2f createVector(float ax, float ay, float bx, float by) {
 		return new Vector2f(bx-ax, by-ay);
 	}
@@ -29,7 +27,6 @@ public class Vector2f implements IVector2 {
 	public static Vector2f setVector(IVector2 a, IVector2 b, Vector2f vec) {
 		return (Vector2f) vec.set(b.getFloatX()-a.getFloatX(), b.getFloatY()-a.getFloatY());
 	}
-	
 	
 	
 	
@@ -109,7 +106,6 @@ public class Vector2f implements IVector2 {
 	public Vector2f set(double x, double y) {
 		return set((float)x, (float)y);
 	}
-	
 	
 	
 	
@@ -257,33 +253,42 @@ public class Vector2f implements IVector2 {
 	
 	@Override
 	public Vector2s toShortVector() {
-		return new Vector2s(this);
+//		return new Vector2s(this);
+		return null;
 	}
 
 	
 	@Override
 	public Vector2i toIntVector() {
-		return new Vector2i(this);
+//		return new Vector2i(this);
+		return null;
 	}
 
 	
 	@Override
 	public Vector2l toLongVector() {
-		return new Vector2l(this);
+//		return new Vector2l(this);
+		return null;
 	}
 
 	
 	@Override
 	public Vector2f toFloatVector() {
-		return new Vector2f(this);
+		return this.copy();
 	}
 
 	
 	@Override
 	public Vector2d toDoubleVector() {
-		return new Vector2d(this);
+//		return new Vector2d(this);
+		return null;
 	}
 	
+	
+	@Override
+	public String toString() {
+		return "Vector2f." + this.hashCode() + "[" + this.x + ", " + this.y + "]";
+	}
 	
 	
 	
@@ -298,7 +303,7 @@ public class Vector2f implements IVector2 {
 		this.y += y;
 		return this;
 	}
-	
+
 	
 	public Vector2f add(float value) {
 		return add(value, value);
@@ -314,7 +319,9 @@ public class Vector2f implements IVector2 {
 	
 
 	public Vector2f sub(float x, float y) {
-		return add(-x, -y);
+		this.x -= x;
+		this.y -= y;
+		return this;
 	}
 	
 	
@@ -377,94 +384,44 @@ public class Vector2f implements IVector2 {
 	//          OTHER OPERATIONS          //
 	////////////////////////////////////////
 	
-	@Override
-	public double angleRadStd(IVector2 v) {
-		return angleRadStd(v.getDoubleX(), v.getDoubleY());
-	}
-	
-	
-	@Override
-	public double angleRadStd(double x, double y) {
-		final double cross = crossStd(x, y);
-		final double dot   = dotStd(x, y);
+	public double angleRad(IVector2 v) {
+		final double cross = cross(v);
+		final double dot   = dot(v);
 		return Math.atan2(cross, dot);
 	}
 	
 	
-	public float angleRad(IVector2 v) {
-		final float cross = cross(v);
-		final float dot   = dot(v);
-		return (float)Math.atan2(cross, dot);
-	}
-	
-	
-	public float angleRad(float x, float y) {
-		final float cross = cross(x, y);
-		final float dot   = dot(x, y);
-		return (float)Math.atan2(cross, dot);
+	public double angleRad(float x, float y) {
+		final double cross = cross(x, y);
+		final double dot   = dot(x, y);
+		return Math.atan2(cross, dot);
 	}
 
 	
 	
 	
-	@Override
-	public double angleDegStd(IVector2 v) {
-		return Math.toDegrees(angleRadStd(v));
+	public double angleDeg(IVector2 v) {
+		return Math.toDegrees(angleRad(v));
 	}
 
 	
-	@Override
-	public double angleDegStd(double x, double y) {
-		return Math.toDegrees(angleRadStd(x, y));
+	public double angleDeg(float x, float y) {
+		return Math.toDegrees(angleRad(x, y));
 	}
 	
 	
-	public float angleDeg(IVector2 v) {
-		return (float)Math.toDegrees(angleRad(v));
-	}
+	
 
-	
-	public float angleDeg(float x, float y) {
-		return (float)Math.toDegrees(angleRad(x, y));
-	}
-	
-	
-	
-	
-	@Override
-	public double crossStd(IVector2 v) {
-		return (this.x * v.getDoubleY()) - (this.y * v.getDoubleX());
-	}
-	
-	
-	@Override
-	public double crossStd(double x, double y) {
-		return (this.x * x) - (this.y * y);
-	}
-
-	
 	public float cross(IVector2 v) {
 		return (this.x * v.getFloatY()) - (this.y * v.getFloatX());
 	}
 	
 	
 	public float cross(float x, float y) {
-		return (this.x * x) - (this.y * y);
+		return (this.x * y) - (this.y * x);
 	}
 	
 	
-	
-	
-	@Override
-	public double dotStd(IVector2 v) {
-		return (x * v.getDoubleX()) + (y * v.getDoubleY());
-	}
-	
-	
-	@Override
-	public double dotStd(double x, double y) {
-		return (this.x * x) + (this.y * y);
-	}
 	
 	
 	public float dot(IVector2 v) {
@@ -486,16 +443,9 @@ public class Vector2f implements IVector2 {
 		this.y = -this.y;
 		return this;
 	}
-
 	
 	
 	
-	
-	@Override
-	public double componentSumStd() {
-		return this.x + this.y;
-	}
-
 	
 	public float componentSum() {
 		return this.x + this.y;
@@ -503,23 +453,12 @@ public class Vector2f implements IVector2 {
 	
 	
 	
-	@Override
-	public double componentMinStd() {
-		return Math.min((double)this.x, (double)this.y);
-	}
-	
 	
 	public float componentMin() {
 		return Math.min(this.x, this.y);
 	}
 
 	
-	
-	
-	@Override
-	public double componentMaxStd() {
-		return Math.max((double)this.x, (double)this.y);
-	}
 	
 	
 	public float componentMax() {
@@ -530,13 +469,11 @@ public class Vector2f implements IVector2 {
 	
 
 	@Override
-	public double length2Std() {
-		final double x = this.x;
-		final double y = this.y;
-		return x*x + y*y;
+	public float length2Float() {
+		return length2();
 	}
-
-
+	
+	
 	public float length2() {
 		return x*x + y*y;
 	}
@@ -545,27 +482,28 @@ public class Vector2f implements IVector2 {
 	
 	
 	@Override
-	public double lengthStd() {
-		return Math.sqrt(length2Std());
+	public float lengthFloat() {
+		return (float) length();
 	}
 	
 	
-	public float length() {
-		return (float) Math.sqrt(length2());
+	public double length() {
+		return Math.sqrt(length2());
 	}
 	
 	
 	
-
+	
 	@Override
-	public double dist2Std(IVector2 v) {
-		final double x1 = x;
-		final double y1 = y;
-		final double x2 = v.getDoubleX();
-		final double y2 = v.getDoubleY();
-		return (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1);
+	public float dist2Float(IVector2 v) {
+		return (float) dist2(v);
 	}
-
+	
+	
+	@Override
+	public float dist2Float(float x, float y) {
+		return dist2(x, y);
+	}
 	
 	
 	public float dist2(IVector2 v) {
@@ -582,43 +520,33 @@ public class Vector2f implements IVector2 {
 	}
 	
 	
-	public double dist2(double x, double y) {
-		final double x1 = this.x;
-		final double y1 = this.y;
-		final double x2 = x;
-		final double y2 = y;
-		return (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1);
+	
+	
+	public float distFloat(IVector2 v) {
+		return (float) dist(v);
 	}
 	
 	
-	
-	
-	@Override
-	public double distStd(IVector2 v) {
-		return Math.sqrt(dist2Std(v));
+	public float distFloat(float x, float y) {
+		return (float) dist(x, y);
 	}
 	
 	
-	public float dist(IVector2 v) {
-		return (float) Math.sqrt(dist2(v));
+	public double dist(IVector2 v) {
+		return Math.sqrt(dist2(v));
 	}
 	
 	
-	public float dist(float x, float y) {
-		return (float) Math.sqrt(dist2(x, y));
-	}
-	
-	
-	public double dist(double x, double y) {
+	public double dist(float x, float y) {
 		return Math.sqrt(dist2(x, y));
 	}
 	
-	
 
+	
 	
 	@Override
 	public Vector2f normalize() {
-		final double len = lengthStd();
+		final double len = length();
 		this.x /= len;
 		this.y /= len;
 		return this;
@@ -627,8 +555,7 @@ public class Vector2f implements IVector2 {
 	
 	
 	
-	@Override
-	public Vector2f setLength(double length) {
+	public Vector2f setLength(float length) {
 		normalize();
 		scale(length);
 		return this;
@@ -637,9 +564,8 @@ public class Vector2f implements IVector2 {
 	
 	
 	
-	@Override
-	public Vector2f limitLength(double max) {
-		double len = lengthStd();
+	public Vector2f limitLength(float max) {
+		double len = length();
 		if(len > max) {
 			this.x /= len;
 			this.y /= len;
@@ -651,9 +577,8 @@ public class Vector2f implements IVector2 {
 	
 	
 	
-	@Override
 	public Vector2f clampLength(double min, double max) {
-		double len = lengthStd();
+		double len = length();
 		if(len > max) {
 			this.x /= len;
 			this.y /= len;
@@ -669,10 +594,9 @@ public class Vector2f implements IVector2 {
 	
 	
 	
-	@Override
-	public Vector2f clampComponents(double min, double max) {
-		this.x = (float) Math.min(max, Math.max(this.x, min));
-		this.y = (float) Math.min(max, Math.max(this.y, min));
+	public Vector2f clampComponents(float min, float max) {
+		this.x = Math.min(max, Math.max(this.x, min));
+		this.y = Math.min(max, Math.max(this.y, min));
 		return this;
 	}
 
@@ -680,8 +604,7 @@ public class Vector2f implements IVector2 {
 	
 	
 	
-	@Override
-	public Vector2f rotateRad(double angleRad) {
+	public Vector2f rotateRad(float angleRad) {
 		final double cos = Math.cos(angleRad);
 		final double sin = Math.sin(angleRad);
 		this.x = (float) (x*cos - y*sin);
@@ -689,39 +612,66 @@ public class Vector2f implements IVector2 {
 		return this;
 	}
 
-	@Override
-	public Vector2f rotateDeg(double angleDeg) {
-		return rotateRad(Math.toRadians(angleDeg));
+	
+	
+	
+	public Vector2f rotateDeg(float angleDeg) {
+		return rotateRad((float)Math.toRadians(angleDeg));
 	}
 
-	@Override
-	public Vector2f project(IVector2 vec) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	
+	
+	public Vector2f project(IVector2 v) {
+		final double dot = dot(v);
+		final double len2 = v.length2Float();
+		this.set(v).scale(dot / len2);
+		return this;
 	}
 	
 	
-	@Override
-	public IVector2 reflect() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	
+	public Vector2f reflect(IVector2 n) { // n should be normalized before
+		// I - 2.0 * dot(N, I) * N
+		final double dotN = this.dot(n);
+		float rx = (float) (2.0 * dotN * n.getDoubleX());
+		float ry = (float) (2.0 * dotN * n.getDoubleY());
+		this.sub(rx, ry);
+		return this;
 	}
 
 
-	@Override
-	public IVector2 refract() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	
+	// https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/refract.xhtml
+	public IVector2 refract(IVector2 n, float eta) {
+		final double dotN = this.dot(n);
+		final double k = 1.0 - eta*eta * (1.0 - dotN*dotN);
+		if(k < 0.0) {
+			this.set(0f, 0f);
+		} else {
+			final double sqrtK = Math.sqrt(k);
+			float rx = (float) (eta * this.x - (eta * dotN + sqrtK) * n.getDoubleX());
+			float ry = (float) (eta * this.y - (eta * dotN + sqrtK) * n.getDoubleY());
+			this.set(rx, ry);
+		}
+		return this;
 	}
 	
 
+	
+	
 	@Override
 	public Vector2f copy() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Vector2f(this.x, this.y);
 	}
 
 
+	@Override
+	public int getDimensions() {
+		return 2;
+	}
 
 
 }

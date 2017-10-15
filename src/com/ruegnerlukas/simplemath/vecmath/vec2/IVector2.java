@@ -48,45 +48,20 @@ public interface IVector2 extends IVector {
 	public IVector2 div(IVector2 v);
 	public IVector2 scale(double s);
 	
-	
 	// other operations
-	public double angleRadStd(IVector2 v);	
-	public double angleRadStd(double x, double y);
+	public float lengthFloat();
+	public float length2Float();
+	
+	public float dist2Float(IVector2 v);
+	public float dist2Float(float x, float y);
+	
+	public float distFloat(IVector2 v);
+	public float distFloat(float x, float y);
 
-	public double angleDegStd(IVector2 v);	
-	public double angleDegStd(double x, double y);
-
-	public double crossStd(IVector2 v);
-	public double crossStd(double x, double y);
-
-	public double dotStd(IVector2 v);
-	public double dotStd(double x, double y);
-
+	
 	public IVector2 negate();
-	
-	public double componentSumStd();
-	public double componentMinStd();
-	public double componentMaxStd();
-
-	public double length2Std();
-	public double lengthStd();
-
-	public double dist2Std(IVector2 v);
-	public double distStd(IVector2 v);
-
 	public IVector2 normalize();
-	public IVector2 setLength(double length);
-	public IVector2 limitLength(double max);
-	public IVector2 clampLength(double min, double max);
-	public IVector2 clampComponents(double min, double max);
-
-	public IVector2 rotateRad(double angleRad);
-	public IVector2 rotateDeg(double angleDeg);
 	
-	public IVector2 project(IVector2 vec);
-	public IVector2 reflect();
-	public IVector2 refract();
-
 	public IVector2 copy();
 	
 }
