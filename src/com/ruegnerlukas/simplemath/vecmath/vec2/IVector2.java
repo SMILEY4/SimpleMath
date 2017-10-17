@@ -43,15 +43,19 @@ public interface IVector2 extends IVector {
 	
 	// operations
 	public IVector2 add(IVector2 vec);
+	public IVector2 add(Number x, Number y);
 	public IVector2 add(Number n);
 
 	public IVector2 sub(IVector2 vec);
+	public IVector2 sub(Number x, Number y);
 	public IVector2 sub(Number n);
 
 	public IVector2 mul(IVector2 vec);
+	public IVector2 mul(Number x, Number y);
 	public IVector2 scale(Number n);
 
 	public IVector2 div(IVector2 vec);
+	public IVector2 div(Number x, Number y);
 	public IVector2 div(Number n);
 
 	
