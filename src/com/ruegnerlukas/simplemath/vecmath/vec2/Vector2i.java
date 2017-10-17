@@ -1,8 +1,6 @@
 package com.ruegnerlukas.simplemath.vecmath.vec2;
 
-
-
-public class Vector2i implements IVector2 {
+public class Vector2i {
 
 
 }
