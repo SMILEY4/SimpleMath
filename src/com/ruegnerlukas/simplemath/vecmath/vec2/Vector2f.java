@@ -6,12 +6,25 @@ public class Vector2f implements IVector2 {
 
 	
 	
-	
+	/**
+	 * creates a new vector from point a to point b
+	 * @param a the position of the first point
+	 * @param b the position of the second point
+	 * @return the created vector
+	 * */
 	public static Vector2f createVectorAB(IVector2 a, IVector2 b) {
 		return Vector2f.createVectorAB(a.getFloatX(), a.getFloatY(), b.getFloatX(), b.getFloatY());
 	}
 	
 	
+	/**
+	 * creates a new vector from point a to point b
+	 * @param ax the x-position of the first point
+	 * @param ay the y-position of the first point
+	 * @param bx the x-position of the second point
+	 * @param by the y-position of the second point
+	 * @return the created vector
+	 * */
 	public static Vector2f createVectorAB(float ax, float ay, float bx, float by) {
 		return new Vector2f(bx-ax, by-ay);
 	}
@@ -19,11 +32,25 @@ public class Vector2f implements IVector2 {
 	
 	
 	
+	/**
+	 * calculates the vector from point a to point b and stores the values in "dst"
+	 * @param a the position of the first point
+	 * @param b the position of the second point
+	 * @return the vector "dst" with the new values
+	 * */
 	public static Vector2f setVectorAB(IVector2 a, IVector2 b, Vector2f dst) {
 		return Vector2f.setVectorAB(a.getFloatX(), a.getFloatY(), b.getFloatX(), b.getFloatY(), dst);
 	}
 	
 	
+	/**
+	 * calculates the vector from point a to point b and stores the values in "dst"
+	 * @param ax the x-position of the first point
+	 * @param ay the y-position of the first point
+	 * @param bx the x-position of the second point
+	 * @param by the y-position of the second point
+	 * @return the vector "dst" with the new values
+	 * */
 	public static Vector2f setVectorAB(float ax, float ay, float bx, float by, Vector2f dst) {
 		return dst.set(bx-ax, by-ay);
 	}
@@ -33,7 +60,10 @@ public class Vector2f implements IVector2 {
 	
 	
 	
+	/** the x-component of this vector (index=0)*/
 	public float x;
+	
+	/** the y-component of this vector (index=1)*/
 	public float y;
 	
 	
@@ -41,21 +71,33 @@ public class Vector2f implements IVector2 {
 	
 	
 	
+	/**
+	 * creates a zero-vector
+	 * */
 	public Vector2f() {
 		this(0);
 	}
 	
 	
+	/**
+	 * creates a vector with the same values for x and y
+	 * */
 	public Vector2f(float xy) {
 		this(xy, xy);
 	}
 	
 	
+	/**
+	 * creates a vector with the same values as the given vector
+	 * */
 	public Vector2f(IVector2 vec) {
 		this(vec.getFloatX(), vec.getFloatY());
 	}
 
 	
+	/**
+	 * creates a vector with the given x and y values
+	 * */
 	public Vector2f(float x, float y) {
 		this.x = x;
 		this.y = y;
@@ -252,28 +294,35 @@ public class Vector2f implements IVector2 {
 		return new Vector2s(this);
 	}
 
+	
 	@Override
 	public Vector2i toIntVector() {
 		return new Vector2i(this);
 	}
 
+	
 	@Override
 	public Vector2l toLongVector() {
 		return new Vector2l(this);
 	}
 
+	
 	@Override
 	public Vector2f toFloatVector() {
 		return (Vector2f) this.copy();
 	}
 
+	
 	@Override
 	public Vector2d toDoubleVector() {
 		return new Vector2d(this);
 	}
 
 	
-	
+	@Override public String toString() {
+		return "Vector2f." + this.hashCode() + "(" + this.x + ", " + this.y + ")";
+	}
+
 	
 	
 	
@@ -295,11 +344,22 @@ public class Vector2f implements IVector2 {
 	}
 	
 	
+	/**
+	 * Adds the given component to this vector.
+	 * @param xy the x- and y-component
+	 * @return this vector for chaining
+	 * */
 	public Vector2f add(float xy) {
 		return this.add(xy, xy);
 	}
 	
 	
+	/**
+	 * Adds the given components to this vector.
+	 * @param x the x-component
+	 * @param y the y-component
+	 * @return this vector for chaining
+	 * */
 	public Vector2f add(float x, float y) {
 		this.x += x;
 		this.y += y;
@@ -328,11 +388,22 @@ public class Vector2f implements IVector2 {
 	}
 
 	
+	/**
+	 * Subtracts the given component to this vector.
+	 * @param xy the x- and y-component
+	 * @return this vector for chaining
+	 * */
 	public Vector2f sub(float xy) {
 		return this.sub(xy, xy);
 	}
 	
 	
+	/**
+	 * Subtracts the given components to this vector.
+	 * @param x the x-component
+	 * @param y the y-component
+	 * @return this vector for chaining
+	 * */
 	public Vector2f sub(float x, float y) {
 		this.x -= x;
 		this.y -= y;
@@ -360,11 +431,22 @@ public class Vector2f implements IVector2 {
 	}
 
 	
+	/**
+	 * Scales this vector by the given scalar.
+	 * @param xy the scalar
+	 * @return this vector for chaining
+	 * */
 	public Vector2f scale(float xy) {
 		return this.mul(xy, xy);
 	}
 
 	
+	/**
+	 * Multiplies this vector with the given components (component-wise).
+	 * @param x the x-component
+	 * @param y the y-component
+	 * @return this vector for chaining
+	 * */
 	public Vector2f mul(float x, float y) {
 		this.x *= x;
 		this.y *= y;
@@ -392,11 +474,22 @@ public class Vector2f implements IVector2 {
 	}
 
 	
+	/**
+	 * Divides this vector by the given component (component-wise).
+	 * @param xy the x- and y-component
+	 * @return this vector for chaining
+	 * */
 	public Vector2f div(float xy) {
 		return this.div(xy, xy);
 	}
 	
 	
+	/**
+	 * Divides this vector by the given components (component-wise).
+	 * @param x the x-component
+	 * @param y the y-component
+	 * @return this vector for chaining
+	 * */
 	public Vector2f div(float x, float y) {
 		this.x /= x;
 		this.y /= y;
@@ -418,11 +511,21 @@ public class Vector2f implements IVector2 {
 	}
 	
 	
+	/**
+	 * Calculates the cross product between this vector and the given vector.
+	 * @param vec the vector
+	 * @return the result
+	 * */
 	public float cross(IVector2 vec) {
 		return this.cross(vec.getFloatX(), vec.getFloatY());
 	}
 	
 	
+	/**
+	 * Calculates the cross product between this vector and the given vector-components.
+	 * @param vec the vector
+	 * @return the result
+	 * */
 	public float cross(float x, float y) {
 		return (this.x * y) - (this.y * x);
 	}
@@ -442,11 +545,21 @@ public class Vector2f implements IVector2 {
 	}
 	
 	
+	/**
+	 * Calculates the dot product between this vector and the given vector.
+	 * @param vec the vector
+	 * @return the result
+	 * */
 	public float dot(IVector2 vec) {
 		return this.dot(vec.getFloatX(), vec.getFloatY());
 	}
 	
 	
+	/**
+	 * Calculates the dot product between this vector and the given vector-components.
+	 * @param vec the vector
+	 * @return the result
+	 * */
 	public float dot(float x, float y) {
 		return (this.x * x) + (this.y * y);
 	}
@@ -466,11 +579,22 @@ public class Vector2f implements IVector2 {
 	}
 	
 	
+	/**
+	 * Calculates the squared distance between this vector and the given vector.
+	 * @param vec the vector
+	 * @return the result
+	 * */
 	public float dist2(IVector2 vec) {
 		return this.dist2(vec.getFloatX(), vec.getFloatY());
 	}
 	
 	
+	/**
+	 * Calculates the squared distance between this vector and the given position.
+	 * @param x the x-position
+	 * @param y the y-position
+	 * @return the result
+	 * */
 	public float dist2(float x, float y) {
 		return (x-this.x)*(x-this.x) + (y-this.y)*(y-this.y);
 	}
@@ -490,11 +614,22 @@ public class Vector2f implements IVector2 {
 	}
 	
 	
+	/**
+	 * Calculates the distance between this vector and the given vector.
+	 * @param vec the vector
+	 * @return the result
+	 * */
 	public float dist(IVector2 vec) {
 		return this.dist(vec.getFloatX(), vec.getFloatY());
 	}
 	
 	
+	/**
+	 * Calculates the distance between this vector and the given position.
+	 * @param x the x-position
+	 * @param y the y-position
+	 * @return the result
+	 * */
 	public float dist(float x, float y) {
 		return (float) Math.sqrt(this.dist2(x, y));
 	}
@@ -507,7 +642,11 @@ public class Vector2f implements IVector2 {
 		return length2();
 	}
 
-	
+
+	/**
+	 * Calculates the squared length of this vector.
+	 * @return the result
+	 * */
 	public float length2() {
 		return x*x + y*y;
 	}
@@ -521,6 +660,10 @@ public class Vector2f implements IVector2 {
 	}
 	
 	
+	/**
+	 * Calculates the length of this vector.
+	 * @return the result
+	 * */
 	public float length() {
 		return (float) Math.sqrt(length2());
 	}
@@ -535,6 +678,11 @@ public class Vector2f implements IVector2 {
 	}
 	
 	
+	/**
+	 * Sets the length of this vector.
+	 * @param length the new length
+	 * @return this vector for chaining
+	 * */
 	public Vector2f setLength(float length) {
 		normalize();
 		scale(length);
@@ -549,6 +697,12 @@ public class Vector2f implements IVector2 {
 		return null;
 	}
 	
+	
+	/**
+	 * Limits the length of this vector to the given maximum length.
+	 * @param maxLength the maximum length
+	 * @return this vector for chaining
+	 * */
 	public Vector2f limitLength(float maxLength) {
 		float len = length();
 		if(len > maxLength) {
@@ -567,6 +721,12 @@ public class Vector2f implements IVector2 {
 	}
 	
 	
+	/**
+	 * Limits the length of this vector to the given minimum and maximum length.
+	 * @param minLength the minimum length
+	 * @param maxLength the maximum length
+	 * @return this vector for chaining
+	 * */
 	public Vector2f clampLength(float minLength, float maxLength) {
 		float len = length();
 		if(len < minLength) {
@@ -595,11 +755,22 @@ public class Vector2f implements IVector2 {
 	}
 
 
+	/**
+	 * Calculates the angle between this vector and the given vector in radians.
+	 * @param vec the vector
+	 * @return the result
+	 * */
 	public float angleRad(IVector2 vec) {
 		return this.angleRad(vec.getFloatX(), vec.getFloatY());
 	}
 	
 	
+	/**
+	 * Calculates the angle between this vector and the given vector in degrees.
+	 * @param x the x-component of the vector
+	 * @param y the y-component of the vector
+	 * @return the result
+	 * */
 	public float angleRad(float x, float y) {
 		final float cross = cross(x, y);
 		final float dot   = dot(x, y);
@@ -621,11 +792,22 @@ public class Vector2f implements IVector2 {
 	}
 	
 	
+	/**
+	 * Calculates the angle between this vector and the given vector in degrees.
+	 * @param vec the vector
+	 * @return the result
+	 * */
 	public float angleDeg(IVector2 vec) {
 		return this.angleDeg(vec.getFloatX(), vec.getFloatY());
 	}
 	
 	
+	/**
+	 * Calculates the angle between this vector and the given vector in degrees.
+	 * @param x the x-component of the vector
+	 * @param y the y-component of the vector
+	 * @return the result
+	 * */
 	public float angleDeg(float x, float y) {
 		return (float) Math.toDegrees(angleRad(x, y));
 	}
@@ -639,6 +821,11 @@ public class Vector2f implements IVector2 {
 	}
 
 	
+	/**
+	 * Rotates this vector by the given angle in radians.
+	 * @param angleRad the angle in radians
+	 * @return this vector for chaining
+	 * */
 	public Vector2f rotateRad(float angleRad) {
 		final double cos = Math.cos(angleRad);
 		final double sin = Math.sin(angleRad);
@@ -656,6 +843,11 @@ public class Vector2f implements IVector2 {
 	}
 	
 	
+	/**
+	 * Rotates this vector by the given angle in degrees.
+	 * @param angleRad the angle in degrees
+	 * @return this vector for chaining
+	 * */
 	public Vector2f rotateDeg(float angleDeg) {
 		return this.rotateRad(Math.toRadians(angleDeg));
 	}
@@ -672,6 +864,11 @@ public class Vector2f implements IVector2 {
 	}
 
 	
+	/**
+	 * Projects this vector on the given vector.
+	 * @param vec the vector
+	 * @return this vector for chaining
+	 * */
 	public Vector2f project(Vector2f vec) {
 		final float dot = dot(vec);
 		final float len2 = vec.length2();
@@ -718,6 +915,10 @@ public class Vector2f implements IVector2 {
 	}
 
 	
+	/**
+	 * Calculates the sum of the components.
+	 * @return the result
+	 * */
 	public float componentSum() {
 		return x + y;
 	}
@@ -731,6 +932,10 @@ public class Vector2f implements IVector2 {
 	}
 	
 	
+	/**
+	 * Calculates the smallest component.
+	 * @return the result
+	 * */
 	public float componentMin() {
 		return Math.min(x, y);
 	}
@@ -744,6 +949,10 @@ public class Vector2f implements IVector2 {
 	}
 	
 	
+	/**
+	 * Calculates the biggest component.
+	 * @return the result
+	 * */
 	public float componentMax() {
 		return Math.max(x, y);
 	}
@@ -757,11 +966,19 @@ public class Vector2f implements IVector2 {
 	}
 	
 	
+	/**
+	 * Clamps the components between the given minimum and maximum values.
+	 * @param min the minimum value
+	 * @param max the maximum value
+	 * @return the result
+	 * */
 	public Vector2f clampComponents(float min, float max) {
 		this.x = Math.min(max, Math.max(this.x, min));
 		this.y = Math.min(max, Math.max(this.y, min));
 		return this;
 	}
 
+	
+	
 	
 }
