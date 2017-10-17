@@ -44,19 +44,19 @@ public interface IVector2 extends IVector {
 	// operations
 	public IVector2 add(IVector2 vec);
 	public IVector2 add(Number x, Number y);
-	public IVector2 add(Number n);
+	public IVector2 add(Number xy);
 
 	public IVector2 sub(IVector2 vec);
 	public IVector2 sub(Number x, Number y);
-	public IVector2 sub(Number n);
+	public IVector2 sub(Number xy);
 
 	public IVector2 mul(IVector2 vec);
 	public IVector2 mul(Number x, Number y);
-	public IVector2 scale(Number n);
+	public IVector2 scale(Number xy);
 
 	public IVector2 div(IVector2 vec);
 	public IVector2 div(Number x, Number y);
-	public IVector2 div(Number n);
+	public IVector2 div(Number xy);
 
 	
 	public Number crossGen(IVector2 vec);
@@ -91,8 +91,8 @@ public interface IVector2 extends IVector {
 	public IVector2 rotateDeg(Number angleDeg);
 
 	public IVector2 project(IVector2 vec);
-	public IVector2 reflect(IVector2 n);
-	public IVector2 refract(IVector2 n, float eta);
+	public IVector2 reflect(IVector2 vec);
+	public IVector2 refract(IVector2 vec, float eta);
 	
 	public Number componentSumGen();
 	public Number componentMinGen();
