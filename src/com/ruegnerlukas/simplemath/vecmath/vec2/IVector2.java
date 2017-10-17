@@ -384,6 +384,35 @@ public interface IVector2 extends IVector {
 	public IVector2 clampComponents(Number min, Number max);
 	
 	
+	
+	
+	/**
+	 * Compares this vector with the given vector.
+	 * @return true, if the two vectors are the same
+	 * */
+	public boolean compare(IVector2 vec);
+	
+	
+	
+	/**
+	 * @return true, if this vector has a length of 1
+	 * */
+	public boolean isUnit();
+	
+	
+	/**
+	 * @return true, if all components of this vector are zero
+	 * */
+	public boolean isZero();
+	
+	
+	/**
+	 * @return true, if this vector is perpendicular with the given vector
+	 * */
+	public boolean isPerpendicular(IVector2 vec);
+	
+	
+	
 }
 
 

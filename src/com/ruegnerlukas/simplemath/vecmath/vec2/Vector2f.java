@@ -6,6 +6,11 @@ public class Vector2f implements IVector2 {
 
 	
 	
+	
+	/** Used when comparing two float values. */
+	public static final float EPSILON = 0.000001f;
+	
+	
 	/**
 	 * creates a new vector from point a to point b
 	 * @param a the position of the first point
@@ -977,6 +982,48 @@ public class Vector2f implements IVector2 {
 		this.y = Math.min(max, Math.max(this.y, min));
 		return this;
 	}
+
+	
+	
+
+	@Override
+	public boolean compare(IVector2 vec) {
+		if(Math.abs(x - vec.getFloatX()) > EPSILON) { return false; }
+		if(Math.abs(y - vec.getFloatY()) > EPSILON) { return false; }
+		return true;
+	}
+
+
+	@Override
+	public boolean isUnit() {
+		if(Math.abs(length2() - 1f) > EPSILON) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+
+	@Override
+	public boolean isZero() {
+		if( (x < EPSILON) && (y < EPSILON) ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	
+	@Override
+	public boolean isPerpendicular(IVector2 vec) {
+		if(dot(vec) < EPSILON) {
+			return true;
+		} else {
+			return false;
+		}	
+	}
+
+
 
 	
 	
