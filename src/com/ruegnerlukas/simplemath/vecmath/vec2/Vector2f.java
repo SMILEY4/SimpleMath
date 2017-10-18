@@ -11,6 +11,8 @@ public class Vector2f implements IVector2 {
 	public static final float EPSILON = 0.000001f;
 	
 	
+	
+	
 	/**
 	 * creates a new vector from point a to point b
 	 * @param a the position of the first point
@@ -699,7 +701,7 @@ public class Vector2f implements IVector2 {
 	
 	@Override
 	public Vector2f limitLength(Number maxLength) {
-		return null;
+		return limitLength(maxLength.floatValue());
 	}
 	
 	
@@ -905,7 +907,7 @@ public class Vector2f implements IVector2 {
 		} else {
 			final double sqrtK = Math.sqrt(k);
 			float rx = (float) (eta * this.x - (eta * dotN + sqrtK) * n.getFloatX());
-			float ry = (float) (eta * this.y - (eta * dotN + sqrtK) * n.getFloatX());
+			float ry = (float) (eta * this.y - (eta * dotN + sqrtK) * n.getFloatY());
 			this.set(rx, ry);
 		}
 		return this;
