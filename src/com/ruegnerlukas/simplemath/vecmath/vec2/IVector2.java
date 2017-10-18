@@ -33,12 +33,6 @@ public interface IVector2 extends IVector {
 
 
 
-	/**  @return the x-component as a short **/
-	public short getShortX();
-	
-	/**  @return the y-component as a short **/
-	public short getShortY();
-	
 	/**  @return the x-component as an integer **/
 	public int getIntX();
 	
@@ -65,12 +59,6 @@ public interface IVector2 extends IVector {
 	
 
 
-	
-	/**
-	 * Converts this vector to a short vector.
-	 * @return the created short vector
-	 * */
-	public Vector2s toShortVector();
 	
 	/**
 	 * Converts this vector to an integer vector.

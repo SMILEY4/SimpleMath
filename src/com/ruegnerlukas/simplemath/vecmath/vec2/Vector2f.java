@@ -242,16 +242,6 @@ public class Vector2f implements IVector2 {
 	
 	
 	@Override
-	public short getShortX() {
-		return (short) this.x;
-	}
-
-	@Override
-	public short getShortY() {
-		return (short) this.y;
-	}
-
-	@Override
 	public int getIntX() {
 		return (int) this.x;
 	}
@@ -295,12 +285,6 @@ public class Vector2f implements IVector2 {
 	
 	
 	
-	
-	@Override
-	public Vector2s toShortVector() {
-		return new Vector2s(this);
-	}
-
 	
 	@Override
 	public Vector2i toIntVector() {
