@@ -1,4 +1,4 @@
-package com.ruegnerlukas.simplemath;
+package com.ruegnerlukas;
 
 import com.ruegnerlukas.simplemath.vecmath.*;
 import com.ruegnerlukas.simplemath.vecmath.vec2.*;
