@@ -695,7 +695,7 @@ public class Vector2l implements IVector2 {
 	
 	@Override
 	public Vector2l setLength(Number length) {
-		return this.setLength(length.longValue());
+		return this.setLength(length.floatValue());
 	}
 	
 	
@@ -704,7 +704,7 @@ public class Vector2l implements IVector2 {
 	 * @param length the new length
 	 * @return this vector for chaining
 	 * */
-	public Vector2l setLength(long length) {
+	public Vector2l setLength(float length) {
 		normalize();
 		scale(length);
 		return this;
@@ -787,7 +787,7 @@ public class Vector2l implements IVector2 {
 	
 	
 	/**
-	 * Calculates the angle between this vector and the given vector in degrees.
+	 * Calculates the angle between this vector and the given vector in radians.
 	 * @param x the x-component of the vector
 	 * @param y the y-component of the vector
 	 * @return the result

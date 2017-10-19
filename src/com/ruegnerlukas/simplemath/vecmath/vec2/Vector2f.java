@@ -1,7 +1,5 @@
 package com.ruegnerlukas.simplemath.vecmath.vec2;
 
-import com.ruegnerlukas.simplemath.vecmath.IVector;
-
 public class Vector2f implements IVector2 {
 
 	
@@ -757,7 +755,7 @@ public class Vector2f implements IVector2 {
 	
 	
 	/**
-	 * Calculates the angle between this vector and the given vector in degrees.
+	 * Calculates the angle between this vector and the given vector in radians.
 	 * @param x the x-component of the vector
 	 * @param y the y-component of the vector
 	 * @return the result

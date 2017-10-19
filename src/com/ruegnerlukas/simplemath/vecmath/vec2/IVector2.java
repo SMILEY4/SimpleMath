@@ -188,7 +188,8 @@ public interface IVector2 extends IVector {
 	
 	/**
 	 * Calculates the cross product between this vector and the given vector-components.
-	 * @param vec the vector
+	 * @param x the x-component
+	 * @param y the y-component
 	 * @return the result as a {@link java.lang.Number}
 	 * */
 	public Number crossGen(Number x, Number y);
@@ -203,7 +204,8 @@ public interface IVector2 extends IVector {
 	
 	/**
 	 * Calculates the dot product between this vector and the given vector-components.
-	 * @param vec the vector
+	 * @param x the x-component
+	 * @param y the y-component
 	 * @return the result as a {@link java.lang.Number}
 	 * */
 	public Number dotGen(Number x, Number y);
@@ -284,7 +286,7 @@ public interface IVector2 extends IVector {
 	public Number angleRadGen(IVector2 vec);
 	
 	/**
-	 * Calculates the angle between this vector and the given vector in degrees.
+	 * Calculates the angle between this vector and the given vector in radians.
 	 * @param x the x-component of the vector
 	 * @param y the y-component of the vector
 	 * @return the result as a {@link java.lang.Number}
