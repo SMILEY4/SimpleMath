@@ -23,6 +23,14 @@ public class InterpolationSwingOut implements IInterpolation {
 	public float interpolate(float a) {
 		return InterpolationMath.swingOut(a, scale);
 	}
+	
+	
+	
+
+	@Override
+	public float interpolate(float start, float end, float a) {
+		return start + (end - start) * interpolate(a);
+	}
 
 	
 }

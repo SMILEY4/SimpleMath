@@ -24,6 +24,14 @@ public class InterpolationExponentialOut implements IInterpolation {
 	public float interpolate(float a) {
 		return InterpolationMath.expOut(a, value, power);
 	}
+	
+	
+	
+
+	@Override
+	public float interpolate(float start, float end, float a) {
+		return start + (end - start) * interpolate(a);
+	}
 
 	
 }

@@ -29,6 +29,13 @@ public class InterpolationElasticIn implements IInterpolation {
 	public float interpolate(float a) {
 		return InterpolationMath.elasticIn(a, value, power, bounces, scale);
 	}
+	
+	
+	
 
+	@Override
+	public float interpolate(float start, float end, float a) {
+		return start + (end - start) * interpolate(a);
+	}
 	
 }

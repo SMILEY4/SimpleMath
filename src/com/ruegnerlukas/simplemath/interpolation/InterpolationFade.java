@@ -9,6 +9,14 @@ public class InterpolationFade implements IInterpolation {
 	public float interpolate(float a) {
 		return InterpolationMath.fade(a);
 	}
+	
+	
+	
+
+	@Override
+	public float interpolate(float start, float end, float a) {
+		return start + (end - start) * interpolate(a);
+	}
 
 
 }
