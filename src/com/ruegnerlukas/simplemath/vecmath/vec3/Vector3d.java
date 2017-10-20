@@ -203,6 +203,7 @@ public class Vector3d implements IVector3 {
 		final double len = length();
 		this.x /= len;
 		this.y /= len;
+		this.z /= len;
 		return this;
 	}
 

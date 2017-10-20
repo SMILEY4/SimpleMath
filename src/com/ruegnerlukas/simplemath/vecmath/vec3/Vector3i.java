@@ -200,6 +200,7 @@ public class Vector3i implements IVector3 {
 		final float len = length();
 		this.x /= len;
 		this.y /= len;
+		this.z /= len;
 		return this;
 	}
 
