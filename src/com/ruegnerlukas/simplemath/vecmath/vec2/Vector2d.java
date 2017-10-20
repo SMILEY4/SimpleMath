@@ -1,5 +1,6 @@
 package com.ruegnerlukas.simplemath.vecmath.vec2;
 
+import com.ruegnerlukas.simplemath.vecmath.vec3.IVector3;
 
 public class Vector2d implements IVector2 {
 
@@ -942,7 +943,7 @@ public class Vector2d implements IVector2 {
 	
 	
 	/**
-	 * Calculates the biggest component.
+	 * Calculates the largest component.
 	 * @return the result
 	 * */
 	public double componentMax() {
@@ -1011,8 +1012,5 @@ public class Vector2d implements IVector2 {
 	}
 
 
-
-	
-	
 	
 }

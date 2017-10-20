@@ -1036,7 +1036,7 @@ public class Vector4d implements IVector4 {
 	
 	
 	/**
-	 * Calculates the biggest component.
+	 * Calculates the largest component.
 	 * @return the result
 	 * */
 	public double componentMax() {

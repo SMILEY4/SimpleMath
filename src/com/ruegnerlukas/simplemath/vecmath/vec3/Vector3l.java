@@ -1028,7 +1028,7 @@ public class Vector3l implements IVector3 {
 	
 	
 	/**
-	 * Calculates the biggest component.
+	 * Calculates the largest component.
 	 * @return the result
 	 * */
 	public long componentMax() {

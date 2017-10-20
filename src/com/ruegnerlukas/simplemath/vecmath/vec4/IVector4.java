@@ -7,7 +7,8 @@ import com.ruegnerlukas.simplemath.vecmath.vec3.IVector3;
 public interface IVector4 extends IVector {
 
 	
-
+	
+	
 
 	/**
 	 * Sets this vector from the given vector.
@@ -299,40 +300,7 @@ public interface IVector4 extends IVector {
 	public Number distGen(Number x, Number y, Number z, Number w);
 	
 	
-	/**
-	 * Calculates the squared length of this vector.
-	 * @return the result as a {@link java.lang.Number}
-	 * */
-	public Number length2Gen();
 	
-	/**
-	 * Calculates the length of this vector.
-	 * @return the result as a {@link java.lang.Number}
-	 * */
-	public Number lengthGen();
-	
-	/**
-	 * Sets the length of this vector.
-	 * @param length the new length
-	 * @return this vector for chaining
-	 * */
-	public IVector4 setLength(Number length);
-	
-	/**
-	 * Limits the length of this vector to the given maximum length.
-	 * @param maxLength the maximum length
-	 * @return this vector for chaining
-	 * */
-	public IVector4 limitLength(Number maxLength);
-	
-	/**
-	 * Limits the length of this vector to the given minimum and maximum length.
-	 * @param minLength the minimum length
-	 * @param maxLength the maximum length
-	 * @return this vector for chaining
-	 * */
-	public IVector4 clampLenght(Number minLength, Number maxLength);
-
 	
 	/**
 	 * Calculates the angle between this vector and the given vector in radians. Both vectors should be normalized before.
@@ -392,32 +360,6 @@ public interface IVector4 extends IVector {
 	 * */
 	public IVector4 refract(IVector4 vec, float eta);
 	
-	/**
-	 * Calculates the sum of the components.
-	 * @return the result as a {@link java.lang.Number}
-	 * */
-	public Number componentSumGen();
-	
-	/**
-	 * Calculates the smallest component.
-	 * @return the result as a {@link java.lang.Number}
-	 * */
-	public Number componentMinGen();
-	
-	/**
-	 * Calculates the biggest component.
-	 * @return the result as a {@link java.lang.Number}
-	 * */
-	public Number componentMaxGen();
-	
-	/**
-	 * Clamps the components between the given minimum and maximum values.
-	 * @param min the minimum value
-	 * @param max the maximum value
-	 * @return the result as a {@link java.lang.Number}
-	 * */
-	public IVector4 clampComponents(Number min, Number max);
-	
 	
 	
 	
@@ -428,17 +370,6 @@ public interface IVector4 extends IVector {
 	public boolean compare(IVector4 vec);
 	
 	
-	
-	/**
-	 * @return true, if this vector has a length of 1
-	 * */
-	public boolean isUnit();
-	
-	
-	/**
-	 * @return true, if all components of this vector are zero
-	 * */
-	public boolean isZero();
 	
 	
 	/**

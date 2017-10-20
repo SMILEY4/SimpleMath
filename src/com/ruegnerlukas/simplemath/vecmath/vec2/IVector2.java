@@ -1,6 +1,7 @@
 package com.ruegnerlukas.simplemath.vecmath.vec2;
 
 import com.ruegnerlukas.simplemath.vecmath.IVector;
+import com.ruegnerlukas.simplemath.vecmath.vec3.IVector3;
 
 
 public interface IVector2 extends IVector {
@@ -241,41 +242,6 @@ public interface IVector2 extends IVector {
 	 * @return the result as a {@link java.lang.Number}
 	 * */
 	public Number distGen(Number x, Number y);
-	
-	
-	/**
-	 * Calculates the squared length of this vector.
-	 * @return the result as a {@link java.lang.Number}
-	 * */
-	public Number length2Gen();
-	
-	/**
-	 * Calculates the length of this vector.
-	 * @return the result as a {@link java.lang.Number}
-	 * */
-	public Number lengthGen();
-	
-	/**
-	 * Sets the length of this vector.
-	 * @param length the new length
-	 * @return this vector for chaining
-	 * */
-	public IVector2 setLength(Number length);
-	
-	/**
-	 * Limits the length of this vector to the given maximum length.
-	 * @param maxLength the maximum length
-	 * @return this vector for chaining
-	 * */
-	public IVector2 limitLength(Number maxLength);
-	
-	/**
-	 * Limits the length of this vector to the given minimum and maximum length.
-	 * @param minLength the minimum length
-	 * @param maxLength the maximum length
-	 * @return this vector for chaining
-	 * */
-	public IVector2 clampLenght(Number minLength, Number maxLength);
 
 	
 	/**
@@ -347,32 +313,11 @@ public interface IVector2 extends IVector {
 	 * */
 	public IVector2 refract(IVector2 vec, float eta);
 	
-	/**
-	 * Calculates the sum of the components.
-	 * @return the result as a {@link java.lang.Number}
-	 * */
-	public Number componentSumGen();
 	
 	/**
-	 * Calculates the smallest component.
-	 * @return the result as a {@link java.lang.Number}
+	 * @return true, if this vector is perpendicular with the given vector
 	 * */
-	public Number componentMinGen();
-	
-	/**
-	 * Calculates the biggest component.
-	 * @return the result as a {@link java.lang.Number}
-	 * */
-	public Number componentMaxGen();
-	
-	/**
-	 * Clamps the components between the given minimum and maximum values.
-	 * @param min the minimum value
-	 * @param max the maximum value
-	 * @return the result as a {@link java.lang.Number}
-	 * */
-	public IVector2 clampComponents(Number min, Number max);
-	
+	public boolean isPerpendicular(IVector2 vec);
 	
 	
 	
@@ -381,26 +326,6 @@ public interface IVector2 extends IVector {
 	 * @return true, if the two vectors are the same
 	 * */
 	public boolean compare(IVector2 vec);
-	
-	
-	
-	/**
-	 * @return true, if this vector has a length of 1
-	 * */
-	public boolean isUnit();
-	
-	
-	/**
-	 * @return true, if all components of this vector are zero
-	 * */
-	public boolean isZero();
-	
-	
-	/**
-	 * @return true, if this vector is perpendicular with the given vector
-	 * */
-	public boolean isPerpendicular(IVector2 vec);
-	
 	
 	
 }

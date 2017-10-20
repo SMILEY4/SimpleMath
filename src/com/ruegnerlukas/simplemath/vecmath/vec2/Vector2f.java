@@ -941,7 +941,7 @@ public class Vector2f implements IVector2 {
 	
 	
 	/**
-	 * Calculates the biggest component.
+	 * Calculates the largest component.
 	 * @return the result
 	 * */
 	public float componentMax() {

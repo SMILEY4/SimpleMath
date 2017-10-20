@@ -982,7 +982,7 @@ public class Vector3f implements IVector3 {
 	
 	
 	/**
-	 * Calculates the biggest component.
+	 * Calculates the largest component.
 	 * @return the result
 	 * */
 	public float componentMax() {

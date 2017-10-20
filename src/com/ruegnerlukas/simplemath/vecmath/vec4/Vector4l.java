@@ -1083,7 +1083,7 @@ public class Vector4l implements IVector4 {
 	
 	
 	/**
-	 * Calculates the biggest component.
+	 * Calculates the largest component.
 	 * @return the result
 	 * */
 	public long componentMax() {

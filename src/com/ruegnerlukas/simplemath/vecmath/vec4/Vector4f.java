@@ -1036,7 +1036,7 @@ public class Vector4f implements IVector4 {
 	
 	
 	/**
-	 * Calculates the biggest component.
+	 * Calculates the largest component.
 	 * @return the result
 	 * */
 	public float componentMax() {
