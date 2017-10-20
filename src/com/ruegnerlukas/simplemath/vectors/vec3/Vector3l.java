@@ -131,7 +131,7 @@ public class Vector3l implements IVector3 {
 		if(index == 0) { this.x = value.longValue(); return this; }
 		if(index == 1) { this.y = value.longValue(); return this; }
 		if(index == 2) { this.z = value.longValue(); return this; }
-		return null;
+		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 	}
 
 	
@@ -142,7 +142,7 @@ public class Vector3l implements IVector3 {
 		if(index == 0) { return (short) this.x; }
 		if(index == 1) { return (short) this.y; }
 		if(index == 2) { return (short) this.z; }
-		return 0;
+		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 	}
 
 	
@@ -151,7 +151,7 @@ public class Vector3l implements IVector3 {
 		if(index == 0) { return (int) this.x; }
 		if(index == 1) { return (int) this.y; }
 		if(index == 2) { return (int) this.z; }
-		return 0;
+		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 	}
 
 	
@@ -160,7 +160,7 @@ public class Vector3l implements IVector3 {
 		if(index == 0) { return (long) this.x; }
 		if(index == 1) { return (long) this.y; }
 		if(index == 2) { return (long) this.z; }
-		return 0;
+		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 	}
 	
 
@@ -169,7 +169,7 @@ public class Vector3l implements IVector3 {
 		if(index == 0) { return (float) this.x; }
 		if(index == 1) { return (float) this.y; }
 		if(index == 2) { return (float) this.z; }
-		return 0;
+		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 	}
 
 	
@@ -178,7 +178,7 @@ public class Vector3l implements IVector3 {
 		if(index == 0) { return (double) this.x; }
 		if(index == 1) { return (double) this.y; }
 		if(index == 2) { return (double) this.z; }
-		return 0;
+		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 	}
 
 	

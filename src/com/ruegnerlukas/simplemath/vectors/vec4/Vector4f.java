@@ -144,7 +144,7 @@ public class Vector4f implements IVector4 {
 		if(index == 1) { this.y = value.floatValue(); return this; }
 		if(index == 2) { this.z = value.floatValue(); return this; }
 		if(index == 3) { this.w = value.floatValue(); return this; }
-		return null;
+		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 	}
 
 	
@@ -156,7 +156,7 @@ public class Vector4f implements IVector4 {
 		if(index == 1) { return (short) this.y; }
 		if(index == 2) { return (short) this.z; }
 		if(index == 3) { return (short) this.w; }
-		return 0;
+		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 	}
 
 	
@@ -166,7 +166,7 @@ public class Vector4f implements IVector4 {
 		if(index == 1) { return (int) this.y; }
 		if(index == 2) { return (int) this.z; }
 		if(index == 3) { return (int) this.w; }
-		return 0;
+		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 	}
 
 	
@@ -176,7 +176,7 @@ public class Vector4f implements IVector4 {
 		if(index == 1) { return (long) this.y; }
 		if(index == 2) { return (long) this.z; }
 		if(index == 3) { return (long) this.w; }
-		return 0;
+		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 	}
 	
 
@@ -186,7 +186,7 @@ public class Vector4f implements IVector4 {
 		if(index == 1) { return (float) this.y; }
 		if(index == 2) { return (float) this.z; }
 		if(index == 3) { return (float) this.w; }
-		return 0;
+		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 	}
 
 	
@@ -196,7 +196,7 @@ public class Vector4f implements IVector4 {
 		if(index == 1) { return (double) this.y; }
 		if(index == 2) { return (double) this.z; }
 		if(index == 3) { return (double) this.w; }
-		return 0;
+		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 	}
 
 	

@@ -121,7 +121,7 @@ public class Vector2l implements IVector2 {
 	public Vector2l set(int index, Number value) {
 		if(index == 0) { this.x = value.longValue(); return this; }
 		if(index == 1) { this.y = value.longValue(); return this; }
-		return null;
+		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 	}
 
 	
@@ -132,7 +132,7 @@ public class Vector2l implements IVector2 {
 	public short getShort(int index) {
 		if(index == 0) { return (short) this.x; }
 		if(index == 1) { return (short) this.y; }
-		return 0;
+		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 	}
 
 	
@@ -140,7 +140,7 @@ public class Vector2l implements IVector2 {
 	public int getInt(int index) {
 		if(index == 0) { return (int) this.x; }
 		if(index == 1) { return (int) this.y; }
-		return 0;
+		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 	}
 
 	
@@ -148,7 +148,7 @@ public class Vector2l implements IVector2 {
 	public long getLong(int index) {
 		if(index == 0) { return (long) this.x; }
 		if(index == 1) { return (long) this.y; }
-		return 0;
+		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 	}
 
 	
@@ -156,7 +156,7 @@ public class Vector2l implements IVector2 {
 	public float getFloat(int index) {
 		if(index == 0) { return (float) this.x; }
 		if(index == 1) { return (float) this.y; }
-		return 0;
+		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 	}
 
 	
@@ -164,7 +164,7 @@ public class Vector2l implements IVector2 {
 	public double getDouble(int index) {
 		if(index == 0) { return (double) this.x; }
 		if(index == 1) { return (double) this.y; }
-		return 0;
+		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 	}
 
 	

@@ -73,8 +73,10 @@ public class VectorNl implements IVectorN {
 	public VectorNl set(int index, Number value) {
 		if( (0 <= index) && (index < getDimensions()) ) {
 			values[index] = value.longValue();
+			return this;
+		} else {
+			throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 		}
-		return this;
 	}
 
 	
@@ -84,8 +86,9 @@ public class VectorNl implements IVectorN {
 	public short getShort(int index) {
 		if( (0 <= index) && (index < getDimensions()) ) {
 			return (short) values[index];
+		} else {
+			throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 		}
-		return 0;
 	}
 
 	
@@ -93,8 +96,9 @@ public class VectorNl implements IVectorN {
 	public int getInt(int index) {
 		if( (0 <= index) && (index < getDimensions()) ) {
 			return (int) values[index];
+		} else {
+			throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 		}
-		return 0;
 	}
 
 	
@@ -102,8 +106,9 @@ public class VectorNl implements IVectorN {
 	public long getLong(int index) {
 		if( (0 <= index) && (index < getDimensions()) ) {
 			return (long) values[index];
+		} else {
+			throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 		}
-		return 0;
 	}
 
 	
@@ -111,8 +116,9 @@ public class VectorNl implements IVectorN {
 	public float getFloat(int index) {
 		if( (0 <= index) && (index < getDimensions()) ) {
 			return (float) values[index];
+		} else {
+			throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 		}
-		return 0;
 	}
 
 	
@@ -120,8 +126,9 @@ public class VectorNl implements IVectorN {
 	public double getDouble(int index) {
 		if( (0 <= index) && (index < getDimensions()) ) {
 			return (double) values[index];
+		} else {
+			throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
 		}
-		return 0;
 	}
 
 	
@@ -178,8 +185,10 @@ public class VectorNl implements IVectorN {
 					values[i] = v.getLong(i);
 				}
 			}
+			return this;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + v.getDimensions() + ", size Vector: " + getDimensions());
 		}
-		return this;
 	}
 
 	
@@ -189,22 +198,28 @@ public class VectorNl implements IVectorN {
 	public VectorNl setGen(Number... a) {
 		if(a.length == 1) {
 			Arrays.fill(this.values, a[0].longValue());
+			return this;
 		} else if(this.getDimensions() == a.length) {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				values[i] = a[i].longValue();
 			}
+			return this;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + a.length + ", size Vector: " + getDimensions());
 		}
-		return this;
 	}
 
 	
 	public VectorNl set(long... a) {
 		if(a.length == 1) {
 			Arrays.fill(this.values, a[0]);
+			return this;
 		} else if(this.getDimensions() == a.length) {
 			System.arraycopy(a, 0, this.values, 0, this.getDimensions());
+			return this;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + a.length + ", size Vector: " + getDimensions());
 		}
-		return this;
 	}
 	
 	
@@ -242,8 +257,10 @@ public class VectorNl implements IVectorN {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				values[i] += vec.getLong(i);
 			}
+			return this;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + vec.getDimensions() + ", size Vector: " + getDimensions());
 		}
-		return this;
 	}
 	
 
@@ -254,12 +271,15 @@ public class VectorNl implements IVectorN {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] += value;
 			}
+			return this;
 		} else if(this.getDimensions() == values.length) {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] += values[i].longValue();
 			}
+			return this;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + values.length + ", size Vector: " + getDimensions());
 		}
-		return this;
 	}
 
 	
@@ -274,12 +294,15 @@ public class VectorNl implements IVectorN {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] += value;
 			}
+			return this;
 		} else if(this.getDimensions() == values.length) {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] += values[i];
 			}
+			return this;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + values.length + ", size Vector: " + getDimensions());
 		}
-		return this;
 	}
 	
 
@@ -291,8 +314,10 @@ public class VectorNl implements IVectorN {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] -= vec.getLong(i);
 			}
+			return this;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + vec.getDimensions() + ", size Vector: " + getDimensions());
 		}
-		return this;
 	}
 
 	
@@ -303,12 +328,15 @@ public class VectorNl implements IVectorN {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] -= value;
 			}
+			return this;
 		} else if(this.getDimensions() == values.length) {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] -= values[i].longValue();
 			}
+			return this;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + values.length + ", size Vector: " + getDimensions());
 		}
-		return this;
 	}
 
 	
@@ -323,12 +351,15 @@ public class VectorNl implements IVectorN {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] -= value;
 			}
+			return this;
 		} else if(this.getDimensions() == values.length) {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] -= values[i];
 			}
+			return this;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + values.length + ", size Vector: " + getDimensions());
 		}
-		return this;
 	}
 	
 	
@@ -340,8 +371,10 @@ public class VectorNl implements IVectorN {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] *= vec.getLong(i);
 			}
+			return this;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + vec.getDimensions() + ", size Vector: " + getDimensions());
 		}
-		return this;
 	}
 	
 
@@ -352,12 +385,15 @@ public class VectorNl implements IVectorN {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] *= value;
 			}
+			return this;
 		} else if(this.getDimensions() == values.length) {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] *= values[i].longValue();
 			}
+			return this;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + values.length + ", size Vector: " + getDimensions());
 		}
-		return this;
 	}
 
 	
@@ -372,12 +408,15 @@ public class VectorNl implements IVectorN {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] *= value;
 			}
+			return this;
 		} else if(this.getDimensions() == values.length) {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] *= values[i];
 			}
+			return this;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + values.length + ", size Vector: " + getDimensions());
 		}
-		return this;
 	}
 	
 	
@@ -392,12 +431,15 @@ public class VectorNl implements IVectorN {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] *= value;
 			}
+			return this;
 		} else if(this.getDimensions() == values.length) {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] *= values[i];
 			}
+			return this;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + values.length + ", size Vector: " + getDimensions());
 		}
-		return this;
 	}
 	
 	
@@ -409,10 +451,13 @@ public class VectorNl implements IVectorN {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] /= vec.getLong(i);
 			}
+			return this;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + vec.getDimensions() + ", size Vector: " + getDimensions());
 		}
-		return this;
 	}
 
+	
 	@Override
 	public VectorNl divGen(Number... values) {
 		if(values.length == 1) {
@@ -420,12 +465,15 @@ public class VectorNl implements IVectorN {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] /= value;
 			}
+			return this;
 		} else if(this.getDimensions() == values.length) {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] /= values[i].longValue();
 			}
+			return this;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + values.length + ", size Vector: " + getDimensions());
 		}
-		return this;
 	}
 
 	
@@ -442,12 +490,15 @@ public class VectorNl implements IVectorN {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] /= value;
 			}
+			return this;
 		} else if(this.getDimensions() == values.length) {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] /= values[i];
 			}
+			return this;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + values.length + ", size Vector: " + getDimensions());
 		}
-		return this;
 	}
 	
 	
@@ -462,12 +513,15 @@ public class VectorNl implements IVectorN {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] /= value;
 			}
+			return this;
 		} else if(this.getDimensions() == values.length) {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] /= values[i];
 			}
+			return this;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + values.length + ", size Vector: " + getDimensions());
 		}
-		return this;
 	}
 	
 
@@ -475,25 +529,29 @@ public class VectorNl implements IVectorN {
 	
 	@Override
 	public Number dotGen(IVectorN vec) {
-		long result = 0;
 		if(this.getDimensions() == vec.getDimensions()) {
+			long result = 0;
 			for(int i=getDimensions()-1; i>=0; i--) {
 				result += (this.values[i] * vec.getLong(i));
 			}
+			return result;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + vec.getDimensions() + ", size Vector: " + getDimensions());
 		}
-		return result;
 	}
 
 	
 	@Override
 	public Number dotGen(Number... values) {
-		long result = 0;
 		if(this.getDimensions() == values.length) {
+			long result = 0;
 			for(int i=getDimensions()-1; i>=0; i--) {
 				result += (this.values[i] * values[i].longValue());
 			}
+			return result;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + values.length + ", size Vector: " + getDimensions());
 		}
-		return result;
 	}
 	
 	
@@ -503,13 +561,15 @@ public class VectorNl implements IVectorN {
 	 * @return the result
 	 * */
 	public long dot(IVectorN vec) {
-		long result = 0;
 		if(this.getDimensions() == vec.getDimensions()) {
+			long result = 0;
 			for(int i=getDimensions()-1; i>=0; i--) {
 				result += (this.values[i] * vec.getLong(i));
 			}
+			return result;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + vec.getDimensions() + ", size Vector: " + getDimensions());
 		}
-		return result;
 	}
 	
 	
@@ -519,13 +579,15 @@ public class VectorNl implements IVectorN {
 	 * @return the result
 	 * */
 	public long dot(long... values) {
-		long result = 0;
 		if(this.getDimensions() == values.length) {
+			long result = 0;
 			for(int i=getDimensions()-1; i>=0; i--) {
 				result += (this.values[i] * values[i]);
 			}
+			return result;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + values.length + ", size Vector: " + getDimensions());
 		}
-		return result;
 	}
 	
 	
@@ -539,13 +601,15 @@ public class VectorNl implements IVectorN {
 	
 	@Override
 	public Number dist2Gen(Number... pos) {
-		long result = 0;
 		if(this.getDimensions() == pos.length) {
+			long result = 0;
 			for(int i=getDimensions()-1; i>=0; i--) {
 				result += (pos[i].longValue() - this.values[i]) * (pos[i].longValue() - this.values[i]);
 			}
+			return result;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + pos.length + ", size Vector: " + getDimensions());
 		}
-		return result;
 	}
 
 	
@@ -555,13 +619,15 @@ public class VectorNl implements IVectorN {
 	 * @return the result
 	 * */
 	public long dist2(IVectorN vec) {
-		long result = 0;
 		if(this.getDimensions() == vec.getDimensions()) {
+			long result = 0;
 			for(int i=getDimensions()-1; i>=0; i--) {
 				result += (vec.getLong(i) - this.values[i]) * (vec.getLong(i) - this.values[i]);
 			}
+			return result;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + vec.getDimensions() + ", size Vector: " + getDimensions());
 		}
-		return result;
 	}
 	
 	
@@ -571,13 +637,15 @@ public class VectorNl implements IVectorN {
 	 * @return the result
 	 * */
 	public long dist2(long... pos) {
-		long result = 0;
 		if(this.getDimensions() == pos.length) {
+			long result = 0;
 			for(int i=getDimensions()-1; i>=0; i--) {
 				result += (pos[i] - this.values[i]) * (pos[i] - this.values[i]);
 			}
+			return result;
+		} else {
+			throw new IllegalArgumentException("Size Input: " + pos.length + ", size Vector: " + getDimensions());
 		}
-		return result;
 	}
 	
 	
