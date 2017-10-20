@@ -557,7 +557,9 @@ public class Vector3d implements IVector3 {
 	
 	/**
 	 * Calculates the cross product between this vector and the given vector-components.
-	 * @param vec the vector
+	 * @param x the x-component
+	 * @param y the y-component
+	 * @param z the z-component
 	 * @return this vector for chaining
 	 * */
 	public Vector3d crossSet(double x, double y, double z) {
@@ -580,7 +582,9 @@ public class Vector3d implements IVector3 {
 	
 	/**
 	 * Calculates the cross product between this vector and the given vector-components.
-	 * @param vec the vector
+	 * @param x the x-component
+	 * @param y the y-component
+	 * @param z the z-component
 	 * @return the result as a new vector
 	 * */
 	public Vector3d cross(double x, double y, double z) {
@@ -617,7 +621,9 @@ public class Vector3d implements IVector3 {
 	
 	/**
 	 * Calculates the dot product between this vector and the given vector-components.
-	 * @param vec the vector
+	 * @param x the x-component
+	 * @param y the y-component
+	 * @param z the z-component
 	 * @return the result
 	 * */
 	public double dot(double x, double y, double z) {
@@ -665,13 +671,13 @@ public class Vector3d implements IVector3 {
 
 	@Override
 	public Number distGen(IVector3 vec) {
-		return null;
+		return this.dist(vec);
 	}
 	
 
 	@Override
 	public Number distGen(Number x, Number y, Number z) {
-		return null;
+		return this.dist(x.doubleValue(), y.doubleValue(), z.doubleValue());
 	}
 	
 	
@@ -1000,7 +1006,7 @@ public class Vector3d implements IVector3 {
 	public Vector3d clampComponents(double min, double max) {
 		this.x = Math.min(max, Math.max(this.x, min));
 		this.y = Math.min(max, Math.max(this.y, min));
-		this.y = Math.min(max, Math.max(this.z, min));
+		this.z = Math.min(max, Math.max(this.z, min));
 		return this;
 	}
 
@@ -1031,7 +1037,7 @@ public class Vector3d implements IVector3 {
 	
 	@Override
 	public boolean isZero() {
-		if( (x < EPSILON) && (y < EPSILON) && (z < EPSILON) ) {
+		if( (Math.abs(x) < EPSILON) && (Math.abs(y) < EPSILON) && (Math.abs(z) < EPSILON) ) {
 			return true;
 		} else {
 			return false;

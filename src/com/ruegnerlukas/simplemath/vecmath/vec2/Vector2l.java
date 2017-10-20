@@ -1,7 +1,5 @@
 package com.ruegnerlukas.simplemath.vecmath.vec2;
 
-import com.ruegnerlukas.simplemath.vecmath.IVector;
-
 public class Vector2l implements IVector2 {
 
 	
@@ -544,7 +542,8 @@ public class Vector2l implements IVector2 {
 	
 	/**
 	 * Calculates the cross product between this vector and the given vector-components.
-	 * @param vec the vector
+	 * @param x the x-component
+	 * @param y the y-component
 	 * @return the result
 	 * */
 	public long cross(long x, long y) {
@@ -578,7 +577,8 @@ public class Vector2l implements IVector2 {
 	
 	/**
 	 * Calculates the dot product between this vector and the given vector-components.
-	 * @param vec the vector
+	 * @param x the x-component
+	 * @param y the y-component
 	 * @return the result
 	 * */
 	public long dot(long x, long y) {
@@ -1022,7 +1022,7 @@ public class Vector2l implements IVector2 {
 
 	@Override
 	public boolean isZero() {
-		if( (x < 0) && (y < 0) ) {
+		if( (Math.abs(x) < 0) && (Math.abs(y) < 0) ) {
 			return true;
 		} else {
 			return false;

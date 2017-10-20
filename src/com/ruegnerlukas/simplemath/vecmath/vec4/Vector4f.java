@@ -604,7 +604,9 @@ public class Vector4f implements IVector4 {
 	
 	/**
 	 * Calculates the cross product between this vector and the given vector-components.
-	 * @param vec the vector
+	 * @param x the x-component
+	 * @param y the y-component
+	 * @param z the z-component
 	 * @return this vector for chaining
 	 * */
 	public Vector4f crossSet(float x, float y, float z) {
@@ -628,7 +630,9 @@ public class Vector4f implements IVector4 {
 	
 	/**
 	 * Calculates the cross product between this vector and the given vector-components.
-	 * @param vec the vector
+	 * @param x the x-component
+	 * @param y the y-component
+	 * @param z the z-component
 	 * @return the result as a new vector
 	 * */
 	public Vector3f cross(float x, float y, float z) {
@@ -665,7 +669,10 @@ public class Vector4f implements IVector4 {
 	
 	/**
 	 * Calculates the dot product between this vector and the given vector-components.
-	 * @param vec the vector
+	 * @param x the x-component
+	 * @param y the y-component
+	 * @param z the z-component
+	 * @param w the w-component
 	 * @return the result
 	 * */
 	public float dot(float x, float y, float z, float w) {
@@ -1087,7 +1094,7 @@ public class Vector4f implements IVector4 {
 	
 	@Override
 	public boolean isZero() {
-		if( (x < EPSILON) && (y < EPSILON) && (z < EPSILON) && (w < EPSILON) ) {
+		if( (Math.abs(x) < EPSILON) && (Math.abs(y) < EPSILON) && (Math.abs(z) < EPSILON) && (Math.abs(w) < EPSILON) ) {
 			return true;
 		} else {
 			return false;

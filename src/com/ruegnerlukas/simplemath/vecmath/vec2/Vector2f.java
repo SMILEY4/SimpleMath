@@ -512,7 +512,8 @@ public class Vector2f implements IVector2 {
 	
 	/**
 	 * Calculates the cross product between this vector and the given vector-components.
-	 * @param vec the vector
+	 * @param x the x-component
+	 * @param y the y-component
 	 * @return the result
 	 * */
 	public float cross(float x, float y) {
@@ -546,7 +547,8 @@ public class Vector2f implements IVector2 {
 	
 	/**
 	 * Calculates the dot product between this vector and the given vector-components.
-	 * @param vec the vector
+	 * @param x the x-component
+	 * @param y the y-component
 	 * @return the result
 	 * */
 	public float dot(float x, float y) {
@@ -990,7 +992,7 @@ public class Vector2f implements IVector2 {
 
 	@Override
 	public boolean isZero() {
-		if( (x < EPSILON) && (y < EPSILON) ) {
+		if( (Math.abs(x) < EPSILON) && (Math.abs(y) < EPSILON) ) {
 			return true;
 		} else {
 			return false;

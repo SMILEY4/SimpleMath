@@ -651,7 +651,9 @@ public class Vector4l implements IVector4 {
 	
 	/**
 	 * Calculates the cross product between this vector and the given vector-components.
-	 * @param vec the vector
+	 * @param x the x-component
+	 * @param y the y-component
+	 * @param z the z-component
 	 * @return this vector for chaining
 	 * */
 	public Vector4l crossSet(long x, long y, long z) {
@@ -675,7 +677,9 @@ public class Vector4l implements IVector4 {
 	
 	/**
 	 * Calculates the cross product between this vector and the given vector-components.
-	 * @param vec the vector
+	 * @param x the x-component
+	 * @param y the y-component
+	 * @param z the z-component
 	 * @return the result as a new vector
 	 * */
 	public Vector3l cross(long x, long y, long z) {
@@ -712,7 +716,10 @@ public class Vector4l implements IVector4 {
 	
 	/**
 	 * Calculates the dot product between this vector and the given vector-components.
-	 * @param vec the vector
+	 * @param x the x-component
+	 * @param y the y-component
+	 * @param z the z-component
+	 * @param w the w-component
 	 * @return the result
 	 * */
 	public long dot(long x, long y, long z, long w) {
@@ -1134,7 +1141,7 @@ public class Vector4l implements IVector4 {
 	
 	@Override
 	public boolean isZero() {
-		if( (x < 0) && (y < 0) && (z < 0) && (w < 0) ) {
+		if( (Math.abs(x) < 0) && (Math.abs(y) < 0) && (Math.abs(z) < 0) && (Math.abs(w) < 0) ) {
 			return true;
 		} else {
 			return false;
