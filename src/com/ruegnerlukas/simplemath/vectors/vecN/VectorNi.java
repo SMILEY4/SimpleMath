@@ -1,24 +1,20 @@
-package com.ruegnerlukas.simplemath.vecmath.vecN;
+package com.ruegnerlukas.simplemath.vectors.vecN;
 
 import java.util.Arrays;
 
-import com.ruegnerlukas.simplemath.vecmath.IVector;
-import com.ruegnerlukas.simplemath.vecmath.vec3.IVector3;
-import com.ruegnerlukas.simplemath.vecmath.vec3.Vector3f;
+import com.ruegnerlukas.simplemath.vectors.IVector;
+import com.ruegnerlukas.simplemath.vectors.vec3.IVector3;
+import com.ruegnerlukas.simplemath.vectors.vec3.Vector3f;
 
-public class VectorNf implements IVectorN {
+public class VectorNi implements IVectorN {
 
 	
-	
-	
-	/** Used when comparing two float values. */
-	public static final float EPSILON = 0.000001f;
 	
 	
 	
 	
 	/** the values of the components of this vector*/
-	private final float[] values;
+	private final int[] values;
 	
 	/** the size / number of dimensions of this vector */
 	private final int size;
@@ -31,22 +27,22 @@ public class VectorNf implements IVectorN {
 	/**
 	 * creates a zero-vector with the given size
 	 * */
-	public VectorNf(int size) {
-		this(new float[size]);
+	public VectorNi(int size) {
+		this(new int[size]);
 	}
 	
 
 	/**
 	 * creates a vector with the same values and size as the given vector
 	 * */
-	public VectorNf(IVectorN vec) {
+	public VectorNi(IVectorN vec) {
 		this.size = vec.getDimensions();
-		this.values = new float[vec.getDimensions()];
-		if(vec instanceof VectorNf) {
-			System.arraycopy( ((VectorNf)vec).get(), 0, this.values, 0, getDimensions());
+		this.values = new int[vec.getDimensions()];
+		if(vec instanceof VectorNi) {
+			System.arraycopy( ((VectorNi)vec).get(), 0, this.values, 0, getDimensions());
 		} else {
 			for(int i=getDimensions()-1; i>=0; i--) {
-				values[i] = vec.getFloat(i);
+				values[i] = vec.getInt(i);
 			}
 		}
 	}
@@ -55,7 +51,7 @@ public class VectorNf implements IVectorN {
 	/**
 	 * creates a vector with the given values and the size of the given array
 	 * */
-	public VectorNf(float[] values) {
+	public VectorNi(int[] values) {
 		this.values = values;
 		this.size = values.length;
 	}
@@ -74,9 +70,9 @@ public class VectorNf implements IVectorN {
 	
 	
 	@Override
-	public VectorNf set(int index, Number value) {
+	public VectorNi set(int index, Number value) {
 		if( (0 <= index) && (index < getDimensions()) ) {
-			values[index] = value.floatValue();
+			values[index] = value.intValue();
 		}
 		return this;
 	}
@@ -134,7 +130,7 @@ public class VectorNf implements IVectorN {
 	/**
 	 * @return the array of values of this vector
 	 * */
-	public float[] get() {
+	public int[] get() {
 		return this.values;
 	}
 	
@@ -142,7 +138,7 @@ public class VectorNf implements IVectorN {
 	
 	
 	@Override
-	public VectorNf negate() {
+	public IVector negate() {
 		for(int i=getDimensions()-1; i>=0; i--) {
 			values[i] = -values[i];
 		}
@@ -153,7 +149,7 @@ public class VectorNf implements IVectorN {
 	
 	
 	@Override
-	public VectorNf normalize() {
+	public IVector normalize() {
 		final float len = length();
 		for(int i=getDimensions()-1; i>=0; i--) {
 			values[i] /= len;
@@ -165,21 +161,21 @@ public class VectorNf implements IVectorN {
 	
 	
 	@Override
-	public VectorNf copy() {
-		return new VectorNf(this);
+	public VectorNi copy() {
+		return new VectorNi(this);
 	}
 
 	
 	
 	
 	@Override
-	public VectorNf set(IVectorN v) {
+	public VectorNi set(IVectorN v) {
 		if(this.getDimensions() == v.getDimensions()) {
-			if(v instanceof VectorNf) {
-				System.arraycopy( ((VectorNf)v).get(), 0, this.values, 0, this.getDimensions());
+			if(v instanceof VectorNi) {
+				System.arraycopy( ((VectorNi)v).get(), 0, this.values, 0, this.getDimensions());
 			} else {
 				for(int i=getDimensions()-1; i>=0; i--) {
-					values[i] = v.getFloat(i);
+					values[i] = v.getInt(i);
 				}
 			}
 		}
@@ -190,19 +186,19 @@ public class VectorNf implements IVectorN {
 	
 	
 	@Override
-	public VectorNf setGen(Number... a) {
+	public VectorNi setGen(Number... a) {
 		if(a.length == 1) {
-			Arrays.fill(this.values, a[0].floatValue());
+			Arrays.fill(this.values, a[0].intValue());
 		} else if(this.getDimensions() == a.length) {
 			for(int i=getDimensions()-1; i>=0; i--) {
-				values[i] = a[i].floatValue();
+				values[i] = a[i].intValue();
 			}
 		}
 		return this;
 	}
 
 	
-	public VectorNf set(float... a) {
+	public VectorNi set(int... a) {
 		if(a.length == 1) {
 			Arrays.fill(this.values, a[0]);
 		} else if(this.getDimensions() == a.length) {
@@ -216,7 +212,7 @@ public class VectorNf implements IVectorN {
 	
 	@Override
 	public VectorNi toIntVector() {
-		return new VectorNi(this);
+		return this.copy();
 	}
 
 	
@@ -228,7 +224,7 @@ public class VectorNf implements IVectorN {
 	
 	@Override
 	public VectorNf toFloatVector() {
-		return this.copy();
+		return new VectorNf(this);
 	}
 
 	
@@ -241,10 +237,10 @@ public class VectorNf implements IVectorN {
 	
 	
 	@Override
-	public VectorNf add(IVectorN vec) {
+	public VectorNi add(IVectorN vec) {
 		if(this.getDimensions() == vec.getDimensions()) {
 			for(int i=getDimensions()-1; i>=0; i--) {
-				values[i] += vec.getFloat(i);
+				values[i] += vec.getInt(i);
 			}
 		}
 		return this;
@@ -252,15 +248,15 @@ public class VectorNf implements IVectorN {
 	
 
 	@Override
-	public VectorNf addGen(Number... values) {
+	public VectorNi addGen(Number... values) {
 		if(values.length == 1) {
-			float value = values[0].floatValue();
+			int value = values[0].intValue();
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] += value;
 			}
 		} else if(this.getDimensions() == values.length) {
 			for(int i=getDimensions()-1; i>=0; i--) {
-				this.values[i] += values[i].floatValue();
+				this.values[i] += values[i].intValue();
 			}
 		}
 		return this;
@@ -272,9 +268,9 @@ public class VectorNf implements IVectorN {
 	 * @param a the list of values. The list must have the same size as this vector or the size 1
 	 * @return this vector for chaining
 	 * */
-	public VectorNf add(float... values) {
+	public VectorNi add(int... values) {
 		if(values.length == 1) {
-			float value = values[0];
+			int value = values[0];
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] += value;
 			}
@@ -290,10 +286,10 @@ public class VectorNf implements IVectorN {
 	
 	
 	@Override
-	public VectorNf sub(IVectorN vec) {
+	public VectorNi sub(IVectorN vec) {
 		if(this.getDimensions() == vec.getDimensions()) {
 			for(int i=getDimensions()-1; i>=0; i--) {
-				this.values[i] -= vec.getFloat(i);
+				this.values[i] -= vec.getInt(i);
 			}
 		}
 		return this;
@@ -301,15 +297,15 @@ public class VectorNf implements IVectorN {
 
 	
 	@Override
-	public VectorNf subGen(Number... values) {
+	public VectorNi subGen(Number... values) {
 		if(values.length == 1) {
-			float value = values[0].floatValue();
+			int value = values[0].intValue();
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] -= value;
 			}
 		} else if(this.getDimensions() == values.length) {
 			for(int i=getDimensions()-1; i>=0; i--) {
-				this.values[i] -= values[i].floatValue();
+				this.values[i] -= values[i].intValue();
 			}
 		}
 		return this;
@@ -321,9 +317,9 @@ public class VectorNf implements IVectorN {
 	 * @param values the list of values. The list must have the same size as this vector or the size 1
 	 * @return this vector for chaining
 	 * */
-	public VectorNf sub(float... values) {
+	public VectorNi sub(int... values) {
 		if(values.length == 1) {
-			float value = values[0];
+			int value = values[0];
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] -= value;
 			}
@@ -339,10 +335,10 @@ public class VectorNf implements IVectorN {
 	
 	
 	@Override
-	public VectorNf mul(IVectorN vec) {
+	public VectorNi mul(IVectorN vec) {
 		if(this.getDimensions() == vec.getDimensions()) {
 			for(int i=getDimensions()-1; i>=0; i--) {
-				this.values[i] *= vec.getFloat(i);
+				this.values[i] *= vec.getInt(i);
 			}
 		}
 		return this;
@@ -350,15 +346,15 @@ public class VectorNf implements IVectorN {
 	
 
 	@Override
-	public VectorNf mulGen(Number... values) {
+	public VectorNi mulGen(Number... values) {
 		if(values.length == 1) {
-			float value = values[0].floatValue();
+			float value = values[0].intValue();
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] *= value;
 			}
 		} else if(this.getDimensions() == values.length) {
 			for(int i=getDimensions()-1; i>=0; i--) {
-				this.values[i] *= values[i].floatValue();
+				this.values[i] *= values[i].intValue();
 			}
 		}
 		return this;
@@ -370,7 +366,27 @@ public class VectorNf implements IVectorN {
 	 * @param vec the vector with the same size as this vector
 	 * @return this vector for chaining
 	 * */
-	public VectorNf mul(float... values) {
+	public VectorNi mul(int... values) {
+		if(values.length == 1) {
+			int value = values[0];
+			for(int i=getDimensions()-1; i>=0; i--) {
+				this.values[i] *= value;
+			}
+		} else if(this.getDimensions() == values.length) {
+			for(int i=getDimensions()-1; i>=0; i--) {
+				this.values[i] *= values[i];
+			}
+		}
+		return this;
+	}
+	
+	
+	/**
+	 * Multiplies this vector with the given vector.
+	 * @param vec the vector with the same size as this vector
+	 * @return this vector for chaining
+	 * */
+	public VectorNi mul(float... values) {
 		if(values.length == 1) {
 			float value = values[0];
 			for(int i=getDimensions()-1; i>=0; i--) {
@@ -388,25 +404,25 @@ public class VectorNf implements IVectorN {
 	
 	
 	@Override
-	public VectorNf div(IVectorN vec) {
+	public VectorNi div(IVectorN vec) {
 		if(this.getDimensions() == vec.getDimensions()) {
 			for(int i=getDimensions()-1; i>=0; i--) {
-				this.values[i] /= vec.getFloat(i);
+				this.values[i] /= vec.getInt(i);
 			}
 		}
 		return this;
 	}
 
 	@Override
-	public VectorNf divGen(Number... values) {
+	public VectorNi divGen(Number... values) {
 		if(values.length == 1) {
-			float value = values[0].floatValue();
+			float value = values[0].intValue();
 			for(int i=getDimensions()-1; i>=0; i--) {
 				this.values[i] /= value;
 			}
 		} else if(this.getDimensions() == values.length) {
 			for(int i=getDimensions()-1; i>=0; i--) {
-				this.values[i] /= values[i].floatValue();
+				this.values[i] /= values[i].intValue();
 			}
 		}
 		return this;
@@ -420,7 +436,27 @@ public class VectorNf implements IVectorN {
 	 * @param values the list of values. The list must have the same size as this vector or the size 1
 	 * @return this vector for chaining
 	 * */
-	public VectorNf div(float... values) {
+	public VectorNi div(int... values) {
+		if(values.length == 1) {
+			int value = values[0];
+			for(int i=getDimensions()-1; i>=0; i--) {
+				this.values[i] /= value;
+			}
+		} else if(this.getDimensions() == values.length) {
+			for(int i=getDimensions()-1; i>=0; i--) {
+				this.values[i] /= values[i];
+			}
+		}
+		return this;
+	}
+	
+	
+	/**
+	 * Divides this vector by the given values (component-wise).
+	 * @param values the list of values. The list must have the same size as this vector or the size 1
+	 * @return this vector for chaining
+	 * */
+	public VectorNi div(float... values) {
 		if(values.length == 1) {
 			float value = values[0];
 			for(int i=getDimensions()-1; i>=0; i--) {
@@ -439,10 +475,10 @@ public class VectorNf implements IVectorN {
 	
 	@Override
 	public Number dotGen(IVectorN vec) {
-		float result = 0;
+		int result = 0;
 		if(this.getDimensions() == vec.getDimensions()) {
 			for(int i=getDimensions()-1; i>=0; i--) {
-				result += (this.values[i] * vec.getFloat(i));
+				result += (this.values[i] * vec.getInt(i));
 			}
 		}
 		return result;
@@ -451,10 +487,10 @@ public class VectorNf implements IVectorN {
 	
 	@Override
 	public Number dotGen(Number... values) {
-		float result = 0;
+		int result = 0;
 		if(this.getDimensions() == values.length) {
 			for(int i=getDimensions()-1; i>=0; i--) {
-				result += (this.values[i] * values[i].floatValue());
+				result += (this.values[i] * values[i].intValue());
 			}
 		}
 		return result;
@@ -466,11 +502,11 @@ public class VectorNf implements IVectorN {
 	 * @param vec the vector the same size as this vector.
 	 * @return the result
 	 * */
-	public float dot(IVectorN vec) {
-		float result = 0;
+	public int dot(IVectorN vec) {
+		int result = 0;
 		if(this.getDimensions() == vec.getDimensions()) {
 			for(int i=getDimensions()-1; i>=0; i--) {
-				result += (this.values[i] * vec.getFloat(i));
+				result += (this.values[i] * vec.getInt(i));
 			}
 		}
 		return result;
@@ -482,8 +518,8 @@ public class VectorNf implements IVectorN {
 	 * @param values the list of values. The list must have the same size as this vector.
 	 * @return the result
 	 * */
-	public float dot(float... values) {
-		float result = 0;
+	public int dot(int... values) {
+		int result = 0;
 		if(this.getDimensions() == values.length) {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				result += (this.values[i] * values[i]);
@@ -503,10 +539,10 @@ public class VectorNf implements IVectorN {
 	
 	@Override
 	public Number dist2Gen(Number... pos) {
-		float result = 0;
+		int result = 0;
 		if(this.getDimensions() == pos.length) {
 			for(int i=getDimensions()-1; i>=0; i--) {
-				result += (pos[i].floatValue() - this.values[i]) * (pos[i].floatValue() - this.values[i]);
+				result += (pos[i].intValue() - this.values[i]) * (pos[i].intValue() - this.values[i]);
 			}
 		}
 		return result;
@@ -518,11 +554,11 @@ public class VectorNf implements IVectorN {
 	 * @param vec the vector with the same size as this vector
 	 * @return the result
 	 * */
-	public float dist2(IVectorN vec) {
-		float result = 0;
+	public int dist2(IVectorN vec) {
+		int result = 0;
 		if(this.getDimensions() == vec.getDimensions()) {
 			for(int i=getDimensions()-1; i>=0; i--) {
-				result += (vec.getFloat(i) - this.values[i]) * (vec.getFloat(i) - this.values[i]);
+				result += (vec.getInt(i) - this.values[i]) * (vec.getInt(i) - this.values[i]);
 			}
 		}
 		return result;
@@ -534,8 +570,8 @@ public class VectorNf implements IVectorN {
 	 * @param pos the list of values for the position. The list must have the same size as this vector.
 	 * @return the result
 	 * */
-	public float dist2(float... pos) {
-		float result = 0;
+	public int dist2(int... pos) {
+		int result = 0;
 		if(this.getDimensions() == pos.length) {
 			for(int i=getDimensions()-1; i>=0; i--) {
 				result += (pos[i] - this.values[i]) * (pos[i] - this.values[i]);
@@ -554,7 +590,7 @@ public class VectorNf implements IVectorN {
 	
 	@Override
 	public Number distGen(Number... pos) {
-		return (float) Math.sqrt(dist2Gen(pos).floatValue());
+		return (float) Math.sqrt(dist2Gen(pos).intValue());
 	}
 	
 	
@@ -573,7 +609,7 @@ public class VectorNf implements IVectorN {
 	 * @param pos the list of values for the position. The list must have the same size as this vector.
 	 * @return the result
 	 * */
-	public float dist(float... pos) {
+	public float dist(int... pos) {
 		return (float) Math.sqrt(dist2(pos));
 	}
 	
@@ -590,8 +626,8 @@ public class VectorNf implements IVectorN {
 	 * Calculates the squared length of this vector.
 	 * @return the result
 	 * */
-	public float length2() {
-		float result = 0;
+	public int length2() {
+		int result = 0;
 		for(int i=getDimensions()-1; i>=0; i--) {
 			result += values[i]*values[i];
 		}
@@ -619,8 +655,8 @@ public class VectorNf implements IVectorN {
 
 	
 	@Override
-	public VectorNf setLength(Number length) {
-		return this.setLength(length.floatValue());
+	public VectorNi setLength(Number length) {
+		return this.setLength(length.intValue());
 	}
 
 	
@@ -629,7 +665,7 @@ public class VectorNf implements IVectorN {
 	 * @param length the new length
 	 * @return this vector for chaining
 	 * */
-	public VectorNf setLength(float length) {
+	public VectorNi setLength(float length) {
 		normalize();
 		mul(length);
 		return this;
@@ -639,8 +675,8 @@ public class VectorNf implements IVectorN {
 	
 
 	@Override
-	public VectorNf limitLength(Number maxLength) {
-		return this.limitLength(maxLength.floatValue());
+	public VectorNi limitLength(Number maxLength) {
+		return this.limitLength(maxLength.intValue());
 	}
 	
 	
@@ -649,7 +685,7 @@ public class VectorNf implements IVectorN {
 	 * @param maxLength the maximum length
 	 * @return this vector for chaining
 	 * */
-	public VectorNf limitLength(float maxLength) {
+	public VectorNi limitLength(float maxLength) {
 		float len = length();
 		if(len > maxLength) {
 			div(len);
@@ -662,8 +698,8 @@ public class VectorNf implements IVectorN {
 	
 
 	@Override
-	public VectorNf clampLenght(Number minLength, Number maxLength) {
-		return this.clampLength(minLength.floatValue(), maxLength.floatValue());
+	public VectorNi clampLenght(Number minLength, Number maxLength) {
+		return this.clampLength(minLength.intValue(), maxLength.intValue());
 	}
 	
 	
@@ -673,7 +709,7 @@ public class VectorNf implements IVectorN {
 	 * @param maxLength the maximum length
 	 * @return this vector for chaining
 	 * */
-	public VectorNf clampLength(float minLength, float maxLength) {
+	public VectorNi clampLength(float minLength, float maxLength) {
 		float len = length();
 		if(len < minLength) {
 			div(len);
@@ -699,8 +735,8 @@ public class VectorNf implements IVectorN {
 	 * Calculates the sum of the components.
 	 * @return the result
 	 * */
-	public float componentSum() {
-		float sum = 0;
+	public int componentSum() {
+		int sum = 0;
 		for(int i=getDimensions()-1; i>=0; i--) {
 			sum += this.values[i];
 		}
@@ -720,8 +756,8 @@ public class VectorNf implements IVectorN {
 	 * Calculates the smallest component.
 	 * @return the result
 	 * */
-	public float componentMin() {
-		float min = Float.MAX_VALUE;
+	public int componentMin() {
+		int min = Integer.MAX_VALUE;
 		for(int i=getDimensions()-1; i>=0; i--) {
 			min = Math.min(min, this.values[i]);
 		}
@@ -741,8 +777,8 @@ public class VectorNf implements IVectorN {
 	 * Calculates the largest component.
 	 * @return the result
 	 * */
-	public float componentMax() {
-		float max = Float.NEGATIVE_INFINITY;
+	public int componentMax() {
+		int max = Integer.MIN_VALUE;
 		for(int i=getDimensions()-1; i>=0; i--) {
 			max = Math.max(max, this.values[i]);
 		}
@@ -753,8 +789,8 @@ public class VectorNf implements IVectorN {
 	
 	
 	@Override
-	public VectorNf clampComponents(Number min, Number max) {
-		return this.clampComponents(min.floatValue(), max.floatValue());
+	public VectorNi clampComponents(Number min, Number max) {
+		return this.clampComponents(min.intValue(), max.intValue());
 	}
 	
 	
@@ -764,7 +800,7 @@ public class VectorNf implements IVectorN {
 	 * @param max the maximum value
 	 * @return the result
 	 * */
-	public VectorNf clampComponents(float min, float max) {
+	public VectorNi clampComponents(int min, int max) {
 		for(int i=getDimensions()-1; i>=0; i--) {
 			this.values[i] = Math.min(max, Math.max(this.values[i], min));
 		}
@@ -777,7 +813,7 @@ public class VectorNf implements IVectorN {
 	@Override
 	public boolean compare(IVectorN vec) {
 		for(int i=getDimensions()-1; i>=0; i--) {
-			if(Math.abs(this.values[i] - vec.getFloat(i)) > EPSILON) { return false; }
+			if(Math.abs(this.values[i] - vec.getInt(i)) > 0) { return false; }
 		}
 		return true;
 	}
@@ -787,7 +823,7 @@ public class VectorNf implements IVectorN {
 	
 	@Override
 	public boolean isUnit() {
-		if(Math.abs(length2() - 1f) > EPSILON) {
+		if(Math.abs(length2() - 1f) > 0) {
 			return false;
 		} else {
 			return true;
@@ -799,7 +835,7 @@ public class VectorNf implements IVectorN {
 	@Override
 	public boolean isZero() {
 		for(int i=getDimensions()-1; i>=0; i--) {
-			if(Math.abs(this.values[i]) > EPSILON) { return false; }
+			if(Math.abs(this.values[i]) > 0) { return false; }
 		}
 		return true;
 	}

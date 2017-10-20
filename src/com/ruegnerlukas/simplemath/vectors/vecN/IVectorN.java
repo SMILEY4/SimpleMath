@@ -1,6 +1,6 @@
-package com.ruegnerlukas.simplemath.vecmath.vecN;
+package com.ruegnerlukas.simplemath.vectors.vecN;
 
-import com.ruegnerlukas.simplemath.vecmath.IVector;
+import com.ruegnerlukas.simplemath.vectors.IVector;
 
 
 public interface IVectorN extends IVector {

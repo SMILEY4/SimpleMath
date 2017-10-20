@@ -1,10 +1,13 @@
-package com.ruegnerlukas.simplemath.vecmath.vec3;
+package com.ruegnerlukas.simplemath.vectors.vec3;
 
-import com.ruegnerlukas.simplemath.vecmath.IVector;
 
-public class Vector3i implements IVector3 {
+public class Vector3f implements IVector3 {
 
 	
+	
+	
+	/** Used when comparing two float values. */
+	public static final float EPSILON = 0.000001f;
 	
 	
 	
@@ -15,8 +18,8 @@ public class Vector3i implements IVector3 {
 	 * @param b the position of the second point
 	 * @return the created vector
 	 * */
-	public static Vector3i createVectorAB(IVector3 a, IVector3 b) {
-		return Vector3i.createVectorAB(a.getIntX(), a.getIntY(), a.getIntZ(), b.getIntX(), b.getIntY(), b.getIntZ());
+	public static Vector3f createVectorAB(IVector3 a, IVector3 b) {
+		return Vector3f.createVectorAB(a.getFloatX(), a.getFloatY(), a.getFloatZ(), b.getFloatX(), b.getFloatY(), b.getFloatZ());
 	}
 	
 	
@@ -30,8 +33,8 @@ public class Vector3i implements IVector3 {
 	 * @param bz the z-position of the second point
 	 * @return the created vector
 	 * */
-	public static Vector3i createVectorAB(int ax, int ay, int az, int bx, int by, int bz) {
-		return new Vector3i(bx-ax, by-ay, bz-az);
+	public static Vector3f createVectorAB(float ax, float ay, float az, float bx, float by, float bz) {
+		return new Vector3f(bx-ax, by-ay, bz-az);
 	}
 	
 	
@@ -43,8 +46,8 @@ public class Vector3i implements IVector3 {
 	 * @param b the position of the second point
 	 * @return the vector "dst" with the new values
 	 * */
-	public static Vector3i setVectorAB(IVector3 a, IVector3 b, Vector3i dst) {
-		return Vector3i.setVectorAB(a.getIntX(), a.getIntY(), a.getIntZ(), b.getIntX(), b.getIntY(), b.getIntZ(), dst);
+	public static Vector3f setVectorAB(IVector3 a, IVector3 b, Vector3f dst) {
+		return Vector3f.setVectorAB(a.getFloatX(), a.getFloatY(), a.getFloatZ(), b.getFloatX(), b.getFloatY(), b.getFloatZ(), dst);
 	}
 	
 	
@@ -58,7 +61,7 @@ public class Vector3i implements IVector3 {
 	 * @param bz the z-position of the second point
 	 * @return the vector "dst" with the new values
 	 * */
-	public static Vector3i setVectorAB(int ax, int ay, int az, int bx, int by, int bz, Vector3i dst) {
+	public static Vector3f setVectorAB(float ax, float ay, float az, float bx, float by, float bz, Vector3f dst) {
 		return dst.set(bx-ax, by-ay, bz-az);
 	}
 	
@@ -68,13 +71,13 @@ public class Vector3i implements IVector3 {
 	
 	
 	/** the x-component of this vector (index=0)*/
-	public int x;
+	public float x;
 	
 	/** the y-component of this vector (index=1)*/
-	public int y;
+	public float y;
 	
 	/** the z-component of this vector (index=2)*/
-	public int z;
+	public float z;
 	
 	
 	
@@ -84,7 +87,7 @@ public class Vector3i implements IVector3 {
 	/**
 	 * creates a zero-vector
 	 * */
-	public Vector3i() {
+	public Vector3f() {
 		this(0);
 	}
 	
@@ -92,7 +95,7 @@ public class Vector3i implements IVector3 {
 	/**
 	 * creates a vector with the same values for x, y and z
 	 * */
-	public Vector3i(int xyz) {
+	public Vector3f(float xyz) {
 		this(xyz, xyz, xyz);
 	}
 	
@@ -100,15 +103,15 @@ public class Vector3i implements IVector3 {
 	/**
 	 * creates a vector with the same values as the given vector
 	 * */
-	public Vector3i(IVector3 vec) {
-		this(vec.getIntX(), vec.getIntY(), vec.getIntZ());
+	public Vector3f(IVector3 vec) {
+		this(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ());
 	}
 
 	
 	/**
 	 * creates a vector with the given x, y and z values
 	 * */
-	public Vector3i(int x, int y, int z) {
+	public Vector3f(float x, float y, float z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -128,10 +131,10 @@ public class Vector3i implements IVector3 {
 	
 	
 	@Override
-	public Vector3i set(int index, Number value) {
-		if(index == 0) { this.x = value.intValue(); return this; }
-		if(index == 1) { this.y = value.intValue(); return this; }
-		if(index == 2) { this.z = value.intValue(); return this; }
+	public Vector3f set(int index, Number value) {
+		if(index == 0) { this.x = value.floatValue(); return this; }
+		if(index == 1) { this.y = value.floatValue(); return this; }
+		if(index == 2) { this.z = value.floatValue(); return this; }
 		return null;
 	}
 
@@ -186,7 +189,7 @@ public class Vector3i implements IVector3 {
 	
 	
 	@Override
-	public Vector3i negate() {
+	public Vector3f negate() {
 		this.x = -x;
 		this.y = -y;
 		this.z = -z;
@@ -197,7 +200,7 @@ public class Vector3i implements IVector3 {
 	
 	
 	@Override
-	public Vector3i normalize() {
+	public Vector3f normalize() {
 		final float len = length();
 		this.x /= len;
 		this.y /= len;
@@ -209,37 +212,37 @@ public class Vector3i implements IVector3 {
 	
 	
 	@Override
-	public Vector3i copy() {
-		return new Vector3i(this);
+	public Vector3f copy() {
+		return new Vector3f(this);
 	}
 
 	
 	
 	
 	@Override
-	public Vector3i set(IVector3 v) {
-		return this.set(v.getIntX(), v.getIntY(), v.getIntZ());
+	public Vector3f set(IVector3 v) {
+		return this.set(v.getFloatX(), v.getFloatY(), v.getFloatZ());
 	}
 
 	
 	@Override
-	public Vector3i set(Number x, Number y, Number z) {
-		return this.set(x.intValue(), y.intValue(), z.intValue());
+	public Vector3f set(Number x, Number y, Number z) {
+		return this.set(x.floatValue(), y.floatValue(), z.floatValue());
 	}
 
 	
 	@Override
-	public Vector3i set(Number xyz) {
-		return this.set(xyz.intValue());
+	public Vector3f set(Number xyz) {
+		return this.set(xyz.floatValue());
 	}
 	
 
-	public Vector3i set(int xyz) {
+	public Vector3f set(float xyz) {
 		return this.set(xyz, xyz, xyz);
 	}
 	
 	
-	public Vector3i set(int x, int y, int z) {
+	public Vector3f set(float x, float y, float z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -316,7 +319,7 @@ public class Vector3i implements IVector3 {
 	
 	@Override
 	public Vector3i toIntVector() {
-		return this.copy();
+		return new Vector3i(this);
 	}
 
 	
@@ -328,7 +331,7 @@ public class Vector3i implements IVector3 {
 	
 	@Override
 	public Vector3f toFloatVector() {
-		return new Vector3f(this);
+		return this.copy();
 	}
 
 	
@@ -339,27 +342,27 @@ public class Vector3i implements IVector3 {
 
 	
 	@Override public String toString() {
-		return "Vector3i." + this.hashCode() + "(" + this.x + ", " + this.y + ", " + this.z + ")";
+		return "Vector3f." + this.hashCode() + "(" + this.x + ", " + this.y + ", " + this.z + ")";
 	}
 
 	
 	
 	
 	@Override
-	public Vector3i add(IVector3 vec) {
-		return this.add(vec.getIntX(), vec.getIntY(), vec.getIntZ());
+	public Vector3f add(IVector3 vec) {
+		return this.add(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ());
 	}
 
 	
 	@Override
-	public Vector3i add(Number x, Number y, Number z) {
-		return this.add(x.intValue(), y.intValue(), z.intValue());
+	public Vector3f add(Number x, Number y, Number z) {
+		return this.add(x.floatValue(), y.floatValue(), z.floatValue());
 	}
 
 	
 	@Override
-	public Vector3i add(Number xyz) {
-		return this.add(xyz.intValue());
+	public Vector3f add(Number xyz) {
+		return this.add(xyz.floatValue());
 	}
 	
 	
@@ -368,7 +371,7 @@ public class Vector3i implements IVector3 {
 	 * @param xyz the x-, y- and z-component
 	 * @return this vector for chaining
 	 * */
-	public Vector3i add(int xyz) {
+	public Vector3f add(float xyz) {
 		return this.add(xyz, xyz, xyz);
 	}
 	
@@ -380,7 +383,7 @@ public class Vector3i implements IVector3 {
 	 * @param z the z-component
 	 * @return this vector for chaining
 	 * */
-	public Vector3i add(int x, int y, int z) {
+	public Vector3f add(float x, float y, float z) {
 		this.x += x;
 		this.y += y;
 		this.z += z;
@@ -391,20 +394,20 @@ public class Vector3i implements IVector3 {
 
 	
 	@Override
-	public Vector3i sub(IVector3 vec) {
-		return this.sub(vec.getIntX(), vec.getIntY(), vec.getIntZ());
+	public Vector3f sub(IVector3 vec) {
+		return this.sub(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ());
 	}
 
 	
 	@Override
-	public Vector3i sub(Number x, Number y, Number z) {
-		return this.sub(x.intValue(), y.intValue(), z.intValue());
+	public Vector3f sub(Number x, Number y, Number z) {
+		return this.sub(x.floatValue(), y.floatValue(), z.floatValue());
 	}
 
 	
 	@Override
-	public Vector3i sub(Number xyz) {
-		return this.sub(xyz.intValue());
+	public Vector3f sub(Number xyz) {
+		return this.sub(xyz.floatValue());
 	}
 	
 	
@@ -413,7 +416,7 @@ public class Vector3i implements IVector3 {
 	 * @param xyz the x-, y- and z-component
 	 * @return this vector for chaining
 	 * */
-	public Vector3i sub(int xyz) {
+	public Vector3f sub(float xyz) {
 		return this.sub(xyz, xyz, xyz);
 	}
 	
@@ -425,7 +428,7 @@ public class Vector3i implements IVector3 {
 	 * @param z the z-component
 	 * @return this vector for chaining
 	 * */
-	public Vector3i sub(int x, int y, int z) {
+	public Vector3f sub(float x, float y, float z) {
 		this.x -= x;
 		this.y -= y;
 		this.z -= z;
@@ -436,17 +439,17 @@ public class Vector3i implements IVector3 {
 	
 	
 	@Override
-	public Vector3i mul(IVector3 vec) {
-		return this.mul(vec.getIntX(), vec.getIntY(), vec.getIntZ());
+	public Vector3f mul(IVector3 vec) {
+		return this.mul(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ());
 	}
 
 	@Override
-	public Vector3i mul(Number x, Number y, Number z) {
-		return this.mul(x.intValue(), y.intValue(), z.intValue());
+	public Vector3f mul(Number x, Number y, Number z) {
+		return this.mul(x.floatValue(), y.floatValue(), z.floatValue());
 	}
 
 	@Override
-	public Vector3i scale(Number xyz) {
+	public Vector3f scale(Number xyz) {
 		return this.scale(xyz);
 	}
 	
@@ -456,17 +459,7 @@ public class Vector3i implements IVector3 {
 	 * @param xyz the scalar
 	 * @return this vector for chaining
 	 * */
-	public Vector3i scale(int xyz) {
-		return this.mul(xyz, xyz, xyz);
-	}
-	
-	
-	/**
-	 * Scales this vector by the given scalar.
-	 * @param xyz the scalar
-	 * @return this vector for chaining
-	 * */
-	public Vector3i scale(float xyz) {
+	public Vector3f scale(float xyz) {
 		return this.mul(xyz, xyz, xyz);
 	}
 
@@ -478,22 +471,7 @@ public class Vector3i implements IVector3 {
 	 * @param z the z-component
 	 * @return this vector for chaining
 	 * */
-	public Vector3i mul(int x, int y, int z) {
-		this.x *= x;
-		this.y *= y;
-		this.z *= z;
-		return this;
-	}
-	
-	
-	/**
-	 * Multiplies this vector with the given components (component-wise).
-	 * @param x the x-component
-	 * @param y the y-component
-	 * @param z the z-component
-	 * @return this vector for chaining
-	 * */
-	public Vector3i mul(float x, float y, float z) {
+	public Vector3f mul(float x, float y, float z) {
 		this.x *= x;
 		this.y *= y;
 		this.z *= z;
@@ -504,20 +482,20 @@ public class Vector3i implements IVector3 {
 	
 
 	@Override
-	public Vector3i div(IVector3 vec) {
-		return this.div(vec.getIntX(), vec.getIntY(), vec.getIntZ());
+	public Vector3f div(IVector3 vec) {
+		return this.div(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ());
 	}
 
 	
 	@Override
-	public Vector3i div(Number x, Number y, Number z) {
-		return this.div(x.intValue(), y.intValue(), z.intValue());
+	public Vector3f div(Number x, Number y, Number z) {
+		return this.div(x.floatValue(), y.floatValue(), z.floatValue());
 	}
 
 	
 	@Override
-	public Vector3i div(Number xyz) {
-		return this.div(xyz.intValue());
+	public Vector3f div(Number xyz) {
+		return this.div(xyz.floatValue());
 	}
 
 
@@ -526,17 +504,7 @@ public class Vector3i implements IVector3 {
 	 * @param xyz the x-, y- and z-component
 	 * @return this vector for chaining
 	 * */
-	public Vector3i div(int xyz) {
-		return this.div(xyz, xyz, xyz);
-	}
-	
-	
-	/**
-	 * Divides this vector by the given component (component-wise).
-	 * @param xyz the x-, y- and z-component
-	 * @return this vector for chaining
-	 * */
-	public Vector3i div(float xyz) {
+	public Vector3f div(float xyz) {
 		return this.div(xyz, xyz, xyz);
 	}
 	
@@ -548,22 +516,7 @@ public class Vector3i implements IVector3 {
 	 * @param z the z-component
 	 * @return this vector for chaining
 	 * */
-	public Vector3i div(int x, int y, int z) {
-		this.x /= x;
-		this.y /= y;
-		this.z /= z;
-		return this;
-	}
-	
-	
-	/**
-	 * Divides this vector by the given components (component-wise).
-	 * @param x the x-component
-	 * @param y the y-component
-	 * @param z the z-component
-	 * @return this vector for chaining
-	 * */
-	public Vector3i div(float x, float y, float z) {
+	public Vector3f div(float x, float y, float z) {
 		this.x /= x;
 		this.y /= y;
 		this.z /= z;
@@ -573,23 +526,23 @@ public class Vector3i implements IVector3 {
 	
 	
 	@Override
-	public Vector3i crossSetGen(IVector3 vec) {
+	public Vector3f crossSetGen(IVector3 vec) {
 		return this.crossSet(vec);
 	}
 
 	@Override
-	public Vector3i crossSetGen(Number x, Number y, Number z) {
-		return this.crossSet(x.intValue(), y.intValue(), z.intValue());
+	public Vector3f crossSetGen(Number x, Number y, Number z) {
+		return this.crossSet(x.floatValue(), y.floatValue(), z.floatValue());
 	}
 	
 	@Override
-	public Vector3i crossGen(IVector3 vec) {
+	public Vector3f crossGen(IVector3 vec) {
 		return this.cross(vec);
 	}
 
 	@Override
-	public Vector3i crossGen(Number x, Number y, Number z) {
-		return this.cross(x.intValue(), y.intValue(), z.intValue());
+	public Vector3f crossGen(Number x, Number y, Number z) {
+		return this.cross(x.floatValue(), y.floatValue(), z.floatValue());
 	}
 
 	
@@ -598,8 +551,8 @@ public class Vector3i implements IVector3 {
 	 * @param vec the vector
 	 * @return this vector for chaining
 	 * */
-	public Vector3i crossSet(IVector3 vec) {
-		return this.crossSet(vec.getIntX(), vec.getIntY(), vec.getIntZ());
+	public Vector3f crossSet(IVector3 vec) {
+		return this.crossSet(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ());
 	}
 	
 	
@@ -610,10 +563,10 @@ public class Vector3i implements IVector3 {
 	 * @param z the z-component
 	 * @return this vector for chaining
 	 * */
-	public Vector3i crossSet(int x, int y, int z) {
-		final int rx = this.y*z - this.z*y;
-		final int ry = this.z*x - this.x*z;
-		final int rz = this.x*y - this.y*x;
+	public Vector3f crossSet(float x, float y, float z) {
+		final float rx = this.y*z - this.z*y;
+		final float ry = this.z*x - this.x*z;
+		final float rz = this.x*y - this.y*x;
 		return this.set(rx, ry, rz);
 	}
 	
@@ -623,8 +576,8 @@ public class Vector3i implements IVector3 {
 	 * @param vec the vector
 	 * @return the result as a new vector
 	 * */
-	public Vector3i cross(IVector3 vec) {
-		return this.cross(vec.getIntX(), vec.getIntY(), vec.getIntZ());
+	public Vector3f cross(IVector3 vec) {
+		return this.cross(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ());
 	}
 	
 	
@@ -635,8 +588,8 @@ public class Vector3i implements IVector3 {
 	 * @param z the z-component
 	 * @return the result as a new vector
 	 * */
-	public Vector3i cross(int x, int y, int z) {
-		return new Vector3i(
+	public Vector3f cross(float x, float y, float z) {
+		return new Vector3f(
 				this.y*z - this.z*y,
 				this.z*x - this.x*z,
 				this.x*y - this.y*x);
@@ -653,7 +606,7 @@ public class Vector3i implements IVector3 {
 	
 	@Override
 	public Number dotGen(Number x, Number y, Number z) {
-		return this.dot(x.intValue(), y.intValue(), z.intValue());
+		return this.dot(x.floatValue(), y.floatValue(), z.floatValue());
 	}
 
 	
@@ -662,8 +615,8 @@ public class Vector3i implements IVector3 {
 	 * @param vec the vector
 	 * @return the result
 	 * */
-	public int dot(IVector3 vec) {
-		return this.dot(vec.getIntX(), vec.getIntY(), vec.getIntZ());
+	public float dot(IVector3 vec) {
+		return this.dot(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ());
 	}
 	
 	
@@ -674,7 +627,7 @@ public class Vector3i implements IVector3 {
 	 * @param z the z-component
 	 * @return the result
 	 * */
-	public int dot(int x, int y, int z) {
+	public float dot(float x, float y, float z) {
 		return (this.x * x) + (this.y * y) + (this.z * z);
 	}
 	
@@ -689,7 +642,7 @@ public class Vector3i implements IVector3 {
 
 	@Override
 	public Number dist2Gen(Number x, Number y, Number z) {
-		return this.dist2(x.intValue(), y.intValue(), z.intValue());
+		return this.dist2(x.floatValue(), y.floatValue(), z.floatValue());
 	}
 	
 	
@@ -698,8 +651,8 @@ public class Vector3i implements IVector3 {
 	 * @param vec the vector
 	 * @return the result
 	 * */
-	public int dist2(IVector3 vec) {
-		return this.dist2(vec.getIntX(), vec.getIntY(), vec.getIntZ());
+	public float dist2(IVector3 vec) {
+		return this.dist2(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ());
 	}
 	
 	
@@ -710,7 +663,7 @@ public class Vector3i implements IVector3 {
 	 * @param z the z-position
 	 * @return the result
 	 * */
-	public int dist2(int x, int y, int z) {
+	public float dist2(float x, float y, float z) {
 		return (x-this.x)*(x-this.x) + (y-this.y)*(y-this.y) + (z-this.z)*(z-this.z);
 	}
 	
@@ -725,7 +678,7 @@ public class Vector3i implements IVector3 {
 
 	@Override
 	public Number distGen(Number x, Number y, Number z) {
-		return this.dist(x.intValue(), y.intValue(), z.intValue());
+		return this.dist(x.floatValue(), y.floatValue(), z.floatValue());
 	}
 	
 	
@@ -735,7 +688,7 @@ public class Vector3i implements IVector3 {
 	 * @return the result
 	 * */
 	public float dist(IVector3 vec) {
-		return this.dist(vec.getIntX(), vec.getIntY(), vec.getIntZ());
+		return this.dist(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ());
 	}
 	
 	
@@ -746,7 +699,7 @@ public class Vector3i implements IVector3 {
 	 * @param z the z-position
 	 * @return the result
 	 * */
-	public float dist(int x, int y, int z) {
+	public float dist(float x, float y, float z) {
 		return (float) Math.sqrt(this.dist2(x, y, z));
 	}
 	
@@ -763,7 +716,7 @@ public class Vector3i implements IVector3 {
 	 * Calculates the squared length of this vector.
 	 * @return the result
 	 * */
-	public int length2() {
+	public float length2() {
 		return x*x + y*y + z*z;
 	}
 	
@@ -788,8 +741,8 @@ public class Vector3i implements IVector3 {
 	
 
 	@Override
-	public Vector3i setLength(Number length) {
-		return this.setLength(length.intValue());
+	public Vector3f setLength(Number length) {
+		return this.setLength(length.floatValue());
 	}
 
 	
@@ -798,7 +751,7 @@ public class Vector3i implements IVector3 {
 	 * @param length the new length
 	 * @return this vector for chaining
 	 * */
-	public Vector3i setLength(float length) {
+	public Vector3f setLength(float length) {
 		normalize();
 		scale(length);
 		return this;
@@ -808,8 +761,8 @@ public class Vector3i implements IVector3 {
 	
 	
 	@Override
-	public Vector3i limitLength(Number maxLength) {
-		return this.limitLength(maxLength.intValue());
+	public Vector3f limitLength(Number maxLength) {
+		return this.limitLength(maxLength.floatValue());
 	}
 	
 	
@@ -818,7 +771,7 @@ public class Vector3i implements IVector3 {
 	 * @param maxLength the maximum length
 	 * @return this vector for chaining
 	 * */
-	public Vector3i limitLength(float maxLength) {
+	public Vector3f limitLength(float maxLength) {
 		float len = length();
 		if(len > maxLength) {
 			div(len);
@@ -832,7 +785,7 @@ public class Vector3i implements IVector3 {
 	
 	@Override
 	public IVector3 clampLenght(Number minLength, Number maxLength) {
-		return this.clampLength(minLength.intValue(), maxLength.intValue());
+		return this.clampLength(minLength.floatValue(), maxLength.floatValue());
 	}
 	
 	
@@ -842,7 +795,7 @@ public class Vector3i implements IVector3 {
 	 * @param maxLength the maximum length
 	 * @return this vector for chaining
 	 * */
-	public Vector3i clampLength(float minLength, float maxLength) {
+	public Vector3f clampLength(float minLength, float maxLength) {
 		float len = length();
 		if(len < minLength) {
 			div(len);
@@ -865,7 +818,7 @@ public class Vector3i implements IVector3 {
 
 	@Override
 	public Number angleRadGen(Number x, Number y, Number z) {
-		return this.angleRad(x.intValue(), y.intValue(), z.intValue());
+		return this.angleRad(x.floatValue(), y.floatValue(), z.floatValue());
 	}
 	
 
@@ -875,7 +828,7 @@ public class Vector3i implements IVector3 {
 	 * @return the result
 	 * */
 	public float angleRad(IVector3 vec) {
-		return this.angleRad(vec.getIntX(), vec.getIntY(), vec.getIntZ());
+		return this.angleRad(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ());
 	}
 	
 	
@@ -886,7 +839,7 @@ public class Vector3i implements IVector3 {
 	 * @param z the z-component of the vector
 	 * @return the result
 	 * */
-	public float angleRad(int x, int y, int z) {
+	public float angleRad(float x, float y, float z) {
 		final double lenAdd = Math.sqrt( (this.x+x)*(this.x+x) + (this.y+y)*(this.y+y) + (this.z+z)*(this.z+z) );
 		final double lenSub = Math.sqrt( (this.x-x)*(this.x-x) + (this.y-y)*(this.y-y) + (this.z-z)*(this.z-z) );
 		return (float) (2.0 * Math.atan( (lenSub) / (lenAdd) ));
@@ -903,7 +856,7 @@ public class Vector3i implements IVector3 {
 	
 	@Override
 	public Number angleDegGen(Number x, Number y, Number z) {
-		return this.angleDeg(x.intValue(), y.intValue(), z.intValue());
+		return this.angleDeg(x.floatValue(), y.floatValue(), z.floatValue());
 	}
 
 	
@@ -913,7 +866,7 @@ public class Vector3i implements IVector3 {
 	 * @return the result
 	 * */
 	public float angleDeg(IVector3 vec) {
-		return this.angleDeg(vec.getIntX(), vec.getIntY(), vec.getIntZ());
+		return this.angleDeg(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ());
 	}
 	
 	
@@ -924,7 +877,7 @@ public class Vector3i implements IVector3 {
 	 * @param z the z-component of the vector
 	 * @return the result
 	 * */
-	public float angleDeg(int x, int y, int z) {
+	public float angleDeg(float x, float y, float z) {
 		return (float) Math.toDegrees(angleRad(x, y, z));
 	}
 	
@@ -934,7 +887,7 @@ public class Vector3i implements IVector3 {
 	@Override
 	public IVector3 project(IVector3 vec) {
 		final float dot = dot(vec);
-		final float len2 = vec.length2Gen().intValue();
+		final float len2 = vec.length2Gen().floatValue();
 		this.set(vec).scale(dot / len2);
 		return this;
 	}
@@ -945,7 +898,7 @@ public class Vector3i implements IVector3 {
 	 * @param vec the vector
 	 * @return this vector for chaining
 	 * */
-	public Vector3i project(Vector3i vec) {
+	public Vector3f project(Vector3f vec) {
 		final float dot = dot(vec);
 		final float len2 = vec.length2();
 		this.set(vec).scale(dot / len2);
@@ -959,9 +912,9 @@ public class Vector3i implements IVector3 {
 	public IVector3 reflect(IVector3 vec) {
 		// I - 2.0 * dot(N, I) * N
 		final float dotN = this.dot(vec);
-		float rx = (2.0f * dotN * vec.getIntX());
-		float ry = (2.0f * dotN * vec.getIntY());
-		float rz = (2.0f * dotN * vec.getIntZ());
+		float rx = (2.0f * dotN * vec.getFloatX());
+		float ry = (2.0f * dotN * vec.getFloatY());
+		float rz = (2.0f * dotN * vec.getFloatZ());
 		this.sub(rx, ry, rz);
 		return this;
 	}
@@ -977,9 +930,9 @@ public class Vector3i implements IVector3 {
 			this.set(0f, 0f, 0f);
 		} else {
 			final double sqrtK = Math.sqrt(k);
-			float rx = (float) (eta * this.x - (eta * dotN + sqrtK) * vec.getIntX());
-			float ry = (float) (eta * this.y - (eta * dotN + sqrtK) * vec.getIntY());
-			float rz = (float) (eta * this.z - (eta * dotN + sqrtK) * vec.getIntZ());
+			float rx = (float) (eta * this.x - (eta * dotN + sqrtK) * vec.getFloatX());
+			float ry = (float) (eta * this.y - (eta * dotN + sqrtK) * vec.getFloatY());
+			float rz = (float) (eta * this.z - (eta * dotN + sqrtK) * vec.getFloatZ());
 			this.set(rx, ry, rz);
 		}
 		return this;
@@ -998,7 +951,7 @@ public class Vector3i implements IVector3 {
 	 * Calculates the sum of the components.
 	 * @return the result
 	 * */
-	public int componentSum() {
+	public float componentSum() {
 		return x + y + z;
 	}
 	
@@ -1015,7 +968,7 @@ public class Vector3i implements IVector3 {
 	 * Calculates the smallest component.
 	 * @return the result
 	 * */
-	public int componentMin() {
+	public float componentMin() {
 		return Math.min(Math.min(x, y), z);
 	}
 	
@@ -1032,7 +985,7 @@ public class Vector3i implements IVector3 {
 	 * Calculates the largest component.
 	 * @return the result
 	 * */
-	public int componentMax() {
+	public float componentMax() {
 		return Math.max(Math.max(x, y), z);
 	}
 	
@@ -1040,8 +993,8 @@ public class Vector3i implements IVector3 {
 	
 
 	@Override
-	public Vector3i clampComponents(Number min, Number max) {
-		return this.clampComponents(min.intValue(), max.intValue());
+	public Vector3f clampComponents(Number min, Number max) {
+		return this.clampComponents(min.floatValue(), max.floatValue());
 	}
 	
 	
@@ -1051,7 +1004,7 @@ public class Vector3i implements IVector3 {
 	 * @param max the maximum value
 	 * @return the result
 	 * */
-	public Vector3i clampComponents(int min, int max) {
+	public Vector3f clampComponents(float min, float max) {
 		this.x = Math.min(max, Math.max(this.x, min));
 		this.y = Math.min(max, Math.max(this.y, min));
 		this.z = Math.min(max, Math.max(this.z, min));
@@ -1063,9 +1016,9 @@ public class Vector3i implements IVector3 {
 	
 	@Override
 	public boolean compare(IVector3 vec) {
-		if(Math.abs(x - vec.getIntX()) > 0) { return false; }
-		if(Math.abs(y - vec.getIntY()) > 0) { return false; }
-		if(Math.abs(z - vec.getIntZ()) > 0) { return false; }
+		if(Math.abs(x - vec.getFloatX()) > EPSILON) { return false; }
+		if(Math.abs(y - vec.getFloatY()) > EPSILON) { return false; }
+		if(Math.abs(z - vec.getFloatZ()) > EPSILON) { return false; }
 		return true;
 	}
 
@@ -1074,7 +1027,7 @@ public class Vector3i implements IVector3 {
 	
 	@Override
 	public boolean isUnit() {
-		if(Math.abs(length2() - 1f) > 0) {
+		if(Math.abs(length2() - 1f) > EPSILON) {
 			return false;
 		} else {
 			return true;
@@ -1085,7 +1038,7 @@ public class Vector3i implements IVector3 {
 	
 	@Override
 	public boolean isZero() {
-		if( (Math.abs(x) < 0) && (Math.abs(y) < 0) && (Math.abs(z) < 0) ) {
+		if( (Math.abs(x) < EPSILON) && (Math.abs(y) < EPSILON) && (Math.abs(z) < EPSILON) ) {
 			return true;
 		} else {
 			return false;
@@ -1097,12 +1050,11 @@ public class Vector3i implements IVector3 {
 	
 	@Override
 	public boolean isPerpendicular(IVector3 vec) {
-		if(dot(vec) < 0) {
+		if(dot(vec) < EPSILON) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-
 
 }

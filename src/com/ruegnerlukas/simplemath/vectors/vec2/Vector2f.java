@@ -1,8 +1,13 @@
-package com.ruegnerlukas.simplemath.vecmath.vec2;
+package com.ruegnerlukas.simplemath.vectors.vec2;
 
+public class Vector2f implements IVector2 {
 
-public class Vector2i implements IVector2 {
-
+	
+	
+	
+	/** Used when comparing two float values. */
+	public static final float EPSILON = 0.000001f;
+	
 	
 	
 	
@@ -12,8 +17,8 @@ public class Vector2i implements IVector2 {
 	 * @param b the position of the second point
 	 * @return the created vector
 	 * */
-	public static Vector2i createVectorAB(IVector2 a, IVector2 b) {
-		return Vector2i.createVectorAB(a.getIntX(), a.getIntY(), b.getIntX(), b.getIntY());
+	public static Vector2f createVectorAB(IVector2 a, IVector2 b) {
+		return Vector2f.createVectorAB(a.getFloatX(), a.getFloatY(), b.getFloatX(), b.getFloatY());
 	}
 	
 	
@@ -25,8 +30,8 @@ public class Vector2i implements IVector2 {
 	 * @param by the y-position of the second point
 	 * @return the created vector
 	 * */
-	public static Vector2i createVectorAB(int ax, int ay, int bx, int by) {
-		return new Vector2i(bx-ax, by-ay);
+	public static Vector2f createVectorAB(float ax, float ay, float bx, float by) {
+		return new Vector2f(bx-ax, by-ay);
 	}
 	
 	
@@ -38,8 +43,8 @@ public class Vector2i implements IVector2 {
 	 * @param b the position of the second point
 	 * @return the vector "dst" with the new values
 	 * */
-	public static Vector2i setVectorAB(IVector2 a, IVector2 b, Vector2i dst) {
-		return Vector2i.setVectorAB(a.getIntX(), a.getIntY(), b.getIntX(), b.getIntY(), dst);
+	public static Vector2f setVectorAB(IVector2 a, IVector2 b, Vector2f dst) {
+		return Vector2f.setVectorAB(a.getFloatX(), a.getFloatY(), b.getFloatX(), b.getFloatY(), dst);
 	}
 	
 	
@@ -51,7 +56,7 @@ public class Vector2i implements IVector2 {
 	 * @param by the y-position of the second point
 	 * @return the vector "dst" with the new values
 	 * */
-	public static Vector2i setVectorAB(int ax, int ay, int bx, int by, Vector2i dst) {
+	public static Vector2f setVectorAB(float ax, float ay, float bx, float by, Vector2f dst) {
 		return dst.set(bx-ax, by-ay);
 	}
 	
@@ -61,10 +66,10 @@ public class Vector2i implements IVector2 {
 	
 	
 	/** the x-component of this vector (index=0)*/
-	public int x;
+	public float x;
 	
 	/** the y-component of this vector (index=1)*/
-	public int y;
+	public float y;
 	
 	
 	
@@ -74,7 +79,7 @@ public class Vector2i implements IVector2 {
 	/**
 	 * creates a zero-vector
 	 * */
-	public Vector2i() {
+	public Vector2f() {
 		this(0);
 	}
 	
@@ -82,7 +87,7 @@ public class Vector2i implements IVector2 {
 	/**
 	 * creates a vector with the same values for x and y
 	 * */
-	public Vector2i(int xy) {
+	public Vector2f(float xy) {
 		this(xy, xy);
 	}
 	
@@ -90,15 +95,15 @@ public class Vector2i implements IVector2 {
 	/**
 	 * creates a vector with the same values as the given vector
 	 * */
-	public Vector2i(IVector2 vec) {
-		this(vec.getIntX(), vec.getIntY());
+	public Vector2f(IVector2 vec) {
+		this(vec.getFloatX(), vec.getFloatY());
 	}
 
 	
 	/**
 	 * creates a vector with the given x and y values
 	 * */
-	public Vector2i(int x, int y) {
+	public Vector2f(float x, float y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -119,9 +124,9 @@ public class Vector2i implements IVector2 {
 	
 	
 	@Override
-	public Vector2i set(int index, Number value) {
-		if(index == 0) { this.x = value.intValue(); return this; }
-		if(index == 1) { this.y = value.intValue(); return this; }
+	public Vector2f set(int index, Number value) {
+		if(index == 0) { this.x = value.floatValue(); return this; }
+		if(index == 1) { this.y = value.floatValue(); return this; }
 		return null;
 	}
 
@@ -155,8 +160,8 @@ public class Vector2i implements IVector2 {
 	
 	@Override
 	public float getFloat(int index) {
-		if(index == 0) { return (float) this.x; }
-		if(index == 1) { return (float) this.y; }
+		if(index == 0) { return this.x; }
+		if(index == 1) { return this.y; }
 		return 0;
 	}
 
@@ -172,7 +177,7 @@ public class Vector2i implements IVector2 {
 	
 	
 	@Override
-	public Vector2i negate() {
+	public Vector2f negate() {
 		this.x = -x;
 		this.y = -y;
 		return this;
@@ -182,7 +187,7 @@ public class Vector2i implements IVector2 {
 	
 	
 	@Override
-	public Vector2i normalize() {
+	public Vector2f normalize() {
 		final float len = length();
 		this.x /= len;
 		this.y /= len;
@@ -193,8 +198,8 @@ public class Vector2i implements IVector2 {
 	
 
 	@Override
-	public Vector2i copy() {
-		return new Vector2i(this);
+	public Vector2f copy() {
+		return new Vector2f(this);
 	}
 
 	
@@ -203,29 +208,29 @@ public class Vector2i implements IVector2 {
 	
 	
 	@Override
-	public Vector2i set(IVector2 v) {
-		return this.set(v.getIntX(), v.getIntY());
+	public Vector2f set(IVector2 v) {
+		return this.set(v.getFloatX(), v.getFloatY());
 	}
 
 	
 	@Override
-	public Vector2i set(Number x, Number y) {
-		return this.set(x.intValue(), y.intValue());
+	public Vector2f set(Number x, Number y) {
+		return this.set(x.floatValue(), y.floatValue());
 	}
 
 	
 	@Override
-	public Vector2i set(Number xy) {
-		return this.set(xy.intValue());
+	public Vector2f set(Number xy) {
+		return this.set(xy.floatValue());
 	}
 	
 
-	public Vector2i set(int xy) {
+	public Vector2f set(float xy) {
 		return this.set(xy, xy);
 	}
 	
 	
-	public Vector2i set(int x, int y) {
+	public Vector2f set(float x, float y) {
 		this.x = x;
 		this.y = y;
 		return this;
@@ -256,22 +261,22 @@ public class Vector2i implements IVector2 {
 
 	@Override
 	public float getFloatX() {
-		return (float) this.x;
+		return this.x;
 	}
 
 	@Override
 	public float getFloatY() {
-		return (float) this.y;
+		return this.y;
 	}
 
 	@Override
 	public double getDoubleX() {
-		return (double) this.x;
+		return this.x;
 	}
 
 	@Override
 	public double getDoubleY() {
-		return (double) this.y;
+		return this.y;
 	}
 
 	
@@ -281,7 +286,7 @@ public class Vector2i implements IVector2 {
 	
 	@Override
 	public Vector2i toIntVector() {
-		return copy();
+		return new Vector2i(this);
 	}
 
 	
@@ -293,7 +298,7 @@ public class Vector2i implements IVector2 {
 	
 	@Override
 	public Vector2f toFloatVector() {
-		return new Vector2f(this);
+		return (Vector2f) this.copy();
 	}
 
 	
@@ -304,27 +309,27 @@ public class Vector2i implements IVector2 {
 
 	
 	@Override public String toString() {
-		return "Vector2i." + this.hashCode() + "(" + this.x + ", " + this.y + ")";
+		return "Vector2f." + this.hashCode() + "(" + this.x + ", " + this.y + ")";
 	}
 
 	
 	
 	
 	@Override
-	public Vector2i add(IVector2 vec) {
-		return this.add(vec.getIntX(), vec.getIntY());
+	public Vector2f add(IVector2 vec) {
+		return this.add(vec.getFloatX(), vec.getFloatY());
 	}
 	
 
 	@Override
-	public Vector2i add(Number x, Number y) {
-		return this.add(x.intValue(), y.intValue());
+	public Vector2f add(Number x, Number y) {
+		return this.add(x.floatValue(), y.floatValue());
 	}
 	
 	
 	@Override
-	public Vector2i add(Number xy) {
-		return this.add(xy.intValue());
+	public Vector2f add(Number xy) {
+		return this.add(xy.floatValue());
 	}
 	
 	
@@ -333,7 +338,7 @@ public class Vector2i implements IVector2 {
 	 * @param xy the x- and y-component
 	 * @return this vector for chaining
 	 * */
-	public Vector2i add(int xy) {
+	public Vector2f add(float xy) {
 		return this.add(xy, xy);
 	}
 	
@@ -344,7 +349,7 @@ public class Vector2i implements IVector2 {
 	 * @param y the y-component
 	 * @return this vector for chaining
 	 * */
-	public Vector2i add(int x, int y) {
+	public Vector2f add(float x, float y) {
 		this.x += x;
 		this.y += y;
 		return this;
@@ -354,21 +359,21 @@ public class Vector2i implements IVector2 {
 	
 	
 	@Override
-	public Vector2i sub(IVector2 vec) {
-		return this.sub(vec.getIntX(), vec.getIntY());
+	public Vector2f sub(IVector2 vec) {
+		return this.sub(vec.getFloatX(), vec.getFloatY());
 	}
 
 	
 	@Override
-	public Vector2i sub(Number x, Number y) {
-		return this.sub(x.intValue(), y.intValue());
+	public Vector2f sub(Number x, Number y) {
+		return this.sub(x.floatValue(), y.floatValue());
 
 	}
 	
 	
 	@Override
-	public Vector2i sub(Number xy) {
-		return this.sub(xy.intValue());
+	public Vector2f sub(Number xy) {
+		return this.sub(xy.floatValue());
 	}
 
 	
@@ -377,7 +382,7 @@ public class Vector2i implements IVector2 {
 	 * @param xy the x- and y-component
 	 * @return this vector for chaining
 	 * */
-	public Vector2i sub(int xy) {
+	public Vector2f sub(float xy) {
 		return this.sub(xy, xy);
 	}
 	
@@ -388,7 +393,7 @@ public class Vector2i implements IVector2 {
 	 * @param y the y-component
 	 * @return this vector for chaining
 	 * */
-	public Vector2i sub(int x, int y) {
+	public Vector2f sub(float x, float y) {
 		this.x -= x;
 		this.y -= y;
 		return this;
@@ -398,20 +403,20 @@ public class Vector2i implements IVector2 {
 	
 	
 	@Override
-	public Vector2i mul(IVector2 vec) {
-		return this.mul(vec.getIntX(), vec.getIntY());
+	public Vector2f mul(IVector2 vec) {
+		return this.mul(vec.getFloatX(), vec.getFloatY());
 	}
 	
 	
 	@Override
-	public Vector2i mul(Number x, Number y) {
-		return this.mul(x.intValue(), y.intValue());
+	public Vector2f mul(Number x, Number y) {
+		return this.mul(x.floatValue(), y.floatValue());
 	}
 
 	
 	@Override
-	public Vector2i scale(Number xy) {
-		return this.scale(xy.intValue());
+	public Vector2f scale(Number xy) {
+		return this.scale(xy.floatValue());
 	}
 
 	
@@ -420,17 +425,7 @@ public class Vector2i implements IVector2 {
 	 * @param xy the scalar
 	 * @return this vector for chaining
 	 * */
-	public Vector2i scale(int xy) {
-		return this.mul(xy, xy);
-	}
-	
-	
-	/**
-	 * Scales this vector by the given scalar.
-	 * @param xy the scalar
-	 * @return this vector for chaining
-	 * */
-	public Vector2i scale(float xy) {
+	public Vector2f scale(float xy) {
 		return this.mul(xy, xy);
 	}
 
@@ -441,20 +436,7 @@ public class Vector2i implements IVector2 {
 	 * @param y the y-component
 	 * @return this vector for chaining
 	 * */
-	public Vector2i mul(int x, int y) {
-		this.x *= x;
-		this.y *= y;
-		return this;
-	}
-	
-	
-	/**
-	 * Multiplies this vector with the given components (component-wise).
-	 * @param x the x-component
-	 * @param y the y-component
-	 * @return this vector for chaining
-	 * */
-	public Vector2i mul(float x, float y) {
+	public Vector2f mul(float x, float y) {
 		this.x *= x;
 		this.y *= y;
 		return this;
@@ -464,20 +446,20 @@ public class Vector2i implements IVector2 {
 	
 	
 	@Override
-	public Vector2i div(IVector2 vec) {
-		return this.div(vec.getIntX(), vec.getIntY());
+	public Vector2f div(IVector2 vec) {
+		return this.div(vec.getFloatX(), vec.getFloatY());
 	}
 
 	
 	@Override
-	public Vector2i div(Number x, Number y) {
-		return this.div(x.intValue(), y.intValue());
+	public Vector2f div(Number x, Number y) {
+		return this.div(x.floatValue(), y.floatValue());
 	}
 	
 	
 	@Override
-	public Vector2i div(Number xy) {
-		return this.div(xy.intValue());
+	public Vector2f div(Number xy) {
+		return this.div(xy.floatValue());
 	}
 
 	
@@ -486,7 +468,7 @@ public class Vector2i implements IVector2 {
 	 * @param xy the x- and y-component
 	 * @return this vector for chaining
 	 * */
-	public Vector2i div(int xy) {
+	public Vector2f div(float xy) {
 		return this.div(xy, xy);
 	}
 	
@@ -497,20 +479,7 @@ public class Vector2i implements IVector2 {
 	 * @param y the y-component
 	 * @return this vector for chaining
 	 * */
-	public Vector2i div(float x, float y) {
-		this.x /= x;
-		this.y /= y;
-		return this;
-	}
-	
-	
-	/**
-	 * Divides this vector by the given components (component-wise).
-	 * @param x the x-component
-	 * @param y the y-component
-	 * @return this vector for chaining
-	 * */
-	public Vector2i div(int x, int y) {
+	public Vector2f div(float x, float y) {
 		this.x /= x;
 		this.y /= y;
 		return this;
@@ -527,7 +496,7 @@ public class Vector2i implements IVector2 {
 	
 	@Override
 	public Number crossGen(Number x, Number y) {
-		return this.cross(x.intValue(), y.intValue());
+		return this.cross(x.floatValue(), y.floatValue());
 	}
 	
 	
@@ -536,8 +505,8 @@ public class Vector2i implements IVector2 {
 	 * @param vec the vector
 	 * @return the result
 	 * */
-	public int cross(IVector2 vec) {
-		return this.cross(vec.getIntX(), vec.getIntY());
+	public float cross(IVector2 vec) {
+		return this.cross(vec.getFloatX(), vec.getFloatY());
 	}
 	
 	
@@ -547,7 +516,7 @@ public class Vector2i implements IVector2 {
 	 * @param y the y-component
 	 * @return the result
 	 * */
-	public int cross(int x, int y) {
+	public float cross(float x, float y) {
 		return (this.x * y) - (this.y * x);
 	}
 	
@@ -562,7 +531,7 @@ public class Vector2i implements IVector2 {
 	
 	@Override
 	public Number dotGen(Number x, Number y) {
-		return this.dot(x.intValue(), y.intValue());
+		return this.dot(x.floatValue(), y.floatValue());
 	}
 	
 	
@@ -571,8 +540,8 @@ public class Vector2i implements IVector2 {
 	 * @param vec the vector
 	 * @return the result
 	 * */
-	public int dot(IVector2 vec) {
-		return this.dot(vec.getIntX(), vec.getIntY());
+	public float dot(IVector2 vec) {
+		return this.dot(vec.getFloatX(), vec.getFloatY());
 	}
 	
 	
@@ -582,7 +551,7 @@ public class Vector2i implements IVector2 {
 	 * @param y the y-component
 	 * @return the result
 	 * */
-	public int dot(int x, int y) {
+	public float dot(float x, float y) {
 		return (this.x * x) + (this.y * y);
 	}
 	
@@ -597,7 +566,7 @@ public class Vector2i implements IVector2 {
 	
 	@Override
 	public Number dist2Gen(Number x, Number y) {
-		return this.dist2(x.intValue(), y.intValue());
+		return this.dist2(x.floatValue(), y.floatValue());
 	}
 	
 	
@@ -606,8 +575,8 @@ public class Vector2i implements IVector2 {
 	 * @param vec the vector
 	 * @return the result
 	 * */
-	public int dist2(IVector2 vec) {
-		return this.dist2(vec.getIntX(), vec.getIntY());
+	public float dist2(IVector2 vec) {
+		return this.dist2(vec.getFloatX(), vec.getFloatY());
 	}
 	
 	
@@ -617,7 +586,7 @@ public class Vector2i implements IVector2 {
 	 * @param y the y-position
 	 * @return the result
 	 * */
-	public int dist2(int x, int y) {
+	public float dist2(float x, float y) {
 		return (x-this.x)*(x-this.x) + (y-this.y)*(y-this.y);
 	}
 	
@@ -632,7 +601,7 @@ public class Vector2i implements IVector2 {
 	
 	@Override
 	public Number distGen(Number x, Number y) {
-		return this.dist(x.intValue(), y.intValue());
+		return this.dist(x.floatValue(), y.floatValue());
 	}
 	
 	
@@ -642,7 +611,7 @@ public class Vector2i implements IVector2 {
 	 * @return the result
 	 * */
 	public float dist(IVector2 vec) {
-		return this.dist(vec.getIntX(), vec.getIntY());
+		return this.dist(vec.getFloatX(), vec.getFloatY());
 	}
 	
 	
@@ -652,7 +621,7 @@ public class Vector2i implements IVector2 {
 	 * @param y the y-position
 	 * @return the result
 	 * */
-	public float dist(int x, int y) {
+	public float dist(float x, float y) {
 		return (float) Math.sqrt(this.dist2(x, y));
 	}
 	
@@ -669,7 +638,7 @@ public class Vector2i implements IVector2 {
 	 * Calculates the squared length of this vector.
 	 * @return the result
 	 * */
-	public int length2() {
+	public float length2() {
 		return x*x + y*y;
 	}
 	
@@ -695,7 +664,7 @@ public class Vector2i implements IVector2 {
 	
 	
 	@Override
-	public Vector2i setLength(Number length) {
+	public Vector2f setLength(Number length) {
 		return this.setLength(length.floatValue());
 	}
 	
@@ -705,7 +674,7 @@ public class Vector2i implements IVector2 {
 	 * @param length the new length
 	 * @return this vector for chaining
 	 * */
-	public Vector2i setLength(float length) {
+	public Vector2f setLength(float length) {
 		normalize();
 		scale(length);
 		return this;
@@ -715,7 +684,7 @@ public class Vector2i implements IVector2 {
 
 	
 	@Override
-	public Vector2i limitLength(Number maxLength) {
+	public Vector2f limitLength(Number maxLength) {
 		return limitLength(maxLength.floatValue());
 	}
 	
@@ -725,7 +694,7 @@ public class Vector2i implements IVector2 {
 	 * @param maxLength the maximum length
 	 * @return this vector for chaining
 	 * */
-	public Vector2i limitLength(float maxLength) {
+	public Vector2f limitLength(float maxLength) {
 		float len = length();
 		if(len > maxLength) {
 			div(len);
@@ -738,7 +707,7 @@ public class Vector2i implements IVector2 {
 
 	
 	@Override
-	public Vector2i clampLenght(Number minLength, Number maxLength) {
+	public Vector2f clampLenght(Number minLength, Number maxLength) {
 		return this.clampLength(minLength.floatValue(), maxLength.floatValue());
 	}
 	
@@ -749,7 +718,7 @@ public class Vector2i implements IVector2 {
 	 * @param maxLength the maximum length
 	 * @return this vector for chaining
 	 * */
-	public Vector2i clampLength(float minLength, float maxLength) {
+	public Vector2f clampLength(float minLength, float maxLength) {
 		float len = length();
 		if(len < minLength) {
 			div(len);
@@ -773,7 +742,7 @@ public class Vector2i implements IVector2 {
 	
 	@Override
 	public Number angleRadGen(Number x, Number y) {
-		return this.angleRad(x.intValue(), y.intValue());
+		return this.angleRad(x.floatValue(), y.floatValue());
 	}
 
 
@@ -783,7 +752,7 @@ public class Vector2i implements IVector2 {
 	 * @return the result
 	 * */
 	public float angleRad(IVector2 vec) {
-		return this.angleRad(vec.getIntX(), vec.getIntY());
+		return this.angleRad(vec.getFloatX(), vec.getFloatY());
 	}
 	
 	
@@ -793,9 +762,9 @@ public class Vector2i implements IVector2 {
 	 * @param y the y-component of the vector
 	 * @return the result
 	 * */
-	public float angleRad(int x, int y) {
-		final int cross = cross(x, y);
-		final int dot   = dot(x, y);
+	public float angleRad(float x, float y) {
+		final float cross = cross(x, y);
+		final float dot   = dot(x, y);
 		return (float) Math.atan2(cross, dot);
 	}
 	
@@ -810,7 +779,7 @@ public class Vector2i implements IVector2 {
 	
 	@Override
 	public Number angleDegGen(Number x, Number y) {
-		return this.angleDeg(x.intValue(), y.intValue());
+		return this.angleDeg(x.floatValue(), y.floatValue());
 	}
 	
 	
@@ -820,7 +789,7 @@ public class Vector2i implements IVector2 {
 	 * @return the result
 	 * */
 	public float angleDeg(IVector2 vec) {
-		return this.angleDeg(vec.getIntX(), vec.getIntY());
+		return this.angleDeg(vec.getFloatX(), vec.getFloatY());
 	}
 	
 	
@@ -830,7 +799,7 @@ public class Vector2i implements IVector2 {
 	 * @param y the y-component of the vector
 	 * @return the result
 	 * */
-	public float angleDeg(int x, int y) {
+	public float angleDeg(float x, float y) {
 		return (float) Math.toDegrees(angleRad(x, y));
 	}
 	
@@ -838,7 +807,7 @@ public class Vector2i implements IVector2 {
 	
 	
 	@Override
-	public Vector2i rotateRad(Number angleRad) {
+	public Vector2f rotateRad(Number angleRad) {
 		return this.rotateRad(angleRad.floatValue());
 	}
 
@@ -848,11 +817,11 @@ public class Vector2i implements IVector2 {
 	 * @param angleRad the angle in radians
 	 * @return this vector for chaining
 	 * */
-	public Vector2i rotateRad(float angleRad) {
+	public Vector2f rotateRad(float angleRad) {
 		final double cos = Math.cos(angleRad);
 		final double sin = Math.sin(angleRad);
-		this.x = (int) (x*cos - y*sin);
-		this.y = (int) (x*sin + y*cos);
+		this.x = (float) (x*cos - y*sin);
+		this.y = (float) (x*sin + y*cos);
 		return this;
 	}
 	
@@ -860,8 +829,8 @@ public class Vector2i implements IVector2 {
 	
 	
 	@Override
-	public Vector2i rotateDeg(Number angleDeg) {
-		return this.rotateDeg(angleDeg.intValue());
+	public Vector2f rotateDeg(Number angleDeg) {
+		return this.rotateDeg(angleDeg.floatValue());
 	}
 	
 	
@@ -870,7 +839,7 @@ public class Vector2i implements IVector2 {
 	 * @param angleRad the angle in degrees
 	 * @return this vector for chaining
 	 * */
-	public Vector2i rotateDeg(int angleDeg) {
+	public Vector2f rotateDeg(float angleDeg) {
 		return this.rotateRad(Math.toRadians(angleDeg));
 	}
 	
@@ -878,9 +847,9 @@ public class Vector2i implements IVector2 {
 	
 	
 	@Override
-	public Vector2i project(IVector2 vec) {
-		final int dot = dot(vec);
-		final int len2 = vec.length2Gen().intValue();
+	public Vector2f project(IVector2 vec) {
+		final float dot = dot(vec);
+		final float len2 = vec.length2Gen().floatValue();
 		this.set(vec).scale(dot / len2);
 		return this;
 	}
@@ -891,9 +860,9 @@ public class Vector2i implements IVector2 {
 	 * @param vec the vector
 	 * @return this vector for chaining
 	 * */
-	public Vector2i project(Vector2i vec) {
-		final int dot = dot(vec);
-		final int len2 = vec.length2();
+	public Vector2f project(Vector2f vec) {
+		final float dot = dot(vec);
+		final float len2 = vec.length2();
 		this.set(vec).scale(dot / len2);
 		return this;
 	}
@@ -902,11 +871,11 @@ public class Vector2i implements IVector2 {
 	
 	
 	@Override
-	public Vector2i reflect(IVector2 n) {  // n should be normalized before
+	public Vector2f reflect(IVector2 n) {  // n should be normalized before
 		// I - 2.0 * dot(N, I) * N
-		final int dotN = this.dot(n);
-		double rx = (2.0f * dotN * n.getIntX());
-		double ry = (2.0f * dotN * n.getIntY());
+		final float dotN = this.dot(n);
+		float rx = (2.0f * dotN * n.getFloatX());
+		float ry = (2.0f * dotN * n.getFloatY());
 		this.sub(rx, ry);
 		return this;
 	}
@@ -914,15 +883,15 @@ public class Vector2i implements IVector2 {
 	
 	
 	@Override
-	public Vector2i refract(IVector2 n, float eta) { // https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/refract.xhtml
-		final int dotN = this.dot(n);
+	public IVector2 refract(IVector2 n, float eta) { // https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/refract.xhtml
+		final float dotN = this.dot(n);
 		final float k = 1.0f - eta*eta * (1.0f - dotN*dotN);
 		if(k < 0.0) {
 			this.set(0f, 0f);
 		} else {
 			final double sqrtK = Math.sqrt(k);
-			double rx = (eta * this.x - (eta * dotN + sqrtK) * n.getIntX());
-			double ry = (eta * this.y - (eta * dotN + sqrtK) * n.getIntY());
+			float rx = (float) (eta * this.x - (eta * dotN + sqrtK) * n.getFloatX());
+			float ry = (float) (eta * this.y - (eta * dotN + sqrtK) * n.getFloatY());
 			this.set(rx, ry);
 		}
 		return this;
@@ -941,7 +910,7 @@ public class Vector2i implements IVector2 {
 	 * Calculates the sum of the components.
 	 * @return the result
 	 * */
-	public int componentSum() {
+	public float componentSum() {
 		return x + y;
 	}
 	
@@ -958,7 +927,7 @@ public class Vector2i implements IVector2 {
 	 * Calculates the smallest component.
 	 * @return the result
 	 * */
-	public int componentMin() {
+	public float componentMin() {
 		return Math.min(x, y);
 	}
 
@@ -975,7 +944,7 @@ public class Vector2i implements IVector2 {
 	 * Calculates the largest component.
 	 * @return the result
 	 * */
-	public int componentMax() {
+	public float componentMax() {
 		return Math.max(x, y);
 	}
 
@@ -983,8 +952,8 @@ public class Vector2i implements IVector2 {
 	
 	
 	@Override
-	public Vector2i clampComponents(Number min, Number max) {
-		return this.clampComponents(min.intValue(), max.intValue());
+	public Vector2f clampComponents(Number min, Number max) {
+		return this.clampComponents(min.floatValue(), max.floatValue());
 	}
 	
 	
@@ -994,7 +963,7 @@ public class Vector2i implements IVector2 {
 	 * @param max the maximum value
 	 * @return the result
 	 * */
-	public Vector2i clampComponents(int min, int max) {
+	public Vector2f clampComponents(float min, float max) {
 		this.x = Math.min(max, Math.max(this.x, min));
 		this.y = Math.min(max, Math.max(this.y, min));
 		return this;
@@ -1005,15 +974,15 @@ public class Vector2i implements IVector2 {
 
 	@Override
 	public boolean compare(IVector2 vec) {
-		if(Math.abs(x - vec.getDoubleX()) > 0) { return false; }
-		if(Math.abs(y - vec.getDoubleY()) > 0) { return false; }
+		if(Math.abs(x - vec.getFloatX()) > EPSILON) { return false; }
+		if(Math.abs(y - vec.getFloatY()) > EPSILON) { return false; }
 		return true;
 	}
 
 
 	@Override
 	public boolean isUnit() {
-		if(Math.abs(length2() - 1) > 0) {
+		if(Math.abs(length2() - 1f) > EPSILON) {
 			return false;
 		} else {
 			return true;
@@ -1023,7 +992,7 @@ public class Vector2i implements IVector2 {
 
 	@Override
 	public boolean isZero() {
-		if( (Math.abs(x) < 0) && (Math.abs(y) < 0) ) {
+		if( (Math.abs(x) < EPSILON) && (Math.abs(y) < EPSILON) ) {
 			return true;
 		} else {
 			return false;
@@ -1033,7 +1002,7 @@ public class Vector2i implements IVector2 {
 	
 	@Override
 	public boolean isPerpendicular(IVector2 vec) {
-		if(dot(vec) < 0) {
+		if(dot(vec) < EPSILON) {
 			return true;
 		} else {
 			return false;

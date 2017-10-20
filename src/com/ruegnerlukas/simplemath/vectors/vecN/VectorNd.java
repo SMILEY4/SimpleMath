@@ -1,10 +1,10 @@
-package com.ruegnerlukas.simplemath.vecmath.vecN;
+package com.ruegnerlukas.simplemath.vectors.vecN;
 
 import java.util.Arrays;
 
-import com.ruegnerlukas.simplemath.vecmath.IVector;
-import com.ruegnerlukas.simplemath.vecmath.vec3.IVector3;
-import com.ruegnerlukas.simplemath.vecmath.vec3.Vector3f;
+import com.ruegnerlukas.simplemath.vectors.IVector;
+import com.ruegnerlukas.simplemath.vectors.vec3.IVector3;
+import com.ruegnerlukas.simplemath.vectors.vec3.Vector3f;
 
 public class VectorNd implements IVectorN {
 

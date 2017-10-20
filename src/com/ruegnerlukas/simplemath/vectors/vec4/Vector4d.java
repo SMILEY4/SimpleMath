@@ -1,6 +1,6 @@
-package com.ruegnerlukas.simplemath.vecmath.vec4;
+package com.ruegnerlukas.simplemath.vectors.vec4;
 
-import com.ruegnerlukas.simplemath.vecmath.vec3.Vector3d;
+import com.ruegnerlukas.simplemath.vectors.vec3.Vector3d;
 
 public class Vector4d implements IVector4 {
 

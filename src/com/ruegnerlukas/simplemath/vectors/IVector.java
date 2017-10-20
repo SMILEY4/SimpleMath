@@ -1,6 +1,6 @@
-package com.ruegnerlukas.simplemath.vecmath;
+package com.ruegnerlukas.simplemath.vectors;
 
-import com.ruegnerlukas.simplemath.vecmath.vec3.IVector3;
+import com.ruegnerlukas.simplemath.vectors.vec3.IVector3;
 
 public interface IVector {
 	

@@ -1,15 +1,9 @@
-package com.ruegnerlukas.simplemath.vecmath.vec4;
+package com.ruegnerlukas.simplemath.vectors.vec4;
 
-import com.ruegnerlukas.simplemath.vecmath.vec3.Vector3f;
+import com.ruegnerlukas.simplemath.vectors.vec3.Vector3i;
 
-public class Vector4f implements IVector4 {
+public class Vector4i implements IVector4 {
 
-	
-	
-	
-	/** Used when comparing two float values. */
-	public static final float EPSILON = 0.000001f;
-	
 	
 	
 	
@@ -19,8 +13,8 @@ public class Vector4f implements IVector4 {
 	 * @param b the position of the second point
 	 * @return the created vector
 	 * */
-	public static Vector4f createVectorAB(IVector4 a, IVector4 b) {
-		return Vector4f.createVectorAB(a.getFloatX(), a.getFloatY(), a.getFloatZ(), a.getFloatW(), b.getFloatX(), b.getFloatY(), b.getFloatZ(), b.getFloatW());
+	public static Vector4i createVectorAB(IVector4 a, IVector4 b) {
+		return Vector4i.createVectorAB(a.getIntX(), a.getIntY(), a.getIntZ(), a.getIntW(), b.getIntX(), b.getIntY(), b.getIntZ(), b.getIntW());
 	}
 	
 	
@@ -36,8 +30,8 @@ public class Vector4f implements IVector4 {
 	 * @param bw the w-position of the second point
 	 * @return the created vector
 	 * */
-	public static Vector4f createVectorAB(float ax, float ay, float az, float aw, float bx, float by, float bz, float bw) {
-		return new Vector4f(bx-ax, by-ay, bz-az, bw-aw);
+	public static Vector4i createVectorAB(int ax, int ay, int az, int aw, int bx, int by, int bz, int bw) {
+		return new Vector4i(bx-ax, by-ay, bz-az, bw-aw);
 	}
 	
 	
@@ -49,8 +43,8 @@ public class Vector4f implements IVector4 {
 	 * @param b the position of the second point
 	 * @return the vector "dst" with the new values
 	 * */
-	public static Vector4f setVectorAB(IVector4 a, IVector4 b, Vector4f dst) {
-		return Vector4f.setVectorAB(a.getFloatX(), a.getFloatY(), a.getFloatZ(), a.getFloatW(), b.getFloatX(), b.getFloatY(), b.getFloatZ(), b.getFloatW(), dst);
+	public static Vector4i setVectorAB(IVector4 a, IVector4 b, Vector4i dst) {
+		return Vector4i.setVectorAB(a.getIntX(), a.getIntY(), a.getIntZ(), a.getIntW(), b.getIntX(), b.getIntY(), b.getIntZ(), b.getIntW(), dst);
 	}
 	
 	
@@ -66,7 +60,7 @@ public class Vector4f implements IVector4 {
 	 * @param bw the w-position of the second point
 	 * @return the vector "dst" with the new values
 	 * */
-	public static Vector4f setVectorAB(float ax, float ay, float az, float aw, float bx, float by, float bz, float bw, Vector4f dst) {
+	public static Vector4i setVectorAB(int ax, int ay, int az, int aw, int bx, int by, int bz, int bw, Vector4i dst) {
 		return dst.set(bx-ax, by-ay, bz-az, bw-aw);
 	}
 	
@@ -76,16 +70,16 @@ public class Vector4f implements IVector4 {
 	
 	
 	/** the x-component of this vector (index=0)*/
-	public float x;
+	public int x;
 	
 	/** the y-component of this vector (index=1)*/
-	public float y;
+	public int y;
 	
 	/** the z-component of this vector (index=2)*/
-	public float z;
+	public int z;
 	
 	/** the w-component of this vector (index=3)*/
-	public float w;
+	public int w;
 	
 	
 	
@@ -94,7 +88,7 @@ public class Vector4f implements IVector4 {
 	/**
 	 * creates a zero-vector
 	 * */
-	public Vector4f() {
+	public Vector4i() {
 		this(0);
 	}
 	
@@ -102,7 +96,7 @@ public class Vector4f implements IVector4 {
 	/**
 	 * creates a vector with the same values for x, y , z and w
 	 * */
-	public Vector4f(float xyzw) {
+	public Vector4i(int xyzw) {
 		this(xyzw, xyzw, xyzw, xyzw);
 	}
 	
@@ -110,15 +104,15 @@ public class Vector4f implements IVector4 {
 	/**
 	 * creates a vector with the same values as the given vector
 	 * */
-	public Vector4f(IVector4 vec) {
-		this(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ(), vec.getFloatW());
+	public Vector4i(IVector4 vec) {
+		this(vec.getIntX(), vec.getIntY(), vec.getIntZ(), vec.getIntW());
 	}
 
 	
 	/**
 	 * creates a vector with the given x, y, z and w values
 	 * */
-	public Vector4f(float x, float y, float z, float w) {
+	public Vector4i(int x, int y, int z, int w) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -139,11 +133,11 @@ public class Vector4f implements IVector4 {
 	
 	
 	@Override
-	public Vector4f set(int index, Number value) {
-		if(index == 0) { this.x = value.floatValue(); return this; }
-		if(index == 1) { this.y = value.floatValue(); return this; }
-		if(index == 2) { this.z = value.floatValue(); return this; }
-		if(index == 3) { this.w = value.floatValue(); return this; }
+	public Vector4i set(int index, Number value) {
+		if(index == 0) { this.x = value.intValue(); return this; }
+		if(index == 1) { this.y = value.intValue(); return this; }
+		if(index == 2) { this.z = value.intValue(); return this; }
+		if(index == 3) { this.w = value.intValue(); return this; }
 		return null;
 	}
 
@@ -203,7 +197,7 @@ public class Vector4f implements IVector4 {
 	
 	
 	@Override
-	public Vector4f negate() {
+	public Vector4i negate() {
 		this.x = -x;
 		this.y = -y;
 		this.z = -z;
@@ -215,7 +209,7 @@ public class Vector4f implements IVector4 {
 	
 	
 	@Override
-	public Vector4f normalize() {
+	public Vector4i normalize() {
 		final float len = length();
 		this.x /= len;
 		this.y /= len;
@@ -228,37 +222,37 @@ public class Vector4f implements IVector4 {
 	
 	
 	@Override
-	public Vector4f copy() {
-		return new Vector4f(this);
+	public Vector4i copy() {
+		return new Vector4i(this);
 	}
 
 	
 	
 	
 	@Override
-	public Vector4f set(IVector4 v) {
-		return this.set(v.getFloatX(), v.getFloatY(), v.getFloatZ(), v.getFloatW());
+	public Vector4i set(IVector4 v) {
+		return this.set(v.getIntX(), v.getIntY(), v.getIntZ(), v.getIntW());
 	}
 
 	
 	@Override
-	public Vector4f set(Number x, Number y, Number z, Number w) {
-		return this.set(x.floatValue(), y.floatValue(), z.floatValue(), w.floatValue());
+	public Vector4i set(Number x, Number y, Number z, Number w) {
+		return this.set(x.intValue(), y.intValue(), z.intValue(), w.intValue());
 	}
 
 	
 	@Override
-	public Vector4f set(Number xyzw) {
-		return this.set(xyzw.floatValue());
+	public Vector4i set(Number xyzw) {
+		return this.set(xyzw.intValue());
 	}
 	
 
-	public Vector4f set(float xyzw) {
+	public Vector4i set(int xyzw) {
 		return this.set(xyzw, xyzw, xyzw, xyzw);
 	}
 	
 	
-	public Vector4f set(float x, float y, float z, float w) {
+	public Vector4i set(int x, int y, int z, int w) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -357,7 +351,7 @@ public class Vector4f implements IVector4 {
 	
 	@Override
 	public Vector4i toIntVector() {
-		return new Vector4i(this);
+		return this.copy();
 	}
 
 	
@@ -369,7 +363,7 @@ public class Vector4f implements IVector4 {
 	
 	@Override
 	public Vector4f toFloatVector() {
-		return this.copy();
+		return new Vector4f(this);
 	}
 
 	
@@ -380,27 +374,27 @@ public class Vector4f implements IVector4 {
 
 	
 	@Override public String toString() {
-		return "Vector4f." + this.hashCode() + "(" + this.x + ", " + this.y + ", " + this.z + ", " + this.w + ")";
+		return "Vector4i." + this.hashCode() + "(" + this.x + ", " + this.y + ", " + this.z + ", " + this.w + ")";
 	}
 
 	
 	
 	
 	@Override
-	public Vector4f add(IVector4 vec) {
-		return this.add(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ(), vec.getFloatW());
+	public Vector4i add(IVector4 vec) {
+		return this.add(vec.getIntX(), vec.getIntY(), vec.getIntZ(), vec.getIntW());
 	}
 
 	
 	@Override
-	public Vector4f add(Number x, Number y, Number z, Number w) {
-		return this.add(x.floatValue(), y.floatValue(), z.floatValue(), w.floatValue());
+	public Vector4i add(Number x, Number y, Number z, Number w) {
+		return this.add(x.intValue(), y.intValue(), z.intValue(), w.intValue());
 	}
 
 	
 	@Override
-	public Vector4f add(Number xyzw) {
-		return this.add(xyzw.floatValue());
+	public Vector4i add(Number xyzw) {
+		return this.add(xyzw.intValue());
 	}
 	
 	
@@ -409,7 +403,7 @@ public class Vector4f implements IVector4 {
 	 * @param xyzw the x-, y-, z- and wcomponent
 	 * @return this vector for chaining
 	 * */
-	public Vector4f add(float xyzw) {
+	public Vector4i add(int xyzw) {
 		return this.add(xyzw, xyzw, xyzw, xyzw);
 	}
 	
@@ -422,7 +416,7 @@ public class Vector4f implements IVector4 {
 	 * @param w the w-component
 	 * @return this vector for chaining
 	 * */
-	public Vector4f add(float x, float y, float z, float w) {
+	public Vector4i add(int x, int y, int z, int w) {
 		this.x += x;
 		this.y += y;
 		this.z += z;
@@ -434,20 +428,20 @@ public class Vector4f implements IVector4 {
 
 	
 	@Override
-	public Vector4f sub(IVector4 vec) {
-		return this.sub(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ(), vec.getFloatW());
+	public Vector4i sub(IVector4 vec) {
+		return this.sub(vec.getIntX(), vec.getIntY(), vec.getIntZ(), vec.getIntW());
 	}
 
 	
 	@Override
-	public Vector4f sub(Number x, Number y, Number z, Number w) {
-		return this.sub(x.floatValue(), y.floatValue(), z.floatValue(), w.floatValue());
+	public Vector4i sub(Number x, Number y, Number z, Number w) {
+		return this.sub(x.intValue(), y.intValue(), z.intValue(), w.intValue());
 	}
 
 	
 	@Override
-	public Vector4f sub(Number xyzw) {
-		return this.sub(xyzw.floatValue());
+	public Vector4i sub(Number xyzw) {
+		return this.sub(xyzw.intValue());
 	}
 	
 	
@@ -456,7 +450,7 @@ public class Vector4f implements IVector4 {
 	 * @param xyzw the x-, y-, z- and w-component
 	 * @return this vector for chaining
 	 * */
-	public Vector4f sub(float xyzw) {
+	public Vector4i sub(int xyzw) {
 		return this.sub(xyzw, xyzw, xyzw, xyzw);
 	}
 	
@@ -469,7 +463,7 @@ public class Vector4f implements IVector4 {
 	 * @param w the w-component
 	 * @return this vector for chaining
 	 * */
-	public Vector4f sub(float x, float y, float z, float w) {
+	public Vector4i sub(int x, int y, int z, int w) {
 		this.x -= x;
 		this.y -= y;
 		this.z -= z;
@@ -481,17 +475,17 @@ public class Vector4f implements IVector4 {
 	
 	
 	@Override
-	public Vector4f mul(IVector4 vec) {
-		return this.mul(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ(), vec.getFloatW());
+	public Vector4i mul(IVector4 vec) {
+		return this.mul(vec.getIntX(), vec.getIntY(), vec.getIntZ(), vec.getIntW());
 	}
 
 	@Override
-	public Vector4f mul(Number x, Number y, Number z, Number w) {
-		return this.mul(x.floatValue(), y.floatValue(), z.floatValue(), w.floatValue());
+	public Vector4i mul(Number x, Number y, Number z, Number w) {
+		return this.mul(x.intValue(), y.intValue(), z.intValue(), w.intValue());
 	}
 
 	@Override
-	public Vector4f scale(Number xyzw) {
+	public Vector4i scale(Number xyzw) {
 		return this.scale(xyzw);
 	}
 	
@@ -501,7 +495,16 @@ public class Vector4f implements IVector4 {
 	 * @param xyzw the scalar
 	 * @return this vector for chaining
 	 * */
-	public Vector4f scale(float xyzw) {
+	public Vector4i scale(int xyzw) {
+		return this.mul(xyzw, xyzw, xyzw, xyzw);
+	}
+	
+	/**
+	 * Scales this vector by the given scalar.
+	 * @param xyzw the scalar
+	 * @return this vector for chaining
+	 * */
+	public Vector4i scale(float xyzw) {
 		return this.mul(xyzw, xyzw, xyzw, xyzw);
 	}
 
@@ -514,7 +517,24 @@ public class Vector4f implements IVector4 {
 	 * @param w the w-component
 	 * @return this vector for chaining
 	 * */
-	public Vector4f mul(float x, float y, float z, float w) {
+	public Vector4i mul(int x, int y, int z, int w) {
+		this.x *= x;
+		this.y *= y;
+		this.z *= z;
+		this.w *= w;
+		return this;
+	}
+	
+	
+	/**
+	 * Multiplies this vector with the given components (component-wise).
+	 * @param x the x-component
+	 * @param y the y-component
+	 * @param z the z-component
+	 * @param w the w-component
+	 * @return this vector for chaining
+	 * */
+	public Vector4i mul(float x, float y, float z, float w) {
 		this.x *= x;
 		this.y *= y;
 		this.z *= z;
@@ -526,20 +546,20 @@ public class Vector4f implements IVector4 {
 	
 
 	@Override
-	public Vector4f div(IVector4 vec) {
-		return this.div(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ(), vec.getFloatW());
+	public Vector4i div(IVector4 vec) {
+		return this.div(vec.getIntX(), vec.getIntY(), vec.getIntZ(), vec.getIntW());
 	}
 
 	
 	@Override
-	public Vector4f div(Number x, Number y, Number z, Number w) {
-		return this.div(x.floatValue(), y.floatValue(), z.floatValue(), w.floatValue());
+	public Vector4i div(Number x, Number y, Number z, Number w) {
+		return this.div(x.intValue(), y.intValue(), z.intValue(), w.intValue());
 	}
 
 	
 	@Override
-	public Vector4f div(Number xyzw) {
-		return this.div(xyzw.floatValue());
+	public Vector4i div(Number xyzw) {
+		return this.div(xyzw.intValue());
 	}
 
 
@@ -548,7 +568,17 @@ public class Vector4f implements IVector4 {
 	 * @param xyz the x-, y-, z- and w-component
 	 * @return this vector for chaining
 	 * */
-	public Vector4f div(float xyzw) {
+	public Vector4i div(int xyzw) {
+		return this.div(xyzw, xyzw, xyzw, xyzw);
+	}
+	
+	
+	/**
+	 * Divides this vector by the given component (component-wise).
+	 * @param xyz the x-, y-, z- and w-component
+	 * @return this vector for chaining
+	 * */
+	public Vector4i div(float xyzw) {
 		return this.div(xyzw, xyzw, xyzw, xyzw);
 	}
 	
@@ -561,7 +591,24 @@ public class Vector4f implements IVector4 {
 	 * @param w the w-component
 	 * @return this vector for chaining
 	 * */
-	public Vector4f div(float x, float y, float z, float w) {
+	public Vector4i div(int x, int y, int z, int w) {
+		this.x /= x;
+		this.y /= y;
+		this.z /= z;
+		this.w /= w;
+		return this;
+	}
+	
+	
+	/**
+	 * Divides this vector by the given components (component-wise).
+	 * @param x the x-component
+	 * @param y the y-component
+	 * @param z the z-component
+	 * @param w the w-component
+	 * @return this vector for chaining
+	 * */
+	public Vector4i div(float x, float y, float z, float w) {
 		this.x /= x;
 		this.y /= y;
 		this.z /= z;
@@ -572,23 +619,23 @@ public class Vector4f implements IVector4 {
 	
 	
 	@Override
-	public Vector4f crossSetGen(IVector4 vec) {
+	public Vector4i crossSetGen(IVector4 vec) {
 		return this.crossSet(vec);
 	}
 
 	@Override
-	public Vector4f crossSetGen(Number x, Number y, Number z) {
-		return this.crossSet(x.floatValue(), y.floatValue(), z.floatValue());
+	public Vector4i crossSetGen(Number x, Number y, Number z) {
+		return this.crossSet(x.intValue(), y.intValue(), z.intValue());
 	}
 	
 	@Override
-	public Vector3f crossGen(IVector4 vec) {
+	public Vector3i crossGen(IVector4 vec) {
 		return this.cross(vec);
 	}
 
 	@Override
-	public Vector3f crossGen(Number x, Number y, Number z) {
-		return this.cross(x.floatValue(), y.floatValue(), z.floatValue());
+	public Vector3i crossGen(Number x, Number y, Number z) {
+		return this.cross(x.intValue(), y.intValue(), z.intValue());
 	}
 
 	
@@ -597,8 +644,8 @@ public class Vector4f implements IVector4 {
 	 * @param vec the vector
 	 * @return this vector for chaining
 	 * */
-	public Vector4f crossSet(IVector4 vec) {
-		return this.crossSet(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ());
+	public Vector4i crossSet(IVector4 vec) {
+		return this.crossSet(vec.getIntX(), vec.getIntY(), vec.getIntZ());
 	}
 	
 	
@@ -609,11 +656,11 @@ public class Vector4f implements IVector4 {
 	 * @param z the z-component
 	 * @return this vector for chaining
 	 * */
-	public Vector4f crossSet(float x, float y, float z) {
-		final float rx = this.y*z - this.z*y;
-		final float ry = this.z*x - this.x*z;
-		final float rz = this.x*y - this.y*x;
-		final float rw = w;
+	public Vector4i crossSet(int x, int y, int z) {
+		final int rx = this.y*z - this.z*y;
+		final int ry = this.z*x - this.x*z;
+		final int rz = this.x*y - this.y*x;
+		final int rw = w;
 		return this.set(rx, ry, rz, rw);
 	}
 	
@@ -623,8 +670,8 @@ public class Vector4f implements IVector4 {
 	 * @param vec the vector
 	 * @return the result as a new vector
 	 * */
-	public Vector3f cross(IVector4 vec) {
-		return this.cross(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ());
+	public Vector3i cross(IVector4 vec) {
+		return this.cross(vec.getIntX(), vec.getIntY(), vec.getIntZ());
 	}
 	
 	
@@ -635,8 +682,8 @@ public class Vector4f implements IVector4 {
 	 * @param z the z-component
 	 * @return the result as a new vector
 	 * */
-	public Vector3f cross(float x, float y, float z) {
-		return new Vector3f(
+	public Vector3i cross(int x, int y, int z) {
+		return new Vector3i(
 				this.y*z - this.z*y,
 				this.z*x - this.x*z,
 				this.x*y - this.y*x);
@@ -653,7 +700,7 @@ public class Vector4f implements IVector4 {
 	
 	@Override
 	public Number dotGen(Number x, Number y, Number z, Number w) {
-		return this.dot(x.floatValue(), y.floatValue(), z.floatValue(), w.floatValue());
+		return this.dot(x.intValue(), y.intValue(), z.intValue(), w.intValue());
 	}
 
 	
@@ -662,8 +709,8 @@ public class Vector4f implements IVector4 {
 	 * @param vec the vector
 	 * @return the result
 	 * */
-	public float dot(IVector4 vec) {
-		return this.dot(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ(), vec.getFloatW());
+	public int dot(IVector4 vec) {
+		return this.dot(vec.getIntX(), vec.getIntY(), vec.getIntZ(), vec.getIntW());
 	}
 	
 	
@@ -675,7 +722,7 @@ public class Vector4f implements IVector4 {
 	 * @param w the w-component
 	 * @return the result
 	 * */
-	public float dot(float x, float y, float z, float w) {
+	public int dot(int x, int y, int z, int w) {
 		return (this.x * x) + (this.y * y) + (this.z * z) + (this.w * w);
 	}
 	
@@ -690,7 +737,7 @@ public class Vector4f implements IVector4 {
 
 	@Override
 	public Number dist2Gen(Number x, Number y, Number z, Number w) {
-		return this.dist2(x.floatValue(), y.floatValue(), z.floatValue(), w.floatValue());
+		return this.dist2(x.intValue(), y.intValue(), z.intValue(), w.intValue());
 	}
 	
 	
@@ -699,8 +746,8 @@ public class Vector4f implements IVector4 {
 	 * @param vec the vector
 	 * @return the result
 	 * */
-	public float dist2(IVector4 vec) {
-		return this.dist2(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ(), vec.getFloatW());
+	public int dist2(IVector4 vec) {
+		return this.dist2(vec.getIntX(), vec.getIntY(), vec.getIntZ(), vec.getIntW());
 	}
 	
 	
@@ -712,7 +759,7 @@ public class Vector4f implements IVector4 {
 	 * @param w the w-position
 	 * @return the result
 	 * */
-	public float dist2(float x, float y, float z, float w) {
+	public int dist2(int x, int y, int z, int w) {
 		return (x-this.x)*(x-this.x) + (y-this.y)*(y-this.y) + (z-this.z)*(z-this.z) + (w-this.w)*(w-this.w);
 	}
 	
@@ -727,7 +774,7 @@ public class Vector4f implements IVector4 {
 
 	@Override
 	public Number distGen(Number x, Number y, Number z, Number w) {
-		return this.dist(x.floatValue(), y.floatValue(), z.floatValue(), w.floatValue());
+		return this.dist(x.intValue(), y.intValue(), z.intValue(), w.intValue());
 	}
 	
 	
@@ -737,7 +784,7 @@ public class Vector4f implements IVector4 {
 	 * @return the result
 	 * */
 	public float dist(IVector4 vec) {
-		return this.dist(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ(), vec.getFloatW());
+		return this.dist(vec.getIntX(), vec.getIntY(), vec.getIntZ(), vec.getIntW());
 	}
 	
 	
@@ -749,7 +796,7 @@ public class Vector4f implements IVector4 {
 	 * @param w the w-position
 	 * @return the result
 	 * */
-	public float dist(float x, float y, float z, float w) {
+	public float dist(int x, int y, int z, int w) {
 		return (float) Math.sqrt(this.dist2(x, y, z, w));
 	}
 	
@@ -766,7 +813,7 @@ public class Vector4f implements IVector4 {
 	 * Calculates the squared length of this vector.
 	 * @return the result
 	 * */
-	public float length2() {
+	public int length2() {
 		return x*x + y*y + z*z + w*w;
 	}
 	
@@ -791,8 +838,8 @@ public class Vector4f implements IVector4 {
 	
 
 	@Override
-	public Vector4f setLength(Number length) {
-		return this.setLength(length.floatValue());
+	public Vector4i setLength(Number length) {
+		return this.setLength(length.intValue());
 	}
 
 	
@@ -801,7 +848,7 @@ public class Vector4f implements IVector4 {
 	 * @param length the new length
 	 * @return this vector for chaining
 	 * */
-	public Vector4f setLength(float length) {
+	public Vector4i setLength(float length) {
 		normalize();
 		scale(length);
 		return this;
@@ -811,8 +858,8 @@ public class Vector4f implements IVector4 {
 	
 	
 	@Override
-	public Vector4f limitLength(Number maxLength) {
-		return this.limitLength(maxLength.floatValue());
+	public Vector4i limitLength(Number maxLength) {
+		return this.limitLength(maxLength.intValue());
 	}
 	
 	
@@ -821,7 +868,7 @@ public class Vector4f implements IVector4 {
 	 * @param maxLength the maximum length
 	 * @return this vector for chaining
 	 * */
-	public Vector4f limitLength(float maxLength) {
+	public Vector4i limitLength(float maxLength) {
 		float len = length();
 		if(len > maxLength) {
 			div(len);
@@ -835,7 +882,7 @@ public class Vector4f implements IVector4 {
 	
 	@Override
 	public IVector4 clampLenght(Number minLength, Number maxLength) {
-		return this.clampLength(minLength.floatValue(), maxLength.floatValue());
+		return this.clampLength(minLength.intValue(), maxLength.intValue());
 	}
 	
 	
@@ -845,7 +892,7 @@ public class Vector4f implements IVector4 {
 	 * @param maxLength the maximum length
 	 * @return this vector for chaining
 	 * */
-	public Vector4f clampLength(float minLength, float maxLength) {
+	public Vector4i clampLength(float minLength, float maxLength) {
 		float len = length();
 		if(len < minLength) {
 			div(len);
@@ -868,7 +915,7 @@ public class Vector4f implements IVector4 {
 
 	@Override
 	public Number angleRadGen(Number x, Number y, Number z, Number w) {
-		return this.angleRad(x.floatValue(), y.floatValue(), z.floatValue(), w.floatValue());
+		return this.angleRad(x.intValue(), y.intValue(), z.intValue(), w.intValue());
 	}
 	
 
@@ -878,7 +925,7 @@ public class Vector4f implements IVector4 {
 	 * @return the result
 	 * */
 	public float angleRad(IVector4 vec) {
-		return this.angleRad(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ(), vec.getFloatW());
+		return this.angleRad(vec.getIntX(), vec.getIntY(), vec.getIntZ(), vec.getIntW());
 	}
 	
 	
@@ -890,7 +937,7 @@ public class Vector4f implements IVector4 {
 	 * @param w the w-component of the vector
 	 * @return the result
 	 * */
-	public float angleRad(float x, float y, float z, float w) {
+	public float angleRad(int x, int y, int z, int w) {
 		final double lenAdd = Math.sqrt( (this.x+x)*(this.x+x) + (this.y+y)*(this.y+y) + (this.z+z)*(this.z+z) + (this.w+w)*(this.w+w));
 		final double lenSub = Math.sqrt( (this.x-x)*(this.x-x) + (this.y-y)*(this.y-y) + (this.z-z)*(this.z-z) + (this.w-w)*(this.w-w) );
 		return (float) (2.0 * Math.atan( (lenSub) / (lenAdd) ));
@@ -907,7 +954,7 @@ public class Vector4f implements IVector4 {
 	
 	@Override
 	public Number angleDegGen(Number x, Number y, Number z, Number w) {
-		return this.angleDeg(x.floatValue(), y.floatValue(), z.floatValue(), w.floatValue());
+		return this.angleDeg(x.intValue(), y.intValue(), z.intValue(), w.intValue());
 	}
 
 	
@@ -917,7 +964,7 @@ public class Vector4f implements IVector4 {
 	 * @return the result
 	 * */
 	public float angleDeg(IVector4 vec) {
-		return this.angleDeg(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ(), vec.getFloatW());
+		return this.angleDeg(vec.getIntX(), vec.getIntY(), vec.getIntZ(), vec.getIntW());
 	}
 	
 	
@@ -929,7 +976,7 @@ public class Vector4f implements IVector4 {
 	 * @param w the w-component of the vector
 	 * @return the result
 	 * */
-	public float angleDeg(float x, float y, float z, float w) {
+	public float angleDeg(int x, int y, int z, int w) {
 		return (float) Math.toDegrees(angleRad(x, y, z, w));
 	}
 	
@@ -939,7 +986,7 @@ public class Vector4f implements IVector4 {
 	@Override
 	public IVector4 project(IVector4 vec) {
 		final float dot = dot(vec);
-		final float len2 = vec.length2Gen().floatValue();
+		final float len2 = vec.length2Gen().intValue();
 		this.set(vec).scale(dot / len2);
 		return this;
 	}
@@ -950,7 +997,7 @@ public class Vector4f implements IVector4 {
 	 * @param vec the vector
 	 * @return this vector for chaining
 	 * */
-	public Vector4f project(Vector4f vec) {
+	public Vector4i project(Vector4i vec) {
 		final float dot = dot(vec);
 		final float len2 = vec.length2();
 		this.set(vec).scale(dot / len2);
@@ -964,10 +1011,10 @@ public class Vector4f implements IVector4 {
 	public IVector4 reflect(IVector4 vec) {
 		// I - 2.0 * dot(N, I) * N
 		final float dotN = this.dot(vec);
-		float rx = (2.0f * dotN * vec.getFloatX());
-		float ry = (2.0f * dotN * vec.getFloatY());
-		float rz = (2.0f * dotN * vec.getFloatZ());
-		float rw = (2.0f * dotN * vec.getFloatW());
+		float rx = (2.0f * dotN * vec.getIntX());
+		float ry = (2.0f * dotN * vec.getIntY());
+		float rz = (2.0f * dotN * vec.getIntZ());
+		float rw = (2.0f * dotN * vec.getIntW());
 		this.sub(rx, ry, rz, rw);
 		return this;
 	}
@@ -983,10 +1030,10 @@ public class Vector4f implements IVector4 {
 			this.set(0f, 0f, 0f, 0f);
 		} else {
 			final double sqrtK = Math.sqrt(k);
-			float rx = (float) (eta * this.x - (eta * dotN + sqrtK) * vec.getFloatX());
-			float ry = (float) (eta * this.y - (eta * dotN + sqrtK) * vec.getFloatY());
-			float rz = (float) (eta * this.z - (eta * dotN + sqrtK) * vec.getFloatZ());
-			float rw = (float) (eta * this.z - (eta * dotN + sqrtK) * vec.getFloatW());
+			int rx = (int) (eta * this.x - (eta * dotN + sqrtK) * vec.getIntX());
+			int ry = (int) (eta * this.y - (eta * dotN + sqrtK) * vec.getIntY());
+			int rz = (int) (eta * this.z - (eta * dotN + sqrtK) * vec.getIntZ());
+			int rw = (int) (eta * this.z - (eta * dotN + sqrtK) * vec.getIntW());
 			this.set(rx, ry, rz, rw);
 		}
 		return this;
@@ -1005,7 +1052,7 @@ public class Vector4f implements IVector4 {
 	 * Calculates the sum of the components.
 	 * @return the result
 	 * */
-	public float componentSum() {
+	public int componentSum() {
 		return x + y + z + w;
 	}
 	
@@ -1022,7 +1069,7 @@ public class Vector4f implements IVector4 {
 	 * Calculates the smallest component.
 	 * @return the result
 	 * */
-	public float componentMin() {
+	public int componentMin() {
 		return Math.min(Math.min(x, y), Math.min(z, w));
 	}
 	
@@ -1039,7 +1086,7 @@ public class Vector4f implements IVector4 {
 	 * Calculates the largest component.
 	 * @return the result
 	 * */
-	public float componentMax() {
+	public int componentMax() {
 		return Math.max(Math.max(x, y), Math.max(z, w));
 	}
 	
@@ -1047,8 +1094,8 @@ public class Vector4f implements IVector4 {
 	
 
 	@Override
-	public Vector4f clampComponents(Number min, Number max) {
-		return this.clampComponents(min.floatValue(), max.floatValue());
+	public Vector4i clampComponents(Number min, Number max) {
+		return this.clampComponents(min.intValue(), max.intValue());
 	}
 	
 	
@@ -1058,7 +1105,7 @@ public class Vector4f implements IVector4 {
 	 * @param max the maximum value
 	 * @return the result
 	 * */
-	public Vector4f clampComponents(float min, float max) {
+	public Vector4i clampComponents(int min, int max) {
 		this.x = Math.min(max, Math.max(this.x, min));
 		this.y = Math.min(max, Math.max(this.y, min));
 		this.z = Math.min(max, Math.max(this.z, min));
@@ -1071,10 +1118,10 @@ public class Vector4f implements IVector4 {
 	
 	@Override
 	public boolean compare(IVector4 vec) {
-		if(Math.abs(x - vec.getFloatX()) > EPSILON) { return false; }
-		if(Math.abs(y - vec.getFloatY()) > EPSILON) { return false; }
-		if(Math.abs(z - vec.getFloatZ()) > EPSILON) { return false; }
-		if(Math.abs(w - vec.getFloatW()) > EPSILON) { return false; }
+		if(Math.abs(x - vec.getIntX()) > 0) { return false; }
+		if(Math.abs(y - vec.getIntY()) > 0) { return false; }
+		if(Math.abs(z - vec.getIntZ()) > 0) { return false; }
+		if(Math.abs(w - vec.getIntW()) > 0) { return false; }
 		return true;
 	}
 
@@ -1083,7 +1130,7 @@ public class Vector4f implements IVector4 {
 	
 	@Override
 	public boolean isUnit() {
-		if(Math.abs(length2() - 1f) > EPSILON) {
+		if(Math.abs(length2() - 1f) > 0) {
 			return false;
 		} else {
 			return true;
@@ -1094,7 +1141,7 @@ public class Vector4f implements IVector4 {
 	
 	@Override
 	public boolean isZero() {
-		if( (Math.abs(x) < EPSILON) && (Math.abs(y) < EPSILON) && (Math.abs(z) < EPSILON) && (Math.abs(w) < EPSILON) ) {
+		if( (Math.abs(x) < 0) && (Math.abs(y) < 0) && (Math.abs(z) < 0) && (Math.abs(w) < 0) ) {
 			return true;
 		} else {
 			return false;
@@ -1106,7 +1153,7 @@ public class Vector4f implements IVector4 {
 	
 	@Override
 	public boolean isPerpendicular(IVector4 vec) {
-		if(dot(vec) < EPSILON) {
+		if(dot(vec) < 0) {
 			return true;
 		} else {
 			return false;

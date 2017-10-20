@@ -1,7 +1,15 @@
-package com.ruegnerlukas.simplemath.vecmath.vec2;
+package com.ruegnerlukas.simplemath.vectors.vec2;
 
-public class Vector2l implements IVector2 {
+import com.ruegnerlukas.simplemath.vectors.vec3.IVector3;
 
+public class Vector2d implements IVector2 {
+
+	
+	
+	
+	/** Used when comparing two double values. */
+	public static final double EPSILON = 0.0000001f;
+	
 	
 	
 	
@@ -11,8 +19,8 @@ public class Vector2l implements IVector2 {
 	 * @param b the position of the second point
 	 * @return the created vector
 	 * */
-	public static Vector2l createVectorAB(IVector2 a, IVector2 b) {
-		return Vector2l.createVectorAB(a.getLongX(), a.getLongY(), b.getLongX(), b.getLongY());
+	public static Vector2d createVectorAB(IVector2 a, IVector2 b) {
+		return Vector2d.createVectorAB(a.getDoubleX(), a.getDoubleY(), b.getDoubleX(), b.getDoubleY());
 	}
 	
 	
@@ -24,8 +32,8 @@ public class Vector2l implements IVector2 {
 	 * @param by the y-position of the second point
 	 * @return the created vector
 	 * */
-	public static Vector2l createVectorAB(long ax, long ay, long bx, long by) {
-		return new Vector2l(bx-ax, by-ay);
+	public static Vector2d createVectorAB(double ax, double ay, double bx, double by) {
+		return new Vector2d(bx-ax, by-ay);
 	}
 	
 	
@@ -37,8 +45,8 @@ public class Vector2l implements IVector2 {
 	 * @param b the position of the second point
 	 * @return the vector "dst" with the new values
 	 * */
-	public static Vector2l setVectorAB(IVector2 a, IVector2 b, Vector2l dst) {
-		return Vector2l.setVectorAB(a.getLongX(), a.getLongY(), b.getLongX(), b.getLongY(), dst);
+	public static Vector2d setVectorAB(IVector2 a, IVector2 b, Vector2d dst) {
+		return Vector2d.setVectorAB(a.getDoubleX(), a.getDoubleY(), b.getDoubleX(), b.getDoubleY(), dst);
 	}
 	
 	
@@ -50,7 +58,7 @@ public class Vector2l implements IVector2 {
 	 * @param by the y-position of the second point
 	 * @return the vector "dst" with the new values
 	 * */
-	public static Vector2l setVectorAB(long ax, long ay, long bx, long by, Vector2l dst) {
+	public static Vector2d setVectorAB(double ax, double ay, double bx, double by, Vector2d dst) {
 		return dst.set(bx-ax, by-ay);
 	}
 	
@@ -60,10 +68,10 @@ public class Vector2l implements IVector2 {
 	
 	
 	/** the x-component of this vector (index=0)*/
-	public long x;
+	public double x;
 	
 	/** the y-component of this vector (index=1)*/
-	public long y;
+	public double y;
 	
 	
 	
@@ -73,7 +81,7 @@ public class Vector2l implements IVector2 {
 	/**
 	 * creates a zero-vector
 	 * */
-	public Vector2l() {
+	public Vector2d() {
 		this(0);
 	}
 	
@@ -81,7 +89,7 @@ public class Vector2l implements IVector2 {
 	/**
 	 * creates a vector with the same values for x and y
 	 * */
-	public Vector2l(long xy) {
+	public Vector2d(double xy) {
 		this(xy, xy);
 	}
 	
@@ -89,15 +97,15 @@ public class Vector2l implements IVector2 {
 	/**
 	 * creates a vector with the same values as the given vector
 	 * */
-	public Vector2l(IVector2 vec) {
-		this(vec.getLongX(), vec.getLongY());
+	public Vector2d(IVector2 vec) {
+		this(vec.getDoubleX(), vec.getDoubleY());
 	}
 
 	
 	/**
 	 * creates a vector with the given x and y values
 	 * */
-	public Vector2l(long x, long y) {
+	public Vector2d(double x, double y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -118,9 +126,9 @@ public class Vector2l implements IVector2 {
 	
 	
 	@Override
-	public Vector2l set(int index, Number value) {
-		if(index == 0) { this.x = value.longValue(); return this; }
-		if(index == 1) { this.y = value.longValue(); return this; }
+	public Vector2d set(int index, Number value) {
+		if(index == 0) { this.x = value.doubleValue(); return this; }
+		if(index == 1) { this.y = value.doubleValue(); return this; }
 		return null;
 	}
 
@@ -171,7 +179,7 @@ public class Vector2l implements IVector2 {
 	
 	
 	@Override
-	public Vector2l negate() {
+	public Vector2d negate() {
 		this.x = -x;
 		this.y = -y;
 		return this;
@@ -181,8 +189,8 @@ public class Vector2l implements IVector2 {
 	
 	
 	@Override
-	public Vector2l normalize() {
-		final float len = length();
+	public Vector2d normalize() {
+		final double len = length();
 		this.x /= len;
 		this.y /= len;
 		return this;
@@ -192,8 +200,8 @@ public class Vector2l implements IVector2 {
 	
 
 	@Override
-	public Vector2l copy() {
-		return new Vector2l(this);
+	public Vector2d copy() {
+		return new Vector2d(this);
 	}
 
 	
@@ -202,29 +210,29 @@ public class Vector2l implements IVector2 {
 	
 	
 	@Override
-	public Vector2l set(IVector2 v) {
-		return this.set(v.getLongX(), v.getLongY());
+	public Vector2d set(IVector2 v) {
+		return this.set(v.getDoubleX(), v.getDoubleY());
 	}
 
 	
 	@Override
-	public Vector2l set(Number x, Number y) {
-		return this.set(x.longValue(), y.longValue());
+	public Vector2d set(Number x, Number y) {
+		return this.set(x.doubleValue(), y.doubleValue());
 	}
 
 	
 	@Override
-	public Vector2l set(Number xy) {
-		return this.set(xy.longValue());
+	public Vector2d set(Number xy) {
+		return this.set(xy.doubleValue());
 	}
 	
 
-	public Vector2l set(long xy) {
+	public Vector2d set(double xy) {
 		return this.set(xy, xy);
 	}
 	
 	
-	public Vector2l set(long x, long y) {
+	public Vector2d set(double x, double y) {
 		this.x = x;
 		this.y = y;
 		return this;
@@ -265,12 +273,12 @@ public class Vector2l implements IVector2 {
 
 	@Override
 	public double getDoubleX() {
-		return (double) this.x;
+		return this.x;
 	}
 
 	@Override
 	public double getDoubleY() {
-		return (double) this.y;
+		return this.y;
 	}
 
 	
@@ -286,7 +294,7 @@ public class Vector2l implements IVector2 {
 	
 	@Override
 	public Vector2l toLongVector() {
-		return copy();
+		return new Vector2l(this);
 	}
 
 	
@@ -298,32 +306,32 @@ public class Vector2l implements IVector2 {
 	
 	@Override
 	public Vector2d toDoubleVector() {
-		return new Vector2d(this);
+		return copy();
 	}
 
 	
 	@Override public String toString() {
-		return "Vector2l." + this.hashCode() + "(" + this.x + ", " + this.y + ")";
+		return "Vector2d." + this.hashCode() + "(" + this.x + ", " + this.y + ")";
 	}
 
 	
 	
 	
 	@Override
-	public Vector2l add(IVector2 vec) {
-		return this.add(vec.getLongX(), vec.getLongY());
+	public Vector2d add(IVector2 vec) {
+		return this.add(vec.getDoubleX(), vec.getDoubleY());
 	}
 	
 
 	@Override
-	public Vector2l add(Number x, Number y) {
-		return this.add(x.longValue(), y.longValue());
+	public Vector2d add(Number x, Number y) {
+		return this.add(x.doubleValue(), y.doubleValue());
 	}
 	
 	
 	@Override
-	public Vector2l add(Number xy) {
-		return this.add(xy.longValue());
+	public Vector2d add(Number xy) {
+		return this.add(xy.doubleValue());
 	}
 	
 	
@@ -332,7 +340,7 @@ public class Vector2l implements IVector2 {
 	 * @param xy the x- and y-component
 	 * @return this vector for chaining
 	 * */
-	public Vector2l add(long xy) {
+	public Vector2d add(double xy) {
 		return this.add(xy, xy);
 	}
 	
@@ -343,7 +351,7 @@ public class Vector2l implements IVector2 {
 	 * @param y the y-component
 	 * @return this vector for chaining
 	 * */
-	public Vector2l add(long x, long y) {
+	public Vector2d add(double x, double y) {
 		this.x += x;
 		this.y += y;
 		return this;
@@ -353,21 +361,21 @@ public class Vector2l implements IVector2 {
 	
 	
 	@Override
-	public Vector2l sub(IVector2 vec) {
-		return this.sub(vec.getLongX(), vec.getLongY());
+	public Vector2d sub(IVector2 vec) {
+		return this.sub(vec.getDoubleX(), vec.getDoubleY());
 	}
 
 	
 	@Override
-	public Vector2l sub(Number x, Number y) {
-		return this.sub(x.longValue(), y.longValue());
+	public Vector2d sub(Number x, Number y) {
+		return this.sub(x.doubleValue(), y.doubleValue());
 
 	}
 	
 	
 	@Override
-	public Vector2l sub(Number xy) {
-		return this.sub(xy.longValue());
+	public Vector2d sub(Number xy) {
+		return this.sub(xy.doubleValue());
 	}
 
 	
@@ -376,7 +384,7 @@ public class Vector2l implements IVector2 {
 	 * @param xy the x- and y-component
 	 * @return this vector for chaining
 	 * */
-	public Vector2l sub(long xy) {
+	public Vector2d sub(double xy) {
 		return this.sub(xy, xy);
 	}
 	
@@ -387,7 +395,7 @@ public class Vector2l implements IVector2 {
 	 * @param y the y-component
 	 * @return this vector for chaining
 	 * */
-	public Vector2l sub(long x, long y) {
+	public Vector2d sub(double x, double y) {
 		this.x -= x;
 		this.y -= y;
 		return this;
@@ -397,20 +405,20 @@ public class Vector2l implements IVector2 {
 	
 	
 	@Override
-	public Vector2l mul(IVector2 vec) {
-		return this.mul(vec.getLongX(), vec.getLongY());
+	public Vector2d mul(IVector2 vec) {
+		return this.mul(vec.getDoubleX(), vec.getDoubleY());
 	}
 	
 	
 	@Override
-	public Vector2l mul(Number x, Number y) {
-		return this.mul(x.longValue(), y.longValue());
+	public Vector2d mul(Number x, Number y) {
+		return this.mul(x.doubleValue(), y.doubleValue());
 	}
 
 	
 	@Override
-	public Vector2l scale(Number xy) {
-		return this.scale(xy.longValue());
+	public Vector2d scale(Number xy) {
+		return this.scale(xy.doubleValue());
 	}
 
 	
@@ -419,17 +427,7 @@ public class Vector2l implements IVector2 {
 	 * @param xy the scalar
 	 * @return this vector for chaining
 	 * */
-	public Vector2l scale(long xy) {
-		return this.mul(xy, xy);
-	}
-	
-	
-	/**
-	 * Scales this vector by the given scalar.
-	 * @param xy the scalar
-	 * @return this vector for chaining
-	 * */
-	public Vector2l scale(float xy) {
+	public Vector2d scale(double xy) {
 		return this.mul(xy, xy);
 	}
 
@@ -440,20 +438,7 @@ public class Vector2l implements IVector2 {
 	 * @param y the y-component
 	 * @return this vector for chaining
 	 * */
-	public Vector2l mul(long x, long y) {
-		this.x *= x;
-		this.y *= y;
-		return this;
-	}
-	
-	
-	/**
-	 * Multiplies this vector with the given components (component-wise).
-	 * @param x the x-component
-	 * @param y the y-component
-	 * @return this vector for chaining
-	 * */
-	public Vector2l mul(float x, float y) {
+	public Vector2d mul(double x, double y) {
 		this.x *= x;
 		this.y *= y;
 		return this;
@@ -463,20 +448,20 @@ public class Vector2l implements IVector2 {
 	
 	
 	@Override
-	public Vector2l div(IVector2 vec) {
-		return this.div(vec.getLongX(), vec.getLongY());
+	public Vector2d div(IVector2 vec) {
+		return this.div(vec.getDoubleX(), vec.getDoubleY());
 	}
 
 	
 	@Override
-	public Vector2l div(Number x, Number y) {
-		return this.div(x.longValue(), y.longValue());
+	public Vector2d div(Number x, Number y) {
+		return this.div(x.doubleValue(), y.doubleValue());
 	}
 	
 	
 	@Override
-	public Vector2l div(Number xy) {
-		return this.div(xy.longValue());
+	public Vector2d div(Number xy) {
+		return this.div(xy.doubleValue());
 	}
 
 	
@@ -485,7 +470,7 @@ public class Vector2l implements IVector2 {
 	 * @param xy the x- and y-component
 	 * @return this vector for chaining
 	 * */
-	public Vector2l div(long xy) {
+	public Vector2d div(double xy) {
 		return this.div(xy, xy);
 	}
 	
@@ -496,20 +481,7 @@ public class Vector2l implements IVector2 {
 	 * @param y the y-component
 	 * @return this vector for chaining
 	 * */
-	public Vector2l div(float x, float y) {
-		this.x /= x;
-		this.y /= y;
-		return this;
-	}
-	
-	
-	/**
-	 * Divides this vector by the given components (component-wise).
-	 * @param x the x-component
-	 * @param y the y-component
-	 * @return this vector for chaining
-	 * */
-	public Vector2l div(long x, long y) {
+	public Vector2d div(double x, double y) {
 		this.x /= x;
 		this.y /= y;
 		return this;
@@ -526,7 +498,7 @@ public class Vector2l implements IVector2 {
 	
 	@Override
 	public Number crossGen(Number x, Number y) {
-		return this.cross(x.longValue(), y.longValue());
+		return this.cross(x.doubleValue(), y.doubleValue());
 	}
 	
 	
@@ -535,8 +507,8 @@ public class Vector2l implements IVector2 {
 	 * @param vec the vector
 	 * @return the result
 	 * */
-	public long cross(IVector2 vec) {
-		return this.cross(vec.getLongX(), vec.getLongY());
+	public double cross(IVector2 vec) {
+		return this.cross(vec.getDoubleX(), vec.getDoubleY());
 	}
 	
 	
@@ -546,7 +518,7 @@ public class Vector2l implements IVector2 {
 	 * @param y the y-component
 	 * @return the result
 	 * */
-	public long cross(long x, long y) {
+	public double cross(double x, double y) {
 		return (this.x * y) - (this.y * x);
 	}
 	
@@ -561,7 +533,7 @@ public class Vector2l implements IVector2 {
 	
 	@Override
 	public Number dotGen(Number x, Number y) {
-		return this.dot(x.longValue(), y.longValue());
+		return this.dot(x.doubleValue(), y.doubleValue());
 	}
 	
 	
@@ -570,8 +542,8 @@ public class Vector2l implements IVector2 {
 	 * @param vec the vector
 	 * @return the result
 	 * */
-	public long dot(IVector2 vec) {
-		return this.dot(vec.getLongX(), vec.getLongY());
+	public double dot(IVector2 vec) {
+		return this.dot(vec.getDoubleX(), vec.getDoubleY());
 	}
 	
 	
@@ -581,7 +553,7 @@ public class Vector2l implements IVector2 {
 	 * @param y the y-component
 	 * @return the result
 	 * */
-	public long dot(long x, long y) {
+	public double dot(double x, double y) {
 		return (this.x * x) + (this.y * y);
 	}
 	
@@ -596,7 +568,7 @@ public class Vector2l implements IVector2 {
 	
 	@Override
 	public Number dist2Gen(Number x, Number y) {
-		return this.dist2(x.longValue(), y.longValue());
+		return this.dist2(x.doubleValue(), y.doubleValue());
 	}
 	
 	
@@ -605,8 +577,8 @@ public class Vector2l implements IVector2 {
 	 * @param vec the vector
 	 * @return the result
 	 * */
-	public long dist2(IVector2 vec) {
-		return this.dist2(vec.getLongX(), vec.getLongY());
+	public double dist2(IVector2 vec) {
+		return this.dist2(vec.getDoubleX(), vec.getDoubleY());
 	}
 	
 	
@@ -616,7 +588,7 @@ public class Vector2l implements IVector2 {
 	 * @param y the y-position
 	 * @return the result
 	 * */
-	public long dist2(long x, long y) {
+	public double dist2(double x, double y) {
 		return (x-this.x)*(x-this.x) + (y-this.y)*(y-this.y);
 	}
 	
@@ -631,7 +603,7 @@ public class Vector2l implements IVector2 {
 	
 	@Override
 	public Number distGen(Number x, Number y) {
-		return this.dist(x.longValue(), y.longValue());
+		return this.dist(x.doubleValue(), y.doubleValue());
 	}
 	
 	
@@ -640,8 +612,8 @@ public class Vector2l implements IVector2 {
 	 * @param vec the vector
 	 * @return the result
 	 * */
-	public float dist(IVector2 vec) {
-		return this.dist(vec.getLongX(), vec.getLongY());
+	public double dist(IVector2 vec) {
+		return this.dist(vec.getDoubleX(), vec.getDoubleY());
 	}
 	
 	
@@ -651,8 +623,8 @@ public class Vector2l implements IVector2 {
 	 * @param y the y-position
 	 * @return the result
 	 * */
-	public float dist(long x, long y) {
-		return (float) Math.sqrt(this.dist2(x, y));
+	public double dist(double x, double y) {
+		return Math.sqrt(this.dist2(x, y));
 	}
 	
 	
@@ -668,7 +640,7 @@ public class Vector2l implements IVector2 {
 	 * Calculates the squared length of this vector.
 	 * @return the result
 	 * */
-	public long length2() {
+	public double length2() {
 		return x*x + y*y;
 	}
 	
@@ -685,8 +657,8 @@ public class Vector2l implements IVector2 {
 	 * Calculates the length of this vector.
 	 * @return the result
 	 * */
-	public float length() {
-		return (float) Math.sqrt(length2());
+	public double length() {
+		return Math.sqrt(length2());
 	}
 
 	
@@ -694,8 +666,8 @@ public class Vector2l implements IVector2 {
 	
 	
 	@Override
-	public Vector2l setLength(Number length) {
-		return this.setLength(length.floatValue());
+	public Vector2d setLength(Number length) {
+		return this.setLength(length.doubleValue());
 	}
 	
 	
@@ -704,7 +676,7 @@ public class Vector2l implements IVector2 {
 	 * @param length the new length
 	 * @return this vector for chaining
 	 * */
-	public Vector2l setLength(float length) {
+	public Vector2d setLength(double length) {
 		normalize();
 		scale(length);
 		return this;
@@ -714,8 +686,8 @@ public class Vector2l implements IVector2 {
 
 	
 	@Override
-	public Vector2l limitLength(Number maxLength) {
-		return limitLength(maxLength.floatValue());
+	public Vector2d limitLength(Number maxLength) {
+		return limitLength(maxLength.doubleValue());
 	}
 	
 	
@@ -724,8 +696,8 @@ public class Vector2l implements IVector2 {
 	 * @param maxLength the maximum length
 	 * @return this vector for chaining
 	 * */
-	public Vector2l limitLength(float maxLength) {
-		float len = length();
+	public Vector2d limitLength(double maxLength) {
+		double len = length();
 		if(len > maxLength) {
 			div(len);
 			scale(maxLength);
@@ -737,8 +709,8 @@ public class Vector2l implements IVector2 {
 
 	
 	@Override
-	public Vector2l clampLenght(Number minLength, Number maxLength) {
-		return this.clampLength(minLength.floatValue(), maxLength.floatValue());
+	public Vector2d clampLenght(Number minLength, Number maxLength) {
+		return this.clampLength(minLength.doubleValue(), maxLength.doubleValue());
 	}
 	
 	
@@ -748,8 +720,8 @@ public class Vector2l implements IVector2 {
 	 * @param maxLength the maximum length
 	 * @return this vector for chaining
 	 * */
-	public Vector2l clampLength(float minLength, float maxLength) {
-		float len = length();
+	public Vector2d clampLength(double minLength, double maxLength) {
+		double len = length();
 		if(len < minLength) {
 			div(len);
 			scale(minLength);
@@ -772,7 +744,7 @@ public class Vector2l implements IVector2 {
 	
 	@Override
 	public Number angleRadGen(Number x, Number y) {
-		return this.angleRad(x.longValue(), y.longValue());
+		return this.angleRad(x.doubleValue(), y.doubleValue());
 	}
 
 
@@ -781,8 +753,8 @@ public class Vector2l implements IVector2 {
 	 * @param vec the vector
 	 * @return the result
 	 * */
-	public float angleRad(IVector2 vec) {
-		return this.angleRad(vec.getLongX(), vec.getLongY());
+	public double angleRad(IVector2 vec) {
+		return this.angleRad(vec.getDoubleX(), vec.getDoubleY());
 	}
 	
 	
@@ -792,10 +764,10 @@ public class Vector2l implements IVector2 {
 	 * @param y the y-component of the vector
 	 * @return the result
 	 * */
-	public float angleRad(long x, long y) {
-		final long cross = cross(x, y);
-		final long dot   = dot(x, y);
-		return (float) Math.atan2(cross, dot);
+	public double angleRad(double x, double y) {
+		final double cross = cross(x, y);
+		final double dot   = dot(x, y);
+		return Math.atan2(cross, dot);
 	}
 	
 	
@@ -809,7 +781,7 @@ public class Vector2l implements IVector2 {
 	
 	@Override
 	public Number angleDegGen(Number x, Number y) {
-		return this.angleDeg(x.longValue(), y.longValue());
+		return this.angleDeg(x.doubleValue(), y.doubleValue());
 	}
 	
 	
@@ -818,8 +790,8 @@ public class Vector2l implements IVector2 {
 	 * @param vec the vector
 	 * @return the result
 	 * */
-	public float angleDeg(IVector2 vec) {
-		return this.angleDeg(vec.getLongX(), vec.getLongY());
+	public double angleDeg(IVector2 vec) {
+		return this.angleDeg(vec.getDoubleX(), vec.getDoubleY());
 	}
 	
 	
@@ -829,16 +801,16 @@ public class Vector2l implements IVector2 {
 	 * @param y the y-component of the vector
 	 * @return the result
 	 * */
-	public float angleDeg(long x, long y) {
-		return (float) Math.toDegrees(angleRad(x, y));
+	public double angleDeg(double x, double y) {
+		return Math.toDegrees(angleRad(x, y));
 	}
 	
 
 	
 	
 	@Override
-	public Vector2l rotateRad(Number angleRad) {
-		return this.rotateRad(angleRad.floatValue());
+	public Vector2d rotateRad(Number angleRad) {
+		return this.rotateRad(angleRad.doubleValue());
 	}
 
 	
@@ -847,11 +819,11 @@ public class Vector2l implements IVector2 {
 	 * @param angleRad the angle in radians
 	 * @return this vector for chaining
 	 * */
-	public Vector2l rotateRad(float angleRad) {
+	public Vector2d rotateRad(double angleRad) {
 		final double cos = Math.cos(angleRad);
 		final double sin = Math.sin(angleRad);
-		this.x = (int) (x*cos - y*sin);
-		this.y = (int) (x*sin + y*cos);
+		this.x = (x*cos - y*sin);
+		this.y = (x*sin + y*cos);
 		return this;
 	}
 	
@@ -859,8 +831,8 @@ public class Vector2l implements IVector2 {
 	
 	
 	@Override
-	public Vector2l rotateDeg(Number angleDeg) {
-		return this.rotateDeg(angleDeg.longValue());
+	public Vector2d rotateDeg(Number angleDeg) {
+		return this.rotateDeg(angleDeg.doubleValue());
 	}
 	
 	
@@ -869,7 +841,7 @@ public class Vector2l implements IVector2 {
 	 * @param angleRad the angle in degrees
 	 * @return this vector for chaining
 	 * */
-	public Vector2l rotateDeg(int angleDeg) {
+	public Vector2d rotateDeg(double angleDeg) {
 		return this.rotateRad(Math.toRadians(angleDeg));
 	}
 	
@@ -877,9 +849,9 @@ public class Vector2l implements IVector2 {
 	
 	
 	@Override
-	public Vector2l project(IVector2 vec) {
-		final long dot = dot(vec);
-		final long len2 = vec.length2Gen().longValue();
+	public Vector2d project(IVector2 vec) {
+		final double dot = dot(vec);
+		final double len2 = vec.length2Gen().doubleValue();
 		this.set(vec).scale(dot / len2);
 		return this;
 	}
@@ -890,9 +862,9 @@ public class Vector2l implements IVector2 {
 	 * @param vec the vector
 	 * @return this vector for chaining
 	 * */
-	public Vector2l project(Vector2l vec) {
-		final long dot = dot(vec);
-		final long len2 = vec.length2();
+	public Vector2d project(Vector2d vec) {
+		final double dot = dot(vec);
+		final double len2 = vec.length2();
 		this.set(vec).scale(dot / len2);
 		return this;
 	}
@@ -901,11 +873,11 @@ public class Vector2l implements IVector2 {
 	
 	
 	@Override
-	public Vector2l reflect(IVector2 n) {  // n should be normalized before
+	public Vector2d reflect(IVector2 n) {  // n should be normalized before
 		// I - 2.0 * dot(N, I) * N
-		final long dotN = this.dot(n);
-		double rx = (2.0f * dotN * n.getLongX());
-		double ry = (2.0f * dotN * n.getLongY());
+		final double dotN = this.dot(n);
+		double rx = (2.0f * dotN * n.getDoubleX());
+		double ry = (2.0f * dotN * n.getDoubleY());
 		this.sub(rx, ry);
 		return this;
 	}
@@ -913,15 +885,15 @@ public class Vector2l implements IVector2 {
 	
 	
 	@Override
-	public Vector2l refract(IVector2 n, float eta) { // https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/refract.xhtml
-		final long dotN = this.dot(n);
-		final float k = 1.0f - eta*eta * (1.0f - dotN*dotN);
+	public Vector2d refract(IVector2 n, float eta) { // https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/refract.xhtml
+		final double dotN = this.dot(n);
+		final double k = 1.0f - eta*eta * (1.0f - dotN*dotN);
 		if(k < 0.0) {
 			this.set(0f, 0f);
 		} else {
 			final double sqrtK = Math.sqrt(k);
-			long rx = (long) (eta * this.x - (eta * dotN + sqrtK) * n.getLongX());
-			long ry = (long) (eta * this.y - (eta * dotN + sqrtK) * n.getLongY());
+			double rx = (eta * this.x - (eta * dotN + sqrtK) * n.getDoubleX());
+			double ry = (eta * this.y - (eta * dotN + sqrtK) * n.getDoubleY());
 			this.set(rx, ry);
 		}
 		return this;
@@ -940,7 +912,7 @@ public class Vector2l implements IVector2 {
 	 * Calculates the sum of the components.
 	 * @return the result
 	 * */
-	public long componentSum() {
+	public double componentSum() {
 		return x + y;
 	}
 	
@@ -957,7 +929,7 @@ public class Vector2l implements IVector2 {
 	 * Calculates the smallest component.
 	 * @return the result
 	 * */
-	public long componentMin() {
+	public double componentMin() {
 		return Math.min(x, y);
 	}
 
@@ -974,7 +946,7 @@ public class Vector2l implements IVector2 {
 	 * Calculates the largest component.
 	 * @return the result
 	 * */
-	public long componentMax() {
+	public double componentMax() {
 		return Math.max(x, y);
 	}
 
@@ -982,8 +954,8 @@ public class Vector2l implements IVector2 {
 	
 	
 	@Override
-	public Vector2l clampComponents(Number min, Number max) {
-		return this.clampComponents(min.longValue(), max.longValue());
+	public Vector2d clampComponents(Number min, Number max) {
+		return this.clampComponents(min.doubleValue(), max.doubleValue());
 	}
 	
 	
@@ -993,7 +965,7 @@ public class Vector2l implements IVector2 {
 	 * @param max the maximum value
 	 * @return the result
 	 * */
-	public Vector2l clampComponents(long min, long max) {
+	public Vector2d clampComponents(double min, double max) {
 		this.x = Math.min(max, Math.max(this.x, min));
 		this.y = Math.min(max, Math.max(this.y, min));
 		return this;
@@ -1004,15 +976,15 @@ public class Vector2l implements IVector2 {
 
 	@Override
 	public boolean compare(IVector2 vec) {
-		if(Math.abs(x - vec.getDoubleX()) > 0) { return false; }
-		if(Math.abs(y - vec.getDoubleY()) > 0) { return false; }
+		if(Math.abs(x - vec.getDoubleX()) > EPSILON) { return false; }
+		if(Math.abs(y - vec.getDoubleY()) > EPSILON) { return false; }
 		return true;
 	}
 
 
 	@Override
 	public boolean isUnit() {
-		if(Math.abs(length2() - 1) > 0) {
+		if(Math.abs(length2() - 1.0) > EPSILON) {
 			return false;
 		} else {
 			return true;
@@ -1022,7 +994,7 @@ public class Vector2l implements IVector2 {
 
 	@Override
 	public boolean isZero() {
-		if( (Math.abs(x) < 0) && (Math.abs(y) < 0) ) {
+		if( (Math.abs(x) < EPSILON) && (Math.abs(y) < EPSILON) ) {
 			return true;
 		} else {
 			return false;
@@ -1032,7 +1004,7 @@ public class Vector2l implements IVector2 {
 	
 	@Override
 	public boolean isPerpendicular(IVector2 vec) {
-		if(dot(vec) < 0) {
+		if(dot(vec) < EPSILON) {
 			return true;
 		} else {
 			return false;
@@ -1040,8 +1012,5 @@ public class Vector2l implements IVector2 {
 	}
 
 
-
-	
-	
 	
 }
