@@ -249,6 +249,20 @@ public class VectorNi implements IVectorN {
 	}
 
 	
+	@Override
+	public String toString() {
+		String str = "VectorNi." + this.hashCode() + "(";
+		for(int i=0; i<values.length; i++) {
+			str += values[i];
+			if(i!=values.length-1) {
+				str += ", ";
+			}
+		}
+		str += ")";
+		return str;
+	}
+	
+	
 	
 	
 	@Override
@@ -764,7 +778,7 @@ public class VectorNi implements IVectorN {
 	
 
 	@Override
-	public VectorNi clampLenght(Number minLength, Number maxLength) {
+	public VectorNi clampLength(Number minLength, Number maxLength) {
 		return this.clampLength(minLength.intValue(), maxLength.intValue());
 	}
 	

@@ -1,6 +1,6 @@
 package com.ruegnerlukas.simplemath.vectors;
 
-import com.ruegnerlukas.simplemath.vectors.vec3.IVector3;
+import com.ruegnerlukas.simplemath.vectors.vec2.IVector2;
 
 public interface IVector {
 	
@@ -85,7 +85,7 @@ public interface IVector {
 	 * @param maxLength the maximum length
 	 * @return this vector for chaining
 	 * */
-	public IVector clampLenght(Number minLength, Number maxLength);
+	public IVector clampLength(Number minLength, Number maxLength);
 	
 	
 	
@@ -130,4 +130,7 @@ public interface IVector {
 	 * */
 	public boolean isZero();
 	
+	
+	
 }
+

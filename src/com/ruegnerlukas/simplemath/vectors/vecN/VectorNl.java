@@ -249,6 +249,20 @@ public class VectorNl implements IVectorN {
 	}
 
 	
+	@Override
+	public String toString() {
+		String str = "VectorNl." + this.hashCode() + "(";
+		for(int i=0; i<values.length; i++) {
+			str += values[i];
+			if(i!=values.length-1) {
+				str += ", ";
+			}
+		}
+		str += ")";
+		return str;
+	}
+	
+	
 	
 	
 	@Override
@@ -766,7 +780,7 @@ public class VectorNl implements IVectorN {
 	
 
 	@Override
-	public VectorNl clampLenght(Number minLength, Number maxLength) {
+	public VectorNl clampLength(Number minLength, Number maxLength) {
 		return this.clampLength(minLength.longValue(), maxLength.longValue());
 	}
 	

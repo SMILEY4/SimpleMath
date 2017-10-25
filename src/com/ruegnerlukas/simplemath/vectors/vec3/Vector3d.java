@@ -783,7 +783,7 @@ public class Vector3d implements IVector3 {
 	
 	
 	@Override
-	public IVector3 clampLenght(Number minLength, Number maxLength) {
+	public IVector3 clampLength(Number minLength, Number maxLength) {
 		return this.clampLength(minLength.doubleValue(), maxLength.doubleValue());
 	}
 	

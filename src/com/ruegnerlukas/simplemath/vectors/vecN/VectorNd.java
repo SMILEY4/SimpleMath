@@ -253,6 +253,20 @@ public class VectorNd implements IVectorN {
 	}
 
 	
+	@Override
+	public String toString() {
+		String str = "VectorNd." + this.hashCode() + "(";
+		for(int i=0; i<values.length; i++) {
+			str += values[i];
+			if(i!=values.length-1) {
+				str += ", ";
+			}
+		}
+		str += ")";
+		return str;
+	}
+	
+	
 	
 	
 	@Override
@@ -723,7 +737,7 @@ public class VectorNd implements IVectorN {
 	
 
 	@Override
-	public VectorNd clampLenght(Number minLength, Number maxLength) {
+	public VectorNd clampLength(Number minLength, Number maxLength) {
 		return this.clampLength(minLength.doubleValue(), maxLength.doubleValue());
 	}
 	

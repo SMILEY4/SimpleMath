@@ -311,7 +311,7 @@ public class Vector2d implements IVector2 {
 
 	
 	@Override public String toString() {
-		return "Vector2d." + this.hashCode() + "(" + this.x + ", " + this.y + ")";
+		return "Vector2d." + this.hashCode() + "(" + this.x + ", " + this.y + "), len=" +this.length();
 	}
 
 	
@@ -709,7 +709,7 @@ public class Vector2d implements IVector2 {
 
 	
 	@Override
-	public Vector2d clampLenght(Number minLength, Number maxLength) {
+	public Vector2d clampLength(Number minLength, Number maxLength) {
 		return this.clampLength(minLength.doubleValue(), maxLength.doubleValue());
 	}
 	
@@ -938,7 +938,7 @@ public class Vector2d implements IVector2 {
 	
 	@Override
 	public Number componentMaxGen() {
-		return this.componentMin();
+		return this.componentMax();
 	}
 	
 	

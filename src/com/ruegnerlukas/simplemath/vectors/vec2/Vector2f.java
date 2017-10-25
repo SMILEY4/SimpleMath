@@ -309,7 +309,7 @@ public class Vector2f implements IVector2 {
 
 	
 	@Override public String toString() {
-		return "Vector2f." + this.hashCode() + "(" + this.x + ", " + this.y + ")";
+		return "Vector2f." + this.hashCode() + "(" + this.x + ", " + this.y + "), len=" +this.length();
 	}
 
 	
@@ -707,7 +707,7 @@ public class Vector2f implements IVector2 {
 
 	
 	@Override
-	public Vector2f clampLenght(Number minLength, Number maxLength) {
+	public Vector2f clampLength(Number minLength, Number maxLength) {
 		return this.clampLength(minLength.floatValue(), maxLength.floatValue());
 	}
 	
@@ -936,7 +936,7 @@ public class Vector2f implements IVector2 {
 	
 	@Override
 	public Number componentMaxGen() {
-		return this.componentMin();
+		return this.componentMax();
 	}
 	
 	

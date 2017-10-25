@@ -881,7 +881,7 @@ public class Vector4i implements IVector4 {
 	
 	
 	@Override
-	public IVector4 clampLenght(Number minLength, Number maxLength) {
+	public IVector4 clampLength(Number minLength, Number maxLength) {
 		return this.clampLength(minLength.intValue(), maxLength.intValue());
 	}
 	
