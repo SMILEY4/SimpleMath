@@ -1,7 +1,5 @@
 package com.ruegnerlukas.simplemath.vectors;
 
-import com.ruegnerlukas.simplemath.vectors.vec2.IVector2;
-
 public interface IVector {
 	
 	/**
