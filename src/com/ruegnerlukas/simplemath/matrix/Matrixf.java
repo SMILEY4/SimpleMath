@@ -145,7 +145,7 @@ public class Matrixf implements IMatrixf {
 	
 	@Override
 	public IMatrix getSubmatrix(int colStart, int rowStart, int colEnd, int rowEnd) {
-		Matrix mat = new Matrix(colEnd-colStart+1, rowEnd-rowStart+1);
+		Matrixf mat = new Matrixf(colEnd-colStart+1, rowEnd-rowStart+1);
 		getSubmatrix(colStart, rowStart, colEnd, rowEnd, mat);
 		return mat;
 	}
@@ -361,7 +361,7 @@ public class Matrixf implements IMatrixf {
 		
 
 		if(dest == null) {
-			return new Matrix(dataC);
+			return new Matrixf(dataC);
 		} else {
 			return dest.copyData(dataC);
 		}
