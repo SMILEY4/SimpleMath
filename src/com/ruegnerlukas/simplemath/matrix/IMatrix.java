@@ -192,5 +192,20 @@ public interface IMatrix {
 	 * */
 	public IMatrix copy();
 	
+	
+	
+	
+	/**
+	 * Whether or not to check for exceptions.
+	 * */
+	public IMatrix setUnsafe(boolean unsafe);
+	
+	
+	
+	/**
+	 * Whether or not this matrix checks for exceptions.
+	 * */
+	public boolean isUnsafe();
+	
 }
 
