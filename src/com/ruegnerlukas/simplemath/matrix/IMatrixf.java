@@ -23,16 +23,6 @@ public interface IMatrixf extends IMatrix {
 	
 	
 	/**
-	 * copies the values of this matrix into the given array
-	 * @param data the destination array (must be the sames size as this matrix) or null
-	 * @return the (created) destination array with the same values as this matrix
-	 * */
-	public float[] copyData(float[][] data);
-	
-	
-	
-	
-	/**
 	 * Writes the values of the given row "row" into the given array "dest"
 	 * @param row	the index of the row
 	 * @param dest	the destination array ( must be the same size as the row (number of columns) ) or null
@@ -47,7 +37,7 @@ public interface IMatrixf extends IMatrix {
 	 * @param dest		the destination array ( must be the same size as the column (number of rows) ) or null
 	 * @return the column (->dest) as an array
 	 * */
-	public void getColumn(int column, float[] dest);
+	public float[] getColumn(int column, float[] dest);
 	
 	
 	/**

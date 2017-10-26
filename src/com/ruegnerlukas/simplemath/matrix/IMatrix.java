@@ -65,11 +65,43 @@ public interface IMatrix {
 	
 	
 	/**
+	 * copies the int values of this matrix into the given array
+	 * @param data the destination array (must be the sames size as this matrix) or null
+	 * @return the (created) destination array with the same values as this matrix
+	 * */
+	public IMatrix copyData(int[][] data);
+	
+	
+	
+	
+	/**
+	 * copies the float values of this matrix into the given array
+	 * @param data the destination array (must be the sames size as this matrix) or null
+	 * @return the (created) destination array with the same values as this matrix
+	 * */
+	public IMatrix copyData(float[][] data);
+	
+	
+	
+	
+	/**
+	 * copies the double values of this matrix into the given array
+	 * @param data the destination array (must be the sames size as this matrix) or null
+	 * @return the (created) destination array with the same values as this matrix
+	 * */
+	public IMatrix copyData(double[][] data);
+	
+	
+	
+	
+	/**
 	 * Adds the given matrix to this matrix
 	 * @param mat the other matrix
 	 * @return this matrix for chaining
 	 * */
 	public IMatrix add(IMatrix mat);
+	
+	
 	
 	
 	/**
@@ -90,6 +122,8 @@ public interface IMatrix {
 	public IMatrix scale(float scalar);
 	
 	
+	
+	
 	/**
 	 * Multiplies this matrix by the given scalar
 	 * @param scalar the scalar
@@ -98,12 +132,16 @@ public interface IMatrix {
 	public IMatrix scale(double scalar);
 	
 	
+	
+	
 	/**
 	 * Multiplies this matrix by the given matrix
 	 * @param mat the other matrix (the number of columns of the given matrix must match the number of rows of this matrix)
 	 * @return this matrix for chaining
 	 * */
 	public IMatrix mul(IMatrix mat);
+	
+	
 	
 	
 	/**
@@ -131,6 +169,8 @@ public interface IMatrix {
 	public boolean compare(IMatrix mat);
 	
 	
+	
+	
 	/**
 	 * @return true if the size of this matrix matches the given matrix
 	 * */
@@ -147,10 +187,13 @@ public interface IMatrix {
 	
 	
 	
+	
 	/**
 	 * @return true, if this matrix is a square matrix and an upper triangular matrix (-> zeros below diagonal)
 	 * */
 	public boolean isUpperTriangular();
+	
+	
 	
 	
 	/**
