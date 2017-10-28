@@ -125,16 +125,6 @@ public interface IMatrix {
 	
 	
 	/**
-	 * Multiplies this matrix by the given scalar
-	 * @param scalar the scalar
-	 * @return this matrix for chaining
-	 * */
-	public IMatrix scale(double scalar);
-	
-	
-	
-	
-	/**
 	 * Multiplies this matrix by the given matrix
 	 * @param mat the other matrix (the number of columns of the given matrix must match the number of rows of this matrix)
 	 * @return this matrix for chaining
@@ -152,6 +142,15 @@ public interface IMatrix {
 	 * */
 	public IMatrix mul(IMatrix mat, IMatrix dest);
 
+	
+	
+	
+	/**
+	 * Negates this matrix
+	 * @return this matrix for chaining
+	 * */
+	public IMatrix negate();
+	
 	
 	
 	
@@ -217,6 +216,15 @@ public interface IMatrix {
 	 * @return the trace of this matrix. This matrix must be a square matrix
 	 * */
 	public float trace();
+	
+	
+	
+	
+	/**
+	 * Sets this matrix to an identity matrix. This matrix must be square
+	 * @return this matrix for chaining
+	 * */
+	public IMatrix setToIdentity();
 	
 	
 	
