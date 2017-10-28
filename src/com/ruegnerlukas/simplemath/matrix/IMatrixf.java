@@ -67,7 +67,7 @@ public interface IMatrixf extends IMatrix {
 	
 	
 	/**
-	 * copies the values of this given array into this matrix
+	 * Uses the given array as new values of this matrix. Changes number of rows and columns.
 	 * @return this matrix for chaining
 	 * */
 	public IMatrixf setData(float[][] data);
