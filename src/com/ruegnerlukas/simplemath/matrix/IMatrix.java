@@ -22,6 +22,31 @@ public interface IMatrix {
 	
 	
 	/**
+	 * Sets the value at the given column and row of the this matrix.
+	 * @return this Matrix for chaining
+	 * */
+	public IMatrix set(int column, int row, Number value);
+	
+	
+	/** @return the value of the component at the given column and row as a int */
+	public int getInt(int column, int row);
+
+	
+	/** @return the value of the component at the given column and row as a long */
+	public long getLong(int column, int row);
+	
+	
+	/** @return the value of the component at the given column and row as a float */
+	public float getFloat(int column, int row);
+	
+	
+	/** @return the value of the component at the given column and row as a double */
+	public double getDouble(int column, int row);
+	
+	
+	
+	
+	/**
 	 * Gets a submatrix of this matrix
 	 * @param colStart	first column index
 	 * @param rowStart	first row index
@@ -41,6 +66,7 @@ public interface IMatrix {
 	 * @return the created submatrix
 	 * */
 	public IMatrix getSubmatrix(int colStart, int rowStart, int colEnd, int rowEnd);
+	
 	
 	
 	
@@ -119,7 +145,7 @@ public interface IMatrix {
 	 * @param scalar the scalar
 	 * @return this matrix for chaining
 	 * */
-	public IMatrix scale(float scalar);
+	public IMatrix scale(Number scalar);
 	
 	
 	
@@ -207,7 +233,7 @@ public interface IMatrix {
 	/**
 	 * @return the determinant of this matrix. This matrix must be a square matrix
 	 * */
-	public float determinant();
+	public Number determinantGen();
 	
 	
 	
@@ -215,7 +241,7 @@ public interface IMatrix {
 	/**
 	 * @return the trace of this matrix. This matrix must be a square matrix
 	 * */
-	public float trace();
+	public Number traceGen();
 	
 	
 	

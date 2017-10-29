@@ -20,10 +20,10 @@ public class Matrix4f extends Matrixf {
 						float m03, float m13, float m23, float m33) {
 		super(4, 4);
 		this.setUnsafe(true);
-		this.setData(0, 0, m00).setData(1, 0, m10).setData(2, 0, m20).setData(3, 0, m30);
-		this.setData(0, 1, m01).setData(1, 1, m11).setData(2, 1, m21).setData(3, 1, m31);
-		this.setData(0, 2, m02).setData(1, 2, m12).setData(2, 2, m22).setData(3, 2, m32);
-		this.setData(0, 3, m03).setData(1, 3, m13).setData(2, 3, m23).setData(3, 3, m33);
+		this.set(0, 0, m00).set(1, 0, m10).set(2, 0, m20).set(3, 0, m30);
+		this.set(0, 1, m01).set(1, 1, m11).set(2, 1, m21).set(3, 1, m31);
+		this.set(0, 2, m02).set(1, 2, m12).set(2, 2, m22).set(3, 2, m32);
+		this.set(0, 3, m03).set(1, 3, m13).set(2, 3, m23).set(3, 3, m33);
 		this.setUnsafe(false);
 	}
 	
@@ -34,7 +34,7 @@ public class Matrix4f extends Matrixf {
 		if(data.length != 4 && data[0].length != 4) {
 			throw new IllegalArgumentException("Invalid input array size: " + data.length + "," +data[0].length + ".");
 		}
-		super.setData(data);
+		super.set(data);
 	}
 	
 	

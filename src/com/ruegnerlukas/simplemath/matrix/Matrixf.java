@@ -10,6 +10,8 @@ import com.ruegnerlukas.simplemath.vectors.vecN.VectorNf;
 public class Matrixf implements IMatrixf {
 
 	
+	
+	
 	/**
 	 * @return an identity matrix with the given size
 	 * */
@@ -24,15 +26,18 @@ public class Matrixf implements IMatrixf {
 		for(int i=0; i<size; i++) {
 			for(int j=0; j<size; j++) {
 				if(i == j) {
-					mat.setData(i, j, 1f);
+					mat.set(i, j, 1f);
 				} else {
-					mat.setData(i, j, 0f);
+					mat.set(i, j, 0f);
 				}
 			}
 		}
 		mat.setUnsafe(false);
 		return mat;
 	}
+	
+	
+	
 	
 	
 	
@@ -129,6 +134,149 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
+	public int getInt(int column, int row) {
+		return (int) this.getData(column, row);
+	}
+
+	
+	
+
+	@Override
+	public long getLong(int column, int row) {
+		return (long) this.getData(column, row);
+	}
+
+
+	
+	
+	@Override
+	public float getFloat(int column, int row) {
+		return (float) this.getData(column, row);
+	}
+	
+	
+
+
+	@Override
+	public double getDouble(int column, int row) {
+		return (double) this.getData(column, row);
+	}
+	
+	
+	
+	
+	@Override
+	public float[][] getData() {
+		return this.data;
+	}
+
+	
+	
+	
+	@Override
+	public float getData(int i, int j) {
+		if( !unsafe && (i < 0 || i >= getNumberColumns() || j < 0 || j >= getNumberRows()) ) {
+			throw new IndexOutOfBoundsException("Index: " + i+","+j + ", size: " + getNumberColumns() + "," + getNumberRows());
+		}
+		return this.data[i][j];
+	}
+
+	
+	
+	
+	@Override
+	public float[] getRow(int row, float[] dest) {
+		if(!unsafe) {
+			if(dest.length != getNumberColumns()) {
+				throw new IllegalArgumentException("Destination array length invalid: " + dest.length + ". Should be " + getNumberColumns());
+			}
+			if(row < 0 || row >= getNumberRows()) {
+				throw new IndexOutOfBoundsException("Index: " + row + ", size: " + getNumberRows());
+			}
+		}
+		for(int i=0; i<getNumberColumns(); i++) {
+			dest[i] = getData(i, row);
+		}
+		return dest;
+	}
+
+	
+	
+	
+	@Override
+	public float[] getColumn(int column, float[] dest) {
+		if(!unsafe) {
+			if(dest.length != getNumberRows()) {
+				throw new IllegalArgumentException("Destination array length invalid: " + dest.length + ". Should be " + getNumberRows());
+			}
+			if(column < 0 || column >= getNumberColumns()) {
+				throw new IndexOutOfBoundsException("Index: " + column + ", size: " + getNumberColumns());
+			}
+		}
+		for(int j=0; j<getNumberRows(); j++) {
+			dest[j] = getData(column, j);
+		}
+		return dest;
+	}
+	
+	
+	
+
+	@Override
+	public float[] getRow(int row) {
+		float[] data = new float[getNumberColumns()];
+		getRow(row, data);
+		return data;
+	}
+
+	
+	
+	
+	@Override
+	public float[] getColumn(int column) {
+		float[] data = new float[getNumberRows()];
+		getColumn(column, data);
+		return data;
+	}
+
+	
+	
+	
+	@Override
+	public IVector getRowVector(int row) {
+		final int n = getNumberColumns();
+		if(n == 2) {
+			return new Vector2f(data[0][row], data[1][row]);
+		} else if(n ==3) {
+			return new Vector3f(data[0][row], data[1][row], data[2][row]);
+		} else if(n == 4) {
+			return new Vector4f(data[0][row], data[1][row], data[2][row], data[3][row]);
+		} else {
+			return new VectorNf(getRow(row));
+		}
+	}
+
+	
+	
+	
+	@Override
+	public IVector getColumnVector(int column) {
+		final int n = getNumberRows();
+		if(n == 2) {
+			return new Vector2f(data[column][0], data[column][1]);
+		} else if(n == 3) {
+			return new Vector3f(data[column][0], data[column][1], data[column][2]);
+		} else if(n == 4) {
+			return new Vector4f(data[column][0], data[column][1], data[column][2], data[column][3]);
+		} else {
+			return new VectorNf(getColumn(column));
+		}
+	}
+	
+	
+	
+	
+	@Override
 	public void getSubmatrix(int colStart, int rowStart, int colEnd, int rowEnd, IMatrix dest) {
 		if(!unsafe) {
 			if(colStart < 0 || colStart >= getNumberColumns()) {
@@ -154,13 +302,12 @@ public class Matrixf implements IMatrixf {
 			IMatrixf destf = (IMatrixf)dest;
 			for(int c=colStart, i=0; c<=colEnd; c++, i++) {
 				for(int r=rowStart, j=0; r<=rowEnd; r++, j++) {
-					destf.setData(i, j, this.data[c][r]);
+					destf.set(i, j, this.data[c][r]);
 				}
 			}
 		} else {
 			// TODO: other matrix-types
 		}
-		
 		
 	}
 
@@ -214,6 +361,75 @@ public class Matrixf implements IMatrixf {
 			tmp = this.data[i][r0];
 			data[i][r0] = data[i][r1];
 			data[i][r1] = tmp;
+		}
+		return this;
+	}
+
+	
+	
+	
+	@Override
+	public Matrixf set(float[][] data) {
+		this.data = data;
+		this.columns = data.length;
+		this.rows = data[0].length;
+		return this;
+	}
+
+	
+	
+	
+	@Override
+	public IMatrix set(int column, int row, Number value) {
+		return this.set(column, row, value.floatValue());
+	}
+	
+	
+	
+	
+	@Override
+	public Matrixf set(int i, int j, float v) {
+		if( !unsafe && (i < 0 || i >= getNumberColumns() || j < 0 || j >= getNumberRows()) ) {
+			throw new IndexOutOfBoundsException("Index: " + i+","+j + ", size: " + getNumberColumns() + "," + getNumberRows());
+		}
+		this.data[i][j] = v;
+		return this;
+	}
+
+	
+	
+	
+	@Override
+	public Matrixf setColumn(int column, float[] data) {
+		if(!unsafe) {
+			if(column < 0 || column >= getNumberColumns()) {
+				throw new IndexOutOfBoundsException("Index: " + column + ", size: " + getNumberColumns());
+			}
+			if(data.length != getNumberRows()) {
+				throw new IllegalArgumentException("Input array length invalid: " + data.length + ". Should be " + getNumberRows());
+			}
+		}
+		for(int j=0; j<getNumberRows(); j++) {
+			this.data[column][j] = data[j];
+		}
+		return this;
+	}
+
+	
+	
+	
+	@Override
+	public Matrixf setRow(int row, float[] data) {
+		if(!unsafe) {
+			if(row < 0 || row >= getNumberRows()) {
+				throw new IndexOutOfBoundsException("Index: " + row + ", size: " + getNumberRows());
+			}
+			if(data.length != getNumberColumns()) {
+				throw new IllegalArgumentException("Input array length invalid: " + data.length + ". Should be " + getNumberColumns());
+			}
+		}
+		for(int i=0; i<getNumberColumns(); i++) {
+			this.data[i][row] = data[i];
 		}
 		return this;
 	}
@@ -314,6 +530,16 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
+	public Matrixf scale(Number scalar) {
+		return this.scale(scalar.floatValue());
+	}
+	
+	
+	/**
+	 * Multiplies this matrix by the given scalar
+	 * @param scalar the scalar
+	 * @return this matrix for chaining
+	 * */
 	public Matrixf scale(float scalar) {
 		for(int j=0; j<this.getNumberRows(); j++) {
 			for(int i=0; i<this.getNumberColumns(); i++) {
@@ -322,8 +548,8 @@ public class Matrixf implements IMatrixf {
 		}
 		return this;
 	}
-
 	
+
 	
 	
 	@Override
@@ -531,6 +757,14 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
+	public Number determinantGen() {
+		return this.determinant();
+	}
+	
+	
+	/**
+	 * @return the determinant of this matrix. This matrix must be a square matrix
+	 * */
 	public float determinant() {
 		return determinant(this.data, unsafe);
 	}
@@ -584,6 +818,14 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
+	public Number traceGen() {
+		return this.traceGen();
+	}
+	
+	
+	/**
+	 * @return the trace of this matrix. This matrix must be a square matrix
+	 * */
 	public float trace() {
 		if(!unsafe && !isSquare()) {
 			throw new IllegalArgumentException("Matrix must be square.");
@@ -667,194 +909,7 @@ public class Matrixf implements IMatrixf {
 		return this.unsafe;
 	}
 
-	
-	
-	
-	@Override
-	public float[][] getData() {
-		return this.data;
-	}
-
-	
-	
-	
-	@Override
-	public float getData(int i, int j) {
-		if( !unsafe && (i < 0 || i >= getNumberColumns() || j < 0 || j >= getNumberRows()) ) {
-			throw new IndexOutOfBoundsException("Index: " + i+","+j + ", size: " + getNumberColumns() + "," + getNumberRows());
-		}
-		return this.data[i][j];
-	}
-
-	
-	
-	
-	@Override
-	public float[] getRow(int row, float[] dest) {
-		if(!unsafe) {
-			if(dest.length != getNumberColumns()) {
-				throw new IllegalArgumentException("Destination array length invalid: " + dest.length + ". Should be " + getNumberColumns());
-			}
-			if(row < 0 || row >= getNumberRows()) {
-				throw new IndexOutOfBoundsException("Index: " + row + ", size: " + getNumberRows());
-			}
-		}
-		for(int i=0; i<getNumberColumns(); i++) {
-			dest[i] = getData(i, row);
-		}
-		return dest;
-	}
-
-	
-	
-	
-	@Override
-	public float[] getColumn(int column, float[] dest) {
-		if(!unsafe) {
-			if(dest.length != getNumberRows()) {
-				throw new IllegalArgumentException("Destination array length invalid: " + dest.length + ". Should be " + getNumberRows());
-			}
-			if(column < 0 || column >= getNumberColumns()) {
-				throw new IndexOutOfBoundsException("Index: " + column + ", size: " + getNumberColumns());
-			}
-		}
-		for(int j=0; j<getNumberRows(); j++) {
-			dest[j] = getData(column, j);
-		}
-		return dest;
-	}
-	
-	
-	
-
-	@Override
-	public float[] getRow(int row) {
-		float[] data = new float[getNumberColumns()];
-		getRow(row, data);
-		return data;
-	}
-
-	
-	
-	
-	@Override
-	public float[] getColumn(int column) {
-		float[] data = new float[getNumberRows()];
-		getColumn(column, data);
-		return data;
-	}
-
-	
-	
-	
-	@Override
-	public IVector getRowVector(int row) {
-		final int n = getNumberColumns();
-		if(n == 2) {
-			return new Vector2f(data[0][row], data[1][row]);
-		} else if(n ==3) {
-			return new Vector3f(data[0][row], data[1][row], data[2][row]);
-		} else if(n == 4) {
-			return new Vector4f(data[0][row], data[1][row], data[2][row], data[3][row]);
-		} else {
-			return new VectorNf(getRow(row));
-		}
-	}
-
-	
-	
-	
-	@Override
-	public IVector getColumnVector(int column) {
-		final int n = getNumberRows();
-		if(n == 2) {
-			return new Vector2f(data[column][0], data[column][1]);
-		} else if(n == 3) {
-			return new Vector3f(data[column][0], data[column][1], data[column][2]);
-		} else if(n == 4) {
-			return new Vector4f(data[column][0], data[column][1], data[column][2], data[column][3]);
-		} else {
-			return new VectorNf(getColumn(column));
-		}
-	}
-
-	
-	
-	
-	@Override
-	public Matrixf setData(float[][] data) {
-		this.data = data;
-		this.columns = data.length;
-		this.rows = data[0].length;
-		return this;
-	}
-
-	
-	
-	
-	@Override
-	public Matrixf setData(int i, int j, float v) {
-		if( !unsafe && (i < 0 || i >= getNumberColumns() || j < 0 || j >= getNumberRows()) ) {
-			throw new IndexOutOfBoundsException("Index: " + i+","+j + ", size: " + getNumberColumns() + "," + getNumberRows());
-		}
-		this.data[i][j] = v;
-		return this;
-	}
-
-	
-	
-	
-	@Override
-	public Matrixf setDataCol(int column, float[] data) {
-		if(!unsafe) {
-			if(column < 0 || column >= getNumberColumns()) {
-				throw new IndexOutOfBoundsException("Index: " + column + ", size: " + getNumberColumns());
-			}
-			if(data.length != getNumberRows()) {
-				throw new IllegalArgumentException("Input array length invalid: " + data.length + ". Should be " + getNumberRows());
-			}
-		}
-		for(int j=0; j<getNumberRows(); j++) {
-			this.data[column][j] = data[j];
-		}
-		return this;
-	}
-
-	
-	
-	
-	@Override
-	public Matrixf setDataRow(int row, float[] data) {
-		if(!unsafe) {
-			if(row < 0 || row >= getNumberRows()) {
-				throw new IndexOutOfBoundsException("Index: " + row + ", size: " + getNumberRows());
-			}
-			if(data.length != getNumberColumns()) {
-				throw new IllegalArgumentException("Input array length invalid: " + data.length + ". Should be " + getNumberColumns());
-			}
-		}
-		for(int i=0; i<getNumberColumns(); i++) {
-			this.data[i][row] = data[i];
-		}
-		return this;
-	}
-
-
 
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

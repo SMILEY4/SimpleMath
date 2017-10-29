@@ -70,7 +70,7 @@ public interface IMatrixf extends IMatrix {
 	 * Uses the given array as new values of this matrix. Changes number of rows and columns.
 	 * @return this matrix for chaining
 	 * */
-	public IMatrixf setData(float[][] data);
+	public IMatrixf set(float[][] data);
 	
 	
 	
@@ -78,7 +78,7 @@ public interface IMatrixf extends IMatrix {
 	 * Sets the value of this matrix at the given index
 	 * @return this matrix for chaining
 	 * */
-	public IMatrixf setData(int i, int j, float v);
+	public IMatrixf set(int i, int j, float v);
 	
 	
 	/**
@@ -87,7 +87,7 @@ public interface IMatrixf extends IMatrix {
 	 * @param data 	the array containg the new values (must be the same size as the column)
 	 * @return this matrix for chaining
 	 * */
-	public IMatrixf setDataCol(int column, float[] data);
+	public IMatrixf setColumn(int column, float[] data);
 	
 	
 	/**
@@ -96,7 +96,7 @@ public interface IMatrixf extends IMatrix {
 	 * @param data 	the array containg the new values (must be the same size as the row)
 	 * @return this matrix for chaining
 	 * */
-	public IMatrixf setDataRow(int row, float[] data);
+	public IMatrixf setRow(int row, float[] data);
 
 	
 	
