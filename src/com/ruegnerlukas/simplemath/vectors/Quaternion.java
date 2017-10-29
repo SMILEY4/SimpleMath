@@ -67,6 +67,18 @@ public class Quaternion extends Vector4f {
 	
 	
 	
+	/**
+	 * Sets this quanternion from the given quanternion.
+	 * @param q the quanternion
+	 * @return this quanternion for chaining
+	 * */
+	public Quaternion set(Quaternion q) {
+		return this.set(q.getFloatX(), q.getFloatY(), q.getFloatZ(), q.getFloatW());
+	}
+	
+	
+	
+	
 	@Override
 	public Quaternion set(IVector4 v) {
 		return (Quaternion) super.set(v);
@@ -191,7 +203,7 @@ public class Quaternion extends Vector4f {
 	public Quaternion mul(IVector4 vec) {
 		return (Quaternion) super.mul(vec);
 	}
-
+	
 	
 	
 	
@@ -288,16 +300,31 @@ public class Quaternion extends Vector4f {
 	
 	
 	/**
-	 * Sets this quaternion to the quaternion product
+	 * Multiplies this quaternion with the gigen quanternion (this = this*other)
 	 * @param q the right Quaternion
 	 * @return this quaternion for chaining
 	 * */
 	public Quaternion mul(Quaternion q) {
-		final float x = this.x * q.w  +  this.w * q.x  +  this.y * q.z  -  this.z * q.y;
-		final float y = this.y * q.w  +  this.w * q.y  +  this.z * q.x  -  this.x * q.z;
-		final float z = this.z * q.w  +  this.w * q.z  +  this.x * q.y  -  this.y * q.x;
-		final float w = this.w * q.w  -  this.x * q.w  -  this.y * q.y  -  this.z * q.z;
-		return (Quaternion) this.set(x, y, z, w);
+		final float newX = this.w * q.x + this.x * q.w + this.y * q.z - this.z * q.y;
+		final float newY = this.w * q.y + this.y * q.w + this.z * q.x - this.x * q.z;
+		final float newZ = this.w * q.z + this.z * q.w + this.x * q.y - this.y * q.x;
+		final float newW = this.w * q.w - this.x * q.x - this.y * q.y - this.z * q.z;
+		return (Quaternion) this.set(newX, newY, newZ, newW);
+	}
+	
+	
+	
+	/**
+	 * Multiplies this quaternion with the gigen quanternion (this = other*this)
+	 * @param q the left Quaternion
+	 * @return this quaternion for chaining
+	 * */
+	public Quaternion mulLeft(Quaternion q) {
+		final float newX = q.w * this.x + q.x * this.w + q.y * this.z - q.z * this.y;
+		final float newY = q.w * this.y + q.y * this.w + q.z * this.x - q.x * this.z;
+		final float newZ = q.w * this.z + q.z * this.w + q.x * this.y - q.y * this.x;
+		final float newW = q.w * this.w - q.x * this.x - q.y * this.y - q.z * this.z;
+		return (Quaternion) this.set(newX, newY, newZ, newW);
 	}
 	
 	
