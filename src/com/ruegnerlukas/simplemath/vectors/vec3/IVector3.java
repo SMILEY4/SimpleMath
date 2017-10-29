@@ -1,6 +1,8 @@
 package com.ruegnerlukas.simplemath.vectors.vec3;
 
+import com.ruegnerlukas.simplemath.matrix.IMatrix;
 import com.ruegnerlukas.simplemath.vectors.IVector;
+import com.ruegnerlukas.simplemath.vectors.Quaternion;
 
 
 public interface IVector3 extends IVector {
@@ -163,6 +165,7 @@ public interface IVector3 extends IVector {
 	 * */
 	public IVector3 mul(Number x, Number y, Number z);
 	
+	
 	/**
 	 * Scales this vector by the given scalar.
 	 * @param xyz the scalar
@@ -170,6 +173,22 @@ public interface IVector3 extends IVector {
 	 * */
 	public IVector3 scale(Number xyz);
 
+	
+	/**
+	 * Multiplies this vector with the given matrix.
+	 * @param mat the matrix
+	 * @return this vector for chaining
+	 * */
+	public IVector3 mul(IMatrix mat);
+	
+	
+	/**
+	 * Multiplies this vector with the given quaternion.
+	 * @param q the quaternion
+	 * @return this vector for chaining
+	 * */
+	public IVector3 mul(Quaternion q);
+	
 	
 	/**
 	 * Divides this vector by the given vector (component-wise).

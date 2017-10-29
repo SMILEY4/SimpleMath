@@ -1,5 +1,7 @@
 package com.ruegnerlukas.simplemath.vectors.vec3;
 
+import com.ruegnerlukas.simplemath.matrix.IMatrix;
+import com.ruegnerlukas.simplemath.vectors.Quaternion;
 
 public class Vector3i implements IVector3 {
 
@@ -505,6 +507,66 @@ public class Vector3i implements IVector3 {
 	
 	
 
+	@Override
+	public Vector3i mul(IMatrix mat) {
+		
+		// 4x4
+		if(mat.getNumberColumns() == 4 && mat.getNumberRows() == 4) {
+			mat.setUnsafe(true);
+			final float vx = x*mat.getFloat(0, 0) + y*mat.getFloat(0, 1) + z*mat.getFloat(0, 2) + mat.getFloat(0, 3);
+			final float vy = x*mat.getFloat(1, 0) + y*mat.getFloat(1, 1) + z*mat.getFloat(1, 2) + mat.getFloat(1, 3);
+			final float vz = x*mat.getFloat(2, 0) + y*mat.getFloat(2, 1) + z*mat.getFloat(2, 2) + mat.getFloat(2, 3);
+			mat.setUnsafe(false);
+			return this.set(vx, vy, vz);
+		}
+		
+		// 3x3
+		if(mat.getNumberColumns() == 3 && mat.getNumberRows() == 3) {
+			mat.setUnsafe(true);
+			final float vx = x*mat.getFloat(0, 0) + y*mat.getFloat(0, 1) + z*mat.getFloat(0, 2);
+			final float vy = x*mat.getFloat(1, 0) + y*mat.getFloat(1, 1) + z*mat.getFloat(1, 2);
+			final float vz = x*mat.getFloat(2, 0) + y*mat.getFloat(2, 1) + z*mat.getFloat(2, 2);
+			mat.setUnsafe(false);
+			return this.set(vx, vy, vz);
+		}
+		
+		
+		// 4x3
+		if(mat.getNumberColumns() == 4 && mat.getNumberRows() == 3) {
+			mat.setUnsafe(true);
+			final float vx = x*mat.getFloat(0, 0) + y*mat.getFloat(0, 1) + z*mat.getFloat(0, 2);
+			final float vy = x*mat.getFloat(1, 0) + y*mat.getFloat(1, 1) + z*mat.getFloat(1, 2);
+			final float vz = x*mat.getFloat(2, 0) + y*mat.getFloat(2, 1) + z*mat.getFloat(2, 2);
+			mat.setUnsafe(false);
+			return this.set(vx, vy, vz);
+		}
+		
+		return this;
+	}
+	
+	
+	
+	
+	private Quaternion qTemp1 = null;
+	private Quaternion qTemp2 = null;
+
+	@Override
+	public Vector3i mul(Quaternion q) {
+		if(qTemp1 == null) {
+			qTemp1 = new Quaternion();
+		}
+		if(qTemp2 == null) {
+			qTemp2 = new Quaternion();
+		}
+		qTemp1.set(q);
+		qTemp1.negate();
+		qTemp1.mulLeft(qTemp2.set(this.x, this.y, this.z, 0f)).mulLeft(q);
+		return this.set(qTemp1.getFloatX(), qTemp1.getFloatY(), qTemp1.getFloatZ());
+	}
+	
+	
+	
+	
 	@Override
 	public Vector3i div(IVector3 vec) {
 		return this.div(vec.getIntX(), vec.getIntY(), vec.getIntZ());
