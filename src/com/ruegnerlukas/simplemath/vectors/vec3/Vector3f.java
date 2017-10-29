@@ -228,11 +228,23 @@ public class Vector3f implements IVector3 {
 	}
 	
 
+	/**
+	 * Sets the components of this vector.
+	 * @param xyz the value of the x- y- and z-component
+	 * @return this vector for chaining
+	 * */
 	public Vector3f set(float xyz) {
 		return this.set(xyz, xyz, xyz);
 	}
 	
 	
+	/**
+	 * Sets the components of this vector.
+	 * @param x the value of the x-component
+	 * @param y the value of the y-component
+	 * @param z the value of the z-component
+	 * @return this vector for chaining
+	 * */
 	public Vector3f set(float x, float y, float z) {
 		this.x = x;
 		this.y = y;

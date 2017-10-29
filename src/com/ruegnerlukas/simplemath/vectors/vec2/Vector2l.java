@@ -211,11 +211,22 @@ public class Vector2l implements IVector2 {
 	}
 	
 
+	/**
+	 * Sets the components of this vector.
+	 * @param xy the value of the x- and y-component
+	 * @return this vector for chaining
+	 * */
 	public Vector2l set(long xy) {
 		return this.set(xy, xy);
 	}
 	
 	
+	/**
+	 * Sets the components of this vector.
+	 * @param x the value of the x-component
+	 * @param y the value of the y-component
+	 * @return this vector for chaining
+	 * */
 	public Vector2l set(long x, long y) {
 		this.x = x;
 		this.y = y;

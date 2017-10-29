@@ -243,11 +243,24 @@ public class Vector4d implements IVector4 {
 	}
 	
 
+	/**
+	 * Sets the components of this vector.
+	 * @param xyzw the value of the x- y- z- and w-component
+	 * @return this vector for chaining
+	 * */
 	public Vector4d set(double xyzw) {
 		return this.set(xyzw, xyzw, xyzw, xyzw);
 	}
 	
 	
+	/**
+	 * Sets the components of this vector.
+	 * @param x the value of the x-component
+	 * @param y the value of the y-component
+	 * @param z the value of the z-component
+	 * @param w the value of the w-component
+	 * @return this vector for chaining
+	 * */
 	public Vector4d set(double x, double y, double z, double w) {
 		this.x = x;
 		this.y = y;

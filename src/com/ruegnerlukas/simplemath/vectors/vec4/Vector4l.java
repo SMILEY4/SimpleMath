@@ -237,11 +237,24 @@ public class Vector4l implements IVector4 {
 	}
 	
 
+	/**
+	 * Sets the components of this vector.
+	 * @param xyzw the value of the x- y- z- and w-component
+	 * @return this vector for chaining
+	 * */
 	public Vector4l set(long xyzw) {
 		return this.set(xyzw, xyzw, xyzw, xyzw);
 	}
 	
 	
+	/**
+	 * Sets the components of this vector.
+	 * @param x the value of the x-component
+	 * @param y the value of the y-component
+	 * @param z the value of the z-component
+	 * @param w the value of the w-component
+	 * @return this vector for chaining
+	 * */
 	public Vector4l set(long x, long y, long z, long w) {
 		this.x = x;
 		this.y = y;

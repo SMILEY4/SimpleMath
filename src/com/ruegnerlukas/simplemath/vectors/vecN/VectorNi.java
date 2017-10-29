@@ -197,7 +197,12 @@ public class VectorNi implements IVectorN {
 		}
 	}
 
-	
+
+	/**
+	 * Sets the components of this vector.
+	 * @param a a list of values. The list must have the same size as this vector or the size 1
+	 * @return this vector for chaining
+	 * */
 	public VectorNi set(int... a) {
 		if(a.length == 1) {
 			Arrays.fill(this.values, a[0]);
