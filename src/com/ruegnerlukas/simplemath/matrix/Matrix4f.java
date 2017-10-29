@@ -573,6 +573,7 @@ public class Matrix4f extends Matrixf {
 	}
 	
 	
+	
 //	public Matrix4f setToRotation(float axisX, float axisY, float axisZ, float angleRad) {
 //		return this;
 //	}
@@ -671,6 +672,15 @@ public class Matrix4f extends Matrixf {
 	public Vector3f getScaling() {
 		return new Vector3f(getScalingX(), getScalingY(), getScalingZ());
 	}
+	
+	
+	
+	
+	@Override
+	public Matrix4f copy() {
+		return (Matrix4f) new Matrix4f().copyData(this.getData());
+	}
+	
 	
 	
 }
