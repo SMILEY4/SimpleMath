@@ -862,7 +862,7 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
-	public String toFormattedString() {
+	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append("Matrix (float), " + this.getNumberColumns() + "x" + this.getNumberRows()).append(" (").append(Integer.toHexString(this.hashCode())).append(")");
