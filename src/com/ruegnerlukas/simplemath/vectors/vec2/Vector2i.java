@@ -867,7 +867,7 @@ public class Vector2i implements IVector2 {
 	
 	/**
 	 * Rotates this vector by the given angle in degrees.
-	 * @param angleRad the angle in degrees
+	 * @param angleDeg the angle in degrees
 	 * @return this vector for chaining
 	 * */
 	public Vector2i rotateDeg(int angleDeg) {

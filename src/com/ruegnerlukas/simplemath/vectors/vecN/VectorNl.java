@@ -299,7 +299,7 @@ public class VectorNl implements IVectorN {
 	
 	/**
 	 * Adds the given values to this vector.
-	 * @param a the list of values. The list must have the same size as this vector or the size 1
+	 * @param values the list of values. The list must have the same size as this vector or the size 1
 	 * @return this vector for chaining
 	 * */
 	public VectorNl add(long... values) {
@@ -413,7 +413,7 @@ public class VectorNl implements IVectorN {
 	
 	/**
 	 * Multiplies this vector with the given vector.
-	 * @param vec the vector with the same size as this vector
+	 * @param values the vector as a list with the same size as this vector
 	 * @return this vector for chaining
 	 * */
 	public VectorNl mul(long... values) {
@@ -436,7 +436,7 @@ public class VectorNl implements IVectorN {
 	
 	/**
 	 * Multiplies this vector with the given vector.
-	 * @param vec the vector with the same size as this vector
+	 * @param values the vector as a list with the same size as this vector
 	 * @return this vector for chaining
 	 * */
 	public VectorNl mul(float... values) {

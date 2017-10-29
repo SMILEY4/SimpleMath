@@ -26,7 +26,7 @@ public interface IMatrixf extends IMatrix {
 	 * Writes the values of the given row "row" into the given array "dest"
 	 * @param row	the index of the row
 	 * @param dest	the destination array ( must be the same size as the row (number of columns) ) or null
-	 * @return the row (->dest) as an array
+	 * @return the row (dest) as an array
 	 * */
 	public float[] getRow(int row, float[] dest);
 	
@@ -35,7 +35,7 @@ public interface IMatrixf extends IMatrix {
 	 * Writes the values of the given column "column" into the given array "dest"
 	 * @param column	the index of the column
 	 * @param dest		the destination array ( must be the same size as the column (number of rows) ) or null
-	 * @return the column (->dest) as an array
+	 * @return the column (dest) as an array
 	 * */
 	public float[] getColumn(int column, float[] dest);
 	
@@ -83,8 +83,8 @@ public interface IMatrixf extends IMatrix {
 	
 	/**
 	 * Sets the values of the given column
-	 * @param row 	the index of the column
-	 * @param data 	the array containg the new values (must be the same size as the column)
+	 * @param column 	the index of the column
+	 * @param data 		the array containg the new values (must be the same size as the column)
 	 * @return this matrix for chaining
 	 * */
 	public IMatrixf setColumn(int column, float[] data);

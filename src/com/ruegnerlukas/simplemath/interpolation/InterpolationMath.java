@@ -18,7 +18,7 @@ public class InterpolationMath {
 	
 	/**
 	 * @param a			alpha value between 0 and 1
-	 * @returns the interpolated value (mostly between 0 and 1)
+	 * @return the interpolated value (mostly between 0 and 1)
 	 * */
 	public static float linear(float a) {
 		return a;
@@ -39,7 +39,7 @@ public class InterpolationMath {
 	
 	/**
 	 * @param a			alpha value between 0 and 1
-	 * @returns the interpolated value (mostly between 0 and 1)
+	 * @return the interpolated value (mostly between 0 and 1)
 	 * */
 	public static float fade(float a) {
 		return MathUtils.clamp( a*a*a * (a * (a*6-15) + 10), 0, 1);
@@ -68,7 +68,7 @@ public class InterpolationMath {
 	
 	/**
 	 * @param a			alpha value between 0 and 1
-	 * @returns the interpolated value (mostly between 0 and 1)
+	 * @return the interpolated value (mostly between 0 and 1)
 	 * */
 	public static float sine(float a) {
 		return (1f - (float)Math.cos(a * Math.PI)) / 2f;
@@ -79,7 +79,7 @@ public class InterpolationMath {
 	
 	/**
 	 * @param a			alpha value between 0 and 1
-	 * @returns the interpolated value (mostly between 0 and 1)
+	 * @return the interpolated value (mostly between 0 and 1)
 	 * */
 	public static float sineIn(float a) {
 		return 1f - (float)Math.cos(a * Math.PI / 2f);
@@ -90,7 +90,7 @@ public class InterpolationMath {
 	
 	/**
 	 * @param a			alpha value between 0 and 1
-	 * @returns the interpolated value (mostly between 0 and 1)
+	 * @return the interpolated value (mostly between 0 and 1)
 	 * */
 	public static float sineOut(float a) {
 		return (float)Math.sin(a * Math.PI / 2f);
@@ -119,7 +119,7 @@ public class InterpolationMath {
 	
 	/**
 	 * @param a			alpha value between 0 and 1
-	 * @returns the interpolated value (mostly between 0 and 1)
+	 * @return the interpolated value (mostly between 0 and 1)
 	 * */
 	public static float circle(float a) {
 		if (a <= 0.5f) {
@@ -133,7 +133,7 @@ public class InterpolationMath {
 	
 	/**
 	 * @param a			alpha value between 0 and 1
-	 * @returns the interpolated value (mostly between 0 and 1)
+	 * @return the interpolated value (mostly between 0 and 1)
 	 * */
 	public static float circleIn(float a) {
 		return (float)(1f - Math.sqrt(1 - a*a));
@@ -144,7 +144,7 @@ public class InterpolationMath {
 	
 	/**
 	 * @param a			alpha value between 0 and 1
-	 * @returns the interpolated value (mostly between 0 and 1)
+	 * @return the interpolated value (mostly between 0 and 1)
 	 * */
 	public static float circleOut(float a) {
 		return (float)(1f - Math.sqrt(1 - (a-1f)*(a-1f)));
@@ -189,7 +189,7 @@ public class InterpolationMath {
 	/**
 	 * @param a			alpha value between 0 and 1
 	 * @param power		higher value means bigger slope
-	 * @returns the interpolated value (mostly between 0 and 1)
+	 * @return the interpolated value (mostly between 0 and 1)
 	 * */
 	public static float pow(float a, int power) {
 		if(a <= 0.5f) {
@@ -204,7 +204,7 @@ public class InterpolationMath {
 	/**
 	 * @param a			alpha value between 0 and 17
 	 * @param power		higher value means bigger slope
-	 * @returns the interpolated value (mostly between 0 and 1)
+	 * @return the interpolated value (mostly between 0 and 1)
 	 * */
 	public static float powIn(float a, int power) {
 		return (float)Math.pow(a, power);
@@ -215,7 +215,7 @@ public class InterpolationMath {
 	
 	/**
 	 * @param a	alpha value between 0 and 1
-	 * @returns the interpolated value (mostly between 0 and 1)
+	 * @return the interpolated value (mostly between 0 and 1)
 	 * */
 	public static float powOut(float a, int power) {
 		return (float)Math.pow(a-1f, power) * (power%2 == 0 ? -1 : 1) + 1;
@@ -272,7 +272,7 @@ public class InterpolationMath {
 	 * @param a			alpha value between 0 and 1
 	 * @param value		value between 0 and 1. Higher value means more linear interpolation 
 	 * @param power		higher value means bigger slope
-	 * @returns the interpolated value (mostly between 0 and 1)
+	 * @return the interpolated value (mostly between 0 and 1)
 	 * */
 	public static float exp(float a, float value, int power) {
 		final float min = (float) Math.pow(value, -power);
@@ -290,7 +290,7 @@ public class InterpolationMath {
 	 * @param a			alpha value between 0 and 1
 	 * @param value		value between 0 and 1. Higher value means more linear interpolation 
 	 * @param power		higher value means bigger slope
-	 * @returns the interpolated value (mostly between 0 and 1)
+	 * @return the interpolated value (mostly between 0 and 1)
 	 * */
 	public static float expIn(float a, float value, int power) {
 		final float min = (float) Math.pow(value, -power);
@@ -305,7 +305,7 @@ public class InterpolationMath {
 	 * @param a			alpha value between 0 and 1
 	 * @param value		value between 0 and 1. Higher value means more linear interpolation 
 	 * @param power		higher value means bigger slope
-	 * @returns the interpolated value (mostly between 0 and 1)
+	 * @return the interpolated value (mostly between 0 and 1)
 	 * */
 	public static float expOut(float a, float value, int power) {
 		final float min = (float) Math.pow(value, -power);
@@ -351,7 +351,7 @@ public class InterpolationMath {
 	/**
 	 * @param a			alpha value between 0 and 1
 	 * @param value		value between 0 and 1. Higher value means more linear interpolation 
-	 * @param power		higher value means bigger slope	 * @returns the interpolated value (mostly between 0 and 1)
+	 * @param power		higher value means bigger slope	 * @return the interpolated value (mostly between 0 and 1)
 	 * */
 	public static float elastic(float a, float value, int power, int bounces, float scale) {
 		final float bouncesF = bounces * (float)Math.PI * (bounces % 2 == 0 ? 1 : -1);
@@ -366,7 +366,7 @@ public class InterpolationMath {
 	
 	/**
 	 * @param a	alpha value between 0 and 1
-	 * @returns the interpolated value (mostly between 0 and 1)
+	 * @return the interpolated value (mostly between 0 and 1)
 	 * */
 	public static float elasticIn(float a, float value, int power, int bounces, float scale) {
 		final float bouncesF = bounces * (float)Math.PI * (bounces % 2 == 0 ? 1 : -1);
@@ -381,7 +381,7 @@ public class InterpolationMath {
 	
 	/**
 	 * @param a	alpha value between 0 and 1
-	 * @returns the interpolated value (mostly between 0 and 1)
+	 * @return the interpolated value (mostly between 0 and 1)
 	 * */
 	public static float elasticOut(float a, float value, int power, int bounces, float scale) {
 		final float bouncesF = bounces * (float)Math.PI * (bounces % 2 == 0 ? 1 : -1);
@@ -425,7 +425,7 @@ public class InterpolationMath {
 	
 	/**
 	 * @param a	alpha value between 0 and 1
-	 * @returns the interpolated value (mostly between 0 and 1)
+	 * @return the interpolated value (mostly between 0 and 1)
 	 * */
 	public static float swing(float a, float scale) {
 		if(a <= 0.5f) {
@@ -440,7 +440,7 @@ public class InterpolationMath {
 	
 	/**
 	 * @param a	alpha value between 0 and 1
-	 * @returns the interpolated value (mostly between 0 and 1)
+	 * @return the interpolated value (mostly between 0 and 1)
 	 * */
 	public static float swingOut(float a, float scale) {
 		return (a-1f) * (a-1f) * ((scale+1f) * (a-1f) - scale) + 1f;
@@ -451,7 +451,7 @@ public class InterpolationMath {
 	
 	/**
 	 * @param a	alpha value between 0 and 1
-	 * @returns the interpolated value (mostly between 0 and 1)
+	 * @return the interpolated value (mostly between 0 and 1)
 	 * */
 	public static float swingIn(float a, float scale) {
 		return a * a * ((scale+1f) * a - scale);

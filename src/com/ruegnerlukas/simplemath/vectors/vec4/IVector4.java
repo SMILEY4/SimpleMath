@@ -29,7 +29,7 @@ public interface IVector4 extends IVector {
 	
 	/**
 	 * Sets the components of this vector.
-	 * @param xyz the value of the x-, y-, z- and w-component
+	 * @param xyzw the value of the x-, y-, z- and w-component
 	 * @return this vector for chaining
 	 * */
 	public IVector4 set(Number xyzw);
@@ -132,7 +132,7 @@ public interface IVector4 extends IVector {
 	
 	/**
 	 * Adds the given component to this vector.
-	 * @param xyz the x-, y-, z- and w-component
+	 * @param xyzw the x-, y-, z- and w-component
 	 * @return this vector for chaining
 	 * */
 	public IVector4 add(Number xyzw);
@@ -157,7 +157,7 @@ public interface IVector4 extends IVector {
 	
 	/**
 	 * Subtracts the given component to this vector.
-	 * @param xyz the x-, y-, z- and w-component
+	 * @param xyzw the x-, y-, z- and w-component
 	 * @return this vector for chaining
 	 * */
 	public IVector4 sub(Number xyzw);
@@ -207,7 +207,7 @@ public interface IVector4 extends IVector {
 	
 	/**
 	 * Divides this vector by the given component (component-wise).
-	 * @param xyz the x-, y-, z- and w-component
+	 * @param xyzw the x-, y-, z- and w-component
 	 * @return this vector for chaining
 	 * */
 	public IVector4 div(Number xyzw);

@@ -284,7 +284,7 @@ public interface IVector2 extends IVector {
 	
 	/**
 	 * Rotates this vector by the given angle in degrees.
-	 * @param angleRad the angle in degrees
+	 * @param angleDeg the angle in degrees
 	 * @return this vector for chaining
 	 * */
 	public IVector2 rotateDeg(Number angleDeg);

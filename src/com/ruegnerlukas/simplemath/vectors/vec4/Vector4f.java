@@ -545,7 +545,7 @@ public class Vector4f implements IVector4 {
 
 	/**
 	 * Divides this vector by the given component (component-wise).
-	 * @param xyz the x-, y-, z- and w-component
+	 * @param xyzw the x-, y-, z- and w-component
 	 * @return this vector for chaining
 	 * */
 	public Vector4f div(float xyzw) {

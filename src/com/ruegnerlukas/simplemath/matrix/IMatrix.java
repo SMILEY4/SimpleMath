@@ -163,7 +163,7 @@ public interface IMatrix {
 	/**
 	 * Multiplies this matrix by the given matrix
 	 * @param mat 	the other matrix(the number of columns of the given matrix must match the number of rows of this matrix)
-	 * @oaram dest	the destination matrix or null (null -> creates new matrix)
+	 * @param dest	the destination matrix or null (null creates new matrix)
 	 * @return the result / destination matrix
 	 * */
 	public IMatrix mul(IMatrix mat, IMatrix dest);
@@ -214,7 +214,7 @@ public interface IMatrix {
 	
 	
 	/**
-	 * @return true, if this matrix is a square matrix and an upper triangular matrix (-> zeros below diagonal)
+	 * @return true, if this matrix is a square matrix and an upper triangular matrix (zeros below diagonal)
 	 * */
 	public boolean isUpperTriangular();
 	
