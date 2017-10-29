@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.ruegnerlukas.simplemath.matrix.Matrix4f;
 import com.ruegnerlukas.simplemath.matrix.Matrixf;
+import com.ruegnerlukas.simplemath.vectors.Quaternion;
 import com.ruegnerlukas.simplemath.vectors.vec4.Vector4f;
 
 public class Test {
@@ -19,41 +20,111 @@ public class Test {
 		float axisZ = 0.4f;
 		long seed = 3425;
 			
-		
-		
-		System.out.println();
-		System.out.println("BASE");
-		System.out.println(fillRandom(new Matrix4f(), seed).toFormattedString());
-		
-		
-		
-		
-		System.out.println();
-		System.out.println("LWJGL");
-		org.lwjgl.util.vector.Matrix4f lwjglMat = org.lwjgl.util.vector.Matrix4f.setIdentity(new org.lwjgl.util.vector.Matrix4f());
-		fillRandom(lwjglMat, seed);
-		System.out.println(toStringLWJGL(lwjglMat));
 
-		System.out.println(org.lwjgl.util.vector.Matrix4f.transform(lwjglMat, new org.lwjgl.util.vector.Vector4f(1f, 0f, 0f, 0f), null));
+//		System.out.println();
+//		System.out.println("LWJGL");
+//		org.lwjgl.util.vector.Quaternion lwjglQuat = new org.lwjgl.util.vector.Quaternion();
+//		fillRandom(lwjglQuat, seed);
+//		
+//		
+//		
+//		System.out.println(lwjglQuat);
+		
+		
+		System.out.println();
+		System.out.println("GDX");
+		com.badlogic.gdx.math.Matrix4 gdxMat = fillRandom(new com.badlogic.gdx.math.Matrix4(), seed);
+		com.badlogic.gdx.math.Quaternion gdxQuat = new com.badlogic.gdx.math.Quaternion();
+		fillRandom(gdxQuat, seed);
+		
+		float[] gdxRotMat = new float[4*4];
+		gdxQuat.nor();
+		gdxQuat.toMatrix(gdxRotMat);
+		System.out.println(new com.badlogic.gdx.math.Matrix4(gdxRotMat));
+		
+		System.out.println(gdxQuat);
 		
 		
 		
 		
 		System.out.println();
 		System.out.println("SIMPLE MATH");
-		Matrix4f smMat = (Matrix4f)Matrixf.createIdentity(4);
-		fillRandom(smMat, seed);
-		System.out.println(smMat.toFormattedString());
-		System.out.println(smMat.transformVector(new Vector4f(1f, 0f, 0f, 0f)));
+//		Matrix4f smMat = fillRandom(new Matrix4f(), seed);
+		Quaternion smQuat = new Quaternion();
+		fillRandom(smQuat, seed);
+		
+		System.out.println(smQuat.normalize().toRotationMatrix().getSubmatrix(0, 0, 3, 3).toFormattedString());
+		
+		System.out.println(smQuat);
 		
 		
 		
-		System.out.println();
-		System.out.println("DIFFERENCE");
-		System.out.println(difference(lwjglMat, smMat).toFormattedString());
+		
+//		System.out.println();
+//		System.out.println("BASE");
+//		System.out.println(fillRandom(new Matrix4f(), seed).toFormattedString());
+//		
+//		
+//		
+//		
+//		System.out.println();
+//		System.out.println("LWJGL");
+//		org.lwjgl.util.vector.Matrix4f lwjglMat = org.lwjgl.util.vector.Matrix4f.setIdentity(new org.lwjgl.util.vector.Matrix4f());
+//		fillRandom(lwjglMat, seed);
+//		System.out.println(toStringLWJGL(lwjglMat));
+//
+//		System.out.println(org.lwjgl.util.vector.Matrix4f.transform(lwjglMat, new org.lwjgl.util.vector.Vector4f(1f, 0f, 0f, 0f), null));
+//		
+//		
+//		
+//		
+//		System.out.println();
+//		System.out.println("SIMPLE MATH");
+//		Matrix4f smMat = (Matrix4f)Matrixf.createIdentity(4);
+//		fillRandom(smMat, seed);
+//		System.out.println(smMat.toFormattedString());
+//		System.out.println(smMat.transformVector(new Vector4f(1f, 0f, 0f, 0f)));
+//		
+//		
+//		
+//		System.out.println();
+//		System.out.println("DIFFERENCE");
+//		System.out.println(difference(lwjglMat, smMat).toFormattedString());
 	}
 
 	
+	
+	
+	private static Quaternion fillRandom(Quaternion smQuat, long seed) {
+		Random random = new Random(seed);
+		smQuat.x = random.nextInt(20)-10;
+		smQuat.y = random.nextInt(20)-10;
+		smQuat.z = random.nextInt(20)-10;
+		smQuat.w = random.nextInt(20)-10;
+		return smQuat;
+	}
+	
+	
+	
+	private static org.lwjgl.util.vector.Quaternion fillRandom(org.lwjgl.util.vector.Quaternion lwjglQuat, long seed) {
+		Random random = new Random(seed);
+		lwjglQuat.x = random.nextInt(20)-10;
+		lwjglQuat.y = random.nextInt(20)-10;
+		lwjglQuat.z = random.nextInt(20)-10;
+		lwjglQuat.w = random.nextInt(20)-10;
+		return lwjglQuat;
+	}
+	
+	
+	
+	private static com.badlogic.gdx.math.Quaternion fillRandom(com.badlogic.gdx.math.Quaternion gdxQuat, long seed) {
+		Random random = new Random(seed);
+		gdxQuat.x = random.nextInt(20)-10;
+		gdxQuat.y = random.nextInt(20)-10;
+		gdxQuat.z = random.nextInt(20)-10;
+		gdxQuat.w = random.nextInt(20)-10;
+		return gdxQuat;
+	}
 	
 	
 	
@@ -61,7 +132,7 @@ public class Test {
 		Random random = new Random(seed);
 		for(int i=0; i<4; i++) {
 			for(int j=0; j<4; j++) {
-				smMat.setData(i, j, random.nextInt(20)-10);
+				smMat.set(i, j, random.nextInt(20)-10);
 			}
 		}
 		return smMat;
@@ -86,6 +157,17 @@ public class Test {
 		lwjglMat.m31 = random.nextInt(20)-10;
 		lwjglMat.m32 = random.nextInt(20)-10;
 		lwjglMat.m33 = random.nextInt(20)-10;
+	}
+	
+	
+	private static com.badlogic.gdx.math.Matrix4 fillRandom(com.badlogic.gdx.math.Matrix4 gdxMat, long seed) {
+		Random random = new Random(seed);
+		float[] values = new float[16];
+		for(int i=0; i<16; i++) {
+			values[i] = random.nextInt(20)-10;
+		}
+		gdxMat.set(values);
+		return gdxMat;
 	}
 	
 	
