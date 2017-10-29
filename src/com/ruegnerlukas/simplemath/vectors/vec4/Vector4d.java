@@ -151,16 +151,6 @@ public class Vector4d implements IVector4 {
 	
 	
 	@Override
-	public short getShort(int index) {
-		if(index == 0) { return (short) this.x; }
-		if(index == 1) { return (short) this.y; }
-		if(index == 2) { return (short) this.z; }
-		if(index == 3) { return (short) this.w; }
-		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
-	}
-
-	
-	@Override
 	public int getInt(int index) {
 		if(index == 0) { return (int) this.x; }
 		if(index == 1) { return (int) this.y; }

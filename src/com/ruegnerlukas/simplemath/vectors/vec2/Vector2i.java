@@ -130,14 +130,6 @@ public class Vector2i implements IVector2 {
 	
 	
 	@Override
-	public short getShort(int index) {
-		if(index == 0) { return (short) this.x; }
-		if(index == 1) { return (short) this.y; }
-		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
-	}
-
-	
-	@Override
 	public int getInt(int index) {
 		if(index == 0) { return (int) this.x; }
 		if(index == 1) { return (int) this.y; }

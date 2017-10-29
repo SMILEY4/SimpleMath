@@ -1,7 +1,5 @@
 package com.ruegnerlukas.simplemath.vectors.vec2;
 
-import com.ruegnerlukas.simplemath.vectors.vec3.IVector3;
-
 public class Vector2d implements IVector2 {
 
 	
@@ -135,14 +133,6 @@ public class Vector2d implements IVector2 {
 	
 	
 	
-	
-	@Override
-	public short getShort(int index) {
-		if(index == 0) { return (short) this.x; }
-		if(index == 1) { return (short) this.y; }
-		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
-	}
-
 	
 	@Override
 	public int getInt(int index) {

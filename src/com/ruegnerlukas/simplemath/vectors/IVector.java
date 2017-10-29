@@ -13,9 +13,6 @@ public interface IVector {
 	 * */
 	public IVector set(int index, Number value);
 
-	/** @return the value of the component at the given index as a short */
-	public short getShort(int index);
-	
 	/** @return the value of the component at the given index as an integer */
 	public int 	getInt(int index);
 	

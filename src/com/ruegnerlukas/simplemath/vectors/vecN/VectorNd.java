@@ -2,9 +2,6 @@ package com.ruegnerlukas.simplemath.vectors.vecN;
 
 import java.util.Arrays;
 
-import com.ruegnerlukas.simplemath.vectors.IVector;
-import com.ruegnerlukas.simplemath.vectors.vec3.IVector3;
-import com.ruegnerlukas.simplemath.vectors.vec3.Vector3f;
 
 public class VectorNd implements IVectorN {
 
@@ -85,16 +82,6 @@ public class VectorNd implements IVectorN {
 
 	
 	
-	
-	@Override
-	public short getShort(int index) {
-		if( (0 <= index) && (index < getDimensions()) ) {
-			return (short) values[index];
-		} else {
-			throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());
-		}
-	}
-
 	
 	@Override
 	public int getInt(int index) {
