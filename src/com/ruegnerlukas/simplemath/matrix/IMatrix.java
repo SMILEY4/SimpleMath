@@ -256,14 +256,6 @@ public interface IMatrix {
 	
 	
 	/**
-	 * @return this matrix as a string for debugging
-	 * */
-	public String toFormattedString();
-	
-	
-	
-	
-	/**
 	 * Creates a new matrix  with the same values and size as this matrix.
 	 * @return the created matrix
 	 * */
