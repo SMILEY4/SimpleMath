@@ -315,7 +315,7 @@ public class Quaternion extends Vector4f {
 	
 	
 	/**
-	 * Multiplies this quaternion with the gigen quanternion (this = other*this)
+	 * Multiplies this quaternion with the given quanternion (this = other*this)
 	 * @param q the left Quaternion
 	 * @return this quaternion for chaining
 	 * */
