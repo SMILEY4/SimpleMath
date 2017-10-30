@@ -1,5 +1,7 @@
-package com.ruegnerlukas.simplemath.matrix;
+package com.ruegnerlukas.simplemath.matrix.matrix4;
 
+import com.ruegnerlukas.simplemath.matrix.IMatrix;
+import com.ruegnerlukas.simplemath.matrix.matrixN.Matrixf;
 import com.ruegnerlukas.simplemath.vectors.vec2.IVector2;
 import com.ruegnerlukas.simplemath.vectors.vec3.IVector3;
 import com.ruegnerlukas.simplemath.vectors.vec3.Vector3f;

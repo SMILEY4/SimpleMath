@@ -1,5 +1,6 @@
-package com.ruegnerlukas.simplemath.matrix;
+package com.ruegnerlukas.simplemath.matrix.matrixN;
 
+import com.ruegnerlukas.simplemath.matrix.IMatrix;
 import com.ruegnerlukas.simplemath.vectors.IVector;
 
 public interface IMatrixf extends IMatrix {

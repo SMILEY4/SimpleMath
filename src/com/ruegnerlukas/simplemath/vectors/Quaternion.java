@@ -2,7 +2,7 @@ package com.ruegnerlukas.simplemath.vectors;
 
 import com.ruegnerlukas.simplemath.MathUtils;
 import com.ruegnerlukas.simplemath.matrix.IMatrix;
-import com.ruegnerlukas.simplemath.matrix.Matrix4f;
+import com.ruegnerlukas.simplemath.matrix.matrix4.Matrix4f;
 import com.ruegnerlukas.simplemath.vectors.vec3.IVector3;
 import com.ruegnerlukas.simplemath.vectors.vec3.Vector3f;
 import com.ruegnerlukas.simplemath.vectors.vec4.IVector4;

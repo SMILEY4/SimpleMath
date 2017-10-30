@@ -2,8 +2,8 @@ package com.ruegnerlukas;
 
 import java.util.Random;
 
-import com.ruegnerlukas.simplemath.matrix.Matrix4f;
-import com.ruegnerlukas.simplemath.matrix.Matrixf;
+import com.ruegnerlukas.simplemath.matrix.matrix4.Matrix4f;
+import com.ruegnerlukas.simplemath.matrix.matrixN.Matrixf;
 import com.ruegnerlukas.simplemath.vectors.Quaternion;
 import com.ruegnerlukas.simplemath.vectors.vec4.Vector4f;
 
