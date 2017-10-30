@@ -22,6 +22,7 @@ public class Matrixf implements IMatrixf {
 		} else {
 			mat = new Matrixf(size, size);
 		}
+		boolean wasUnsafe = mat.isUnsafe();
 		mat.setUnsafe(true);
 		for(int i=0; i<size; i++) {
 			for(int j=0; j<size; j++) {
@@ -32,7 +33,7 @@ public class Matrixf implements IMatrixf {
 				}
 			}
 		}
-		mat.setUnsafe(false);
+		mat.setUnsafe(wasUnsafe);
 		return mat;
 	}
 	

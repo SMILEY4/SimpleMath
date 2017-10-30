@@ -400,11 +400,12 @@ public class Quaternion extends Vector4f {
 	public Quaternion setFromMatrix(IMatrix mat) {
 		if(mat.getNumberColumns() >= 3 && mat.getNumberRows() >= 3) {
 		
+			boolean wasUnsafe = mat.isUnsafe();
 			mat.setUnsafe(true);
 			setFromMatrix(	mat.getFloat(0, 0), mat.getFloat(0, 1), mat.getFloat(0, 2),
 							mat.getFloat(1, 0), mat.getFloat(1, 1), mat.getFloat(1, 2),
 							mat.getFloat(2, 0), mat.getFloat(2, 1), mat.getFloat(2, 2) );
-			mat.setUnsafe(false);
+			mat.setUnsafe(wasUnsafe);
 			return this;
 		} else {
 			throw new IllegalArgumentException("matrix must be at least 3x3.");
