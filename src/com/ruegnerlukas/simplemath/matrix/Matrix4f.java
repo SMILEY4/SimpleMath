@@ -57,27 +57,22 @@ public class Matrix4f extends Matrixf {
 			throw new IllegalArgumentException("Input matrix size invalid: " + mat.getNumberColumns() + "," + mat.getNumberRows()
 			+ ". Should be " + this.getNumberColumns() + "," + this.getNumberRows());
 		}
-		if(mat instanceof IMatrixf) {
-			IMatrixf matf = (IMatrixf)mat;
-			this.getData()[0][0] += matf.getData()[0][0];
-			this.getData()[0][1] += matf.getData()[0][1];
-			this.getData()[0][2] += matf.getData()[0][2];
-			this.getData()[0][3] += matf.getData()[0][3];
-			this.getData()[1][0] += matf.getData()[1][0];
-			this.getData()[1][1] += matf.getData()[1][1];
-			this.getData()[1][2] += matf.getData()[1][2];
-			this.getData()[1][3] += matf.getData()[1][3];
-			this.getData()[2][0] += matf.getData()[2][0];
-			this.getData()[2][1] += matf.getData()[2][1];
-			this.getData()[2][2] += matf.getData()[2][2];
-			this.getData()[2][3] += matf.getData()[2][3];
-			this.getData()[3][0] += matf.getData()[3][0];
-			this.getData()[3][1] += matf.getData()[3][1];
-			this.getData()[3][2] += matf.getData()[3][2];
-			this.getData()[3][3] += matf.getData()[3][3];
-		} else {
-			// TODO: other matrix-types
-		}
+		this.getData()[0][0] += mat.getFloat(0, 0);
+		this.getData()[0][1] += mat.getFloat(0, 1);
+		this.getData()[0][2] += mat.getFloat(0, 2);
+		this.getData()[0][3] += mat.getFloat(0, 3);
+		this.getData()[1][0] += mat.getFloat(1, 0);
+		this.getData()[1][1] += mat.getFloat(1, 1);
+		this.getData()[1][2] += mat.getFloat(1, 2);
+		this.getData()[1][3] += mat.getFloat(1, 3);
+		this.getData()[2][0] += mat.getFloat(2, 0);
+		this.getData()[2][1] += mat.getFloat(2, 1);
+		this.getData()[2][2] += mat.getFloat(2, 2);
+		this.getData()[2][3] += mat.getFloat(2, 3);
+		this.getData()[3][0] += mat.getFloat(3, 0);
+		this.getData()[3][1] += mat.getFloat(3, 1);
+		this.getData()[3][2] += mat.getFloat(3, 2);
+		this.getData()[3][3] += mat.getFloat(3, 3);
 		return this;
 	}
 	
@@ -90,27 +85,22 @@ public class Matrix4f extends Matrixf {
 			throw new IllegalArgumentException("Input matrix size invalid: " + mat.getNumberColumns() + "," + mat.getNumberRows()
 			+ ". Should be " + this.getNumberColumns() + "," + this.getNumberRows());
 		}
-		if(mat instanceof IMatrixf) {
-			IMatrixf matf = (IMatrixf)mat;
-			this.getData()[0][0] -= matf.getData()[0][0];
-			this.getData()[0][1] -= matf.getData()[0][1];
-			this.getData()[0][2] -= matf.getData()[0][2];
-			this.getData()[0][3] -= matf.getData()[0][3];
-			this.getData()[1][0] -= matf.getData()[1][0];
-			this.getData()[1][1] -= matf.getData()[1][1];
-			this.getData()[1][2] -= matf.getData()[1][2];
-			this.getData()[1][3] -= matf.getData()[1][3];
-			this.getData()[2][0] -= matf.getData()[2][0];
-			this.getData()[2][1] -= matf.getData()[2][1];
-			this.getData()[2][2] -= matf.getData()[2][2];
-			this.getData()[2][3] -= matf.getData()[2][3];
-			this.getData()[3][0] -= matf.getData()[3][0];
-			this.getData()[3][1] -= matf.getData()[3][1];
-			this.getData()[3][2] -= matf.getData()[3][2];
-			this.getData()[3][3] -= matf.getData()[3][3];
-		} else {
-			// TODO: other matrix-types
-		}
+		this.getData()[0][0] -= mat.getFloat(0, 0);
+		this.getData()[0][1] -= mat.getFloat(0, 1);
+		this.getData()[0][2] -= mat.getFloat(0, 2);
+		this.getData()[0][3] -= mat.getFloat(0, 3);
+		this.getData()[1][0] -= mat.getFloat(1, 0);
+		this.getData()[1][1] -= mat.getFloat(1, 1);
+		this.getData()[1][2] -= mat.getFloat(1, 2);
+		this.getData()[1][3] -= mat.getFloat(1, 3);
+		this.getData()[2][0] -= mat.getFloat(2, 0);
+		this.getData()[2][1] -= mat.getFloat(2, 1);
+		this.getData()[2][2] -= mat.getFloat(2, 2);
+		this.getData()[2][3] -= mat.getFloat(2, 3);
+		this.getData()[3][0] -= mat.getFloat(3, 0);
+		this.getData()[3][1] -= mat.getFloat(3, 1);
+		this.getData()[3][2] -= mat.getFloat(3, 2);
+		this.getData()[3][3] -= mat.getFloat(3, 3);
 		return this;
 	}
 	

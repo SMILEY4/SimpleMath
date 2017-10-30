@@ -299,17 +299,11 @@ public class Matrixf implements IMatrixf {
 				throw new IllegalArgumentException("Destination matrix invalid: number of rows:" + dest.getNumberRows() + ". Should be " + (rowEnd-rowStart+1) );
 			}
 		}
-		if(dest instanceof IMatrixf) {
-			IMatrixf destf = (IMatrixf)dest;
-			for(int c=colStart, i=0; c<=colEnd; c++, i++) {
-				for(int r=rowStart, j=0; r<=rowEnd; r++, j++) {
-					destf.set(i, j, this.data[c][r]);
-				}
+		for(int c=colStart, i=0; c<=colEnd; c++, i++) {
+			for(int r=rowStart, j=0; r<=rowEnd; r++, j++) {
+				dest.set(i, j, this.data[c][r]);
 			}
-		} else {
-			// TODO: other matrix-types
 		}
-		
 	}
 
 	
@@ -492,15 +486,10 @@ public class Matrixf implements IMatrixf {
 			throw new IllegalArgumentException("Input matrix size invalid: " + mat.getNumberColumns() + "," + mat.getNumberRows()
 			+ ". Should be " + this.getNumberColumns() + "," + this.getNumberRows());
 		}
-		if(mat instanceof IMatrixf) {
-			IMatrixf matf = (IMatrixf)mat;
-			for(int j=0; j<this.getNumberRows(); j++) {
-				for(int i=0; i<this.getNumberColumns(); i++) {
-					this.data[i][j] += matf.getData()[i][j];
-				}
+		for(int j=0; j<this.getNumberRows(); j++) {
+			for(int i=0; i<this.getNumberColumns(); i++) {
+				this.data[i][j] += mat.getFloat(i, j);
 			}
-		} else {
-			// TODO: other matrix-types
 		}
 		return this;
 	}
@@ -514,15 +503,10 @@ public class Matrixf implements IMatrixf {
 			throw new IllegalArgumentException("Input matrix size invalid: " + mat.getNumberColumns() + "," + mat.getNumberRows()
 			+ ". Should be " + this.getNumberColumns() + "," + this.getNumberRows());
 		}
-		if(mat instanceof IMatrixf) {
-			IMatrixf matf = (IMatrixf)mat;
-			for(int j=0; j<this.getNumberRows(); j++) {
-				for(int i=0; i<this.getNumberColumns(); i++) {
-					this.data[i][j] -= matf.getData()[i][j];
-				}
+		for(int j=0; j<this.getNumberRows(); j++) {
+			for(int i=0; i<this.getNumberColumns(); i++) {
+				this.data[i][j] -= mat.getFloat(i, j);
 			}
-		} else {
-			// TODO: other matrix-types
 		}
 		return this;
 	}
@@ -648,16 +632,9 @@ public class Matrixf implements IMatrixf {
 		if(this.getNumberColumns() != mat.getNumberColumns() || this.getNumberRows() != mat.getNumberRows()) {
 			return false;
 		}
-		float[][] dataMat = null;
-		if(mat instanceof IMatrixf) {
-			dataMat = ((IMatrixf)mat).getData();
-		} else {
-			// TODO: other matrix types
-			return false;
-		}
 		for(int j=0; j<this.getNumberRows(); j++) {
 			for(int i=0; i<this.getNumberColumns(); i++) {
-				if( !MathUtils.isNearlyEqual(this.data[i][j], dataMat[i][j], true) ) {
+				if( !MathUtils.isNearlyEqual(this.data[i][j], mat.getFloat(i, j), true) ) {
 					return false;
 				}
 			}
