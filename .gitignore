@@ -6,4 +6,4 @@
 toDo.txt
 *.jar
 /doc
-*/Test.java
+src/com/ruegnerlukas/Test.java
