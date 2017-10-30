@@ -101,6 +101,16 @@ public interface IMatrix {
 	
 	
 	/**
+	 * copies the long values of this matrix into the given array
+	 * @param data the destination array (must be the sames size as this matrix) or null
+	 * @return the (created) destination array with the same values as this matrix
+	 * */
+	public IMatrix copyData(long[][] data);
+	
+	
+	
+	
+	/**
 	 * copies the float values of this matrix into the given array
 	 * @param data the destination array (must be the sames size as this matrix) or null
 	 * @return the (created) destination array with the same values as this matrix

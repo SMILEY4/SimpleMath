@@ -1,15 +1,14 @@
 package com.ruegnerlukas.simplemath.matrix.matrixN;
 
-import com.ruegnerlukas.simplemath.MathUtils;
 import com.ruegnerlukas.simplemath.matrix.IMatrix;
-import com.ruegnerlukas.simplemath.matrix.matrix4.Matrix4f;
+import com.ruegnerlukas.simplemath.matrix.matrix4.Matrix4l;
 import com.ruegnerlukas.simplemath.vectors.IVector;
-import com.ruegnerlukas.simplemath.vectors.vec2.Vector2f;
-import com.ruegnerlukas.simplemath.vectors.vec3.Vector3f;
-import com.ruegnerlukas.simplemath.vectors.vec4.Vector4f;
-import com.ruegnerlukas.simplemath.vectors.vecN.VectorNf;
+import com.ruegnerlukas.simplemath.vectors.vec2.Vector2l;
+import com.ruegnerlukas.simplemath.vectors.vec3.Vector3l;
+import com.ruegnerlukas.simplemath.vectors.vec4.Vector4l;
+import com.ruegnerlukas.simplemath.vectors.vecN.VectorNl;
 
-public class Matrixf implements IMatrixf {
+public class Matrixl implements IMatrixl {
 
 	
 	
@@ -17,21 +16,21 @@ public class Matrixf implements IMatrixf {
 	/**
 	 * @return an identity matrix with the given size
 	 * */
-	public static Matrixf createIdentity(int size) {
-		Matrixf mat = null;
+	public static Matrixl createIdentity(int size) {
+		Matrixl mat = null;
 		if(size == 4) {
-			mat = new Matrix4f();
+			mat = new Matrix4l();
 		} else {
-			mat = new Matrixf(size, size);
+			mat = new Matrixl(size, size);
 		}
 		boolean wasUnsafe = mat.isUnsafe();
 		mat.setUnsafe(true);
 		for(int i=0; i<size; i++) {
 			for(int j=0; j<size; j++) {
 				if(i == j) {
-					mat.set(i, j, 1f);
+					mat.set(i, j, 1);
 				} else {
-					mat.set(i, j, 0f);
+					mat.set(i, j, 0);
 				}
 			}
 		}
@@ -44,7 +43,7 @@ public class Matrixf implements IMatrixf {
 	
 	
 	
-	private float[][] data;
+	private long[][] data;
 	private int columns;
 	private int rows;
 
@@ -58,18 +57,18 @@ public class Matrixf implements IMatrixf {
 	/**
 	 * creates a zero-matrix with the given number of rows and columns
 	 * */
-	public Matrixf(int columns, int rows) {
-		this(columns, rows, 0f);
+	public Matrixl(int columns, int rows) {
+		this(columns, rows, 0);
 	}
 	
 	
 	/**
 	 * creates matrix filled with the given value and with the given number of rows and columns
 	 * */
-	public Matrixf(int columns, int rows, float fill) {
+	public Matrixl(int columns, int rows, long fill) {
 		this.columns = columns;
 		this.rows = rows;
-		this.data = new float[columns][rows];
+		this.data = new long[columns][rows];
 		for(int i=0; i<data.length; i++) {
 			for(int j=0; j<data[i].length; j++) {
 				data[i][j] = fill;
@@ -81,7 +80,7 @@ public class Matrixf implements IMatrixf {
 	/**
 	 * Creates a new matrix with the given data
 	 * */
-	public Matrixf(float[][] data) {
+	public Matrixl(long[][] data) {
 		this.data = data;
 		this.columns = data.length;
 		this.rows = data[0].length;
@@ -91,7 +90,7 @@ public class Matrixf implements IMatrixf {
 	/**
 	 * Creates a new matrix with the given vectors as either rows or columns
 	 * */
-	public Matrixf(IVector[] vectors, boolean asColumns) {
+	public Matrixl(IVector[] vectors, boolean asColumns) {
 		int dim = vectors[0].getDimensions();
 		if(!unsafe) {
 			for(int i=0; i<vectors.length; i++) {
@@ -103,11 +102,11 @@ public class Matrixf implements IMatrixf {
 		
 		this.columns = asColumns ? vectors.length : dim;
 		this.rows = asColumns ? dim : vectors.length;
-		this.data = new float[this.columns][this.rows];
+		this.data = new long[this.columns][this.rows];
 		
 		for(int i=0; i<this.columns; i++) {
 			for(int j=0; j<this.rows; j++) {
-				this.data[i][j] = asColumns ? vectors[i].getFloat(j) : vectors[j].getFloat(i);
+				this.data[i][j] = asColumns ? vectors[i].getLong(j) : vectors[j].getLong(i);
 			}
 		}
 		
@@ -169,7 +168,7 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
-	public float[][] getData() {
+	public long[][] getData() {
 		return this.data;
 	}
 
@@ -177,7 +176,7 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
-	public float getData(int i, int j) {
+	public long getData(int i, int j) {
 		if( !unsafe && (i < 0 || i >= getNumberColumns() || j < 0 || j >= getNumberRows()) ) {
 			throw new IndexOutOfBoundsException("Index: " + i+","+j + ", size: " + getNumberColumns() + "," + getNumberRows());
 		}
@@ -188,7 +187,7 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
-	public float[] getRow(int row, float[] dest) {
+	public long[] getRow(int row, long[] dest) {
 		if(!unsafe) {
 			if(dest.length != getNumberColumns()) {
 				throw new IllegalArgumentException("Destination array length invalid: " + dest.length + ". Should be " + getNumberColumns());
@@ -207,7 +206,7 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
-	public float[] getColumn(int column, float[] dest) {
+	public long[] getColumn(int column, long[] dest) {
 		if(!unsafe) {
 			if(dest.length != getNumberRows()) {
 				throw new IllegalArgumentException("Destination array length invalid: " + dest.length + ". Should be " + getNumberRows());
@@ -226,8 +225,8 @@ public class Matrixf implements IMatrixf {
 	
 
 	@Override
-	public float[] getRow(int row) {
-		float[] data = new float[getNumberColumns()];
+	public long[] getRow(int row) {
+		long[] data = new long[getNumberColumns()];
 		getRow(row, data);
 		return data;
 	}
@@ -236,8 +235,8 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
-	public float[] getColumn(int column) {
-		float[] data = new float[getNumberRows()];
+	public long[] getColumn(int column) {
+		long[] data = new long[getNumberRows()];
 		getColumn(column, data);
 		return data;
 	}
@@ -249,13 +248,13 @@ public class Matrixf implements IMatrixf {
 	public IVector getRowVector(int row) {
 		final int n = getNumberColumns();
 		if(n == 2) {
-			return new Vector2f(data[0][row], data[1][row]);
+			return new Vector2l(data[0][row], data[1][row]);
 		} else if(n ==3) {
-			return new Vector3f(data[0][row], data[1][row], data[2][row]);
+			return new Vector3l(data[0][row], data[1][row], data[2][row]);
 		} else if(n == 4) {
-			return new Vector4f(data[0][row], data[1][row], data[2][row], data[3][row]);
+			return new Vector4l(data[0][row], data[1][row], data[2][row], data[3][row]);
 		} else {
-			return new VectorNf(getRow(row));
+			return new VectorNl(getRow(row));
 		}
 	}
 
@@ -266,13 +265,13 @@ public class Matrixf implements IMatrixf {
 	public IVector getColumnVector(int column) {
 		final int n = getNumberRows();
 		if(n == 2) {
-			return new Vector2f(data[column][0], data[column][1]);
+			return new Vector2l(data[column][0], data[column][1]);
 		} else if(n == 3) {
-			return new Vector3f(data[column][0], data[column][1], data[column][2]);
+			return new Vector3l(data[column][0], data[column][1], data[column][2]);
 		} else if(n == 4) {
-			return new Vector4f(data[column][0], data[column][1], data[column][2], data[column][3]);
+			return new Vector4l(data[column][0], data[column][1], data[column][2], data[column][3]);
 		} else {
-			return new VectorNf(getColumn(column));
+			return new VectorNl(getColumn(column));
 		}
 	}
 	
@@ -312,8 +311,8 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
-	public Matrixf getSubmatrix(int colStart, int rowStart, int colEnd, int rowEnd) {
-		Matrixf mat = new Matrixf(colEnd-colStart+1, rowEnd-rowStart+1);
+	public Matrixl getSubmatrix(int colStart, int rowStart, int colEnd, int rowEnd) {
+		Matrixl mat = new Matrixl(colEnd-colStart+1, rowEnd-rowStart+1);
 		getSubmatrix(colStart, rowStart, colEnd, rowEnd, mat);
 		return mat;
 	}
@@ -322,7 +321,7 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
-	public Matrixf switchColumns(int c0, int c1) {
+	public Matrixl switchColumns(int c0, int c1) {
 		if(!unsafe) {
 			if( (c0 < 0) || (c0 >= getNumberColumns()) ) {
 				throw new IndexOutOfBoundsException("Index: " + c0 + ", size: " + getNumberColumns());
@@ -331,7 +330,7 @@ public class Matrixf implements IMatrixf {
 				throw new IndexOutOfBoundsException("Index: " + c1 + ", size: " + getNumberColumns());
 			}
 		}
-		float tmp;
+		long tmp;
 		for(int j=0; j<getNumberRows(); j++) {
 			tmp = this.data[c0][j];
 			data[c0][j] = data[c1][j];
@@ -344,7 +343,7 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
-	public Matrixf switchRows(int r0, int r1) {
+	public Matrixl switchRows(int r0, int r1) {
 		if(!unsafe) {
 			if( (r0 < 0) || (r0 >= getNumberRows()) ) {
 				throw new IndexOutOfBoundsException("Index: " + r0 + ", size: " + getNumberRows());
@@ -353,7 +352,7 @@ public class Matrixf implements IMatrixf {
 				throw new IndexOutOfBoundsException("Index: " + r1 + ", size: " + getNumberRows());
 			}
 		}
-		float tmp;
+		long tmp;
 		for(int i=0; i<getNumberColumns(); i++) {
 			tmp = this.data[i][r0];
 			data[i][r0] = data[i][r1];
@@ -366,7 +365,7 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
-	public Matrixf set(float[][] data) {
+	public Matrixl set(long[][] data) {
 		this.data = data;
 		this.columns = data.length;
 		this.rows = data[0].length;
@@ -378,14 +377,14 @@ public class Matrixf implements IMatrixf {
 	
 	@Override
 	public IMatrix set(int column, int row, Number value) {
-		return this.set(column, row, value.floatValue());
+		return this.set(column, row, value.longValue());
 	}
 	
 	
 	
 	
 	@Override
-	public Matrixf set(int i, int j, float v) {
+	public Matrixl set(int i, int j, long v) {
 		if( !unsafe && (i < 0 || i >= getNumberColumns() || j < 0 || j >= getNumberRows()) ) {
 			throw new IndexOutOfBoundsException("Index: " + i+","+j + ", size: " + getNumberColumns() + "," + getNumberRows());
 		}
@@ -397,7 +396,7 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
-	public Matrixf setColumn(int column, float[] data) {
+	public Matrixl setColumn(int column, long[] data) {
 		if(!unsafe) {
 			if(column < 0 || column >= getNumberColumns()) {
 				throw new IndexOutOfBoundsException("Index: " + column + ", size: " + getNumberColumns());
@@ -416,7 +415,7 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
-	public Matrixf setRow(int row, float[] data) {
+	public Matrixl setRow(int row, long[] data) {
 		if(!unsafe) {
 			if(row < 0 || row >= getNumberRows()) {
 				throw new IndexOutOfBoundsException("Index: " + row + ", size: " + getNumberRows());
@@ -435,13 +434,29 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
-	public Matrixf copyData(int[][] data) {
+	public Matrixl copyData(int[][] data) {
 		if( !unsafe && (data.length != this.getNumberColumns() || data[0].length != this.getNumberRows()) ) {
 			throw new IllegalArgumentException("Input array length invalid: " + data.length + "," + data[0].length + ". Should be " + getNumberColumns() + "," + getNumberRows());
 		}
 		for(int i=0; i<this.getNumberColumns(); i++) {
 			for(int j=0; j<this.getNumberRows(); j++) {
-				this.data[i][j] = (float) data[i][j];
+				this.data[i][j] = (long) data[i][j];
+			}
+		}
+		return this;
+	}
+
+	
+	
+	
+	@Override
+	public Matrixl copyData(long[][] data) {
+		if( !unsafe && (data.length != this.getNumberColumns() || data[0].length != this.getNumberRows()) ) {
+			throw new IllegalArgumentException("Input array length invalid: " + data.length + "," + data[0].length + ". Should be " + getNumberColumns() + "," + getNumberRows());
+		}
+		for(int i=0; i<this.getNumberColumns(); i++) {
+			for(int j=0; j<this.getNumberRows(); j++) {
+				this.data[i][j] = (long) data[i][j];
 			}
 		}
 		return this;
@@ -449,15 +464,15 @@ public class Matrixf implements IMatrixf {
 	
 	
 	
-	
+
 	@Override
-	public Matrixf copyData(long[][] data) {
+	public Matrixl copyData(float[][] data) {
 		if( !unsafe && (data.length != this.getNumberColumns() || data[0].length != this.getNumberRows()) ) {
 			throw new IllegalArgumentException("Input array length invalid: " + data.length + "," + data[0].length + ". Should be " + getNumberColumns() + "," + getNumberRows());
 		}
 		for(int i=0; i<this.getNumberColumns(); i++) {
 			for(int j=0; j<this.getNumberRows(); j++) {
-				this.data[i][j] = (float) data[i][j];
+				this.data[i][j] = (long) data[i][j];
 			}
 		}
 		return this;
@@ -467,29 +482,13 @@ public class Matrixf implements IMatrixf {
 	
 
 	@Override
-	public Matrixf copyData(float[][] data) {
+	public Matrixl copyData(double[][] data) {
 		if( !unsafe && (data.length != this.getNumberColumns() || data[0].length != this.getNumberRows()) ) {
 			throw new IllegalArgumentException("Input array length invalid: " + data.length + "," + data[0].length + ". Should be " + getNumberColumns() + "," + getNumberRows());
 		}
 		for(int i=0; i<this.getNumberColumns(); i++) {
 			for(int j=0; j<this.getNumberRows(); j++) {
-				this.data[i][j] = data[i][j];
-			}
-		}
-		return this;
-	}
-
-	
-	
-
-	@Override
-	public Matrixf copyData(double[][] data) {
-		if( !unsafe && (data.length != this.getNumberColumns() || data[0].length != this.getNumberRows()) ) {
-			throw new IllegalArgumentException("Input array length invalid: " + data.length + "," + data[0].length + ". Should be " + getNumberColumns() + "," + getNumberRows());
-		}
-		for(int i=0; i<this.getNumberColumns(); i++) {
-			for(int j=0; j<this.getNumberRows(); j++) {
-				this.data[i][j] = (float) data[i][j];
+				this.data[i][j] = (long) data[i][j];
 			}
 		}
 		return this;
@@ -499,14 +498,14 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
-	public Matrixf add(IMatrix mat) {
+	public Matrixl add(IMatrix mat) {
 		if(!unsafe && !compareSize(mat)) {
 			throw new IllegalArgumentException("Input matrix size invalid: " + mat.getNumberColumns() + "," + mat.getNumberRows()
 			+ ". Should be " + this.getNumberColumns() + "," + this.getNumberRows());
 		}
 		for(int j=0; j<this.getNumberRows(); j++) {
 			for(int i=0; i<this.getNumberColumns(); i++) {
-				this.data[i][j] += mat.getFloat(i, j);
+				this.data[i][j] += mat.getLong(i, j);
 			}
 		}
 		return this;
@@ -516,14 +515,14 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
-	public Matrixf sub(IMatrix mat) {
+	public Matrixl sub(IMatrix mat) {
 		if(!unsafe && !compareSize(mat)) {
 			throw new IllegalArgumentException("Input matrix size invalid: " + mat.getNumberColumns() + "," + mat.getNumberRows()
 			+ ". Should be " + this.getNumberColumns() + "," + this.getNumberRows());
 		}
 		for(int j=0; j<this.getNumberRows(); j++) {
 			for(int i=0; i<this.getNumberColumns(); i++) {
-				this.data[i][j] -= mat.getFloat(i, j);
+				this.data[i][j] -= mat.getLong(i, j);
 			}
 		}
 		return this;
@@ -533,8 +532,8 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
-	public Matrixf scale(Number scalar) {
-		return this.scale(scalar.floatValue());
+	public Matrixl scale(Number scalar) {
+		return this.scale(scalar.doubleValue());
 	}
 	
 	
@@ -543,7 +542,7 @@ public class Matrixf implements IMatrixf {
 	 * @param scalar the scalar
 	 * @return this matrix for chaining
 	 * */
-	public Matrixf scale(float scalar) {
+	public Matrixl scale(double scalar) {
 		for(int j=0; j<this.getNumberRows(); j++) {
 			for(int i=0; i<this.getNumberColumns(); i++) {
 				this.data[i][j] *= scalar;
@@ -556,29 +555,29 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
-	public Matrixf mul(IMatrix mat) {
-		Matrixf.mul(this, mat, this, this.isUnsafe());
+	public Matrixl mul(IMatrix mat) {
+		Matrixl.mul(this, mat, this, this.isUnsafe());
 		return this;
 	}
 
 	
 	@Override
-	public Matrixf mul(IMatrix mat, IMatrix dest) {
-		Matrixf.mul(this, mat, dest, this.isUnsafe());
+	public Matrixl mul(IMatrix mat, IMatrix dest) {
+		Matrixl.mul(this, mat, dest, this.isUnsafe());
 		return this;
 	}
 	
 	
 	@Override
 	public IMatrix mulLeft(IMatrix mat) {
-		Matrixf.mul(mat, this, this, this.isUnsafe());
+		Matrixl.mul(mat, this, this, this.isUnsafe());
 		return this;
 	}
 	
 
 	@Override
 	public IMatrix mulLeft(IMatrix mat, IMatrix dest) {
-		Matrixf.mul(mat, this, dest, this.isUnsafe());
+		Matrixl.mul(mat, this, dest, this.isUnsafe());
 		return this;
 	}
 	
@@ -606,18 +605,30 @@ public class Matrixf implements IMatrixf {
 					+ "must match the number of rows (" + aRows + ") of this matrix.");
 		}
 		
-		float[][] dataC = new float[aCols][bRows];	// l x n
 		
-		for(int i=0; i<aCols; i++) {
-			for(int j=0; j<bRows; j++) {
-				for(int k=0; k<aRows; k++) {
-					dataC[i][j] += matA.getFloat(i, k) * matB.getFloat(k, j);
+		if( (matA instanceof Matrixl && matB instanceof Matrixl) || (matA instanceof Matrixl && matB instanceof Matrixl) ) {
+			int[][] dataC = new int[aCols][bRows];	// l x n
+			for(int i=0; i<aCols; i++) {
+				for(int j=0; j<bRows; j++) {
+					for(int k=0; k<aRows; k++) {
+						dataC[i][j] += matA.getLong(i, k) * matB.getLong(k, j);
+					}
 				}
 			}
+			dest.copyData(dataC);
+			
+		} else {
+			double[][] dataC = new double[aCols][bRows];	// l x n
+			for(int i=0; i<aCols; i++) {
+				for(int j=0; j<bRows; j++) {
+					for(int k=0; k<aRows; k++) {
+						dataC[i][j] += matA.getDouble(i, k) * matB.getDouble(k, j);
+					}
+				}
+			}
+			dest.copyData(dataC);
 		}
-
-		dest.copyData(dataC);
-
+		
 		return true;
 	}
 	
@@ -625,7 +636,7 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
-	public Matrixf negate() {
+	public Matrixl negate() {
 		for(int j=0; j<this.getNumberRows(); j++) {
 			for(int i=0; i<this.getNumberColumns(); i++) {
 				this.data[i][j] = -this.data[i][j];
@@ -652,7 +663,7 @@ public class Matrixf implements IMatrixf {
 		}
 		for(int j=0; j<this.getNumberRows(); j++) {
 			for(int i=0; i<this.getNumberColumns(); i++) {
-				if( !MathUtils.isNearlyEqual(this.data[i][j], mat.getFloat(i, j), true) ) {
+				if(this.data[i][j] == mat.getLong(i, j)) {
 					return false;
 				}
 			}
@@ -676,8 +687,8 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
-	public Matrixf transpose() {
-		float[][] dataTransp = new float[getNumberColumns()][getNumberRows()];
+	public Matrixl transpose() {
+		long[][] dataTransp = new long[getNumberColumns()][getNumberRows()];
 		for(int i=0; i<getNumberColumns(); i++) {
 			for(int j=0; j<getNumberRows(); j++) {
 				dataTransp[i][j] = this.data[j][i];
@@ -702,7 +713,7 @@ public class Matrixf implements IMatrixf {
 		}
 		for(int row=0; row<getNumberRows(); row++) {
 			for(int col=0; col<getNumberColumns(); col++) {
-				if(row > col && !MathUtils.isNearlyEqual(this.data[col][row], 0f)) {
+				if(row > col && this.data[col][row] != 0) {
 					return false;
 				}
 			}
@@ -714,14 +725,14 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
-	public Matrixf toUpperTriangle() {
+	public Matrixl toUpperTriangle() {
 		if(!unsafe && !isSquare()) {
 			throw new IllegalArgumentException("Matrix must be square.");
 		}
 		
-		float[][] m = this.data;
-		float f1 = 0;
-		float temp = 0;
+		long[][] m = this.data;
+		long f1 = 0;
+		long temp = 0;
 		int tms = getNumberColumns();
 		int v = 1;
 		int iDF = 1;
@@ -745,7 +756,7 @@ public class Matrixf implements IMatrixf {
 					}
 				}
 				
-				if(!MathUtils.isNearlyEqual(m[col][col], 0)) {
+				if(m[col][col] != 0) {
 					try {
 						f1 = (-1) * m[col][row] / m[col][col];
 						for(int i=col; i<tms; i++) {
@@ -775,12 +786,12 @@ public class Matrixf implements IMatrixf {
 	/**
 	 * @return the determinant of this matrix. This matrix must be a square matrix
 	 * */
-	public float determinant() {
+	public long determinant() {
 		return determinant(this.data, unsafe);
 	}
 
 	
-	private static float determinant(float[][] matrix, boolean unsafe) {
+	private static long determinant(long[][] matrix, boolean unsafe) {
 		
 		if(!unsafe && matrix.length != matrix[0].length) {
 			throw new IllegalArgumentException("Matrix must be square.");
@@ -797,10 +808,10 @@ public class Matrixf implements IMatrixf {
 
 		// NxN matrix
 		int n = matrix.length;
-		float det = 0;
+		long det = 0;
 		
 		for(int i=0; i<n; i++) {
-			float[][] smaller = new float[n-1][n-1];
+			long[][] smaller = new long[n-1][n-1];
 			
 			for(int a=1; a<n; a++) {
 				for(int b=0; b<n; b++) {
@@ -821,7 +832,6 @@ public class Matrixf implements IMatrixf {
 		}
 		
 		return det;
-		
 	}
 	
 	
@@ -836,12 +846,12 @@ public class Matrixf implements IMatrixf {
 	/**
 	 * @return the trace of this matrix. This matrix must be a square matrix
 	 * */
-	public float trace() {
+	public long trace() {
 		if(!unsafe && !isSquare()) {
 			throw new IllegalArgumentException("Matrix must be square.");
 		}
 		
-		float trace = 0;
+		long trace = 0;
 		for(int i=0; i<getNumberColumns(); i++) {
 			trace += this.data[i][i];
 		}
@@ -875,13 +885,13 @@ public class Matrixf implements IMatrixf {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append("Matrix (float), " + this.getNumberColumns() + "x" + this.getNumberRows()).append(" (").append(Integer.toHexString(this.hashCode())).append(")");
+		sb.append("Matrix (long), " + this.getNumberColumns() + "x" + this.getNumberRows()).append(" (").append(Integer.toHexString(this.hashCode())).append(")");
 		sb.append(System.lineSeparator());
 		
 		for(int j=0; j<this.getNumberRows(); j++) {
 			sb.append("[");
 			for(int i=0; i<this.getNumberColumns(); i++) {
-				String strNumber = String.format("%.4f", this.data[i][j]);
+				String strNumber = ""+this.data[i][j];
 				sb.append(String.format("%1$10s", strNumber));
 				if(i != getNumberColumns()-1) {
 					sb.append(", ");
@@ -898,15 +908,15 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
-	public Matrixf copy() {
-		return new Matrixf(getNumberColumns(), getNumberRows()).copyData(this.data);
+	public Matrixl copy() {
+		return new Matrixl(getNumberColumns(), getNumberRows()).copyData(this.data);
 	}
 
 	
 	
 	
 	@Override
-	public Matrixf setUnsafe(boolean unsafe) {
+	public Matrixl setUnsafe(boolean unsafe) {
 		this.unsafe = unsafe;
 		return this;
 	}
