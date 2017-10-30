@@ -53,7 +53,7 @@ public class Test {
 		Quaternion smQuat = new Quaternion();
 		fillRandom(smQuat, seed);
 		
-		System.out.println(smQuat.normalize().toRotationMatrix().getSubmatrix(0, 0, 3, 3).toFormattedString());
+		System.out.println(smQuat.normalize().toRotationMatrix().getSubmatrix(0, 0, 3, 3));
 		
 		System.out.println(smQuat);
 		
