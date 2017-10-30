@@ -152,7 +152,7 @@ public interface IMatrix {
 	
 	/**
 	 * Multiplies this matrix by the given matrix
-	 * @param mat the other matrix (the number of columns of the given matrix must match the number of rows of this matrix)
+	 * @param mat the right matrix (the number of columns of the given matrix must match the number of rows of this matrix)
 	 * @return this matrix for chaining
 	 * */
 	public IMatrix mul(IMatrix mat);
@@ -162,12 +162,32 @@ public interface IMatrix {
 	
 	/**
 	 * Multiplies this matrix by the given matrix
-	 * @param mat 	the other matrix(the number of columns of the given matrix must match the number of rows of this matrix)
+	 * @param mat 	the right matrix(the number of columns of the given matrix must match the number of rows of this matrix)
 	 * @param dest	the destination matrix or null (null creates new matrix)
 	 * @return the result / destination matrix
 	 * */
 	public IMatrix mul(IMatrix mat, IMatrix dest);
 
+	
+	
+	
+	/**
+	 * Multiplies this matrix by the given matrix (this = mat * this)
+	 * @param mat the left matrix (the number of columns of the given matrix must match the number of rows of this matrix)
+	 * @return this matrix for chaining
+	 * */
+	public IMatrix mulLeft(IMatrix mat);
+	
+	
+	
+	
+	/**
+	 * Multiplies this matrix by the given matrix (this = mat * this)
+	 * @param mat 	the left matrix(the number of columns of the given matrix must match the number of rows of this matrix)
+	 * @param dest	the destination matrix or null (null creates new matrix)
+	 * @return the result / destination matrix
+	 * */
+	public IMatrix mulLeft(IMatrix mat, IMatrix dest);
 	
 	
 	

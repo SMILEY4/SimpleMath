@@ -555,19 +555,44 @@ public class Matrixf implements IMatrixf {
 	
 	@Override
 	public Matrixf mul(IMatrix mat) {
-		Matrixf dest = this;
-		mul(mat, dest);
+		Matrixf.mul(this, mat, this, this.isUnsafe());
 		return this;
 	}
 
 	
+	@Override
+	public Matrixf mul(IMatrix mat, IMatrix dest) {
+		Matrixf.mul(this, mat, dest, this.isUnsafe());
+		return this;
+	}
 	
 	
 	@Override
-	public Matrixf mul(IMatrix mat, IMatrix dest) {
+	public IMatrix mulLeft(IMatrix mat) {
+		Matrixf.mul(mat, this, this, this.isUnsafe());
+		return this;
+	}
+	
+
+	@Override
+	public IMatrix mulLeft(IMatrix mat, IMatrix dest) {
+		Matrixf.mul(mat, this, dest, this.isUnsafe());
+		return this;
+	}
+	
+	
+	/**
+	 * Multiplies the left matrix with the right matrix and stores the result into the dest-matrix
+	 * @return false, if dest is null
+	 * */
+	private static boolean mul(IMatrix left, IMatrix right, IMatrix dest, boolean unsafe) {
 		
-		Matrixf matA = this;
-		IMatrix matB = mat;
+		if(dest == null) {
+			return false;
+		}
+		
+		IMatrix matA = left;
+		IMatrix matB = right;
 		
 		int aCols = matA.getNumberColumns();// l
 		int aRows = matA.getNumberRows();	// m 
@@ -579,32 +604,21 @@ public class Matrixf implements IMatrixf {
 					+ "must match the number of rows (" + aRows + ") of this matrix.");
 		}
 		
-		float[][] dataA = matA.getData();
-		float[][] dataB = null;
-		if(matB instanceof IMatrixf) {
-			dataB = ((IMatrixf)matB).getData();
-		} else {
-			// TODO: other matrix types
-			return this;
-		}
 		float[][] dataC = new float[aCols][bRows];	// l x n
 		
 		for(int i=0; i<aCols; i++) {
 			for(int j=0; j<bRows; j++) {
 				for(int k=0; k<aRows; k++) {
-					dataC[i][j] += dataA[i][k] * dataB[k][j];
+					dataC[i][j] += matA.getFloat(i, k) * matB.getFloat(k, j);
 				}
 			}
 		}
-		
 
-		if(dest == null) {
-			return new Matrixf(dataC);
-		} else {
-			return (Matrixf) dest.copyData(dataC);
-		}
+		dest.copyData(dataC);
+
+		return true;
 	}
-
+	
 	
 	
 	
