@@ -169,7 +169,7 @@ public class Matrix4l extends Matrixl {
 	/**
 	 * Multiplies this matrix with the rotation specified by the given axis and angle
 	 * @param axis		the axis of rotation
-	 * @param angleDeg	the angle of rotation in radians
+	 * @param angleRad	the angle of rotation in radians
 	 * @return this matrix for chaining
 	 * */
 	public IMatrix rotateRad(IVector3 axis, double angleRad) {
@@ -182,7 +182,7 @@ public class Matrix4l extends Matrixl {
 	 * @param axisX		the x compontnt of the axis of rotation
 	 * @param axisY		the y compontnt of the axis of rotation
 	 * @param axisZ		the z compontnt of the axis of rotation
-	 * @param angleDeg	the angle of rotation in radians
+	 * @param angleRad	the angle of rotation in radians
 	 * @return this matrix for chaining
 	 * */
 	public IMatrix rotateRad(long axisX, long axisY, long axisZ, double angleRad) {
