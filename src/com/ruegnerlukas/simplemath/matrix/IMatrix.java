@@ -155,7 +155,7 @@ public interface IMatrix {
 	 * @param scalar the scalar
 	 * @return this matrix for chaining
 	 * */
-	public IMatrix scale(Number scalar);
+	public IMatrix mul(Number scalar);
 	
 	
 	

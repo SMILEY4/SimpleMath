@@ -532,7 +532,7 @@ public class Matrixd implements IMatrixd {
 	
 	
 	@Override
-	public Matrixd scale(Number scalar) {
+	public Matrixd mul(Number scalar) {
 		return this.scale(scalar.doubleValue());
 	}
 	

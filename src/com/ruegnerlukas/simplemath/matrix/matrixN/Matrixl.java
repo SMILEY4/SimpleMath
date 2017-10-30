@@ -532,7 +532,7 @@ public class Matrixl implements IMatrixl {
 	
 	
 	@Override
-	public Matrixl scale(Number scalar) {
+	public Matrixl mul(Number scalar) {
 		return this.scale(scalar.doubleValue());
 	}
 	

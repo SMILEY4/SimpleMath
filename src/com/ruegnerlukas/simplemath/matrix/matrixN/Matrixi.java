@@ -531,7 +531,7 @@ public class Matrixi implements IMatrixi {
 	
 	
 	@Override
-	public Matrixi scale(Number scalar) {
+	public Matrixi mul(Number scalar) {
 		return this.scale(scalar.floatValue());
 	}
 	

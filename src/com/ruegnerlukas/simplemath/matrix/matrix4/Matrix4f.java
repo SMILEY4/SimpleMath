@@ -5,7 +5,6 @@ import com.ruegnerlukas.simplemath.matrix.matrixN.Matrixf;
 import com.ruegnerlukas.simplemath.vectors.vec2.IVector2;
 import com.ruegnerlukas.simplemath.vectors.vec3.IVector3;
 import com.ruegnerlukas.simplemath.vectors.vec3.Vector3f;
-import com.ruegnerlukas.simplemath.vectors.vec4.IVector4;
 
 
 
@@ -110,7 +109,7 @@ public class Matrix4f extends Matrixf {
 	
 	
 	@Override
-	public Matrix4f scale(float scalar) {
+	public Matrix4f mul(float scalar) {
 		this.getData()[0][0] *= scalar;
 		this.getData()[0][1] *= scalar;
 		this.getData()[0][2] *= scalar;
@@ -129,6 +128,7 @@ public class Matrix4f extends Matrixf {
 		this.getData()[3][3] *= scalar;
 		return this;
 	}
+	
 	
 	
 	
@@ -264,10 +264,10 @@ public class Matrix4f extends Matrixf {
 	 * @return this matrix for chaining
 	 * */
 	public Matrix4f translate(float x, float y, float z) {
-		getData()[3][0] += getData()[0][0]*x + getData()[1][0]*y + getData()[2][0]*z;
-		getData()[3][1] += getData()[0][1]*x + getData()[1][1]*y + getData()[2][1]*z;
-		getData()[3][2] += getData()[0][2]*x + getData()[1][2]*y + getData()[2][2]*z;
-		getData()[3][3] += getData()[0][3]*x + getData()[1][3]*y + getData()[2][3]*z;
+		getData()[0][3] += getData()[0][0]*x + getData()[0][1]*y + getData()[0][2]*z;
+		getData()[1][3] += getData()[1][0]*x + getData()[1][1]*y + getData()[1][2]*z;
+		getData()[2][3] += getData()[2][0]*x + getData()[2][1]*y + getData()[2][2]*z;
+		getData()[3][3] += getData()[3][0]*x + getData()[3][1]*y + getData()[3][2]*z;
 		return this;
 	}
 	
@@ -304,7 +304,7 @@ public class Matrix4f extends Matrixf {
 	 * @param vec the vector to scale by
 	 * @return this matrix for chaining
 	 * */
-	public Matrixf scale(IVector3 vec) {
+	public Matrix4f scale(IVector3 vec) {
 		return scale(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ());
 	}
 	
@@ -316,7 +316,7 @@ public class Matrix4f extends Matrixf {
 	 * @param z the z component to scale by
 	 * @return this matrix for chaining
 	 * */
-	public Matrixf scale(float x, float y, float z) {
+	public Matrix4f scale(float x, float y, float z) {
 		for(int i=0; i<4; i++) {
 			getData()[i][0] *= x;
 			getData()[i][1] *= y;
@@ -332,7 +332,7 @@ public class Matrix4f extends Matrixf {
 	 * Sets the homogneous scale of this matrix.
 	 * @param zoom the zoom value (1 = no zoom)
 	 * */
-	public Matrixf setCoordinateZoom(float zoom) {
+	public Matrix4f setCoordinateZoom(float zoom) {
 		getData()[3][3] = zoom;
 		return this;
 	}
@@ -340,18 +340,9 @@ public class Matrix4f extends Matrixf {
 	
 	
 	
-	/**
-	 * Transforms the given vector by this matrix.
-	 * @param vec the vector to transform
-	 * @return the transformed vector
-	 * */
-	public IVector4 transformVector(IVector4 vec) {
-		float x = getData()[0][0]*vec.getFloatX()  +  getData()[1][0]*vec.getFloatY()  +  getData()[2][0]*vec.getFloatZ()  +  getData()[3][0]*vec.getFloatW();
-		float y = getData()[0][1]*vec.getFloatX()  +  getData()[1][1]*vec.getFloatY()  +  getData()[2][1]*vec.getFloatZ()  +  getData()[3][1]*vec.getFloatW();
-		float z = getData()[0][2]*vec.getFloatX()  +  getData()[1][2]*vec.getFloatY()  +  getData()[2][2]*vec.getFloatZ()  +  getData()[3][2]*vec.getFloatW();
-		float w = getData()[0][3]*vec.getFloatX()  +  getData()[1][3]*vec.getFloatY()  +  getData()[2][3]*vec.getFloatZ()  +  getData()[3][3]*vec.getFloatW();
-		vec.set(x, y, z, w);
-		return vec;
+	@Override
+	public Matrix4f setToIdentity() {
+		return (Matrix4f) super.setToIdentity();
 	}
 	
 	
@@ -672,6 +663,8 @@ public class Matrix4f extends Matrixf {
 	public Matrix4f copy() {
 		return (Matrix4f) new Matrix4f().copyData(this.getData());
 	}
+	
+	
 	
 	
 	

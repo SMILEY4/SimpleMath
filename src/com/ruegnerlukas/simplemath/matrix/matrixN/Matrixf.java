@@ -533,8 +533,8 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
-	public Matrixf scale(Number scalar) {
-		return this.scale(scalar.floatValue());
+	public Matrixf mul(Number scalar) {
+		return this.mul(scalar.floatValue());
 	}
 	
 	
@@ -543,7 +543,7 @@ public class Matrixf implements IMatrixf {
 	 * @param scalar the scalar
 	 * @return this matrix for chaining
 	 * */
-	public Matrixf scale(float scalar) {
+	public Matrixf mul(float scalar) {
 		for(int j=0; j<this.getNumberRows(); j++) {
 			for(int i=0; i<this.getNumberColumns(); i++) {
 				this.data[i][j] *= scalar;
@@ -852,7 +852,7 @@ public class Matrixf implements IMatrixf {
 	
 	
 	@Override
-	public IMatrix setToIdentity() {
+	public Matrixf setToIdentity() {
 		if(!unsafe && !isSquare()) {
 			throw new IllegalArgumentException("Matrix must be square.");
 		}		

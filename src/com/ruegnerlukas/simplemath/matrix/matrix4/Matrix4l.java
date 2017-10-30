@@ -6,7 +6,6 @@ import com.ruegnerlukas.simplemath.vectors.vec2.IVector2;
 import com.ruegnerlukas.simplemath.vectors.vec3.IVector3;
 import com.ruegnerlukas.simplemath.vectors.vec3.Vector3d;
 import com.ruegnerlukas.simplemath.vectors.vec3.Vector3l;
-import com.ruegnerlukas.simplemath.vectors.vec4.IVector4;
 
 
 
@@ -305,7 +304,7 @@ public class Matrix4l extends Matrixl {
 	 * @param vec the vector to scale by
 	 * @return this matrix for chaining
 	 * */
-	public Matrixl scale(IVector3 vec) {
+	public Matrix4l scale(IVector3 vec) {
 		return scale(vec.getDoubleX(), vec.getDoubleY(), vec.getDoubleZ());
 	}
 	
@@ -317,7 +316,7 @@ public class Matrix4l extends Matrixl {
 	 * @param z the z component to scale by
 	 * @return this matrix for chaining
 	 * */
-	public Matrixl scale(double x, double y, double z) {
+	public Matrix4l scale(double x, double y, double z) {
 		for(int i=0; i<4; i++) {
 			getData()[i][0] *= x;
 			getData()[i][1] *= y;
@@ -333,7 +332,7 @@ public class Matrix4l extends Matrixl {
 	 * Sets the homogneous scale of this matrix.
 	 * @param zoom the zoom value (1 = no zoom)
 	 * */
-	public Matrixl setCoordinateZoom(long zoom) {
+	public Matrix4l setCoordinateZoom(long zoom) {
 		getData()[3][3] = zoom;
 		return this;
 	}
@@ -341,19 +340,10 @@ public class Matrix4l extends Matrixl {
 	
 	
 	
-	/**
-	 * Transforms the given vector by this matrix.
-	 * @param vec the vector to transform
-	 * @return the transformed vector
-	 * */
-	public IVector4 transformVector(IVector4 vec) {
-		long x = getData()[0][0]*vec.getLongX()  +  getData()[1][0]*vec.getLongY()  +  getData()[2][0]*vec.getLongZ()  +  getData()[3][0]*vec.getLongW();
-		long y = getData()[0][1]*vec.getLongX()  +  getData()[1][1]*vec.getLongY()  +  getData()[2][1]*vec.getLongZ()  +  getData()[3][1]*vec.getLongW();
-		long z = getData()[0][2]*vec.getLongX()  +  getData()[1][2]*vec.getLongY()  +  getData()[2][2]*vec.getLongZ()  +  getData()[3][2]*vec.getLongW();
-		long w = getData()[0][3]*vec.getLongX()  +  getData()[1][3]*vec.getLongY()  +  getData()[2][3]*vec.getLongZ()  +  getData()[3][3]*vec.getLongW();
-		vec.set(x, y, z, w);
-		return vec;
-	}
+	@Override
+	public Matrix4l setToIdentity() {
+		return (Matrix4l) super.setToIdentity();
+	}	
 	
 	
 	
