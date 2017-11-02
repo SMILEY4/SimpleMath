@@ -2,6 +2,7 @@ package com.ruegnerlukas.simplemath.matrix.matrix4;
 
 import com.ruegnerlukas.simplemath.matrix.IMatrix;
 import com.ruegnerlukas.simplemath.matrix.matrixN.Matrixf;
+import com.ruegnerlukas.simplemath.vectors.Quaternion;
 import com.ruegnerlukas.simplemath.vectors.vec2.IVector2;
 import com.ruegnerlukas.simplemath.vectors.vec3.IVector3;
 import com.ruegnerlukas.simplemath.vectors.vec3.Vector3f;
@@ -555,26 +556,262 @@ public class Matrix4f extends Matrixf {
 		return this;
 	}
 	
+
 	
 	
-//	public Matrix4f setToRotation(float axisX, float axisY, float axisZ, float angleRad) {
-//		return this;
-//	}
-//	
-//	
-//	public Matrix4f setToRotation(float yaw, float pitch, float roll) {
-//		return this;
-//	}
-//	
-//	
-//	public Matrix4f setToLookAt(float dirX, float dirY, float dirZ, float upX, float upY, float upZ) {
-//		return this;
-//	}
-//	
-//	
-//	public Matrix4f setToLookAt(float posX, float posY, float posZ, float targetX, float targetY, float targetZ, float upX, float upY, float upZ) {
-//		return this;
-//	}
+	
+	/**
+	 * Sets this matrix to the rotation matrix representing the quaternion
+	 * @param q the quaternion
+	 * @return this for chaining
+	 * */
+	public Matrix4f setFromQuaternion(Quaternion q) {
+		return setFromQuaternion(q.x, q.y, q.z, q.w);
+	}
+
+	
+	/**
+	 * Sets this matrix to the rotation matrix representing the quaternion
+	 * @param qx	the x-component of the quaternion
+	 * @param qy	the y-component of the quaternion
+	 * @param qz	the z-component of the quaternion
+	 * @return this for chaining
+	 * */
+	public Matrix4f setFromQuaternion(float qx, float qy, float qz, float qw) {
+		final float translationX = 0;
+		final float translationY = 0;
+		final float translationZ = 0;
+		
+		final float xs = qx * 2f;
+		final float ys = qy * 2f;
+		final float zs = qz * 2f;
+		
+		final float wx = qw * xs;
+		final float wy = qw * ys;
+		final float wz = qw * zs;
+		final float xx = qx * xs;
+		final float xy = qx * ys;
+		final float xz = qx * zs;
+		final float yy = qy * ys;
+		final float yz = qy * zs;
+		final float zz = qz * zs;
+		
+		boolean wasUnsafe = this.isUnsafe();
+		this.setUnsafe(true);
+			
+		this.set(0, 0, 1f - (yy+zz) );
+		this.set(1, 0, xy-wz );
+		this.set(2, 0, xz+wy );
+		this.set(3, 0, translationX );
+
+		this.set(0, 1, xy+wz );
+		this.set(1, 1, 1f - (xx+zz) );
+		this.set(2, 1, yz-wx );
+		this.set(3, 2, translationY );
+
+		this.set(0, 2, xz-wy );
+		this.set(1, 2, yz+wx );
+		this.set(2, 2, 1f - (xx+yy) );
+		this.set(3, 2, translationZ );
+		
+		this.set(0, 3, 0f );
+		this.set(1, 3, 0f );
+		this.set(2, 3, 0f );
+		this.set(3, 3, 1f );
+		
+		this.setUnsafe(wasUnsafe);
+		
+		return this;
+	}
+	
+	
+	
+	
+	private Quaternion tmpQuat;
+	
+	
+	/**
+	 * Sets this matrix to a rotation matrix (rotates counter-clockwise around the given axis)
+	 * @param axis the vector representing the axis of rotation
+	 * @param angleDeg the angle in degrees
+	 * @return this matrix for chaining
+	 * */
+	public Matrix4f setToRotationDeg(IVector3 axis, float angleDeg) {
+		return setToRotationRad(axis.getFloatX(), axis.getFloatY(), axis.getFloatZ(), (float)Math.toRadians(angleDeg));
+	}
+
+	
+	/**
+	 * Sets this matrix to a rotation matrix (rotates counter-clockwise around the given axis)
+	 * @param axisX the x-component of the vector representing the axis of rotation
+	 * @param axisY the y-component of the vector representing the axis of rotation
+	 * @param axisZ the z-component of the vector representing the axis of rotation
+	 * @param angleDeg the angle in degrees
+	 * @return this matrix for chaining
+	 * */
+	public Matrix4f setToRotationDeg(float axisX, float axisY, float axisZ, float angleDeg) {
+		return setToRotationRad(axisX, axisY, axisZ, (float)Math.toRadians(angleDeg));
+	}
+	
+	
+	/**
+	 * Sets this matrix to a rotation matrix (rotates counter-clockwise around the given axis)
+	 * @param axis the vector representing the axis of rotation
+	 * @param angleRad the angle in radians
+	 * @return this matrix for chaining
+	 * */
+	public Matrix4f setToRotationRad(IVector3 axis, float angleRad) {
+		return setToRotationRad(axis.getFloatX(), axis.getFloatY(), axis.getFloatZ(), angleRad);
+	}
+
+	
+	/**
+	 * Sets this matrix to a rotation matrix (rotates counter-clockwise around the given axis)
+	 * @param axisX the x-component of the vector representing the axis of rotation
+	 * @param axisY the y-component of the vector representing the axis of rotation
+	 * @param axisZ the z-component of the vector representing the axis of rotation
+	 * @param angleRad the angle in radians
+	 * @return this matrix for chaining
+	 * */
+	public Matrix4f setToRotationRad(float axisX, float axisY, float axisZ, float angleRad) {
+		if(tmpQuat == null) {
+			tmpQuat = new Quaternion();
+		}
+		tmpQuat.setFromAxisAngleRad(axisX, axisY, axisZ, angleRad);
+		this.setFromQuaternion(tmpQuat);
+		return this;
+	}
+	
+	
+	
+	
+	/**
+	 * Sets this matrix to a rotation matrix from the given euler angles in degrees
+	 * @param yaw the yaw in degrees
+	 * @param pitch the pitch in degrees
+	 * @param roll the roll in degrees
+	 * @return this matrix for chaining
+	 * */
+	public Matrix4f setToRotationEulerDeg(float yaw, float pitch, float roll) {
+		return this.setToRotationEulerRad( (float)Math.toRadians(yaw), (float)Math.toRadians(pitch), (float)Math.toRadians(roll) );
+	}
+	
+	
+	/**
+	 * Sets this matrix to a rotation matrix from the given euler angles in radians
+	 * @param yaw the yaw in radians
+	 * @param pitch the pitch in radians
+	 * @param roll the roll in radians
+	 * @return this matrix for chaining
+	 * */
+	public Matrix4f setToRotationEulerRad(float yaw, float pitch, float roll) {
+		if(tmpQuat == null) {
+			tmpQuat = new Quaternion();
+		}
+		tmpQuat.setFromEulerRad(yaw, pitch, roll);
+		this.setFromQuaternion(tmpQuat);
+		return this;
+	}
+	
+	
+	
+	
+	private Vector3f vex, vey, vez;
+	
+	
+	/**
+	 * Sets this matrix to a look at matrix with the given position, target and up vector
+	 * @param position the position
+	 * @param target the target
+	 * @param up the up vector
+	 * @return this matrix for chaining
+	 * */
+	public Matrix4f setToLookAt(IVector3 position, IVector3 target, IVector3 up) {
+		return this.setToLookAt(
+				position.getFloatX(), position.getFloatY(), position.getFloatZ(),
+				target.getFloatX(), target.getFloatY(), target.getFloatZ(),
+				up.getFloatX(), up.getFloatY(), up.getFloatZ()
+				);
+	}
+	
+	
+	/**
+	 * Sets this matrix to a look at matrix with the given position, target and up vector
+	 * @param posX the x-component of the position
+	 * @param posY the y-component of the position
+	 * @param posZ the z-component of the position
+	 * @param targetX the x-position of the target
+	 * @param targetY the y-position of the target
+	 * @param targetZ the z-position of the target
+	 * @param upX the x-component of the up-vector
+	 * @param upY the y-component of the up-vector
+	 * @param upZ the z-component of the up-vector
+	 * @return this matrix for chaining
+	 * */
+	public Matrix4f setToLookAt(float posX, float posY, float posZ, float targetX, float targetY, float targetZ, float upX, float upY, float upZ) {
+		Vector3f.setVectorAB(posX, posY, posZ, targetX, targetY, targetZ, vex);
+		setToLookAt(vex.x, vex.y, vex.z, upX, upY, upZ);
+		this.translate(-posX, -posY, -posZ);
+		return this;
+	}
+	
+	
+	/**
+	 * Sets this matrix to a look at matrix with a direction and an up vector
+	 * @param direction the direction vector
+	 * @param up the up vector
+	 * @return this matrix for chaining
+	 * */
+	public Matrix4f setToLookAt(IVector3 direction, IVector3 up) {
+		return setToLookAt(
+				direction.getFloatX(), direction.getFloatY(), direction.getFloatZ(),
+				up.getFloatX(), up.getFloatY(), up.getFloatZ()
+				);
+	}
+	
+	
+	/**
+	 * Sets this matrix to a look at matrix with a direction and an up vector
+	 * @param dirX the x-component of the direction
+	 * @param dirY the y-component of the direction
+	 * @param dirZ the z-component of the direction
+	 * @param upX the x-component of the up-vector
+	 * @param upY the y-component of the up-vector
+	 * @param upZ the z-component of the up-vector
+	 * @return this matrix for chaining
+	 * */
+	public Matrix4f setToLookAt(float dirX, float dirY, float dirZ, float upX, float upY, float upZ) {
+		if(vex == null) { vex = new Vector3f(); }
+		if(vey == null) { vey = new Vector3f(); }
+		if(vez == null) { vez = new Vector3f(); }
+
+		vez.set(dirX, dirY, dirZ).normalize();
+		vex.set(dirX, dirY, dirZ).normalize();
+		
+		vex.crossSet(upX, upY, upZ).normalize();
+		
+		vey.set(vex).crossSet(vez).normalize();
+		
+		this.setToIdentity();
+		
+		boolean wasUnsafe = this.isUnsafe();
+		this.setUnsafe(true);
+		
+		this.set(0, 0, vex.x);
+		this.set(1, 0, vex.y);
+		this.set(2, 0, vex.z);
+		this.set(0, 1, vey.x);
+		this.set(1, 1, vey.y);
+		this.set(2, 1, vey.z);
+		this.set(0, 2, -vez.x);
+		this.set(1, 2, -vez.y);
+		this.set(2, 2, -vez.z);
+		
+		this.setUnsafe(wasUnsafe);
+		
+		return this;
+	}
+	
 	
 	
 	
