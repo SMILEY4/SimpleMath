@@ -109,7 +109,7 @@ public class Matrix4d extends Matrixd {
 	
 	
 	@Override
-	public Matrix4d scale(double scalar) {
+	public Matrix4d mul(double scalar) {
 		this.getData()[0][0] *= scalar;
 		this.getData()[0][1] *= scalar;
 		this.getData()[0][2] *= scalar;

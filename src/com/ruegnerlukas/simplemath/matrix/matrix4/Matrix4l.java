@@ -110,7 +110,7 @@ public class Matrix4l extends Matrixl {
 	
 	
 	@Override
-	public Matrix4l scale(double scalar) {
+	public Matrix4l mul(double scalar) {
 		this.getData()[0][0] *= scalar;
 		this.getData()[0][1] *= scalar;
 		this.getData()[0][2] *= scalar;

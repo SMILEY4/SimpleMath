@@ -532,7 +532,7 @@ public class Matrixi implements IMatrixi {
 	
 	@Override
 	public Matrixi mul(Number scalar) {
-		return this.scale(scalar.floatValue());
+		return this.mul(scalar.floatValue());
 	}
 	
 	
@@ -541,7 +541,7 @@ public class Matrixi implements IMatrixi {
 	 * @param scalar the scalar
 	 * @return this matrix for chaining
 	 * */
-	public Matrixi scale(float scalar) {
+	public Matrixi mul(float scalar) {
 		for(int j=0; j<this.getNumberRows(); j++) {
 			for(int i=0; i<this.getNumberColumns(); i++) {
 				this.data[i][j] *= scalar;

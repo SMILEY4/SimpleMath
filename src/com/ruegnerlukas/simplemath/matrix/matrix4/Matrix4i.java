@@ -110,7 +110,7 @@ public class Matrix4i extends Matrixi {
 	
 	
 	@Override
-	public Matrix4i scale(float scalar) {
+	public Matrix4i mul(float scalar) {
 		this.getData()[0][0] *= scalar;
 		this.getData()[0][1] *= scalar;
 		this.getData()[0][2] *= scalar;

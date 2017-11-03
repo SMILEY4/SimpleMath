@@ -533,7 +533,7 @@ public class Matrixl implements IMatrixl {
 	
 	@Override
 	public Matrixl mul(Number scalar) {
-		return this.scale(scalar.doubleValue());
+		return this.mul(scalar.doubleValue());
 	}
 	
 	
@@ -542,7 +542,7 @@ public class Matrixl implements IMatrixl {
 	 * @param scalar the scalar
 	 * @return this matrix for chaining
 	 * */
-	public Matrixl scale(double scalar) {
+	public Matrixl mul(double scalar) {
 		for(int j=0; j<this.getNumberRows(); j++) {
 			for(int i=0; i<this.getNumberColumns(); i++) {
 				this.data[i][j] *= scalar;
