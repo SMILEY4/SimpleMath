@@ -23,8 +23,8 @@ public class Quaternionf extends Vector4f implements IQuaternion {
 	}
 	
 	
-	public Quaternionf(Quaternionf q) {
-		super(q.x, q.y, q.z, q.w);
+	public Quaternionf(IQuaternion q) {
+		super(q.getFloatX(), q.getFloatY(), q.getFloatZ(), q.getFloatW());
 	}
 	
 	
@@ -277,7 +277,7 @@ public class Quaternionf extends Vector4f implements IQuaternion {
 	
 	@Override
 	public String toString() {
-		return "Quaternion." + this.hashCode() + " (" + this.x + ", " + this.y + ", " + this.z + ", " + this.w + ")";
+		return "Quaternionf." + this.hashCode() + " (" + this.x + ", " + this.y + ", " + this.z + ", " + this.w + ")";
 	}
 	
 	
