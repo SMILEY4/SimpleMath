@@ -8,7 +8,7 @@ import com.ruegnerlukas.simplemath.vectors.vec3.Vector3f;
 import com.ruegnerlukas.simplemath.vectors.vec4.IVector4;
 import com.ruegnerlukas.simplemath.vectors.vec4.Vector4f;
 
-public class Quaternionf extends Vector4f {
+public class Quaternionf extends Vector4f implements IQuaternion {
 
 	
 	
@@ -67,12 +67,8 @@ public class Quaternionf extends Vector4f {
 	
 	
 	
-	/**
-	 * Sets this quanternion from the given quanternion.
-	 * @param q the quanternion
-	 * @return this quanternion for chaining
-	 * */
-	public Quaternionf set(Quaternionf q) {
+	@Override
+	public Quaternionf set(IQuaternion q) {
 		return this.set(q.getFloatX(), q.getFloatY(), q.getFloatZ(), q.getFloatW());
 	}
 	
@@ -287,10 +283,7 @@ public class Quaternionf extends Vector4f {
 	
 	
 	
-	/**
-	 * Sets this quaternion to an identity
-	 * @return this quaternion for chaining
-	 * */
+	@Override
 	public Quaternionf setToIdentity() {
 		this.set(0, 0, 0, 1);
 		return this;
@@ -299,42 +292,32 @@ public class Quaternionf extends Vector4f {
 	
 	
 	
-	/**
-	 * Multiplies this quaternion with the gigen quanternion (this = this*other)
-	 * @param q the right Quaternion
-	 * @return this quaternion for chaining
-	 * */
-	public Quaternionf mul(Quaternionf q) {
-		final float newX = this.w * q.x + this.x * q.w + this.y * q.z - this.z * q.y;
-		final float newY = this.w * q.y + this.y * q.w + this.z * q.x - this.x * q.z;
-		final float newZ = this.w * q.z + this.z * q.w + this.x * q.y - this.y * q.x;
-		final float newW = this.w * q.w - this.x * q.x - this.y * q.y - this.z * q.z;
-		return (Quaternionf) this.set(newX, newY, newZ, newW);
-	}
-	
-	
-	
-	/**
-	 * Multiplies this quaternion with the given quanternion (this = other*this)
-	 * @param q the left Quaternion
-	 * @return this quaternion for chaining
-	 * */
-	public Quaternionf mulLeft(Quaternionf q) {
-		final float newX = q.w * this.x + q.x * this.w + q.y * this.z - q.z * this.y;
-		final float newY = q.w * this.y + q.y * this.w + q.z * this.x - q.x * this.z;
-		final float newZ = q.w * this.z + q.z * this.w + q.x * this.y - q.y * this.x;
-		final float newW = q.w * this.w - q.x * this.x - q.y * this.y - q.z * this.z;
+	@Override
+	public Quaternionf mul(IQuaternion q) {
+		final float newX = this.w * q.getFloatX() + this.x * q.getFloatW() + this.y * q.getFloatZ() - this.z * q.getFloatY();
+		final float newY = this.w * q.getFloatY() + this.y * q.getFloatW() + this.z * q.getFloatX() - this.x * q.getFloatZ();
+		final float newZ = this.w * q.getFloatZ() + this.z * q.getFloatW() + this.x * q.getFloatY() - this.y * q.getFloatX();
+		final float newW = this.w * q.getFloatW() - this.x * q.getFloatX() - this.y * q.getFloatY() - this.z * q.getFloatZ();
 		return (Quaternionf) this.set(newX, newY, newZ, newW);
 	}
 	
 	
 	
 	
-	/**
-	 * Sets this value of this quaternion to the to the equivalent rotation of the Axis-Angle argument.
-	 * @param vec the axis-angle. x,y,z as the axis and w as the angle in degrees
-	 * @return this quaternion for chaining
-	 * */
+	@Override
+	public Quaternionf mulLeft(IQuaternion q) {
+		final float newX = q.getFloatW() * this.x + q.getFloatX() * this.w + q.getFloatY() * this.z - q.getFloatZ() * this.y;
+		final float newY = q.getFloatW() * this.y + q.getFloatY() * this.w + q.getFloatZ() * this.x - q.getFloatX() * this.z;
+		final float newZ = q.getFloatW() * this.z + q.getFloatZ() * this.w + q.getFloatX() * this.y - q.getFloatY() * this.x;
+		final float newW = q.getFloatW() * this.w - q.getFloatX() * this.x - q.getFloatY() * this.y - q.getFloatZ() * this.z;
+		return (Quaternionf) this.set(newX, newY, newZ, newW);
+	}
+	
+	
+	
+	
+	
+	@Override
 	public Quaternionf setFromAxisAngleDeg(IVector4 vec) {
 		return this.setFromAxisAngleRad(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ(), (float)Math.toRadians(vec.getFloatW()));
 	}
@@ -354,11 +337,7 @@ public class Quaternionf extends Vector4f {
 	}
 	
 	
-	/**
-	 * Sets this value of this quaternion to the to the equivalent rotation of the Axis-Angle argument.
-	 * @param vec the axis-angle. x,y,z as the axis and w as the angle in radians
-	 * @return this quaternion for chaining
-	 * */
+	@Override
 	public Quaternionf setFromAxisAngleRad(IVector4 vec) {
 		return this.setFromAxisAngleRad(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ(), vec.getFloatW());
 	}
@@ -392,11 +371,7 @@ public class Quaternionf extends Vector4f {
 	
 	
 	
-	/**
-	 * Sets the component of this quaternion from the given matrix
-	 * @param mat the (rotation) matrix. Must be at least 3x3
-	 * @return this quaternion for chaining
-	 * */
+	@Override
 	public Quaternionf setFromMatrix(IMatrix mat) {
 		if(mat.getNumberColumns() >= 3 && mat.getNumberRows() >= 3) {
 		
@@ -484,6 +459,18 @@ public class Quaternionf extends Vector4f {
 	
 	
 	
+	@Override
+	public Quaternionf setFromEulerDeg(IVector3 angles) {
+		return this.setFromEulerDeg(angles.getFloatX(), angles.getFloatY(), angles.getFloatZ());
+	}
+	
+	
+	@Override
+	public Quaternionf setFromEulerRad(IVector3 angles) {
+		return this.setFromEulerRad(angles.getFloatX(), angles.getFloatY(), angles.getFloatZ());
+	}
+	
+	
 	/**
 	 * Sets this quaternion from the given euler angles
 	 * @param yaw	the yaw angle in degrees
@@ -533,20 +520,13 @@ public class Quaternionf extends Vector4f {
 	
 	
 	
-	/**
-	 * Creates a vector3f which represents the x axis of this quaternion
-	 * @return the x axis as the created vector
-	 * */
+	@Override
 	public Vector3f getXAxis() {
 		return (Vector3f) getXAxis(null);
 	}
 	
 	
-	/**
-	 * Sets the distination vector to the x axis of this quaternion
-	 * @param dest the destination vector or null
-	 * @return the x axis as the given vector
-	 * */
+	@Override
 	public IVector3 getXAxis(IVector3 dest) {
 		if(dest == null) {
 			dest = new Vector3f();
@@ -574,20 +554,13 @@ public class Quaternionf extends Vector4f {
 	
 	
 	
-	/**
-	 * Creates a vector3f which represents the y axis of this quaternion
-	 * @return the y axis as the created vector
-	 * */
+	@Override
 	public Vector3f getYAxis() {
 		return (Vector3f) getYAxis(null);
 	}
 	
 	
-	/**
-	 * Sets the distination vector to the y axis of this quaternion
-	 * @param dest the destination vector or null
-	 * @return the y axis as the given vector
-	 * */
+	@Override
 	public IVector3 getYAxis(IVector3 dest) {
 		if(dest == null) {
 			dest = new Vector3f();
@@ -616,19 +589,12 @@ public class Quaternionf extends Vector4f {
 	
 	
 	
-	/**
-	 * Creates a vector3f which represents the z axis of this quaternion
-	 * @return the z axis as the created vector
-	 * */
+	@Override
 	public Vector3f getZAxis() {
 		return (Vector3f) getYAxis(null);
 	}
 	
-	/**
-	 * Sets the destination vector to the z axis of this quaternion
-	 * @param dest the destination vector or null
-	 * @return the z axis as the given vector
-	 * */
+	@Override
 	public IVector3 getZAxis(IVector3 dest) {
 		if(dest == null) {
 			dest = new Vector3f();
@@ -657,10 +623,7 @@ public class Quaternionf extends Vector4f {
 	
 	
 	
-	/**
-	 * Get the pole of the gimbal lock. This quaternion must be normalized.
-	 * @return +1 for north pole, -1 for south pole, 0 for no gimbal lock
-	 * */
+	@Override
 	public int getGimbalPole() {
 		final float t = y*x + z*w;
 		return t > 0.499f ? 1 : (t < -0.499f ? -1 : 0);
@@ -742,12 +705,21 @@ public class Quaternionf extends Vector4f {
 	}
 	
 	
+	@Override
+	public Vector3f getRotationDeg() {
+		return new Vector3f(this.getRotationXDeg(), this.getRotationYDeg(), this.getRotationZDeg());
+	}
 	
 	
-	/**
-	 * Creates a new matrix representing this quaternion. This quaternion must be normalized.
-	 * @return the created matrix representing this quaternion.
-	 * */
+	@Override
+	public Vector3f getRotationRad() {
+		return new Vector3f(this.getRotationXRad(), this.getRotationYRad(), this.getRotationZRad());
+	}
+	
+	
+	
+	
+	@Override
 	public Matrix4f toRotationMatrix() {
 		return toRotationMatrix(null);
 	}
