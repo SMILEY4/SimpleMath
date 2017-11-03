@@ -277,7 +277,6 @@ public class Quaterniond extends Vector4d implements IQuaternion {
 	
 	
 	@Override
-<<<<<<< HEAD
 	public Quaternionf toFloatQuanternion() {
 		return new Quaternionf(this);
 	}
@@ -292,8 +291,6 @@ public class Quaterniond extends Vector4d implements IQuaternion {
 	
 	
 	@Override
-=======
->>>>>>> 999653199444c376dece21c0f03c512eebeb6fc7
 	public String toString() {
 		return "Quaterniond." + this.hashCode() + " (" + this.x + ", " + this.y + ", " + this.z + ", " + this.w + ")";
 	}
