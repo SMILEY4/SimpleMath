@@ -7,6 +7,21 @@ import com.ruegnerlukas.simplemath.vectors.vec4.IVector4;
 public interface IQuaternion extends IVector4 {
 
 	
+	
+	/**
+	 * Converts this quaternion to a float quaternion.
+	 * @return the created float quaternion
+	 * */
+	public Quaternionf toFloatQuanternion();
+	
+	
+	/**
+	 * Converts this quaternion to a double quaternion.
+	 * @return the created double quaternion
+	 * */
+	public Quaterniond toDoubleQuanternion();
+
+	
 	/**
 	 * Sets this quanternion from the given quanternion.
 	 * @param q the quanternion
