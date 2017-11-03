@@ -2,7 +2,7 @@ package com.ruegnerlukas.simplemath.vectors.vec3;
 
 import com.ruegnerlukas.simplemath.matrix.IMatrix;
 import com.ruegnerlukas.simplemath.vectors.IVector;
-import com.ruegnerlukas.simplemath.vectors.Quaternion;
+import com.ruegnerlukas.simplemath.vectors.quaternion.Quaternionf;
 
 
 public interface IVector3 extends IVector {
@@ -187,7 +187,7 @@ public interface IVector3 extends IVector {
 	 * @param q the quaternion
 	 * @return this vector for chaining
 	 * */
-	public IVector3 mul(Quaternion q);
+	public IVector3 mul(Quaternionf q);
 	
 	
 	/**

@@ -2,7 +2,7 @@ package com.ruegnerlukas.simplemath.matrix.matrix4;
 
 import com.ruegnerlukas.simplemath.matrix.IMatrix;
 import com.ruegnerlukas.simplemath.matrix.matrixN.Matrixf;
-import com.ruegnerlukas.simplemath.vectors.Quaternion;
+import com.ruegnerlukas.simplemath.vectors.quaternion.Quaternionf;
 import com.ruegnerlukas.simplemath.vectors.vec2.IVector2;
 import com.ruegnerlukas.simplemath.vectors.vec3.IVector3;
 import com.ruegnerlukas.simplemath.vectors.vec3.Vector3f;
@@ -565,7 +565,7 @@ public class Matrix4f extends Matrixf {
 	 * @param q the quaternion
 	 * @return this for chaining
 	 * */
-	public Matrix4f setFromQuaternion(Quaternion q) {
+	public Matrix4f setFromQuaternion(Quaternionf q) {
 		return setFromQuaternion(q.x, q.y, q.z, q.w);
 	}
 
@@ -627,7 +627,7 @@ public class Matrix4f extends Matrixf {
 	
 	
 	
-	private Quaternion tmpQuat;
+	private Quaternionf tmpQuat;
 	
 	
 	/**
@@ -675,7 +675,7 @@ public class Matrix4f extends Matrixf {
 	 * */
 	public Matrix4f setToRotationRad(float axisX, float axisY, float axisZ, float angleRad) {
 		if(tmpQuat == null) {
-			tmpQuat = new Quaternion();
+			tmpQuat = new Quaternionf();
 		}
 		tmpQuat.setFromAxisAngleRad(axisX, axisY, axisZ, angleRad);
 		this.setFromQuaternion(tmpQuat);
@@ -706,7 +706,7 @@ public class Matrix4f extends Matrixf {
 	 * */
 	public Matrix4f setToRotationEulerRad(float yaw, float pitch, float roll) {
 		if(tmpQuat == null) {
-			tmpQuat = new Quaternion();
+			tmpQuat = new Quaternionf();
 		}
 		tmpQuat.setFromEulerRad(yaw, pitch, roll);
 		this.setFromQuaternion(tmpQuat);

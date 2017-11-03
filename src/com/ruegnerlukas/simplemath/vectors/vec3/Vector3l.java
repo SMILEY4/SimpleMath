@@ -1,7 +1,7 @@
 package com.ruegnerlukas.simplemath.vectors.vec3;
 
 import com.ruegnerlukas.simplemath.matrix.IMatrix;
-import com.ruegnerlukas.simplemath.vectors.Quaternion;
+import com.ruegnerlukas.simplemath.vectors.quaternion.Quaternionf;
 
 public class Vector3l implements IVector3 {
 
@@ -549,16 +549,16 @@ public class Vector3l implements IVector3 {
 	
 	
 	
-	private Quaternion qTemp1 = null;
-	private Quaternion qTemp2 = null;
+	private Quaternionf qTemp1 = null;
+	private Quaternionf qTemp2 = null;
 
 	@Override
-	public Vector3l mul(Quaternion q) {
+	public Vector3l mul(Quaternionf q) {
 		if(qTemp1 == null) {
-			qTemp1 = new Quaternion();
+			qTemp1 = new Quaternionf();
 		}
 		if(qTemp2 == null) {
-			qTemp2 = new Quaternion();
+			qTemp2 = new Quaternionf();
 		}
 		qTemp1.set(q);
 		qTemp1.negate();

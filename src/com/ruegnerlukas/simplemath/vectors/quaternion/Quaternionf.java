@@ -1,4 +1,4 @@
-package com.ruegnerlukas.simplemath.vectors;
+package com.ruegnerlukas.simplemath.vectors.quaternion;
 
 import com.ruegnerlukas.simplemath.MathUtils;
 import com.ruegnerlukas.simplemath.matrix.IMatrix;
@@ -8,27 +8,27 @@ import com.ruegnerlukas.simplemath.vectors.vec3.Vector3f;
 import com.ruegnerlukas.simplemath.vectors.vec4.IVector4;
 import com.ruegnerlukas.simplemath.vectors.vec4.Vector4f;
 
-public class Quaternion extends Vector4f {
+public class Quaternionf extends Vector4f {
 
 	
 	
 	
-	public Quaternion() {
+	public Quaternionf() {
 		super();
 	}
 	
 	
-	public Quaternion(IVector4 vec) {
+	public Quaternionf(IVector4 vec) {
 		super(vec);
 	}
 	
 	
-	public Quaternion(Quaternion q) {
+	public Quaternionf(Quaternionf q) {
 		super(q.x, q.y, q.z, q.w);
 	}
 	
 	
-	public Quaternion(float x, float y, float z, float w) {
+	public Quaternionf(float x, float y, float z, float w) {
 		super(x, y, z, w);
 	}
 	
@@ -36,32 +36,32 @@ public class Quaternion extends Vector4f {
 	
 	
 	@Override
-	public Quaternion set(int index, Number value) {
-		return (Quaternion) super.set(index, value);
+	public Quaternionf set(int index, Number value) {
+		return (Quaternionf) super.set(index, value);
 	}
 	
 	
 	
 	
 	@Override
-	public Quaternion negate() {
-		return (Quaternion) super.negate();
+	public Quaternionf negate() {
+		return (Quaternionf) super.negate();
 	}
 	
 	
 	
 	
 	@Override
-	public Quaternion normalize() {
-		return (Quaternion) super.normalize();
+	public Quaternionf normalize() {
+		return (Quaternionf) super.normalize();
 	}
 	
 	
 	
 	
 	@Override
-	public Quaternion copy() {
-		return (Quaternion) super.copy();
+	public Quaternionf copy() {
+		return (Quaternionf) super.copy();
 	}
 	
 	
@@ -72,7 +72,7 @@ public class Quaternion extends Vector4f {
 	 * @param q the quanternion
 	 * @return this quanternion for chaining
 	 * */
-	public Quaternion set(Quaternion q) {
+	public Quaternionf set(Quaternionf q) {
 		return this.set(q.getFloatX(), q.getFloatY(), q.getFloatZ(), q.getFloatW());
 	}
 	
@@ -80,200 +80,200 @@ public class Quaternion extends Vector4f {
 	
 	
 	@Override
-	public Quaternion set(IVector4 v) {
-		return (Quaternion) super.set(v);
+	public Quaternionf set(IVector4 v) {
+		return (Quaternionf) super.set(v);
 	}
 	
 	
 	
 	
 	@Override
-	public Quaternion set(Number x, Number y, Number z, Number w) {
-		return (Quaternion) super.set(x, y, z, w);
+	public Quaternionf set(Number x, Number y, Number z, Number w) {
+		return (Quaternionf) super.set(x, y, z, w);
 	}
 	
 	
 	
 	
 	@Override
-	public Quaternion set(Number xyzw) {
-		return (Quaternion) super.set(xyzw);
+	public Quaternionf set(Number xyzw) {
+		return (Quaternionf) super.set(xyzw);
 	}
 	
 	
 	
 	
 	@Override
-	public Quaternion set(float xyzw) {
-		return (Quaternion) super.set(xyzw);
+	public Quaternionf set(float xyzw) {
+		return (Quaternionf) super.set(xyzw);
 	}
 	
 	
 	
 	
 	@Override
-	public Quaternion set(float x, float y, float z, float w) {
-		return (Quaternion) super.set(x, y, z, w);
+	public Quaternionf set(float x, float y, float z, float w) {
+		return (Quaternionf) super.set(x, y, z, w);
 	}
 	
 	
 	
 	
 	@Override
-	public Quaternion add(IVector4 vec) {
-		return (Quaternion) super.add(vec);
+	public Quaternionf add(IVector4 vec) {
+		return (Quaternionf) super.add(vec);
 	}
 	
 	
 	
 	
 	@Override
-	public Quaternion add(Number x, Number y, Number z, Number w) {
-		return (Quaternion) super.add(x, y, z, w);
+	public Quaternionf add(Number x, Number y, Number z, Number w) {
+		return (Quaternionf) super.add(x, y, z, w);
 	}
 	
 	
 	
 	
 	@Override
-	public Quaternion add(Number xyzw) {
-		return (Quaternion) super.add(xyzw);
+	public Quaternionf add(Number xyzw) {
+		return (Quaternionf) super.add(xyzw);
 	}
 	
 	
 	
 	
 	@Override
-	public Quaternion add(float xyzw) {
-		return (Quaternion) super.add(xyzw);
-	}
-	
-	
-
-	
-	@Override
-	public Quaternion add(float x, float y, float z, float w) {
-		return (Quaternion) super.add(x, y, z, w);
-	}
-	
-	
-	
-	
-	@Override
-	public Quaternion sub(IVector4 vec) {
-		return (Quaternion) super.sub(vec);
+	public Quaternionf add(float xyzw) {
+		return (Quaternionf) super.add(xyzw);
 	}
 	
 	
 
 	
 	@Override
-	public Quaternion sub(Number x, Number y, Number z, Number w) {
-		return (Quaternion) super.sub(x, y, z, w);
+	public Quaternionf add(float x, float y, float z, float w) {
+		return (Quaternionf) super.add(x, y, z, w);
+	}
+	
+	
+	
+	
+	@Override
+	public Quaternionf sub(IVector4 vec) {
+		return (Quaternionf) super.sub(vec);
+	}
+	
+	
+
+	
+	@Override
+	public Quaternionf sub(Number x, Number y, Number z, Number w) {
+		return (Quaternionf) super.sub(x, y, z, w);
 	}
 
 	
 	
 	
 	@Override
-	public Quaternion sub(Number xyzw) {
-		return (Quaternion) super.sub(xyzw);
+	public Quaternionf sub(Number xyzw) {
+		return (Quaternionf) super.sub(xyzw);
 	}
 	
 	
 	
 	
 	@Override
-	public Quaternion sub(float xyzw) {
-		return (Quaternion) super.sub(xyzw);
+	public Quaternionf sub(float xyzw) {
+		return (Quaternionf) super.sub(xyzw);
 	}
 	
 	
 	
 	
 	@Override
-	public Quaternion sub(float x, float y, float z, float w) {
-		return (Quaternion) super.sub(x, y, z, w);
+	public Quaternionf sub(float x, float y, float z, float w) {
+		return (Quaternionf) super.sub(x, y, z, w);
 	}
 	
 	
 	
 	
 	@Override
-	public Quaternion mul(IVector4 vec) {
-		return (Quaternion) super.mul(vec);
+	public Quaternionf mul(IVector4 vec) {
+		return (Quaternionf) super.mul(vec);
 	}
 	
 	
 	
 	
 	@Override
-	public Quaternion mul(Number x, Number y, Number z, Number w) {
-		return (Quaternion) super.mul(x, y, z, w);
-	}
-
-	
-	
-	
-	@Override
-	public Quaternion scale(Number xyzw) {
-		return (Quaternion) super.scale(xyzw);
-	}
-	
-	
-	
-	
-	@Override
-	public Quaternion scale(float xyzw) {
-		return (Quaternion) super.scale(xyzw);
-	}
-	
-	
-	
-
-	@Override
-	public Quaternion mul(float x, float y, float z, float w) {
-		return (Quaternion) super.mul(x, y, z, w);
-	}
-	
-	
-	
-
-	@Override
-	public Quaternion div(IVector4 vec) {
-		return (Quaternion) super.div(vec);
+	public Quaternionf mul(Number x, Number y, Number z, Number w) {
+		return (Quaternionf) super.mul(x, y, z, w);
 	}
 
 	
 	
 	
 	@Override
-	public Quaternion div(Number x, Number y, Number z, Number w) {
-		return (Quaternion) super.div(x, y, z, w);
-	}
-
-	
-	
-	
-	@Override
-	public Quaternion div(Number xyzw) {
-		return (Quaternion) super.div(xyzw);
-	}
-
-	
-	
-
-	@Override
-	public Quaternion div(float xyzw) {
-		return (Quaternion) super.div(xyzw);
+	public Quaternionf scale(Number xyzw) {
+		return (Quaternionf) super.scale(xyzw);
 	}
 	
 	
 	
 	
 	@Override
-	public Quaternion div(float x, float y, float z, float w) {
-		return (Quaternion) super.div(x, y, z, w);
+	public Quaternionf scale(float xyzw) {
+		return (Quaternionf) super.scale(xyzw);
+	}
+	
+	
+	
+
+	@Override
+	public Quaternionf mul(float x, float y, float z, float w) {
+		return (Quaternionf) super.mul(x, y, z, w);
+	}
+	
+	
+	
+
+	@Override
+	public Quaternionf div(IVector4 vec) {
+		return (Quaternionf) super.div(vec);
+	}
+
+	
+	
+	
+	@Override
+	public Quaternionf div(Number x, Number y, Number z, Number w) {
+		return (Quaternionf) super.div(x, y, z, w);
+	}
+
+	
+	
+	
+	@Override
+	public Quaternionf div(Number xyzw) {
+		return (Quaternionf) super.div(xyzw);
+	}
+
+	
+	
+
+	@Override
+	public Quaternionf div(float xyzw) {
+		return (Quaternionf) super.div(xyzw);
+	}
+	
+	
+	
+	
+	@Override
+	public Quaternionf div(float x, float y, float z, float w) {
+		return (Quaternionf) super.div(x, y, z, w);
 	}
 	
 	
@@ -291,7 +291,7 @@ public class Quaternion extends Vector4f {
 	 * Sets this quaternion to an identity
 	 * @return this quaternion for chaining
 	 * */
-	public Quaternion setToIdentity() {
+	public Quaternionf setToIdentity() {
 		this.set(0, 0, 0, 1);
 		return this;
 	}
@@ -304,12 +304,12 @@ public class Quaternion extends Vector4f {
 	 * @param q the right Quaternion
 	 * @return this quaternion for chaining
 	 * */
-	public Quaternion mul(Quaternion q) {
+	public Quaternionf mul(Quaternionf q) {
 		final float newX = this.w * q.x + this.x * q.w + this.y * q.z - this.z * q.y;
 		final float newY = this.w * q.y + this.y * q.w + this.z * q.x - this.x * q.z;
 		final float newZ = this.w * q.z + this.z * q.w + this.x * q.y - this.y * q.x;
 		final float newW = this.w * q.w - this.x * q.x - this.y * q.y - this.z * q.z;
-		return (Quaternion) this.set(newX, newY, newZ, newW);
+		return (Quaternionf) this.set(newX, newY, newZ, newW);
 	}
 	
 	
@@ -319,12 +319,12 @@ public class Quaternion extends Vector4f {
 	 * @param q the left Quaternion
 	 * @return this quaternion for chaining
 	 * */
-	public Quaternion mulLeft(Quaternion q) {
+	public Quaternionf mulLeft(Quaternionf q) {
 		final float newX = q.w * this.x + q.x * this.w + q.y * this.z - q.z * this.y;
 		final float newY = q.w * this.y + q.y * this.w + q.z * this.x - q.x * this.z;
 		final float newZ = q.w * this.z + q.z * this.w + q.x * this.y - q.y * this.x;
 		final float newW = q.w * this.w - q.x * this.x - q.y * this.y - q.z * this.z;
-		return (Quaternion) this.set(newX, newY, newZ, newW);
+		return (Quaternionf) this.set(newX, newY, newZ, newW);
 	}
 	
 	
@@ -335,7 +335,7 @@ public class Quaternion extends Vector4f {
 	 * @param vec the axis-angle. x,y,z as the axis and w as the angle in degrees
 	 * @return this quaternion for chaining
 	 * */
-	public Quaternion setFromAxisAngleDeg(IVector4 vec) {
+	public Quaternionf setFromAxisAngleDeg(IVector4 vec) {
 		return this.setFromAxisAngleRad(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ(), (float)Math.toRadians(vec.getFloatW()));
 	}
 	
@@ -349,7 +349,7 @@ public class Quaternion extends Vector4f {
 	 * @param angle	the angle in degrees
 	 * @return this quaternion for chaining
 	 * */
-	public Quaternion setFromAxisAngleDeg(float ax, float ay, float az, float angle) {
+	public Quaternionf setFromAxisAngleDeg(float ax, float ay, float az, float angle) {
 		return this.setFromAxisAngleRad(ax, ay, az, (float)Math.toRadians(angle));
 	}
 	
@@ -359,7 +359,7 @@ public class Quaternion extends Vector4f {
 	 * @param vec the axis-angle. x,y,z as the axis and w as the angle in radians
 	 * @return this quaternion for chaining
 	 * */
-	public Quaternion setFromAxisAngleRad(IVector4 vec) {
+	public Quaternionf setFromAxisAngleRad(IVector4 vec) {
 		return this.setFromAxisAngleRad(vec.getFloatX(), vec.getFloatY(), vec.getFloatZ(), vec.getFloatW());
 	}
 	
@@ -373,7 +373,7 @@ public class Quaternion extends Vector4f {
 	 * @param angle	the angle in radians
 	 * @return this quaternion for chaining
 	 * */
-	public Quaternion setFromAxisAngleRad(float ax, float ay, float az, float angle) {
+	public Quaternionf setFromAxisAngleRad(float ax, float ay, float az, float angle) {
 		
 		float d = (float) Math.sqrt(ax * ax + ay * ay + az * az);
 		
@@ -397,7 +397,7 @@ public class Quaternion extends Vector4f {
 	 * @param mat the (rotation) matrix. Must be at least 3x3
 	 * @return this quaternion for chaining
 	 * */
-	public Quaternion setFromMatrix(IMatrix mat) {
+	public Quaternionf setFromMatrix(IMatrix mat) {
 		if(mat.getNumberColumns() >= 3 && mat.getNumberRows() >= 3) {
 		
 			boolean wasUnsafe = mat.isUnsafe();
@@ -420,7 +420,7 @@ public class Quaternion extends Vector4f {
 	 * @param mat the (rotation) matrix
 	 * @return this quaternion for chaining
 	 * */
-	public Quaternion setFromMatrix(Matrix4f mat) {
+	public Quaternionf setFromMatrix(Matrix4f mat) {
 		return setFromMatrix(mat.getData()[0][0], mat.getData()[0][1], mat.getData()[0][2],
 							 mat.getData()[1][0], mat.getData()[1][1], mat.getData()[1][2],
 							 mat.getData()[2][0], mat.getData()[2][1], mat.getData()[2][2] );
@@ -433,7 +433,7 @@ public class Quaternion extends Vector4f {
 	 * Sets the component of this quaternion from the given matrix
 	 * @return this quaternion for chaining
 	 * */
-	public Quaternion setFromMatrix(float m00, float m01, float m02,
+	public Quaternionf setFromMatrix(float m00, float m01, float m02,
 									 float m10, float m11, float m12,
 									 float m20, float m21, float m22) {
 		
@@ -491,7 +491,7 @@ public class Quaternion extends Vector4f {
 	 * @param roll	the roll angle in degrees
 	 * @return this quaternion for chaining
 	 * */
-	public Quaternion setFromEulerDeg(float yaw, float pitch , float roll) {
+	public Quaternionf setFromEulerDeg(float yaw, float pitch , float roll) {
 		return this.setFromEulerRad((float)Math.toRadians(yaw), (float)Math.toRadians(pitch), (float)Math.toRadians(roll));
 	}
 
@@ -503,7 +503,7 @@ public class Quaternion extends Vector4f {
 	 * @param roll	the roll angle in radians
 	 * @return this quaternion for chaining
 	 * */
-	public Quaternion setFromEulerRad(float yaw, float pitch , float roll) {
+	public Quaternionf setFromEulerRad(float yaw, float pitch , float roll) {
 		
 		final float hr = roll * 0.5f;
 		final float shr = (float) Math.sin(hr);
