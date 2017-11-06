@@ -231,7 +231,7 @@ public class Vector3l implements IVector3 {
 	 * @param xyz the value of the x- y- and z-component
 	 * @return this vector for chaining
 	 * */
-	public Vector3l set(int xyz) {
+	public Vector3l set(long xyz) {
 		return this.set(xyz, xyz, xyz);
 	}
 	
@@ -453,7 +453,7 @@ public class Vector3l implements IVector3 {
 	
 	@Override
 	public Vector3l scale(Number xyz) {
-		return this.scale(xyz);
+		return this.scale(xyz.floatValue());
 	}
 	
 	

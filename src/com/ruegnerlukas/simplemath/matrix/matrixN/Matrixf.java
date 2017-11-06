@@ -829,7 +829,7 @@ public class Matrixf implements IMatrixf {
 	
 	@Override
 	public Number traceGen() {
-		return this.traceGen();
+		return this.trace();
 	}
 	
 	

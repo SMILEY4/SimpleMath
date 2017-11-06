@@ -606,8 +606,8 @@ public class Matrixl implements IMatrixl {
 		}
 		
 		
-		if( (matA instanceof Matrixl && matB instanceof Matrixl) || (matA instanceof Matrixl && matB instanceof Matrixl) ) {
-			int[][] dataC = new int[aCols][bRows];	// l x n
+		if( (matA instanceof Matrixl && matB instanceof Matrixi) || (matA instanceof Matrixi && matB instanceof Matrixl) ) {
+			long[][] dataC = new long[aCols][bRows];	// l x n
 			for(int i=0; i<aCols; i++) {
 				for(int j=0; j<bRows; j++) {
 					for(int k=0; k<aRows; k++) {
@@ -839,7 +839,7 @@ public class Matrixl implements IMatrixl {
 	
 	@Override
 	public Number traceGen() {
-		return this.traceGen();
+		return this.trace();
 	}
 	
 	

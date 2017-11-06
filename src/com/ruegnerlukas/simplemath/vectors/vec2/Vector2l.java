@@ -863,7 +863,7 @@ public class Vector2l implements IVector2 {
 	
 	@Override
 	public Vector2l rotateDeg(Number angleDeg) {
-		return this.rotateDeg(angleDeg.longValue());
+		return this.rotateDeg(angleDeg.intValue());
 	}
 	
 	

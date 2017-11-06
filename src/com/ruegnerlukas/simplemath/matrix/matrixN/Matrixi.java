@@ -838,7 +838,7 @@ public class Matrixi implements IMatrixi {
 	
 	@Override
 	public Number traceGen() {
-		return this.traceGen();
+		return this.trace();
 	}
 	
 	

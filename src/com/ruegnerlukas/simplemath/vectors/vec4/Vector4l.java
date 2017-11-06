@@ -489,7 +489,7 @@ public class Vector4l implements IVector4 {
 
 	@Override
 	public Vector4l scale(Number xyzw) {
-		return this.scale(xyzw);
+		return this.scale(xyzw.longValue());
 	}
 	
 	

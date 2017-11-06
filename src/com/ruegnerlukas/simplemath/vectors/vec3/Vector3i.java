@@ -451,7 +451,7 @@ public class Vector3i implements IVector3 {
 
 	@Override
 	public Vector3i scale(Number xyz) {
-		return this.scale(xyz);
+		return this.scale(xyz.intValue());
 	}
 	
 	

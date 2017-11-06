@@ -828,7 +828,7 @@ public class Matrixd implements IMatrixd {
 	
 	@Override
 	public Number traceGen() {
-		return this.traceGen();
+		return this.trace();
 	}
 	
 	

@@ -495,7 +495,7 @@ public class Vector4f implements IVector4 {
 
 	@Override
 	public Vector4f scale(Number xyzw) {
-		return this.scale(xyzw);
+		return this.scale(xyzw.floatValue());
 	}
 	
 	
