@@ -1,4 +1,4 @@
-package com.ruegnerlukas.simplemath.geometry.shapes;
+package com.ruegnerlukas.simplemath.geometry;
 
 import java.util.List;
 
