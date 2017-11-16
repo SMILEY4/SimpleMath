@@ -214,6 +214,81 @@ public class Intersector {
 	}
 	
 	
+	/**
+	 * checks whether a rectangle and a polygon intersect and returns them in intersections
+	 * @param rx		the x-position of the rectangle
+	 * @param ry		the y-position of the rectangle
+	 * @param rWidth	the width of the rectangle (must be positive)
+	 * @param rHeight	the height of the rectangle (must be positive)
+	 * @param polygon	the points of the polygon as array {x0,y0,x1,y1,...,xn,yn}
+	 * @param intersections the intersection points or null
+	 * @return true, if the rectangles and the polygon intersect
+	 * */	
+	public static boolean intersectsRectanglePolygon(float rx, float ry, float rWidth, float rHeight, float[] polygon, List<Vector2f> intersections) {
+
+		if(polygon.length % 2 != 0) {
+			throw new IllegalArgumentException("Invalid polygon data size: " + polygon.length);
+		}
+		
+		float minX = rx;
+		float minY = ry;
+		float maxX = rx + rWidth;
+		float maxY = ry + rHeight;
+		
+		int numPointsInRect = 0;
+		for(int i=0,n=polygon.length; i<n; ) {
+			final float x = polygon[i++];
+			final float y = polygon[i++];
+			if(pointInRectangle(minX, minY, maxX, maxY, x, y)) { numPointsInRect++; }
+		}
+		if(numPointsInRect > 0) { return true; }
+		
+		int numPointsInPolygon = 0;
+		if(pointInPolygon(polygon, minX, minY)) { numPointsInPolygon++; }
+		if(pointInPolygon(polygon, maxX, minY)) { numPointsInPolygon++; }
+		if(pointInPolygon(polygon, maxX, maxY)) { numPointsInPolygon++; }
+		if(pointInPolygon(polygon, minX, maxY)) { numPointsInPolygon++; }
+		if(numPointsInPolygon > 0) { return true; }
+
+		if(intersections != null) {
+			int numIntersections = 0;
+			for(int i=0; i<polygon.length; i+=2) {
+				int ix = i;
+				int iy = i+1;
+				float x1 = polygon[ix];
+				float y1 = polygon[iy];
+				float x2 = polygon[(ix+1) % (polygon.length/2)];
+				float y2 = polygon[(iy+1) % (polygon.length/2)];
+				Vector2f v1 = new Vector2f();
+				if(intersectsLineLine(x1, y1, x2, y2, minX, minY, maxX, minY, v1)) { numIntersections++; intersections.add(v1); }
+				Vector2f v2 = new Vector2f();
+				if(intersectsLineLine(x1, y1, x2, y2, maxX, minY, maxX, maxY, v2)) { numIntersections++; intersections.add(v2); }
+				Vector2f v3 = new Vector2f();
+				if(intersectsLineLine(x1, y1, x2, y2, maxX, maxY, minX, maxY, v3)) { numIntersections++; intersections.add(v3); }
+				Vector2f v4 = new Vector2f();
+				if(intersectsLineLine(x1, y1, x2, y2, minX, maxY, maxX, minY, v4)) { numIntersections++; intersections.add(v4); }
+			}
+			if(numIntersections > 0) { return true;}
+			
+		} else {
+			for(int i=0; i<polygon.length; i+=2) {
+				int ix = i;
+				int iy = i+1;
+				float x1 = polygon[ix];
+				float y1 = polygon[iy];
+				float x2 = polygon[(ix+1) % (polygon.length/2)];
+				float y2 = polygon[(iy+1) % (polygon.length/2)];
+				if(intersectsLineLine(x1, y1, x2, y2, minX, minY, maxX, minY, null)) { return true; }
+				if(intersectsLineLine(x1, y1, x2, y2, maxX, minY, maxX, maxY, null)) { return true; }
+				if(intersectsLineLine(x1, y1, x2, y2, maxX, maxY, minX, maxY, null)) { return true; }
+				if(intersectsLineLine(x1, y1, x2, y2, minX, maxY, maxX, minY, null)) { return true; }
+			}
+		}
+		
+		return false;
+	}
+	
+	
 	
 	
 	/**
@@ -312,6 +387,40 @@ public class Intersector {
 	}
 	
 	
+	/**
+	 * checks whether a circle and a polygon intersect
+	 * @param cx		the x-position (center) of the circle
+	 * @param cy		the y-position (center) of the circle
+	 * @param cRadius	the radius of the circle
+	 * @param polygon	the points of the polygon as an array {x0,y0,x1,y1,...,xn,yn}
+	 * @return true, if the circle and the polygon intersect
+	 * */	
+	public static boolean intersectsCirclePolygon(float cx, float cy, float cRadius, float[] polygon) {
+		if(polygon.length % 2 != 0) {
+			throw new IllegalArgumentException("Invalid polygon data size: " + polygon.length);
+		}
+		int numPointsInCircle = 0;
+		for(int i=0; i<polygon.length; ) {
+			final float x = polygon[i++];
+			final float y = polygon[i++];
+			if(pointInCircle(cx, cy, cRadius, x, y)) { numPointsInCircle++; }
+		}
+		if(numPointsInCircle > 0) { return true; }
+		
+		for(int i=0; i<polygon.length; i+=2) {
+			int ix = i;
+			int iy = i+1;
+			float x1 = polygon[ix];
+			float y1 = polygon[iy];
+			float x2 = polygon[(ix+1) % (polygon.length/2)];
+			float y2 = polygon[(iy+1) % (polygon.length/2)];
+			if(intersectsCircleLine(cx, cy, cRadius, x1, y1, x2, y2)) { return true; }
+		}
+		
+		return false;
+	}
+	
+	
 	
 	
 	/**
@@ -393,6 +502,54 @@ public class Intersector {
 	
 	
 	/**
+	 * checks whether a line segment and a polygon intersect
+	 * @param x1		the x-position of the first point of the line segment
+	 * @param y1		the y-position of the first point of the line segment
+	 * @param x2		the x-position of the second point of the line segment
+	 * @param y2		the y-position of the second point of the line segment
+	 * @param polygon	the points of the polygon as an array {x0,y0,x1,y1,...,xn,yn}
+	 * @return true, if the circle and the line segment intersect
+	 * */
+	public static boolean intersectsLinePolygon(float x1, float y1, float x2, float y2, float[] polygon) {
+
+		if(polygon.length % 2 != 0) {
+			throw new IllegalArgumentException("Invalid polygon data size: " + polygon.length);
+		}
+		
+		int n = polygon.length/2;
+		
+		float x3 = polygon[n*2-2];
+		float y3 = polygon[n*2-1];
+
+		for(int i=0; i<n; i+=2) {
+			float x4 = polygon[i];
+			float y4 = polygon[i+1];
+			
+			float d = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1);
+			if (d != 0) {
+				float yd = y1 - y3;
+				float xd = x1 - x3;
+				float ua = ((x4 - x3) * yd - (y4 - y3) * xd) / d;
+				if (ua >= 0 && ua <= 1) {
+					float ub = ((x2 - x1) * yd - (y2 - y1) * xd) / d;
+					if (ub >= 0 && ub <= 1) {
+						return true;
+					}
+				}
+			}
+			
+			x3 = x4;
+			y3 = x4;
+
+		}
+		
+		return false;
+	}
+	
+	
+	
+	
+	/**
 	 * checks whether two polygons intersect
 	 * @param polygon1	the points of the first polygon
 	 * @param polygon2	the points of the second polygon
@@ -421,6 +578,58 @@ public class Intersector {
 				float y3 = polygon1[j].y;
 				float x4 = polygon1[(j+1) % polygon2.length].x;
 				float y4 = polygon1[(j+1) % polygon2.length].y;
+				if(intersectsLineLine(x1, y1, x2, y2, x3, y3, x4, y4, null)) { return true; }
+			}
+		}
+		
+		return false;
+	}
+	
+	
+	
+	
+	/**
+	 * checks whether two polygons intersect
+	 * @param polygon1	the points of the first polygon as an array {x0,y0,x1,y1,...,xn,yn}
+	 * @param polygon2	the points of the second polygon as an array {x0,y0,x1,y1,...,xn,yn}
+	 * @return true, if the polygons intersect
+	 * */
+	public static boolean intersectsPolygonPolygon(float[] polygon1, float[] polygon2) {
+		
+		if(polygon1.length % 2 != 0) {
+			throw new IllegalArgumentException("Invalid polygon data size: " + polygon1.length);
+		}
+		if(polygon2.length % 2 != 0) {
+			throw new IllegalArgumentException("Invalid polygon data size: " + polygon2.length);
+		}
+		
+		
+		int numPointsInPoly1 = 0;
+		for(int i=0; i<polygon1.length; ) {
+			if(pointInPolygon(polygon1, polygon1[i++], polygon1[i++])) { numPointsInPoly1++; }
+		}
+		if(numPointsInPoly1 > 0) { return true; }
+		
+		int numPointsInPoly2 = 0;
+		for(int i=0; i<polygon2.length; ) {
+			if(pointInPolygon(polygon2, polygon2[i++], polygon2[i++])) { numPointsInPoly2++; }
+		}
+		if(numPointsInPoly2 > 0) { return true; }
+		
+		for(int i=0; i<polygon1.length; i+=2) {
+			int ix = i;
+			int iy = i+1;
+			float x1 = polygon1[ix];
+			float y1 = polygon1[iy];
+			float x2 = polygon1[(ix+1) % (polygon1.length/2)];
+			float y2 = polygon1[(iy+1) % (polygon1.length/2)];
+			for(int j=0; j<polygon2.length; j+=2) {
+				int jx = j;
+				int jy = j+1;
+				float x3 = polygon1[jx];
+				float y3 = polygon1[jy];
+				float x4 = polygon1[(jx+1) % (polygon2.length/2)];
+				float y4 = polygon1[(jy+1) % (polygon2.length/2)];
 				if(intersectsLineLine(x1, y1, x2, y2, x3, y3, x4, y4, null)) { return true; }
 			}
 		}
@@ -514,6 +723,32 @@ public class Intersector {
 			float x2 = polygon[(i+1) % polygon.length].x;
 			float y2 = polygon[(i+1) % polygon.length].y;
 			if (((y1 <= y && y < y2) || (y2 <= y && y < y1)) && x < ((x2 - x1) / (y2 - y1) * (y - y1) + x1)) intersects++;
+		}
+		return (intersects & 1) == 1;
+	}
+	
+	
+	/**
+	 * checks whether the given point is inside the polygon
+	 * @param polygon 	the points of the polygon as an array {x0,y0,x1,y1,...,xn,yn} 
+	 * @param x 		the x-position of the point
+	 * @param y 		the y-position of the point
+	 * @return true, if the point is inside the polygon
+	 * */
+	public static boolean pointInPolygon(float[] polygon, float x, float y) {
+		if(polygon.length % 2 != 0) {
+			throw new IllegalArgumentException("Invalid polygon data size: " + polygon.length);
+		}
+		int intersects = 0;
+		for(int i=0; i<polygon.length/2; i+=2) {
+			int ix = i;
+			int iy = i+1;
+			float x1 = polygon[ix];
+			float y1 = polygon[iy];
+			float x2 = polygon[(ix+1) % (polygon.length/2)];
+			float y2 = polygon[(iy+1) % (polygon.length/2)];
+			if (((y1 <= y && y < y2) || (y2 <= y && y < y1)) && x < ((x2 - x1) / (y2 - y1) * (y - y1) + x1)) intersects++;
+	
 		}
 		return (intersects & 1) == 1;
 	}
