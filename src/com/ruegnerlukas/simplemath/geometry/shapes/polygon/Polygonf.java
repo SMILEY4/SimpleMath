@@ -119,8 +119,9 @@ public class Polygonf implements IPolygon {
 		} else if(shape instanceof IPolygon) {
 			IPolygon poly = (IPolygon) shape;
 			vertices = new float[poly.getVerticesGen().length];
-			for(int j=0,n=vertices.length; j<n; ) {
+			for(int j=0,n=vertices.length; j<n; j+=2) {
 				vertices[j] = poly.getVerticesGen()[j].floatValue();
+				vertices[j+1] = poly.getVerticesGen()[j+1].floatValue();
 			}
 			
 		} else {
@@ -465,7 +466,7 @@ public class Polygonf implements IPolygon {
 
 	@Override
 	public IVector2 getVertex(int index) {
-		return getVertex(index);
+		return getVertex(index, null);
 	}
 
 
