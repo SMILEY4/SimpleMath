@@ -280,6 +280,14 @@ public class Circlef implements ICircle {
 	public IShape copy() {
 		return new Circlef(this);
 	}
+	
+	
+	
+	
+	@Override
+	public String toString() {
+		return "Circlef." + this.hashCode() + "(" + this.cx + ", " + this.cy + ") r=" + this.radius;
+	}
 
 
 	@Override
