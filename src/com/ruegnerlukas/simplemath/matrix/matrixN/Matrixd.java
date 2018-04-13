@@ -957,13 +957,6 @@ public class Matrixd implements IMatrix {
 	}
 
 
-	@Override
-	public IMatrix inverse() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 
 
 }

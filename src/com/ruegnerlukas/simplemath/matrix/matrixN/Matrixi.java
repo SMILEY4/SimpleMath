@@ -967,13 +967,6 @@ public class Matrixi implements IMatrix {
 	}
 
 
-	@Override
-	public IMatrix inverse() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 
 
 }

@@ -276,12 +276,6 @@ public interface IMatrix {
 	
 	
 	
-	// TODO
-	public IMatrix inverse();
-	
-	
-	
-	
 	/**
 	 * Sets this matrix to an identity matrix. This matrix must be square
 	 * @return this matrix for chaining

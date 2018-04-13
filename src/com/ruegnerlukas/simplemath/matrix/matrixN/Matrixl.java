@@ -968,11 +968,4 @@ public class Matrixl implements IMatrix {
 	}
 
 
-	@Override
-	public IMatrix inverse() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 }
