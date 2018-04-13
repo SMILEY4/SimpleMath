@@ -35,13 +35,13 @@ public class Polygonf implements IPolygon {
 
 	
 	/**
-	 * Creates a polygon with nVertices vertex at (0,0)
+	 * Creates a polygon with n-vertices vertex at (0,0)
 	 * */
-	public Polygonf(int nVertices) {
-		if(nVertices <= 0) {
-			throw new IllegalArgumentException("Number of vertices must be > 0");
+	public Polygonf(int n) {
+		if(n <= 2) {
+			throw new IllegalArgumentException("Number of vertices must be > 2");
 		} else {
-			this.vertices = new float[nVertices*2];
+			this.vertices = new float[n*2];
 		}
 	}
 	
@@ -50,8 +50,8 @@ public class Polygonf implements IPolygon {
 	 * Creates a polygon with the given vertices
 	 * */
 	public Polygonf(float... vertices) {
-		if(vertices == null || vertices.length == 0) {
-			throw new IllegalArgumentException("Number of vertices must be > 0");
+		if(vertices == null || vertices.length < 3*2) {
+			throw new IllegalArgumentException("Number of values must be >= 6");
 		} else {
 			this.vertices = vertices;
 		}
@@ -62,8 +62,8 @@ public class Polygonf implements IPolygon {
 	 * Creates a polygon with the given vertices
 	 * */
 	public Polygonf(IVector2... vertices) {
-		if(vertices == null || vertices.length == 0) {
-			throw new IllegalArgumentException("Number of vertices must be > 0");
+		if(vertices == null || vertices.length < 3) {
+			throw new IllegalArgumentException("Number of vertices must be >= 3");
 		} else {
 			this.vertices = new float[vertices.length*2];
 			for(int i=0, j=0, n=vertices.length; i<n; i++) {
@@ -78,8 +78,8 @@ public class Polygonf implements IPolygon {
 	 * Creates a polygon with the given vertices
 	 * */
 	public Polygonf(List<IVector2> vertices) {
-		if(vertices == null || vertices.size() == 0) {
-			throw new IllegalArgumentException("Number of vertices must be > 0");
+		if(vertices == null || vertices.size() < 3) {
+			throw new IllegalArgumentException("Number of vertices must be >= 3");
 		} else {
 			this.vertices = new float[vertices.size()*2];
 			for(int i=0, j=0, n=vertices.size(); i<n; i++) {
@@ -107,14 +107,6 @@ public class Polygonf implements IPolygon {
 			vertices[i++] = rect.getYFloat()+rect.getHeightFloat();
 			vertices[i++] = rect.getXFloat();
 			vertices[i++] = rect.getYFloat()+rect.getHeightFloat();
-			
-		} else if(shape instanceof ILine) {
-			ILine line = (ILine) shape;
-			vertices = new float[3];
-			vertices[i++] = line.getStartXFloat();
-			vertices[i++] = line.getStartYFloat();
-			vertices[i++] = line.getEndXFloat();
-			vertices[i++] = line.getEndYFloat();
 
 		} else if(shape instanceof IPolygon) {
 			IPolygon poly = (IPolygon) shape;
@@ -386,7 +378,7 @@ public class Polygonf implements IPolygon {
 
 
 	@Override
-	public IShape copy() {
+	public Polygonf copy() {
 		return new Polygonf(this);
 	}
 	
@@ -398,11 +390,11 @@ public class Polygonf implements IPolygon {
 		StringBuilder sb = new StringBuilder();
 		for(int i=0; i<vertices.length; ) {
 			sb.append('(').append(vertices[i++]).append(',').append(vertices[i++]).append(')');
-			if(i<vertices.length-2) {
+			if(i<vertices.length-1) {
 				sb.append(", ");
 			}
 		}
-		return "Rectanglef." + this.hashCode() + "(" + sb.toString() + ")";
+		return "Polygonf." + this.hashCode() + "( " + sb.toString() + " )";
 	}
 
 
@@ -844,7 +836,7 @@ public class Polygonf implements IPolygon {
 	
 	
 	
-	private Vector2f tmpVec;
+	private final Vector2f tmpVec = new Vector2f();
 	
 	/**
 	 * Scales this polygon. The position of the given origin does not change.
@@ -855,9 +847,6 @@ public class Polygonf implements IPolygon {
 	 * @return this polygon for chaining
 	 * */
 	public Polygonf scale(float sx, float sy, float ox, float oy) {
-		if(tmpVec == null) {
-			tmpVec = new Vector2f();
-		}
 		for(int i=0; i<vertices.length; ) {
 			float x = vertices[i++];
 			float y = vertices[i++];
@@ -891,4 +880,307 @@ public class Polygonf implements IPolygon {
 		return this.scale(scaling.getFloatX(),  scaling.getFloatY(), ox, oy);
 	}
 
+	
+	
+	
+	private boolean turnTest(float x1, float y1, float x2, float y2, float x3, float y3) {
+		return (x2-x1)*(y3-y2) - (x3-x2)*(y2-y1) > 0;
+	}
+	
+	
+
+	
+	@Override
+	public boolean isConvex() {
+		
+		final int n = this.getNumberVertices();
+		if(n == 3) {
+			return true;
+		}
+		
+		float prevX = this.getXFloat(n-2);
+		float prevY = this.getYFloat(n-2);
+
+		float currX = this.getXFloat(n-1);
+		float currY = this.getYFloat(n-1);
+		
+		float nextX = this.getXFloat(0);
+		float nextY = this.getYFloat(0);
+		
+		boolean isCCW = turnTest(prevX, prevY, currX, currY, nextX, nextY);
+		
+		for(int i=1; i<n; i++) {
+			
+			prevX = currX;
+			prevY = currY;
+			currX = nextX;
+			currY = nextY;
+			nextX = this.getXFloat(i);
+			nextY = this.getYFloat(i);
+
+			if(turnTest(prevX, prevY, currX, currY, nextX, nextY) != isCCW) {
+				return false;
+			}
+			
+		}
+		
+		return true;
+	}
+	
+	
+	
+	
+	private int orientation(float px, float py, float qx, float qy, float rx, float ry) {
+		float val = (qy-py)*(rx-qx) - (qx-px)*(ry-qy);
+		if(val == 0) {
+			return 0;
+		}
+		return (val > 0) ? 1 : 2;
+	}
+
+	
+	@Override
+	public Polygonf makeConvex() {
+		
+		if(isConvex()) {
+			return this;
+		}
+		
+		final int n = this.getNumberVertices();
+		if(n < 3) {
+			return this;
+		}
+
+		
+		int l = 0;
+		for(int i=1; i<n; i++) {
+			if(vertices[i] < vertices[l]) {
+				l = i;
+			}
+		}
+		
+		
+		int p = l;
+		int q;
+		
+		ArrayList<Float> hullX = new ArrayList<Float>();
+		ArrayList<Float> hullY = new ArrayList<Float>();
+
+		do {
+			
+			hullX.add(getXFloat(p));
+			hullY.add(getYFloat(p));
+
+			q = (p+1) % n;
+			
+			for(int i=0; i<n; i++) {
+				if(orientation(getXFloat(p), getYFloat(p), getXFloat(i), getYFloat(i), getXFloat(q), getYFloat(q)) == 2) {
+					q = i;
+				}
+			}
+			
+			p = q;
+			
+		} while(p != l);
+		
+		
+		float[] verticesConvex = new float[hullX.size()*2];
+		for(int i=0, j=0; i<hullX.size(); i++) {
+			verticesConvex[j++] = hullX.get(i);
+			verticesConvex[j++] = hullY.get(i);
+		}
+		this.vertices = verticesConvex;
+		
+		return this;
+	}
+
+
+	
+	
+	@Override
+	public boolean isCCW() {
+		
+		final int n = this.getNumberVertices();
+		
+		float minY = this.getYFloat(0);
+		int minIndex = 0;
+		
+		for(int i=1; i<n; i++) {
+			final float y = this.getYFloat(i);
+			if(y < minY) {
+				minY = y;
+				minIndex = i;
+			}
+		}
+		
+
+		final int indexPrev = (minIndex - 1 + n) % n;
+		final int indexNext = (minIndex + 1) % n;
+
+		return this.turnTest(getXFloat(indexPrev), getYFloat(indexPrev), getXFloat(minIndex), getYFloat(minIndex), getXFloat(indexNext), getYFloat(indexNext));
+	}
+
+
+	
+	
+	@Override
+	public Polygonf makeCCW() {
+
+		if(!isCCW()) {
+			
+			float[] verticesCCW = new float[this.vertices.length];
+			
+			for(int i=this.getNumberVertices()-1, j=0; i>=0; i--) {
+				float x = getXFloat(i);
+				float y = getYFloat(i);
+				verticesCCW[j++] = x;
+				verticesCCW[j++] = y;
+			}
+			
+			this.vertices = verticesCCW;
+			
+		}
+		
+		return this;
+	}
+
+
+	
+	
+	@Override
+	public List<IPolygon> triangulate() {
+		List<IPolygon> triangles = new ArrayList<IPolygon>();
+		triangulate(triangles);
+		return triangles;
+	}
+
+	
+	
+	
+	@Override
+	public void triangulate(List<IPolygon> trianglesOut) {
+		
+		final int n = this.getNumberVertices();
+		if(n < 3) {
+			return;
+		}
+		if(n == 3) {
+			trianglesOut.add(this.copy());
+		}
+		
+		if(this.isConvex()) {
+			
+			float ox = getXFloat(0);
+			float oy = getYFloat(0);
+
+			float ax = getXFloat(1);
+			float ay = getYFloat(1);
+
+			float bx = getXFloat(2);
+			float by = getYFloat(2);
+			
+			for(int i=3; i<n; i++) {
+				Polygonf tri = new Polygonf(ox, oy, ax, ay, bx, by);
+				trianglesOut.add(tri);
+				ax = bx;
+				ay = by;
+				bx = getXFloat(i);
+				by = getYFloat(i);
+			}
+			
+			Polygonf tri = new Polygonf(ox, oy, ax, ay, bx, by);
+			trianglesOut.add(tri);
+			
+			
+		} else {
+			
+			// ear-clipping-algorithm
+			Polygonf poly = isCCW() ? this : this.copy().makeCCW();
+			
+			List<IVector2> listVertices = poly.getVerticesVecList();
+			
+			int p = 0;
+			while(listVertices.size() > 3) {
+				
+				IVector2 v0 = getVertexWrapped(listVertices, p-1);
+				IVector2 v1 = getVertexWrapped(listVertices, p  );
+				IVector2 v2 = getVertexWrapped(listVertices, p+1);
+
+				if( isEar(listVertices, v0, v1, v2) ) {
+					trianglesOut.add(new Polygonf(v0.getFloatX(), v0.getFloatY(), v1.getFloatX(), v1.getFloatY(), v2.getFloatX(), v2.getFloatY()));
+					listVertices.remove(p);
+					p = 0;
+				} else {
+					p++;
+				}
+				
+			}
+			
+			trianglesOut.add(new Polygonf(listVertices.get(0), listVertices.get(1), listVertices.get(2)));
+		}
+		
+	}
+	
+	
+	private IVector2 getVertexWrapped(List<IVector2> vertices, int index) {
+		if(index >= vertices.size()) {
+			return vertices.get(index%vertices.size());
+		}
+		if(index < 0) {
+			return getVertexWrapped(vertices, index+vertices.size());
+		}
+		return vertices.get(index);
+	}
+	
+	
+	private boolean isEar(List<IVector2> vertices, IVector2 a, IVector2 b, IVector2 c) {
+		final float x1 = a.getFloatX();
+		final float y1 = a.getFloatY();
+		final float x2 = b.getFloatX();
+		final float y2 = b.getFloatY();
+		final float x3 = c.getFloatX();
+		final float y3 = c.getFloatY();
+		
+		float l = (x2-x1)*(y3-y2) - (x3-x2)*(y2-y1);
+
+		if(l > 0) {
+			
+			boolean inside = false;
+			for(int i=0; i<vertices.size(); i++) {
+				IVector2 p = vertices.get(i);
+				if(p == a || p == b || p == c) {
+					continue;
+				}
+				if(Intersector.pointInTriangle(x1, y1, x2, y2, x3, y3, p.getFloatX(), p.getFloatY())) {
+					inside = true;
+					break;
+				}
+			}
+			
+			return !inside;
+			
+		}
+		
+		return false;
+	}
+	
+	
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

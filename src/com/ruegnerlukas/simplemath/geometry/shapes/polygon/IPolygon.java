@@ -234,5 +234,47 @@ public interface IPolygon extends IShape {
 	public IPolygon scale(IVector2 scaling, Number ox, Number oy);
 	
 	
+	/**
+	 * Tests if this polygon is convex
+	 * @return true, if polygon is convex
+	 * */
+	public boolean isConvex();
+	
+	
+	/**
+	 * Converts this polygon to a convex polygon
+	 * @return this polygon for chaining
+	 * */
+	public IPolygon makeConvex();
+	
+	
+	/**
+	 * Test is this polygon is CounterClockWise
+	 * @return true, if polygon is ccw
+	 * */
+	public boolean isCCW();
+	
+	
+	/**
+	 * Convert this polygon to a CounterClockWise-polygon
+	 * @return this polygon for chaining
+	 * */
+	public IPolygon makeCCW();
+	
+	
+	/**
+	 * Triangulates this polygon
+	 * @return a list of triangles
+	 * */
+	public List<IPolygon> triangulate();
+	
+	
+	/**
+	 * Triangulates this polygon and adds the resulting triangles to trianglesOut
+	 * @param trianglesOut the resulting triangles
+	 * @return a list of triangles
+	 * */
+	public void triangulate(List<IPolygon> trianglesOut);
+
 	
 }
