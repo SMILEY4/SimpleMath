@@ -1,6 +1,6 @@
 package com.ruegnerlukas.simplemath.matrix;
 
-
+import com.ruegnerlukas.simplemath.matrix.matrixN.Matrixf;
 
 public interface IMatrix {
 
@@ -256,7 +256,7 @@ public interface IMatrix {
 	 * @return this matrix for chaining
 	 * */
 	public IMatrix toUpperTriangle();
-
+	
 	
 	
 	
@@ -272,6 +272,12 @@ public interface IMatrix {
 	 * @return the trace of this matrix. This matrix must be a square matrix
 	 * */
 	public Number traceGen();
+	
+	
+	
+	
+	// TODO
+	public IMatrix inverse();
 	
 	
 	

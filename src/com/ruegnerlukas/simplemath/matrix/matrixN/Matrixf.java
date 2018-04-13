@@ -9,7 +9,7 @@ import com.ruegnerlukas.simplemath.vectors.vec3.Vector3f;
 import com.ruegnerlukas.simplemath.vectors.vec4.Vector4f;
 import com.ruegnerlukas.simplemath.vectors.vecN.VectorNf;
 
-public class Matrixf implements IMatrixf {
+public class Matrixf implements IMatrix {
 
 	
 	
@@ -168,7 +168,9 @@ public class Matrixf implements IMatrixf {
 	
 	
 	
-	@Override
+	/**
+	 * @return the content of this matrix as a 2d-float array
+	 * */
 	public float[][] getData() {
 		return this.data;
 	}
@@ -176,7 +178,9 @@ public class Matrixf implements IMatrixf {
 	
 	
 	
-	@Override
+	/**
+	 * @return the value of the element at the given indices i and j
+	 * */
 	public float getData(int i, int j) {
 		if( !unsafe && (i < 0 || i >= getNumberColumns() || j < 0 || j >= getNumberRows()) ) {
 			throw new IndexOutOfBoundsException("Index: " + i+","+j + ", size: " + getNumberColumns() + "," + getNumberRows());
@@ -187,7 +191,12 @@ public class Matrixf implements IMatrixf {
 	
 	
 	
-	@Override
+	/**
+	 * Writes the values of the given row "row" into the given array "dest"
+	 * @param row	the index of the row
+	 * @param dest	the destination array ( must be the same size as the row (number of columns) ) or null
+	 * @return the row (dest) as an array
+	 * */
 	public float[] getRow(int row, float[] dest) {
 		if(!unsafe) {
 			if(dest.length != getNumberColumns()) {
@@ -206,7 +215,12 @@ public class Matrixf implements IMatrixf {
 	
 	
 	
-	@Override
+	/**
+	 * Writes the values of the given column "column" into the given array "dest"
+	 * @param column	the index of the column
+	 * @param dest		the destination array ( must be the same size as the column (number of rows) ) or null
+	 * @return the column (dest) as an array
+	 * */
 	public float[] getColumn(int column, float[] dest) {
 		if(!unsafe) {
 			if(dest.length != getNumberRows()) {
@@ -225,7 +239,9 @@ public class Matrixf implements IMatrixf {
 	
 	
 
-	@Override
+	/**
+	 * @return the row at the given index as an array
+	 * */
 	public float[] getRow(int row) {
 		float[] data = new float[getNumberColumns()];
 		getRow(row, data);
@@ -235,7 +251,9 @@ public class Matrixf implements IMatrixf {
 	
 	
 	
-	@Override
+	/**
+	 * @return the column at the given index as an array
+	 * */
 	public float[] getColumn(int column) {
 		float[] data = new float[getNumberRows()];
 		getColumn(column, data);
@@ -245,7 +263,9 @@ public class Matrixf implements IMatrixf {
 	
 	
 	
-	@Override
+	/**
+	 * @return the row at the given index as an Vector
+	 * */
 	public IVector getRowVector(int row) {
 		final int n = getNumberColumns();
 		if(n == 2) {
@@ -262,7 +282,9 @@ public class Matrixf implements IMatrixf {
 	
 	
 	
-	@Override
+	/**
+	 * @return the column at the given index as an Vector
+	 * */
 	public IVector getColumnVector(int column) {
 		final int n = getNumberRows();
 		if(n == 2) {
@@ -365,7 +387,10 @@ public class Matrixf implements IMatrixf {
 	
 	
 	
-	@Override
+	/**
+	 * Uses the given array as new values of this matrix. Changes number of rows and columns.
+	 * @return this matrix for chaining
+	 * */
 	public Matrixf set(float[][] data) {
 		this.data = data;
 		this.columns = data.length;
@@ -384,7 +409,10 @@ public class Matrixf implements IMatrixf {
 	
 	
 	
-	@Override
+	/**
+	 * Sets the value of this matrix at the given index
+	 * @return this matrix for chaining
+	 * */
 	public Matrixf set(int i, int j, float v) {
 		if( !unsafe && (i < 0 || i >= getNumberColumns() || j < 0 || j >= getNumberRows()) ) {
 			throw new IndexOutOfBoundsException("Index: " + i+","+j + ", size: " + getNumberColumns() + "," + getNumberRows());
@@ -396,7 +424,12 @@ public class Matrixf implements IMatrixf {
 	
 	
 	
-	@Override
+	/**
+	 * Sets the values of the given column
+	 * @param column 	the index of the column
+	 * @param data 		the array containg the new values (must be the same size as the column)
+	 * @return this matrix for chaining
+	 * */
 	public Matrixf setColumn(int column, float[] data) {
 		if(!unsafe) {
 			if(column < 0 || column >= getNumberColumns()) {
@@ -415,7 +448,12 @@ public class Matrixf implements IMatrixf {
 	
 	
 	
-	@Override
+	/**
+	 * Sets the values of the given row
+	 * @param row 	the index of the row
+	 * @param data 	the array containg the new values (must be the same size as the row)
+	 * @return this matrix for chaining
+	 * */
 	public Matrixf setRow(int row, float[] data) {
 		if(!unsafe) {
 			if(row < 0 || row >= getNumberRows()) {
@@ -763,6 +801,83 @@ public class Matrixf implements IMatrixf {
 		return this;
 	}
 
+	
+	
+	
+	
+	
+	@Override
+	public Matrixf inverse() {
+		if(!unsafe && getNumberColumns() != this.getNumberRows()) {
+			throw new IllegalArgumentException("Matrix must be square.");
+		}
+		final int N = getNumberColumns();
+		
+		
+		float[][] inverse = new float[N][N];
+
+//		for(int i=0; i<N; i++) {
+//			for(int j=0; j<N; j++) {
+//				inverse[i][j] = (float) (Math.pow(-1, i+j) * determinant(minor(this.getData(), i, j), true));
+//			}
+//		}
+
+		
+		for(int j=0; j<N; j++) {
+			for(int i=0; i<N; i++) {
+				inverse[j][i] = (float) (Math.pow(-1, i+j) * determinant(minor(this.getData(), j, i), true));
+			}
+		}
+		
+		double det = 1.0 / determinant(this.getData(), true);
+		
+//		for(int i=0; i<N; i++) {
+//			for(int j=0; j<N; j++) {
+//				float tmp = inverse[i][j];
+//				inverse[i][j] = (float) (inverse[j][i] * det);
+//				inverse[j][i] = (float) (tmp * det);
+//			}
+//		}
+		
+	for(int j=0; j<N; j++) {
+		for(int i=0; i<N; i++) {
+			float tmp = inverse[j][i];
+			inverse[j][i] = (float) (inverse[i][j] * det);
+			inverse[i][j] = (float) (tmp * det);
+		}
+	}
+		
+		this.set(inverse);
+		return this;
+	}	
+	
+	
+	
+	private static float[][] minor(float[][] matrix, int row, int col) {
+		float[][] minor = new float[matrix.length-1][matrix.length-1];
+		
+		
+	//	for(int i=0; i<matrix.length; i++) {
+	//		for(int j=0; i!=row && j<matrix[i].length; j++) {
+	//			if(j != col) {
+	//				minor[i<row? i : i-1][j < col ? j : j-1] = matrix[i][j];
+	//			}
+	//		}
+	//	}
+		
+		for(int j=0; j<matrix.length; j++) {
+			for(int i=0; j!=col && i<matrix[j].length; i++) {
+				
+				if(i != row) {
+					minor[j<col ? j : j-1][i < row ? i : i-1] = matrix[j][i];
+				}
+				
+			}
+		}
+		
+		return minor;
+	}
+	
 	
 	
 	

@@ -8,7 +8,7 @@ import com.ruegnerlukas.simplemath.vectors.vec3.Vector3l;
 import com.ruegnerlukas.simplemath.vectors.vec4.Vector4l;
 import com.ruegnerlukas.simplemath.vectors.vecN.VectorNl;
 
-public class Matrixl implements IMatrixl {
+public class Matrixl implements IMatrix {
 
 	
 	
@@ -167,7 +167,9 @@ public class Matrixl implements IMatrixl {
 	
 	
 	
-	@Override
+	/**
+	 * @return the content of this matrix as a 2d array
+	 * */
 	public long[][] getData() {
 		return this.data;
 	}
@@ -175,7 +177,9 @@ public class Matrixl implements IMatrixl {
 	
 	
 	
-	@Override
+	/**
+	 * @return the value of the element at the given indices i and j
+	 * */
 	public long getData(int i, int j) {
 		if( !unsafe && (i < 0 || i >= getNumberColumns() || j < 0 || j >= getNumberRows()) ) {
 			throw new IndexOutOfBoundsException("Index: " + i+","+j + ", size: " + getNumberColumns() + "," + getNumberRows());
@@ -186,7 +190,12 @@ public class Matrixl implements IMatrixl {
 	
 	
 	
-	@Override
+	/**
+	 * Writes the values of the given row "row" into the given array "dest"
+	 * @param row	the index of the row
+	 * @param dest	the destination array ( must be the same size as the row (number of columns) ) or null
+	 * @return the row (dest) as an array
+	 * */
 	public long[] getRow(int row, long[] dest) {
 		if(!unsafe) {
 			if(dest.length != getNumberColumns()) {
@@ -205,7 +214,12 @@ public class Matrixl implements IMatrixl {
 	
 	
 	
-	@Override
+	/**
+	 * Writes the values of the given column "column" into the given array "dest"
+	 * @param column	the index of the column
+	 * @param dest		the destination array ( must be the same size as the column (number of rows) ) or null
+	 * @return the column (dest) as an array
+	 * */
 	public long[] getColumn(int column, long[] dest) {
 		if(!unsafe) {
 			if(dest.length != getNumberRows()) {
@@ -224,7 +238,9 @@ public class Matrixl implements IMatrixl {
 	
 	
 
-	@Override
+	/**
+	 * @return the row at the given index as an array
+	 * */
 	public long[] getRow(int row) {
 		long[] data = new long[getNumberColumns()];
 		getRow(row, data);
@@ -234,7 +250,9 @@ public class Matrixl implements IMatrixl {
 	
 	
 	
-	@Override
+	/**
+	 * @return the column at the given index as an array
+	 * */
 	public long[] getColumn(int column) {
 		long[] data = new long[getNumberRows()];
 		getColumn(column, data);
@@ -244,7 +262,9 @@ public class Matrixl implements IMatrixl {
 	
 	
 	
-	@Override
+	/**
+	 * @return the row at the given index as an Vector
+	 * */
 	public IVector getRowVector(int row) {
 		final int n = getNumberColumns();
 		if(n == 2) {
@@ -261,7 +281,9 @@ public class Matrixl implements IMatrixl {
 	
 	
 	
-	@Override
+	/**
+	 * @return the column at the given index as an Vector
+	 * */
 	public IVector getColumnVector(int column) {
 		final int n = getNumberRows();
 		if(n == 2) {
@@ -364,7 +386,10 @@ public class Matrixl implements IMatrixl {
 	
 	
 	
-	@Override
+	/**
+	 * Uses the given array as new values of this matrix. Changes number of rows and columns.
+	 * @return this matrix for chaining
+	 * */
 	public Matrixl set(long[][] data) {
 		this.data = data;
 		this.columns = data.length;
@@ -383,7 +408,10 @@ public class Matrixl implements IMatrixl {
 	
 	
 	
-	@Override
+	/**
+	 * Sets the value of this matrix at the given index
+	 * @return this matrix for chaining
+	 * */
 	public Matrixl set(int i, int j, long v) {
 		if( !unsafe && (i < 0 || i >= getNumberColumns() || j < 0 || j >= getNumberRows()) ) {
 			throw new IndexOutOfBoundsException("Index: " + i+","+j + ", size: " + getNumberColumns() + "," + getNumberRows());
@@ -395,7 +423,12 @@ public class Matrixl implements IMatrixl {
 	
 	
 	
-	@Override
+	/**
+	 * Sets the values of the given column
+	 * @param column 	the index of the column
+	 * @param data 		the array containg the new values (must be the same size as the column)
+	 * @return this matrix for chaining
+	 * */
 	public Matrixl setColumn(int column, long[] data) {
 		if(!unsafe) {
 			if(column < 0 || column >= getNumberColumns()) {
@@ -414,7 +447,12 @@ public class Matrixl implements IMatrixl {
 	
 	
 	
-	@Override
+	/**
+	 * Sets the values of the given row
+	 * @param row 	the index of the row
+	 * @param data 	the array containg the new values (must be the same size as the row)
+	 * @return this matrix for chaining
+	 * */
 	public Matrixl setRow(int row, long[] data) {
 		if(!unsafe) {
 			if(row < 0 || row >= getNumberRows()) {
@@ -930,6 +968,11 @@ public class Matrixl implements IMatrixl {
 	}
 
 
+	@Override
+	public IMatrix inverse() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 }
