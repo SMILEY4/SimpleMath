@@ -2,7 +2,9 @@ package com.ruegnerlukas.simplemath.geometry;
 
 import java.util.List;
 
+import com.ruegnerlukas.simplemath.MathUtils;
 import com.ruegnerlukas.simplemath.vectors.vec2.Vector2f;
+import com.ruegnerlukas.simplemath.vectors.vec3.Vector3f;
 
 public class Intersector {
 
@@ -805,12 +807,20 @@ public class Intersector {
 	 * @return true, if the point is inside the triangle
 	 * */
 	public static boolean pointInTriangle(float x1, float y1, float x2, float y2, float x3, float y3, float px, float py) {
-		float px1 = px - x1;
-		float py1 = py - y1;
-		boolean side12 = (x2 - x1) * py1 - (y2 - y1) * px1 > 0;
-		if ((x3 - x1) * py1 - (y2 - y1) * px1 > 0 == side12) return false;
-		if ((x3 - x2) * (py - y2) - (y3 - y2) * (px - x2) > 0 != side12) return false;
-		return true;
+		
+		Vector2f a = new Vector2f(x1, y1);
+		Vector2f b = new Vector2f(x2, y2);
+		Vector2f c = new Vector2f(x3, y3);
+		Vector2f p = new Vector2f(px, py);
+		
+		Vector3f bary = MathUtils.barycentric(a, b, c, p);
+		
+		if(bary.x < 0 || bary.y < 0 || bary.z < 0) {
+			return false;
+		} else {
+			return true;
+		}
+		
 	}
 	
 	
