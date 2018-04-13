@@ -1,6 +1,7 @@
 package com.ruegnerlukas.simplemath;
 
-
+import com.ruegnerlukas.simplemath.vectors.vec2.Vector2f;
+import com.ruegnerlukas.simplemath.vectors.vec3.Vector3f;
 
 public class MathUtils {
 
@@ -135,6 +136,36 @@ public class MathUtils {
 	 * */
 	public static double clamp(double v, double min, double max) {
 		return Math.min(Math.max(v, min), max);
+	}
+	
+	
+	
+	
+	/**
+	 * calculates the barycentric coordinates of the given point P and the triangle ABC
+	 * @param a the first point of the triangle
+	 * @param b the second point of the triangle
+	 * @param c the third point of the triangle
+	 * @param p	the point
+	 * */
+	public static Vector3f barycentric(Vector2f a, Vector2f b, Vector2f c, Vector2f p) {
+		
+		Vector2f v1 = new Vector2f();
+		Vector2f v2 = new Vector2f();
+		Vector2f  q = new Vector2f();
+		
+		Vector2f.setVectorAB(a, b, v1);
+		Vector2f.setVectorAB(a, c, v2);
+		Vector2f.setVectorAB(a, p,  q);
+		
+		final float c12 = v1.cross(v2);
+		
+		Vector3f bary = new Vector3f();
+		bary.y = q.cross(v2) / c12;
+		bary.z = v1.cross(q) / c12;
+		bary.x = 1f - bary.y - bary.z;
+		
+		return bary;
 	}
 	
 
