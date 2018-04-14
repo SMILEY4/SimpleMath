@@ -1,7 +1,12 @@
 package com.ruegnerlukas.simplemath;
 
+import com.ruegnerlukas.simplemath.vectors.vec2.IVector2;
+import com.ruegnerlukas.simplemath.vectors.vec2.Vector2d;
 import com.ruegnerlukas.simplemath.vectors.vec2.Vector2f;
+import com.ruegnerlukas.simplemath.vectors.vec2.Vector2i;
+import com.ruegnerlukas.simplemath.vectors.vec3.Vector3d;
 import com.ruegnerlukas.simplemath.vectors.vec3.Vector3f;
+import com.ruegnerlukas.simplemath.vectors.vec3.Vector3i;
 
 public class MathUtils {
 
@@ -142,13 +147,13 @@ public class MathUtils {
 	
 	
 	/**
-	 * calculates the barycentric coordinates of the given point P and the triangle ABC
+	 * calculates the barycentric coordinates (with float precision) of the given point P and the triangle ABC
 	 * @param a the first point of the triangle
 	 * @param b the second point of the triangle
 	 * @param c the third point of the triangle
 	 * @param p	the point
 	 * */
-	public static Vector3f barycentric(Vector2f a, Vector2f b, Vector2f c, Vector2f p) {
+	public static Vector3f barycentric(IVector2 a, IVector2 b, IVector2 c, IVector2 p) {
 		
 		Vector2f v1 = new Vector2f();
 		Vector2f v2 = new Vector2f();
@@ -164,6 +169,34 @@ public class MathUtils {
 		bary.y = q.cross(v2) / c12;
 		bary.z = v1.cross(q) / c12;
 		bary.x = 1f - bary.y - bary.z;
+		
+		return bary;
+	}
+	
+	
+	/**
+	 * calculates the barycentric coordinates (with double precision) of the given point P and the triangle ABC
+	 * @param a the first point of the triangle
+	 * @param b the second point of the triangle
+	 * @param c the third point of the triangle
+	 * @param p	the point
+	 * */
+	public static Vector3d barycentricDouble(Vector2d a, Vector2d b, Vector2d c, Vector2d p) {
+		
+		Vector2d v1 = new Vector2d();
+		Vector2d v2 = new Vector2d();
+		Vector2d  q = new Vector2d();
+		
+		Vector2d.setVectorAB(a, b, v1);
+		Vector2d.setVectorAB(a, c, v2);
+		Vector2d.setVectorAB(a, p,  q);
+		
+		final double c12 = v1.cross(v2);
+		
+		Vector3d bary = new Vector3d();
+		bary.y = q.cross(v2) / c12;
+		bary.z = v1.cross(q) / c12;
+		bary.x = 1.0 - bary.y - bary.z;
 		
 		return bary;
 	}

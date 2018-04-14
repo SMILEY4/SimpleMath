@@ -2,7 +2,11 @@ package com.ruegnerlukas.simplemath.geometry;
 
 import java.util.List;
 
+import com.ruegnerlukas.simplemath.MathUtils;
 import com.ruegnerlukas.simplemath.vectors.vec2.Vector2d;
+import com.ruegnerlukas.simplemath.vectors.vec2.Vector2f;
+import com.ruegnerlukas.simplemath.vectors.vec3.Vector3d;
+import com.ruegnerlukas.simplemath.vectors.vec3.Vector3f;
 
 public class IntersectorDouble {
 
@@ -570,12 +574,20 @@ public class IntersectorDouble {
 	 * @return true, if the point is inside the triangle
 	 * */
 	public static boolean pointInTriangle(double x1, double y1, double x2, double y2, double x3, double y3, double px, double py) {
-		double px1 = px - x1;
-		double py1 = py - y1;
-		boolean side12 = (x2 - x1) * py1 - (y2 - y1) * px1 > 0;
-		if ((x3 - x1) * py1 - (y2 - y1) * px1 > 0 == side12) return false;
-		if ((x3 - x2) * (py - y2) - (y3 - y2) * (px - x2) > 0 != side12) return false;
-		return true;
+		
+		Vector2d a = new Vector2d(x1, y1);
+		Vector2d b = new Vector2d(x2, y2);
+		Vector2d c = new Vector2d(x3, y3);
+		Vector2d p = new Vector2d(px, py);
+		
+		Vector3d bary = MathUtils.barycentricDouble(a, b, c, p);
+		
+		if(bary.x < 0 || bary.y < 0 || bary.z < 0) {
+			return false;
+		} else {
+			return true;
+		}
+		
 	}
 	
 	
