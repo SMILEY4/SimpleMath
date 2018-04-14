@@ -22,6 +22,8 @@ public class Circlef implements ICircle {
 	public float cy;
 	public float radius;
 	
+	public String name;
+	
 	
 	
 	
@@ -286,7 +288,7 @@ public class Circlef implements ICircle {
 	
 	@Override
 	public String toString() {
-		return "Circlef." + this.hashCode() + "(" + this.cx + ", " + this.cy + ") r=" + this.radius;
+		return name + ": Circlef." + this.hashCode() + "(" + this.cx + ", " + this.cy + ") r=" + this.radius;
 	}
 
 
@@ -965,6 +967,23 @@ public class Circlef implements ICircle {
 	 * */
 	public float getCircumference() {
 		return (float) (Math.PI * 2*radius);
+	}
+	
+	
+	
+	
+	@Override
+	public Circlef setName(String name) {
+		this.name = name;
+		return this;
+	}
+
+	
+	
+
+	@Override
+	public String getName() {
+		return this.name;
 	}
 	
 	

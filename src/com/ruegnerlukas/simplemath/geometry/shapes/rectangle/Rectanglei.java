@@ -3,6 +3,7 @@ package com.ruegnerlukas.simplemath.geometry.shapes.rectangle;
 import com.ruegnerlukas.simplemath.geometry.Intersector;
 import com.ruegnerlukas.simplemath.geometry.IntersectorInt;
 import com.ruegnerlukas.simplemath.geometry.shapes.IShape;
+import com.ruegnerlukas.simplemath.geometry.shapes.circle.Circlei;
 import com.ruegnerlukas.simplemath.geometry.shapes.circle.ICircle;
 import com.ruegnerlukas.simplemath.geometry.shapes.line.ILine;
 import com.ruegnerlukas.simplemath.geometry.shapes.polygon.IPolygon;
@@ -56,6 +57,8 @@ public class Rectanglei implements IRectangle {
 	public int y;
 	public int width;
 	public int height;
+	
+	public String name;
 	
 	
 	
@@ -422,7 +425,7 @@ public class Rectanglei implements IRectangle {
 	
 	@Override
 	public String toString() {
-		return "Rectanglei." + this.hashCode() + "(" + this.x + ", " + this.y + ", " + this.width + ", " + this.height + ")";
+		return name + ": Rectanglei." + this.hashCode() + "(" + this.x + ", " + this.y + ", " + this.width + ", " + this.height + ")";
 	}
 
 
@@ -1373,6 +1376,23 @@ public class Rectanglei implements IRectangle {
 			y -= height;
 		}
 		return this;
+	}
+	
+	
+	
+	
+	@Override
+	public Rectanglei setName(String name) {
+		this.name = name;
+		return this;
+	}
+
+	
+	
+
+	@Override
+	public String getName() {
+		return this.name;
 	}
 
 	

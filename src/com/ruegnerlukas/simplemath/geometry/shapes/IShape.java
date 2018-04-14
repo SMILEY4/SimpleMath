@@ -157,4 +157,19 @@ public interface IShape {
 	 * */
 	public IShape copy();
 
+	
+	/**
+	 * Sets the name of this shape.
+	 * @param name the name
+	 * @return this shape for chaining
+	 * */
+	public IShape setName(String name);
+	
+	
+	/**
+	 * @return the name of this shape or an empty String
+	 * */
+	public String getName();
+	
+	
 }

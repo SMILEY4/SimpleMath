@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.ruegnerlukas.simplemath.geometry.Intersector;
 import com.ruegnerlukas.simplemath.geometry.shapes.IShape;
+import com.ruegnerlukas.simplemath.geometry.shapes.circle.Circlei;
 import com.ruegnerlukas.simplemath.geometry.shapes.circle.ICircle;
 import com.ruegnerlukas.simplemath.geometry.shapes.line.ILine;
 import com.ruegnerlukas.simplemath.geometry.shapes.rectangle.IRectangle;
@@ -22,6 +23,7 @@ public class Polygonf implements IPolygon {
 
 	public float[] vertices;
 	
+	public String name;
 	
 	
 	
@@ -394,7 +396,7 @@ public class Polygonf implements IPolygon {
 				sb.append(", ");
 			}
 		}
-		return "Polygonf." + this.hashCode() + "( " + sb.toString() + " )";
+		return name + ": Polygonf." + this.hashCode() + "( " + sb.toString() + " )";
 	}
 
 
@@ -1165,7 +1167,21 @@ public class Polygonf implements IPolygon {
 	}
 	
 	
+	
+	
+	@Override
+	public Polygonf setName(String name) {
+		this.name = name;
+		return this;
+	}
 
+	
+	
+
+	@Override
+	public String getName() {
+		return this.name;
+	}
 
 }
 

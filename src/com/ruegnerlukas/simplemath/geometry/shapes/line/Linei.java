@@ -3,6 +3,7 @@ package com.ruegnerlukas.simplemath.geometry.shapes.line;
 import com.ruegnerlukas.simplemath.geometry.Intersector;
 import com.ruegnerlukas.simplemath.geometry.IntersectorInt;
 import com.ruegnerlukas.simplemath.geometry.shapes.IShape;
+import com.ruegnerlukas.simplemath.geometry.shapes.circle.Circlei;
 import com.ruegnerlukas.simplemath.geometry.shapes.circle.ICircle;
 import com.ruegnerlukas.simplemath.geometry.shapes.polygon.IPolygon;
 import com.ruegnerlukas.simplemath.geometry.shapes.polygon.Polygonf;
@@ -22,6 +23,8 @@ public class Linei implements ILine {
 	public int y0;
 	public int x1;
 	public int y1;
+	
+	public String name;
 	
 	
 	
@@ -299,7 +302,7 @@ public class Linei implements ILine {
 	
 	@Override
 	public String toString() {
-		return "Linei." + this.hashCode() + "(" + this.x0 + ", " + this.y0 + ", " + this.x1 + ", " + this.y1 + ")";
+		return name + ": Linei." + this.hashCode() + "(" + this.x0 + ", " + this.y0 + ", " + this.x1 + ", " + this.y1 + ")";
 	}
 	
 	
@@ -935,6 +938,22 @@ public class Linei implements ILine {
 		return IntersectorInt.pointOnLine(x0, y0, x1, y1, x, y, 0);
 	}
 	
+	
+	
 
+	@Override
+	public Linei setName(String name) {
+		this.name = name;
+		return this;
+	}
+
+	
+	
+
+	@Override
+	public String getName() {
+		return this.name;
+	}
+	
 
 }

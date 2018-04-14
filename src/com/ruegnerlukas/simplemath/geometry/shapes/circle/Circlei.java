@@ -9,7 +9,6 @@ import com.ruegnerlukas.simplemath.geometry.shapes.rectangle.IRectangle;
 import com.ruegnerlukas.simplemath.geometry.shapes.rectangle.Rectanglef;
 import com.ruegnerlukas.simplemath.vectors.vec2.IVector2;
 import com.ruegnerlukas.simplemath.vectors.vec2.Vector2i;
-import com.ruegnerlukas.simplemath.vectors.vec2.Vector2i;
 import com.ruegnerlukas.simplemath.vectors.vec3.IVector3;
 import com.ruegnerlukas.simplemath.vectors.vec4.IVector4;
 import com.ruegnerlukas.simplemath.vectors.vec4.Vector4f;
@@ -23,6 +22,7 @@ public class Circlei implements ICircle {
 	public int cy;
 	public int radius;
 	
+	public String name;
 	
 	
 	
@@ -287,7 +287,7 @@ public class Circlei implements ICircle {
 	
 	@Override
 	public String toString() {
-		return "Circlei." + this.hashCode() + "(" + this.cx + ", " + this.cy + ") r=" + this.radius;
+		return name + ": Circlei." + this.hashCode() + "(" + this.cx + ", " + this.cy + ") r=" + this.radius;
 	}
 
 
@@ -966,6 +966,23 @@ public class Circlei implements ICircle {
 	 * */
 	public int getCircumference() {
 		return (int) (Math.PI * 2*radius);
+	}
+
+	
+	
+
+	@Override
+	public Circlei setName(String name) {
+		this.name = name;
+		return this;
+	}
+
+	
+	
+
+	@Override
+	public String getName() {
+		return this.name;
 	}
 	
 	
