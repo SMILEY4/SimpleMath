@@ -133,7 +133,7 @@ public class Vector4i implements IVector4 {
 	
 	
 	@Override
-	public Vector4i set(int index, Number value) {
+	public Vector4i setAt(int index, Number value) {
 		if(index == 0) { this.x = value.intValue(); return this; }
 		if(index == 1) { this.y = value.intValue(); return this; }
 		if(index == 2) { this.z = value.intValue(); return this; }

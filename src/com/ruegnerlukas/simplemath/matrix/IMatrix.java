@@ -1,6 +1,5 @@
 package com.ruegnerlukas.simplemath.matrix;
 
-import com.ruegnerlukas.simplemath.matrix.matrixN.Matrixf;
 
 public interface IMatrix {
 

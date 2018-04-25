@@ -4,9 +4,7 @@ import java.util.List;
 
 import com.ruegnerlukas.simplemath.MathUtils;
 import com.ruegnerlukas.simplemath.vectors.vec2.Vector2d;
-import com.ruegnerlukas.simplemath.vectors.vec2.Vector2f;
 import com.ruegnerlukas.simplemath.vectors.vec3.Vector3d;
-import com.ruegnerlukas.simplemath.vectors.vec3.Vector3f;
 
 public class IntersectorDouble {
 

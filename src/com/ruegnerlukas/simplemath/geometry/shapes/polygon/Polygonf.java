@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.ruegnerlukas.simplemath.geometry.Intersector;
 import com.ruegnerlukas.simplemath.geometry.shapes.IShape;
-import com.ruegnerlukas.simplemath.geometry.shapes.circle.Circlei;
 import com.ruegnerlukas.simplemath.geometry.shapes.circle.ICircle;
 import com.ruegnerlukas.simplemath.geometry.shapes.line.ILine;
 import com.ruegnerlukas.simplemath.geometry.shapes.rectangle.IRectangle;
@@ -1183,6 +1182,39 @@ public class Polygonf implements IPolygon {
 		return this.name;
 	}
 
+	
+	
+
+	@Override
+	public Vector2f getRandomPoint() {
+		for(int i=0; i<512; i++) {
+			float x = getMinXFloat() + (float)((getMaxXFloat()-getMinXFloat())*Math.random());
+			float y = getMinYFloat() + (float)((getMaxYFloat()-getMinYFloat())*Math.random());
+			if(Intersector.pointInPolygon(vertices, x, y)) {
+				return new Vector2f(x, y);
+			}
+		}
+		return null;
+	}
+
+	
+	
+
+	@Override
+	public Polygonf getRandomPoint(IVector2 dst) {
+		for(int i=0; i<512; i++) {
+			float x = getMinXFloat() + (float)((getMaxXFloat()-getMinXFloat())*Math.random());
+			float y = getMinYFloat() + (float)((getMaxYFloat()-getMinYFloat())*Math.random());
+			if(Intersector.pointInPolygon(vertices, x, y)) {
+				dst.set(x, y);
+				break;
+			}
+		}
+		return this;
+	}
+
+	
+	
 }
 
 

@@ -139,7 +139,7 @@ public class Vector4d implements IVector4 {
 	
 	
 	@Override
-	public Vector4d set(int index, Number value) {
+	public Vector4d setAt(int index, Number value) {
 		if(index == 0) { this.x = value.doubleValue(); return this; }
 		if(index == 1) { this.y = value.doubleValue(); return this; }
 		if(index == 2) { this.z = value.doubleValue(); return this; }

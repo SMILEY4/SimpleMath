@@ -37,8 +37,8 @@ public class Quaterniond extends Vector4d implements IQuaternion {
 	
 	
 	@Override
-	public Quaterniond set(int index, Number value) {
-		return (Quaterniond) super.set(index, value);
+	public Quaterniond setAt(int index, Number value) {
+		return (Quaterniond) super.setAt(index, value);
 	}
 	
 	

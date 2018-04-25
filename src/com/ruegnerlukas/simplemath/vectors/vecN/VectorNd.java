@@ -71,7 +71,7 @@ public class VectorNd implements IVectorN {
 	
 	
 	@Override
-	public VectorNd set(int index, Number value) {
+	public VectorNd setAt(int index, Number value) {
 		if( (0 <= index) && (index < getDimensions()) ) {
 			values[index] = value.doubleValue();
 			return this;

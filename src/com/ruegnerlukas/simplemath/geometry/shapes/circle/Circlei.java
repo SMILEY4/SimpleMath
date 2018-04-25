@@ -984,6 +984,30 @@ public class Circlei implements ICircle {
 	public String getName() {
 		return this.name;
 	}
+
+
+	@Override
+	public Vector2i getRandomPoint() {
+		final float t = (float)(2.0 * Math.PI * Math.random());
+		final float u = (float)(Math.random()*Math.random());
+		final float r = (u>1 ? 2f-u : u) * getRadiusFloat();
+		Vector2i vec = new Vector2i();
+		vec.x = (int)(r * (float)Math.cos(t) + this.getCenterXFloat());
+		vec.y = (int)(r * (float)Math.sin(t) + this.getCenterYFloat());
+		return vec;
+	}
+
+	
+	
+
+	@Override
+	public Circlei getRandomPoint(IVector2 dst) {
+		final float t = (float)(2.0 * Math.PI * Math.random());
+		final float u = (float)(Math.random()*Math.random());
+		final float r = (u>1 ? 2f-u : u) * getRadiusFloat();
+		dst.set( (int)(r * (float)Math.cos(t) + this.getCenterXFloat()), (int)(r * (float)Math.sin(t) + this.getCenterYFloat()) );
+		return this;
+	}
 	
 	
 	

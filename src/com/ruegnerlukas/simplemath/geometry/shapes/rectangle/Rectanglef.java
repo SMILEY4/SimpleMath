@@ -2,7 +2,6 @@ package com.ruegnerlukas.simplemath.geometry.shapes.rectangle;
 
 import com.ruegnerlukas.simplemath.geometry.Intersector;
 import com.ruegnerlukas.simplemath.geometry.shapes.IShape;
-import com.ruegnerlukas.simplemath.geometry.shapes.circle.Circlei;
 import com.ruegnerlukas.simplemath.geometry.shapes.circle.ICircle;
 import com.ruegnerlukas.simplemath.geometry.shapes.line.ILine;
 import com.ruegnerlukas.simplemath.geometry.shapes.polygon.IPolygon;
@@ -1391,6 +1390,25 @@ public class Rectanglef implements IRectangle {
 	@Override
 	public String getName() {
 		return this.name;
+	}
+	
+	
+	
+	
+	@Override
+	public Vector2f getRandomPoint() {
+		return new Vector2f( (float)(Math.random()*getWidthFloat())+getXFloat(), (float)(Math.random()*getHeightFloat())+getYFloat() );
+	}
+
+	
+	
+
+	@Override
+	public Rectanglef getRandomPoint(IVector2 dst) {
+		if(dst != null) {
+			dst.set( (float)(Math.random()*getWidthFloat())+getXFloat(), (float)(Math.random()*getHeightFloat())+getYFloat() );
+		}
+		return this;
 	}
 	
 }

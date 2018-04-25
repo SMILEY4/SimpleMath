@@ -133,7 +133,7 @@ public class Vector4l implements IVector4 {
 	
 	
 	@Override
-	public Vector4l set(int index, Number value) {
+	public Vector4l setAt(int index, Number value) {
 		if(index == 0) { this.x = value.longValue(); return this; }
 		if(index == 1) { this.y = value.longValue(); return this; }
 		if(index == 2) { this.z = value.longValue(); return this; }

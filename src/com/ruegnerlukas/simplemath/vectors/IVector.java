@@ -11,7 +11,7 @@ public interface IVector {
 	 * Sets the value at the given index of the this vector.
 	 * @return this vector for chaining
 	 * */
-	public IVector set(int index, Number value);
+	public IVector setAt(int index, Number value);
 
 	/** @return the value of the component at the given index as an integer */
 	public int 	getInt(int index);

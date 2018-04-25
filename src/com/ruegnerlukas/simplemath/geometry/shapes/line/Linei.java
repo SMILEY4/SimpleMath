@@ -3,7 +3,6 @@ package com.ruegnerlukas.simplemath.geometry.shapes.line;
 import com.ruegnerlukas.simplemath.geometry.Intersector;
 import com.ruegnerlukas.simplemath.geometry.IntersectorInt;
 import com.ruegnerlukas.simplemath.geometry.shapes.IShape;
-import com.ruegnerlukas.simplemath.geometry.shapes.circle.Circlei;
 import com.ruegnerlukas.simplemath.geometry.shapes.circle.ICircle;
 import com.ruegnerlukas.simplemath.geometry.shapes.polygon.IPolygon;
 import com.ruegnerlukas.simplemath.geometry.shapes.polygon.Polygonf;
@@ -955,5 +954,30 @@ public class Linei implements ILine {
 		return this.name;
 	}
 	
+	
+	
+	
+	@Override
+	public Vector2i getRandomPoint() {
+		final int dx = x1-x0;
+		final int dy = y1-y0;
+		final float rand = (float)Math.random();
+		Vector2i vec = new Vector2i();
+		vec.x = x0 + (int)(dx*rand);
+		vec.y = y0 + (int)(dy*rand);
+		return vec;
+	}
+	
+	
+
+
+	@Override
+	public Linei getRandomPoint(IVector2 dst) {
+		final int dx = x1-x0;
+		final int dy = y1-y0;
+		final float rand = (float)Math.random();
+		dst.set(x0+(int)(dx*rand), y0+(int)(dy*rand));
+		return this;
+	}
 
 }

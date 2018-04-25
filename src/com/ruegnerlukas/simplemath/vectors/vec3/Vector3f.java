@@ -133,7 +133,7 @@ public class Vector3f implements IVector3 {
 	
 	
 	@Override
-	public Vector3f set(int index, Number value) {
+	public Vector3f setAt(int index, Number value) {
 		if(index == 0) { this.x = value.floatValue(); return this; }
 		if(index == 1) { this.y = value.floatValue(); return this; }
 		if(index == 2) { this.z = value.floatValue(); return this; }

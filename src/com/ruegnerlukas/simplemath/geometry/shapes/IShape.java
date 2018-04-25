@@ -152,6 +152,22 @@ public interface IShape {
 	
 	
 	/**
+	 * Generates a random point inside this shape
+	 * @return the random point as a 2d-vector
+	 * */
+	public IVector2 getRandomPoint();
+	
+	
+	/**
+	 * Generates a random point inside this shape and writes it into the dst-vector
+	 * @param dst the destination-vector for the random position
+	 * @return this shape for chaining
+	 * */
+	public IShape getRandomPoint(IVector2 dst);
+	
+	
+	
+	/**
 	 * Creates a new shape with the same values as this shape.
 	 * @return the created shape
 	 * */

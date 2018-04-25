@@ -3,10 +3,8 @@ package com.ruegnerlukas.simplemath.geometry.shapes.polygon;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ruegnerlukas.simplemath.geometry.Intersector;
 import com.ruegnerlukas.simplemath.geometry.IntersectorInt;
 import com.ruegnerlukas.simplemath.geometry.shapes.IShape;
-import com.ruegnerlukas.simplemath.geometry.shapes.circle.Circlei;
 import com.ruegnerlukas.simplemath.geometry.shapes.circle.ICircle;
 import com.ruegnerlukas.simplemath.geometry.shapes.line.ILine;
 import com.ruegnerlukas.simplemath.geometry.shapes.rectangle.IRectangle;
@@ -1182,6 +1180,35 @@ public class Polygoni implements IPolygon {
 	@Override
 	public String getName() {
 		return this.name;
+	}
+
+
+	@Override
+	public Vector2i getRandomPoint() {
+		for(int i=0; i<512; i++) {
+			int x = getMinXInt() + (int)((getMaxXFloat()-getMinXFloat())*Math.random());
+			int y = getMinYInt() + (int)((getMaxYFloat()-getMinYFloat())*Math.random());
+			if(IntersectorInt.pointInPolygon(vertices, x, y)) {
+				return new Vector2i(x, y);
+			}
+		}
+		return null;
+	}
+
+	
+	
+
+	@Override
+	public Polygoni getRandomPoint(IVector2 dst) {
+		for(int i=0; i<512; i++) {
+			int x = getMinXInt() + (int)((getMaxXFloat()-getMinXFloat())*Math.random());
+			int y = getMinYInt() + (int)((getMaxYFloat()-getMinYFloat())*Math.random());
+			if(IntersectorInt.pointInPolygon(vertices, x, y)) {
+				dst.set(x, y);
+				break;
+			}
+		}
+		return this;
 	}
 
 

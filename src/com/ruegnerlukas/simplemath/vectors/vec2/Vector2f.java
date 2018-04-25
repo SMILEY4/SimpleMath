@@ -124,7 +124,7 @@ public class Vector2f implements IVector2 {
 	
 	
 	@Override
-	public Vector2f set(int index, Number value) {
+	public Vector2f setAt(int index, Number value) {
 		if(index == 0) { this.x = value.floatValue(); return this; }
 		if(index == 1) { this.y = value.floatValue(); return this; }
 		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());

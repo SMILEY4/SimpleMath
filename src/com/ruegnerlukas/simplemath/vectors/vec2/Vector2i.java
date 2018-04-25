@@ -119,7 +119,7 @@ public class Vector2i implements IVector2 {
 	
 	
 	@Override
-	public Vector2i set(int index, Number value) {
+	public Vector2i setAt(int index, Number value) {
 		if(index == 0) { this.x = value.intValue(); return this; }
 		if(index == 1) { this.y = value.intValue(); return this; }
 		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());

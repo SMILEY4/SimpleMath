@@ -118,7 +118,7 @@ public class Vector2l implements IVector2 {
 	
 	
 	@Override
-	public Vector2l set(int index, Number value) {
+	public Vector2l setAt(int index, Number value) {
 		if(index == 0) { this.x = value.longValue(); return this; }
 		if(index == 1) { this.y = value.longValue(); return this; }
 		throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + getDimensions());

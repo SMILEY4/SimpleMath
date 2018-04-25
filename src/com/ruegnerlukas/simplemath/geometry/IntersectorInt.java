@@ -3,7 +3,6 @@ package com.ruegnerlukas.simplemath.geometry;
 import java.util.List;
 
 import com.ruegnerlukas.simplemath.MathUtils;
-import com.ruegnerlukas.simplemath.vectors.vec2.Vector2f;
 import com.ruegnerlukas.simplemath.vectors.vec2.Vector2i;
 import com.ruegnerlukas.simplemath.vectors.vec3.Vector3f;
 

@@ -2,7 +2,6 @@ package com.ruegnerlukas.simplemath.geometry.shapes.line;
 
 import com.ruegnerlukas.simplemath.geometry.Intersector;
 import com.ruegnerlukas.simplemath.geometry.shapes.IShape;
-import com.ruegnerlukas.simplemath.geometry.shapes.circle.Circlei;
 import com.ruegnerlukas.simplemath.geometry.shapes.circle.ICircle;
 import com.ruegnerlukas.simplemath.geometry.shapes.polygon.IPolygon;
 import com.ruegnerlukas.simplemath.geometry.shapes.polygon.Polygonf;
@@ -952,6 +951,33 @@ public class Linef implements ILine {
 	public String getName() {
 		return this.name;
 	}
+
+	
+	
+
+	@Override
+	public Vector2f getRandomPoint() {
+		final float dx = x1-x0;
+		final float dy = y1-y0;
+		final float rand = (float)Math.random();
+		Vector2f vec = new Vector2f();
+		vec.x = x0 + dx*rand;
+		vec.y = y0 + dy*rand;
+		return vec;
+	}
+	
+	
+
+
+	@Override
+	public Linef getRandomPoint(IVector2 dst) {
+		final float dx = x1-x0;
+		final float dy = y1-y0;
+		final float rand = (float)Math.random();
+		dst.set(x0+dx*rand, y0+dy*rand);
+		return this;
+	}
+	
 
 
 }

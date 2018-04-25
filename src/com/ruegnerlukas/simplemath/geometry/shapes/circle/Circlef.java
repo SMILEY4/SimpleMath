@@ -985,6 +985,32 @@ public class Circlef implements ICircle {
 	public String getName() {
 		return this.name;
 	}
+
+	
+	
+
+	@Override
+	public Vector2f getRandomPoint() {
+		final float t = (float)(2.0 * Math.PI * Math.random());
+		final float u = (float)(Math.random()*Math.random());
+		final float r = (u>1 ? 2f-u : u) * getRadiusFloat();
+		Vector2f vec = new Vector2f();
+		vec.x = r * (float)Math.cos(t) + this.getCenterXFloat();
+		vec.y = r * (float)Math.sin(t) + this.getCenterYFloat();
+		return vec;
+	}
+
+	
+	
+
+	@Override
+	public Circlef getRandomPoint(IVector2 dst) {
+		final float t = (float)(2.0 * Math.PI * Math.random());
+		final float u = (float)(Math.random()*Math.random());
+		final float r = (u>1 ? 2f-u : u) * getRadiusFloat();
+		dst.set(r * (float)Math.cos(t) + this.getCenterXFloat(), r * (float)Math.sin(t) + this.getCenterYFloat());
+		return this;
+	}
 	
 	
 	

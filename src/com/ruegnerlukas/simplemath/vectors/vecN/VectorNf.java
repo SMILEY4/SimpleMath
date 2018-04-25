@@ -71,7 +71,7 @@ public class VectorNf implements IVectorN {
 	
 	
 	@Override
-	public VectorNf set(int index, Number value) {
+	public VectorNf setAt(int index, Number value) {
 		if( (0 <= index) && (index < getDimensions()) ) {
 			values[index] = value.floatValue();
 			return this;

@@ -3,13 +3,13 @@ package com.ruegnerlukas.simplemath.geometry.shapes.rectangle;
 import com.ruegnerlukas.simplemath.geometry.Intersector;
 import com.ruegnerlukas.simplemath.geometry.IntersectorInt;
 import com.ruegnerlukas.simplemath.geometry.shapes.IShape;
-import com.ruegnerlukas.simplemath.geometry.shapes.circle.Circlei;
 import com.ruegnerlukas.simplemath.geometry.shapes.circle.ICircle;
 import com.ruegnerlukas.simplemath.geometry.shapes.line.ILine;
 import com.ruegnerlukas.simplemath.geometry.shapes.polygon.IPolygon;
 import com.ruegnerlukas.simplemath.geometry.shapes.polygon.Polygonf;
 import com.ruegnerlukas.simplemath.vectors.vec2.IVector2;
 import com.ruegnerlukas.simplemath.vectors.vec2.Vector2f;
+import com.ruegnerlukas.simplemath.vectors.vec2.Vector2i;
 import com.ruegnerlukas.simplemath.vectors.vec4.IVector4;
 import com.ruegnerlukas.simplemath.vectors.vec4.Vector4f;
 
@@ -1395,5 +1395,25 @@ public class Rectanglei implements IRectangle {
 		return this.name;
 	}
 
+
+	
+
+	@Override
+	public Vector2i getRandomPoint() {
+		return new Vector2i( (int)(Math.random()*getWidthFloat())+getXInt(), (int)(Math.random()*getHeightFloat())+getYInt() );
+	}
+
+	
+	
+
+	@Override
+	public Rectanglei getRandomPoint(IVector2 dst) {
+		if(dst != null) {
+			dst.set((int)(Math.random()*getWidthFloat())+getXInt(), (int)(Math.random()*getHeightFloat())+getYInt() );
+		}
+		return this;
+	}
+
+	
 	
 }

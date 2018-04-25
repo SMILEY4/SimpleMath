@@ -68,7 +68,7 @@ public class VectorNl implements IVectorN {
 	
 	
 	@Override
-	public VectorNl set(int index, Number value) {
+	public VectorNl setAt(int index, Number value) {
 		if( (0 <= index) && (index < getDimensions()) ) {
 			values[index] = value.longValue();
 			return this;

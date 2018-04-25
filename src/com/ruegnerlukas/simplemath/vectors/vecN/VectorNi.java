@@ -68,7 +68,7 @@ public class VectorNi implements IVectorN {
 	
 	
 	@Override
-	public VectorNi set(int index, Number value) {
+	public VectorNi setAt(int index, Number value) {
 		if( (0 <= index) && (index < getDimensions()) ) {
 			values[index] = value.intValue();
 			return this;

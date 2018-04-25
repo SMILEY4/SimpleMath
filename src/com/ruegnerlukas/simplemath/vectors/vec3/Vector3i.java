@@ -129,7 +129,7 @@ public class Vector3i implements IVector3 {
 	
 	
 	@Override
-	public Vector3i set(int index, Number value) {
+	public Vector3i setAt(int index, Number value) {
 		if(index == 0) { this.x = value.intValue(); return this; }
 		if(index == 1) { this.y = value.intValue(); return this; }
 		if(index == 2) { this.z = value.intValue(); return this; }

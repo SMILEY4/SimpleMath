@@ -133,7 +133,7 @@ public class Vector3d implements IVector3 {
 	
 	
 	@Override
-	public Vector3d set(int index, Number value) {
+	public Vector3d setAt(int index, Number value) {
 		if(index == 0) { this.x = value.doubleValue(); return this; }
 		if(index == 1) { this.y = value.doubleValue(); return this; }
 		if(index == 2) { this.z = value.doubleValue(); return this; }

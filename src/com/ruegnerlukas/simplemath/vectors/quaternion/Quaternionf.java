@@ -36,8 +36,8 @@ public class Quaternionf extends Vector4f implements IQuaternion {
 	
 	
 	@Override
-	public Quaternionf set(int index, Number value) {
-		return (Quaternionf) super.set(index, value);
+	public Quaternionf setAt(int index, Number value) {
+		return (Quaternionf) super.setAt(index, value);
 	}
 	
 	
