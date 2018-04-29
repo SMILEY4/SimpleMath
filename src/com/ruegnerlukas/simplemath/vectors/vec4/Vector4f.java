@@ -1,5 +1,6 @@
 package com.ruegnerlukas.simplemath.vectors.vec4;
 
+import com.ruegnerlukas.simplemath.vectors.IVector.VectorType;
 import com.ruegnerlukas.simplemath.vectors.vec3.Vector3f;
 
 public class Vector4f implements IVector4 {
@@ -135,6 +136,14 @@ public class Vector4f implements IVector4 {
 		return 4;
 	}
 
+	
+	
+	
+	@Override
+	public VectorType getVectorType() {
+		return VectorType.FLOAT;
+	}
+	
 	
 	
 	

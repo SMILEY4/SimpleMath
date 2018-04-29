@@ -1,5 +1,6 @@
 package com.ruegnerlukas.simplemath.vectors.vec4;
 
+import com.ruegnerlukas.simplemath.vectors.IVector.VectorType;
 import com.ruegnerlukas.simplemath.vectors.vec3.Vector3i;
 
 public class Vector4i implements IVector4 {
@@ -129,6 +130,14 @@ public class Vector4i implements IVector4 {
 		return 4;
 	}
 
+	
+	
+	
+	@Override
+	public VectorType getVectorType() {
+		return VectorType.INT;
+	}
+	
 	
 	
 	

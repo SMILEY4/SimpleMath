@@ -1,6 +1,7 @@
 package com.ruegnerlukas.simplemath.vectors.vec3;
 
 import com.ruegnerlukas.simplemath.matrix.IMatrix;
+import com.ruegnerlukas.simplemath.vectors.IVector.VectorType;
 import com.ruegnerlukas.simplemath.vectors.quaternion.Quaternionf;
 
 public class Vector3l implements IVector3 {
@@ -125,6 +126,15 @@ public class Vector3l implements IVector3 {
 		return 3;
 	}
 
+
+	
+	
+	
+	@Override
+	public VectorType getVectorType() {
+		return VectorType.LONG;
+	}
+	
 	
 	
 	

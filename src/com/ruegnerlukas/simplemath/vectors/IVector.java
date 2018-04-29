@@ -2,10 +2,25 @@ package com.ruegnerlukas.simplemath.vectors;
 
 public interface IVector {
 	
+	public static enum VectorType {
+		FLOAT,
+		DOUBLE,
+		INT,
+		LONG
+	}
+	
+	
 	/**
 	 * @return the number of dimensions of this vector
 	 * */
 	public int getDimensions();
+	
+	
+	/**
+	 * @return the type of this vector
+	 * */
+	public VectorType getVectorType();
+	
 	
 	/**
 	 * Sets the value at the given index of the this vector.

@@ -3,6 +3,7 @@ package com.ruegnerlukas.simplemath.vectors.vecN;
 import java.util.Arrays;
 
 import com.ruegnerlukas.simplemath.vectors.IVector;
+import com.ruegnerlukas.simplemath.vectors.IVector.VectorType;
 
 public class VectorNl implements IVectorN {
 
@@ -64,6 +65,15 @@ public class VectorNl implements IVectorN {
 		return size;
 	}
 
+
+	
+	
+	
+	@Override
+	public VectorType getVectorType() {
+		return VectorType.LONG;
+	}
+	
 	
 	
 	

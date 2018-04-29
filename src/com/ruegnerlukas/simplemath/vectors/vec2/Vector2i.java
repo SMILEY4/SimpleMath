@@ -1,5 +1,6 @@
 package com.ruegnerlukas.simplemath.vectors.vec2;
 
+import com.ruegnerlukas.simplemath.vectors.IVector.VectorType;
 
 public class Vector2i implements IVector2 {
 
@@ -115,6 +116,14 @@ public class Vector2i implements IVector2 {
 		return 2;
 	}
 
+	
+	
+	
+	@Override
+	public VectorType getVectorType() {
+		return VectorType.INT;
+	}
+	
 	
 	
 	

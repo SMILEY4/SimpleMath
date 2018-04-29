@@ -2,6 +2,8 @@ package com.ruegnerlukas.simplemath.vectors.vecN;
 
 import java.util.Arrays;
 
+import com.ruegnerlukas.simplemath.vectors.IVector.VectorType;
+
 
 public class VectorNd implements IVectorN {
 
@@ -67,6 +69,14 @@ public class VectorNd implements IVectorN {
 		return size;
 	}
 
+	
+	
+	
+	@Override
+	public VectorType getVectorType() {
+		return VectorType.DOUBLE;
+	}
+	
 	
 	
 	
