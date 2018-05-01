@@ -395,7 +395,7 @@ public class Polygoni implements IPolygon {
 				sb.append(", ");
 			}
 		}
-		return name + ": Polygoni." + this.hashCode() + "( " + sb.toString() + " )";
+		return (name!=null?name+": ":"") + "Polygoni." + this.hashCode() + "( " + sb.toString() + " )";
 	}
 
 

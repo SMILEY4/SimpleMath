@@ -287,7 +287,7 @@ public class Circlei implements ICircle {
 	
 	@Override
 	public String toString() {
-		return name + ": Circlei." + this.hashCode() + "(" + this.cx + ", " + this.cy + ") r=" + this.radius;
+		return (name!=null?name+": ":"") + "Circlei." + this.hashCode() + "(" + this.cx + ", " + this.cy + ") r=" + this.radius;
 	}
 
 

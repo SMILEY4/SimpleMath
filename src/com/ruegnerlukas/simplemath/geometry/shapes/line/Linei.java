@@ -301,7 +301,7 @@ public class Linei implements ILine {
 	
 	@Override
 	public String toString() {
-		return name + ": Linei." + this.hashCode() + "(" + this.x0 + ", " + this.y0 + ", " + this.x1 + ", " + this.y1 + ")";
+		return (name!=null?name+": ":"") + "Linei." + this.hashCode() + "(" + this.x0 + ", " + this.y0 + ", " + this.x1 + ", " + this.y1 + ")";
 	}
 	
 	

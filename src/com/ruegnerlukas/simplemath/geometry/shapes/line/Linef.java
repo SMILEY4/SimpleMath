@@ -299,7 +299,7 @@ public class Linef implements ILine {
 	
 	@Override
 	public String toString() {
-		return name + ": Linef." + this.hashCode() + "(" + this.x0 + ", " + this.y0 + ", " + this.x1 + ", " + this.y1 + ")";
+		return (name!=null?name+": ":"") + "Linef." + this.hashCode() + "(" + this.x0 + ", " + this.y0 + ", " + this.x1 + ", " + this.y1 + ")";
 	}
 	
 	

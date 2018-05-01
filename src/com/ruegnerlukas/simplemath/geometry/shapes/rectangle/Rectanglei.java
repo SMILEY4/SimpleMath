@@ -425,7 +425,7 @@ public class Rectanglei implements IRectangle {
 	
 	@Override
 	public String toString() {
-		return name + ": Rectanglei." + this.hashCode() + "(" + this.x + ", " + this.y + ", " + this.width + ", " + this.height + ")";
+		return (name!=null?name+": ":"") + "Rectanglei." + this.hashCode() + "(" + this.x + ", " + this.y + ", " + this.width + ", " + this.height + ")";
 	}
 
 

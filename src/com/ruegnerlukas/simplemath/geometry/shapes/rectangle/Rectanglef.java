@@ -422,7 +422,7 @@ public class Rectanglef implements IRectangle {
 	
 	@Override
 	public String toString() {
-		return name + ": Rectanglef." + this.hashCode() + "(" + this.x + ", " + this.y + ", " + this.width + ", " + this.height + ")";
+		return (name!=null?name+": ":"") + "Rectanglef." + this.hashCode() + "(" + this.x + ", " + this.y + ", " + this.width + ", " + this.height + ")";
 	}
 
 

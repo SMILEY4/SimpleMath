@@ -288,7 +288,7 @@ public class Circlef implements ICircle {
 	
 	@Override
 	public String toString() {
-		return name + ": Circlef." + this.hashCode() + "(" + this.cx + ", " + this.cy + ") r=" + this.radius;
+		return (name!=null?name+": ":"") + "Circlef." + this.hashCode() + "(" + this.cx + ", " + this.cy + ") r=" + this.radius;
 	}
 
 

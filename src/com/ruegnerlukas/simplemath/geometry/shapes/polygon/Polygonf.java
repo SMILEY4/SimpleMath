@@ -395,7 +395,7 @@ public class Polygonf implements IPolygon {
 				sb.append(", ");
 			}
 		}
-		return name + ": Polygonf." + this.hashCode() + "( " + sb.toString() + " )";
+		return (name!=null?name+": ":"") + "Polygonf." + this.hashCode() + "( " + sb.toString() + " )";
 	}
 
 
