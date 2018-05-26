@@ -1,7 +1,5 @@
 package com.ruegnerlukas.simplemath.vectors.vec2;
 
-import com.ruegnerlukas.simplemath.vectors.IVector.VectorType;
-
 public class Vector2f implements IVector2 {
 
 	
@@ -321,11 +319,16 @@ public class Vector2f implements IVector2 {
 	}
 
 	
-	@Override public String toString() {
+	@Override
+	public ConstVector2<Vector2f> toConstVector() {
+		return new ConstVector2<Vector2f>(this);
+	}
+	
+	
+	@Override
+	public String toString() {
 		return "Vector2f." + this.hashCode() + "(" + this.x + ", " + this.y + "), len=" +this.length();
 	}
-
-	
 	
 	
 	@Override
@@ -1021,10 +1024,5 @@ public class Vector2f implements IVector2 {
 			return false;
 		}	
 	}
-
-
-
-	
-	
 	
 }

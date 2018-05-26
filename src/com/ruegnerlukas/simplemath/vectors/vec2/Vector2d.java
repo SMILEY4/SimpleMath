@@ -317,6 +317,12 @@ public class Vector2d implements IVector2 {
 	public Vector2d toDoubleVector() {
 		return copy();
 	}
+	
+	
+	@Override
+	public ConstVector2<Vector2d> toConstVector() {
+		return new ConstVector2<Vector2d>(this);
+	}
 
 	
 	@Override public String toString() {
@@ -1019,7 +1025,6 @@ public class Vector2d implements IVector2 {
 			return false;
 		}	
 	}
-
 
 
 

@@ -1,7 +1,5 @@
 package com.ruegnerlukas.simplemath.vectors.vec2;
 
-import com.ruegnerlukas.simplemath.vectors.IVector.VectorType;
-
 public class Vector2l implements IVector2 {
 
 	
@@ -313,6 +311,12 @@ public class Vector2l implements IVector2 {
 	@Override
 	public Vector2d toDoubleVector() {
 		return new Vector2d(this);
+	}
+	
+	
+	@Override
+	public ConstVector2<Vector2l> toConstVector() {
+		return new ConstVector2<Vector2l>(this);
 	}
 
 	

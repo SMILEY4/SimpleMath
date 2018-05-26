@@ -85,6 +85,12 @@ public interface IVector2 extends IVector {
 	public Vector2d toDoubleVector();
 	
 	
+	/**
+	 * Converts this vector to a constant vector
+	 * @return the created constant vector
+	 * */
+	public ConstVector2<? extends IVector2> toConstVector();
+	
 	
 	
 	/**
