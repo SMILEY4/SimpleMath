@@ -11,6 +11,7 @@ import com.ruegnerlukas.simplemath.geometry.shapes.rectangle.IRectangle;
 import com.ruegnerlukas.simplemath.geometry.shapes.rectangle.Rectanglef;
 import com.ruegnerlukas.simplemath.vectors.vec2.IVector2;
 import com.ruegnerlukas.simplemath.vectors.vec2.Vector2f;
+import com.ruegnerlukas.simplemath.vectors.vec3.Vector3i;
 import com.ruegnerlukas.simplemath.vectors.vec4.IVector4;
 import com.ruegnerlukas.simplemath.vectors.vec4.Vector4f;
 
@@ -1047,6 +1048,106 @@ public class Polygonf implements IPolygon {
 
 
 	
+
+	private List<Integer> transformLUT(int[] lut) {
+		
+		List<Integer> tLUT = new ArrayList<Integer>();
+		
+		if(!isCCW()) {
+			for(int i=this.getNumberVertices()-1; i>=0; i--) {
+				tLUT.add(lut[i]);
+			}
+			
+		} else {
+			for(int i=0; i<lut.length; i++) {
+				tLUT.add(lut[i]);
+			}
+		}
+		
+		return tLUT;
+	}
+	
+	
+	
+	
+	@Override
+	public List<Vector3i> triangulateIndices() {
+		List<Vector3i> triangles = new ArrayList<Vector3i>();
+		triangulateIndices(triangles);
+		return triangles;
+	}
+
+	
+	
+	
+	@Override
+	public void triangulateIndices(List<Vector3i> trianglesOut) {
+		
+		
+		final int n = this.getNumberVertices();
+		if(n < 3) {
+			return;
+		}
+		if(n == 3) {
+			trianglesOut.add(new Vector3i(0, 1, 2));
+		}
+		
+		if(this.isConvex()) {
+			
+			int   oi = 0;
+			int   ai = 1;
+			int   bi = 2;
+			
+			for(int i=3; i<n; i++) {
+				trianglesOut.add(new Vector3i(oi, ai, bi));
+				ai = bi;
+				bi = i;
+			}
+			
+			trianglesOut.add(new Vector3i(oi, ai, bi));
+			
+			
+		} else {
+			
+			int[] arrLut = new int[this.getNumberVertices()];
+			for(int i=0; i<arrLut.length; i++) {
+				arrLut[i] = i;
+			}
+			List<Integer> lutList = transformLUT(arrLut);
+
+			// ear-clipping-algorithm
+			Polygonf poly = isCCW() ? this : this.copy().makeCCW();
+			List<IVector2> listVertices = poly.getVerticesVecList();
+			
+			int p = 0;
+			while(listVertices.size() > 3) {
+
+				int i0 = wrapIndex(listVertices, p-1);
+				int i1 = wrapIndex(listVertices, p  );
+				int i2 = wrapIndex(listVertices, p+1);
+
+				IVector2 v0 = listVertices.get(i0);
+				IVector2 v1 = listVertices.get(i1);
+				IVector2 v2 = listVertices.get(i2);
+
+				if( isEar(listVertices, v0, v1, v2) ) {
+					trianglesOut.add(new Vector3i(lutList.get(i0), lutList.get(i1), lutList.get(i2)));
+					listVertices.remove(p);
+					lutList.remove(p);
+					p = 0;
+				} else {
+					p++;
+				}
+				
+			}
+			
+			trianglesOut.add(new Vector3i(lutList.get(0), lutList.get(1), lutList.get(2)));
+		}
+		
+	}
+	
+	
+	
 	
 	@Override
 	public List<IPolygon> triangulate() {
@@ -1054,7 +1155,7 @@ public class Polygonf implements IPolygon {
 		triangulate(triangles);
 		return triangles;
 	}
-
+	
 	
 	
 	
@@ -1123,17 +1224,28 @@ public class Polygonf implements IPolygon {
 	}
 	
 	
+	
+	
 	private IVector2 getVertexWrapped(List<IVector2> vertices, int index) {
-		if(index >= vertices.size()) {
-			return vertices.get(index%vertices.size());
-		}
-		if(index < 0) {
-			return getVertexWrapped(vertices, index+vertices.size());
-		}
-		return vertices.get(index);
+		return vertices.get(wrapIndex(vertices, index));
 	}
 	
 	
+	
+	
+	private int wrapIndex(List<IVector2> vertices, int index) {
+		if(index >= vertices.size()) {
+			return index%vertices.size();
+		}
+		if(index < 0) {
+			return wrapIndex(vertices, index+vertices.size());
+		}
+		return index;
+	}
+
+	
+		
+		
 	private boolean isEar(List<IVector2> vertices, IVector2 a, IVector2 b, IVector2 c) {
 		final float x1 = a.getFloatX();
 		final float y1 = a.getFloatY();
@@ -1214,21 +1326,4 @@ public class Polygonf implements IPolygon {
 	}
 
 	
-	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -564,7 +564,7 @@ public class ConstVector2<V extends IVector2> implements IVector2 {
 	
 	@Override
 	public String toString() {
-		return "ConstVector2." + this.hashCode() + "(" + this.getFloatX() + ", " + this.getFloatY() + "), len=" + this.lengthGen();
+		return "ConstVector2." + this.hashCode() + "(" + this.getFloatX() + ", " + this.getFloatY() + ")";
 	}
 
 

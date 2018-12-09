@@ -359,7 +359,7 @@ public interface IVector3 extends IVector {
 	
 	/**
 	 * Compares this vector with the given vector.
-	 * @return true, if the two vectors are the same
+	 * @return true, if the two vectors have the same values
 	 * */
 	public boolean compare(IVector3 vec);
 	

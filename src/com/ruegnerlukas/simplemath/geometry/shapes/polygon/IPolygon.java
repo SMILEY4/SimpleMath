@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ruegnerlukas.simplemath.geometry.shapes.IShape;
 import com.ruegnerlukas.simplemath.vectors.vec2.IVector2;
+import com.ruegnerlukas.simplemath.vectors.vec3.Vector3i;
 
 public interface IPolygon extends IShape {
 
@@ -270,11 +271,26 @@ public interface IPolygon extends IShape {
 	
 	
 	/**
+	 * Triangulates this polygon
+	 * @return a list of triangles represented by indices in the list of vertices of the original polygon
+	 * */
+	public List<Vector3i> triangulateIndices();
+	
+	
+	/**
 	 * Triangulates this polygon and adds the resulting triangles to trianglesOut
 	 * @param trianglesOut the resulting triangles
 	 * @return a list of triangles
 	 * */
 	public void triangulate(List<IPolygon> trianglesOut);
+	
+	
+	/**
+	 * Triangulates this polygon and adds the resulting triangles to trianglesOut
+	 * @param trianglesOut the resulting triangles
+	 * @return a list of triangles represented by indices in the list of vertices of the original polygon
+	 * */
+	public void triangulateIndices(List<Vector3i> trianglesOut);
 
 	
 }

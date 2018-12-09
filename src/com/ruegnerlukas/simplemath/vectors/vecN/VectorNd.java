@@ -54,7 +54,7 @@ public class VectorNd implements IVectorN {
 	/**
 	 * creates a vector with the given values and the size of the given array
 	 * */
-	public VectorNd(double[] values) {
+	public VectorNd(double... values) {
 		this.values = values;
 		this.size = values.length;
 	}

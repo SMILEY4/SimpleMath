@@ -320,7 +320,7 @@ public class Vector2i implements IVector2 {
 
 	
 	@Override public String toString() {
-		return "Vector2i." + this.hashCode() + "(" + this.x + ", " + this.y + "), len=" +this.length();
+		return "Vector2i." + this.hashCode() + "(" + this.x + ", " + this.y + ")";
 	}
 
 	

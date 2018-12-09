@@ -326,7 +326,7 @@ public class Vector2d implements IVector2 {
 
 	
 	@Override public String toString() {
-		return "Vector2d." + this.hashCode() + "(" + this.x + ", " + this.y + "), len=" +this.length();
+		return "Vector2d." + this.hashCode() + "(" + this.x + ", " + this.y + ")";
 	}
 
 	
@@ -837,9 +837,9 @@ public class Vector2d implements IVector2 {
 	public Vector2d rotateRad(double angleRad) {
 		final double cos = Math.cos(angleRad);
 		final double sin = Math.sin(angleRad);
-		this.x = (x*cos - y*sin);
-		this.y = (x*sin + y*cos);
-		return this;
+		final double newX = (x*cos - y*sin);
+		final double newY = (x*sin + y*cos);
+		return this.set(newX, newY);
 	}
 	
 	

@@ -327,7 +327,7 @@ public class Vector2f implements IVector2 {
 	
 	@Override
 	public String toString() {
-		return "Vector2f." + this.hashCode() + "(" + this.x + ", " + this.y + "), len=" +this.length();
+		return "Vector2f." + this.hashCode() + "(" + this.x + ", " + this.y + ")";
 	}
 	
 	
