@@ -30,3 +30,5 @@ A simple math library for java
 - Power (-In, -Out)
 - Sine (-In, -Out)
 - Swing (-In, -Out)
+
+### Miscellaneous
