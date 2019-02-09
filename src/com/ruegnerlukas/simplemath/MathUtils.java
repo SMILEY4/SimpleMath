@@ -198,8 +198,13 @@ public class MathUtils {
 		
 		return bary;
 	}
-	
 
-	
-	
+
+
+
+	public static double setDecPlaces(double value, int decPlaces) {
+		int p = (int)Math.pow(10, Math.max(0, decPlaces));
+		return (double)((int)(value*p)) / (double)p;
+	}
+
 }
