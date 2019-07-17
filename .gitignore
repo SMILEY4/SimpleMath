@@ -3,7 +3,11 @@
 .classpath
 .settings
 /bin
-toDo.txt
 *.jar
-/doc
-src/com/ruegnerlukas/Test.java
+/libs
+/docs
+/.idea
+/out
+.gitignore
+q
+*iml

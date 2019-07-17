@@ -1,0 +1,15 @@
+com.ruegnerlukas
+com.ruegnerlukas.simplemath
+com.ruegnerlukas.simplemath.geometry.shapes
+com.ruegnerlukas.simplemath.geometry.shapes.rectangle
+com.ruegnerlukas.simplemath.interpolation
+com.ruegnerlukas.simplemath.matrix
+com.ruegnerlukas.simplemath.matrix.matrix3
+com.ruegnerlukas.simplemath.matrix.matrix4
+com.ruegnerlukas.simplemath.matrix.matrixN
+com.ruegnerlukas.simplemath.vectors
+com.ruegnerlukas.simplemath.vectors.quaternion
+com.ruegnerlukas.simplemath.vectors.vec2
+com.ruegnerlukas.simplemath.vectors.vec3
+com.ruegnerlukas.simplemath.vectors.vec4
+com.ruegnerlukas.simplemath.vectors.vecN
