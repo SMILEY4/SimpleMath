@@ -268,4 +268,45 @@ public class MathUtils {
 		return Math.max(0, Math.min(arrWidth * arrHeight, index));
 	}
 
+
+
+
+	/**
+	 * @return true, if the given value is greater or equals the lower and smaller than the upper bound
+	 */
+	public static boolean inRange(double value, double lower, double upper) {
+		return lower <= value && value < upper;
+	}
+
+
+
+
+	/**
+	 * @return true, if the given value is greater or equals the lower and smaller than the upper bound
+	 */
+	public static boolean inRange(float value, float lower, float upper) {
+		return lower <= value && value < upper;
+	}
+
+
+
+
+	/**
+	 * @return true, if the given value is greater or equals the lower and smaller than the upper bound
+	 */
+	public static boolean inRange(long value, long lower, long upper) {
+		return lower <= value && value < upper;
+	}
+
+
+
+
+	/**
+	 * @return true, if the given value is greater or equals the lower and smaller than the upper bound
+	 */
+	public static boolean inRange(int value, int lower, int upper) {
+		return lower <= value && value < upper;
+	}
+
+
 }
